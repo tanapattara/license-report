@@ -12,7 +12,7 @@ const MaterialComponents = [
   MatButtonModule,
 ];
 
-@NgModule({
+@NgModule({ 
   declarations: [],
   imports: [
     CommonModule,
