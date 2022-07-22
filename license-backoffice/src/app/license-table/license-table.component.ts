@@ -12,7 +12,9 @@ import { ApiService } from '../services/api.service';
 
 export class LicenseTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['LicNo', 'Province', 'Color', 'Brand', 'Location'];
+  resultsLength = 0;
+
+  displayedColumns: string[] = ['LicNo', 'Province', 'Color', 'Brand', 'Location', 'aDate','bDate'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -22,6 +24,8 @@ export class LicenseTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllLicense();
+
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
 
   getAllLicense(){
