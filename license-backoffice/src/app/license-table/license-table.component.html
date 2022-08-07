@@ -1,7 +1,14 @@
 <div class="container">
-  <mat-form-field appearance="standard" class="searchinput">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
+  <mat-form-field appearance="fill" *ngFor="let filter of licenseFilter">
+    <mat-label>{{ filter.name }}</mat-label>
+    <mat-select
+      [(value)]="filter.defaultValue"
+      (selectionChange)="applyLicenseFilter($event, filter)"
+    >
+      <mat-option *ngFor="let op of filter.options" [value]="op">
+        {{ op }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 
   <div class="mat-elevation-z2">
@@ -11,31 +18,37 @@
 
       <!-- LicNo Column -->
       <ng-container matColumnDef="LicNo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>LicNo</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>เลขทะเบียน</th>
         <td mat-cell *matCellDef="let element">{{ element.LicNo }}</td>
       </ng-container>
 
       <!-- Province Column -->
       <ng-container matColumnDef="Province">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Province</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>จังหวัด</th>
         <td mat-cell *matCellDef="let element">{{ element.Province }}</td>
       </ng-container>
 
       <!-- Color Column -->
       <ng-container matColumnDef="Color">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Color</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>สี</th>
         <td mat-cell *matCellDef="let element">{{ element.Color }}</td>
       </ng-container>
 
       <!-- Brand Column -->
       <ng-container matColumnDef="Brand">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Brand</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ยี่ห้อ</th>
         <td mat-cell *matCellDef="let element">{{ element.Brand }}</td>
+      </ng-container>
+
+      <!-- Speed Column -->
+      <ng-container matColumnDef="Speed">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ความเร็ว</th>
+        <td mat-cell *matCellDef="let element">{{ element.Speed }}</td>
       </ng-container>
 
       <!-- Location Column -->
       <ng-container matColumnDef="Location">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>สถานที่</th>
         <td mat-cell *matCellDef="let element">{{ element.Location }}</td>
       </ng-container>
 
@@ -58,9 +71,7 @@
 
       <!-- Row shown when there is no data-->
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="5">
-          No data matching the filter "{{ input.value }}"
-        </td>
+        <td class="mat-cell" colspan="5">No data matching the filter</td>
       </tr>
     </table>
     <mat-paginator

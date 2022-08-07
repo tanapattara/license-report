@@ -7,6 +7,7 @@ let app = require("express")(),
   (path = require("path"));
 
 let licenseRoute = require("./license/license.route");
+let dataRoute = require("./data/data.route");
 let util = require("./utilities/util");
 
 app.use(bodyParser.json());
@@ -22,6 +23,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.use("/license", licenseRoute);
+app.use("/data", dataRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -33,6 +35,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./view/index.html"));
 });
 
-server.listen(3000, function () {
-  console.log("app listening on port: 3000 -> http://localhost:3000/");
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, function () {
+  console.log(`Server is listening on http://localhost:${PORT}`);
 });

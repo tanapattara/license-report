@@ -1,6 +1,5 @@
 let express = require("express"),
   router = express.Router(),
-  util = require("../utilities/util"),
   licenseService = require("./license.service");
 
 /**Api to get the list of license */
