@@ -13,6 +13,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -26,7 +28,9 @@ const MaterialComponents = [
   MatSelectModule,
   MatDatepickerModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatSidenavModule,
+  MatListModule
 ];
 
 @NgModule({
