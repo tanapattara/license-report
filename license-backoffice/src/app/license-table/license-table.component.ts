@@ -7,6 +7,7 @@ import { ApiService } from '../services/api.service';
 import { MatSelectChange } from '@angular/material/select';
 import { Color } from '../model/color';
 import { License } from '../model/license';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-license-table',
@@ -15,6 +16,10 @@ import { License } from '../model/license';
 })
 
 export class LicenseTableComponent implements OnInit {
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
   resultsLength = 0;
 

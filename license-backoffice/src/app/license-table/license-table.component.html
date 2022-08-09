@@ -1,16 +1,17 @@
 <div class="container">
-  <mat-form-field appearance="fill" *ngFor="let filter of licenseFilter">
-    <mat-label>{{ filter.name }}</mat-label>
-    <mat-select
-      [(value)]="filter.defaultValue"
-      (selectionChange)="applyLicenseFilter($event, filter)"
-    >
-      <mat-option *ngFor="let op of filter.options" [value]="op">
-        {{ op }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
+  <div>
+    <mat-form-field appearance="fill" *ngFor="let filter of licenseFilter">
+      <mat-label>{{ filter.name }}</mat-label>
+      <mat-select
+        [(value)]="filter.defaultValue"
+        (selectionChange)="applyLicenseFilter($event, filter)"
+      >
+        <mat-option *ngFor="let op of filter.options" [value]="op">
+          {{ op }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div class="mat-elevation-z2">
     <table mat-table [dataSource]="dataSource" matSort>
       <!--- Note that these columns can be defined in any order.
