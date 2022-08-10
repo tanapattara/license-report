@@ -15,6 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -30,7 +31,8 @@ const MaterialComponents = [
   FormsModule,
   ReactiveFormsModule,
   MatSidenavModule,
-  MatListModule
+  MatListModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
