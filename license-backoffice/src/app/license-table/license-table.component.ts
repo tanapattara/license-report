@@ -2,12 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { LicenseFilter } from '../model/licensefilter';
 import { ApiService } from '../services/api.service';
-import { MatSelectChange } from '@angular/material/select';
 import { License } from '../model/license';
-import { FormGroup, FormControl } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FilterComponent } from '../filter/filter.component';
+import { FilterlicenseService } from '../services/filterlicense.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-license-table',
@@ -16,10 +15,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 })
 
 export class LicenseTableComponent implements OnInit {
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
 
   resultsLength = 0;
 
@@ -29,62 +24,25 @@ export class LicenseTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  licenseFilter: LicenseFilter[] = [];
-  color: string[] = ['All'];
-  province: string[] = ['All'];
-  brand: string[] = ['All'];
-  defaultValue = "All";
-  filterDictionary = new Map<string, string>();
+  constructor(private api: ApiService, private filterService: FilterlicenseService) { }
 
-  constructor(private api: ApiService) { }
+  filter: string = "";
+
+  notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
+    this.filter = this.filterService.getFilter();
+    this.dataSource.filter = this.filter;
+
+  });
 
   ngOnInit(): void {
-    // get selected control from api
-    this.getFilter();
     // get data from api
     this.getAllLicense();
-
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
-
-  getFilter() {
-    this.api.getColor().
-      subscribe({
-        next: (res) => {
-          for (var item of res)
-            this.color.push(item['color']);
-          this.licenseFilter.push({ name: 'Color', options: this.color, defaultValue: this.defaultValue });
-        },
-        error: (err) => {
-          console.log("Error while fetching filter ");
-        }
-
-      });
-    this.api.getBrand().
-      subscribe({
-        next: (res) => {
-          for (var item of res)
-            this.brand.push(item['brand']);
-          this.licenseFilter.push({ name: 'Brand', options: this.brand, defaultValue: this.defaultValue });
-        },
-        error: (err) => {
-          console.log("Error while fetching filter ");
-        }
-
-      });
-    this.api.getProvince().
-      subscribe({
-        next: (res) => {
-          for (var item of res)
-            this.province.push(item['province']);
-          this.licenseFilter.push({ name: 'Province', options: this.province, defaultValue: this.defaultValue });
-        },
-        error: (err) => {
-          console.log("Error while fetching filter ");
-        }
-
-      });
+  ngOnDestroy() {
+    this.notifierSubscription.unsubscribe();
   }
+
   getAllLicense() {
     this.api.getLicenses().
       subscribe({
@@ -93,6 +51,7 @@ export class LicenseTableComponent implements OnInit {
           this.dataSource = new MatTableDataSource(res);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.dataSource.filter = this.filter;
           this.dataSource.filterPredicate = function (record, filter) {
             var map = new Map(JSON.parse(filter));
             let isMatch = false;
@@ -110,6 +69,16 @@ export class LicenseTableComponent implements OnInit {
                   isMatchFilter = true;
                 else
                   isMatchFilter = (record[key as keyof License].includes(value));
+              } else if (key == 'date') {
+                let date = value as string[];
+                let sDate = new Date(date[0]);
+                let eDate = new Date(date[1]);
+                let adate_key = 'aDate', bdate_key = 'bDate'
+
+                let RecValueA = new Date(record[adate_key as keyof License]);
+                let RecValueB = new Date(record[bdate_key as keyof License]);
+
+                isMatchFilter = (RecValueA >= sDate && RecValueA <= eDate) || (RecValueB >= sDate && RecValueB <= eDate);
               } else {
                 isMatchFilter = (record[key as keyof License] == value);
               }
@@ -118,6 +87,7 @@ export class LicenseTableComponent implements OnInit {
             }
             return isMatch;
           }
+
         },
         error: (err) => {
           console.log("Error while fetching licenses ");
@@ -125,22 +95,5 @@ export class LicenseTableComponent implements OnInit {
       });
   }
 
-  applyLicenseFilter(ob: MatSelectChange, filtername: string) {
 
-    this.filterDictionary.set(filtername, ob.value.toLowerCase());
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.dataSource.filter = jsonString;
-    console.log(jsonString);
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-  onChangeEvent(event: any, filtername: string) {
-    var filtervalue = (event.target as HTMLInputElement).value == "" ? "All" : (event.target as HTMLInputElement).value;
-    this.filterDictionary.set(filtername, filtervalue);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    console.log(jsonString);
-    this.dataSource.filter = jsonString;
-  }
 }
