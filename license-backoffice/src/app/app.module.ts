@@ -13,6 +13,7 @@ import { ChartBarCarPerHourComponent } from './chart-bar-car-per-hour/chart-bar-
 import { ChartBarCarPerMonthComponent } from './chart-bar-car-per-month/chart-bar-car-per-month.component';
 import { ChartBarCarSpeedComponent } from './chart-bar-car-speed/chart-bar-car-speed.component';
 import { FilterComponent } from './filter/filter.component';
+import { FilterTimeSpeedComponent } from './filter-time-speed/filter-time-speed.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FilterComponent } from './filter/filter.component';
     ChartBarCarPerHourComponent,
     ChartBarCarPerMonthComponent,
     ChartBarCarSpeedComponent,
-    FilterComponent
+    FilterComponent,
+    FilterTimeSpeedComponent
   ],
   imports: [
     BrowserModule,

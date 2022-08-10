@@ -4,7 +4,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from '../services/api.service';
 import { License } from '../model/license';
-import { FilterComponent } from '../filter/filter.component';
 import { FilterlicenseService } from '../services/filterlicense.service';
 import { Subscription } from 'rxjs';
 
@@ -18,7 +17,7 @@ export class LicenseTableComponent implements OnInit {
 
   resultsLength = 0;
 
-  displayedColumns: string[] = ['LicNo', 'Province', 'Color', 'Brand', 'Speed', 'Location', 'aDate', 'bDate'];
+  displayedColumns: string[] = ['LicNo', 'Province', 'Color', 'Brand', 'Type', 'Speed', 'Location', 'aDate', 'bDate'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -27,11 +26,9 @@ export class LicenseTableComponent implements OnInit {
   constructor(private api: ApiService, private filterService: FilterlicenseService) { }
 
   filter: string = "";
-
   notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
     this.filter = this.filterService.getFilter();
     this.dataSource.filter = this.filter;
-
   });
 
   ngOnInit(): void {
