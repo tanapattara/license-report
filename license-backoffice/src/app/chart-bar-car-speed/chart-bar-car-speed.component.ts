@@ -13,6 +13,8 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./chart-bar-car-speed.component.css']
 })
 export class ChartBarCarSpeedComponent implements OnInit {
+  title = 'แผนภูมิจำนวนรถต่อช่วงความเร็ว';
+
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   dataSource!: MatTableDataSource<any>;

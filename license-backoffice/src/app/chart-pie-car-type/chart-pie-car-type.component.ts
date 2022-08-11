@@ -14,7 +14,7 @@ import DatalabelsPlugin from 'chartjs-plugin-datalabels';
   styleUrls: ['./chart-pie-car-type.component.css']
 })
 export class ChartPieCarTypeComponent implements OnInit {
-
+  title = 'แผนภูมิประเภทรถ';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   dataSource!: MatTableDataSource<any>;
@@ -26,7 +26,7 @@ export class ChartPieCarTypeComponent implements OnInit {
     plugins: {
       legend: {
         display: true,
-        position: 'top',
+        position: 'left',
       },
       datalabels: {
         formatter: (value, ctx) => {

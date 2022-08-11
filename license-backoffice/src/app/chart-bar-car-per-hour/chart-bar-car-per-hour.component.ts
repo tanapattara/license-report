@@ -14,7 +14,7 @@ import { FilterlicenseService } from '../services/filterlicense.service';
   styleUrls: ['./chart-bar-car-per-hour.component.css']
 })
 export class ChartBarCarPerHourComponent implements OnInit {
-  title = 'ng2-charts-demo';
+  title = 'แผนภูมิจำนวนรถต่อวัน';
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 

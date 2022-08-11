@@ -15,7 +15,7 @@ import DatalabelsPlugin from 'chartjs-plugin-datalabels'
   styleUrls: ['./chart-pie-car-color.component.css']
 })
 export class ChartPieCarColorComponent implements OnInit {
-
+  title = 'แผนภูมิสีรถ';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   dataSource!: MatTableDataSource<any>;
@@ -26,7 +26,7 @@ export class ChartPieCarColorComponent implements OnInit {
     plugins: {
       legend: {
         display: true,
-        position: 'top',
+        position: 'left',
       },
       datalabels: {
         formatter: (value, ctx) => {

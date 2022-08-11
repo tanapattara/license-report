@@ -14,7 +14,7 @@ import { FilterlicenseService } from '../services/filterlicense.service';
   styleUrls: ['./chart-bar-car-per-month.component.css']
 })
 export class ChartBarCarPerMonthComponent implements OnInit {
-  title = 'ng2-charts-demo';
+  title = 'แผนภูมิจำนวนรถตลอดปี';
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
