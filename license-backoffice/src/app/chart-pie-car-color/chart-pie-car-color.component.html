@@ -1,13 +1,12 @@
 <div class="container">
   <h1>chart-pie-car-color works!</h1>
+  <app-filter-time-speed></app-filter-time-speed>
   <canvas
     baseChart
-    [type]="'pie'"
-    [datasets]="pieChartDatasets"
-    [labels]="pieChartLabels"
+    [data]="pieChartData"
+    [type]="pieChartType"
     [options]="pieChartOptions"
     [plugins]="pieChartPlugins"
-    [legend]="pieChartLegend"
   >
   </canvas>
 </div>
