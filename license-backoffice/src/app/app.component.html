@@ -1,40 +1,38 @@
-<p>
-  <mat-toolbar color="primary">
-    <button
-      mat-icon-button
-      class="lic-icon"
-      aria-label="Example icon-button with menu icon"
-      (click)="sidenav.toggle()"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>{{ title }}</span>
-    <span class="lic-spacer"></span>
-    <button
-      mat-icon-button
-      class="lic-icon"
-      aria-label="Example icon-button with share icon"
-    >
-      <mat-icon>logout</mat-icon>
-    </button>
-  </mat-toolbar>
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" opened class="lic-sidenav">
-      <mat-nav-list>
-        <a mat-list-item [routerLink]="'/'"> หน้าแรก </a>
-        <mat-divider></mat-divider>
-        <div mat-subheader>แผนภูมิกราฟ</div>
-        <a mat-list-item [routerLink]="'/color'"> สีรถ </a>
-        <a mat-list-item [routerLink]="'/type'"> ประเภทรถ </a>
-        <a mat-list-item [routerLink]="'/speed'"> ความเร็ว </a>
-        <a mat-list-item [routerLink]="'/hour'"> รายชั่วโมง </a>
-        <a mat-list-item [routerLink]="'/month'"> รายเดือน </a>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div style="height: 88vh">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</p>
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="lic-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{ title }}</span>
+  <span class="lic-spacer"></span>
+  <button
+    mat-icon-button
+    class="lic-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened class="lic-sidenav">
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/'"> หน้าแรก </a>
+      <mat-divider></mat-divider>
+      <div mat-subheader>แผนภูมิกราฟ</div>
+      <a mat-list-item [routerLink]="'/color'"> สีรถ </a>
+      <a mat-list-item [routerLink]="'/type'"> ประเภทรถ </a>
+      <a mat-list-item [routerLink]="'/speed'"> ความเร็ว </a>
+      <a mat-list-item [routerLink]="'/hour'"> รายชั่วโมง </a>
+      <a mat-list-item [routerLink]="'/month'"> รายเดือน </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

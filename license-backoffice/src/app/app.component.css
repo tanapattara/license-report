@@ -9,4 +9,8 @@
   justify-content: center;
   width: 200px;
 }
-  
+html, body, .material-app, .mat-sidenav-container {
+  height: calc(100vh - 64px);
+
+  width: 100%;
+}

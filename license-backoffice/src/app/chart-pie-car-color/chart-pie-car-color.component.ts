@@ -65,21 +65,20 @@ export class ChartPieCarColorComponent implements OnInit {
     this.pieChartData.datasets[0].data = [];
     this.pieChartData.labels = [];
 
-    if (this.filter != '') {
-      for (let row of this.dataSource.filteredData) {
-        if (this.chartDictionary.has(row.Color)) {
-          let ex = this.chartDictionary.get(row.Color)!;
-          this.chartDictionary.set(row.Color, ex + 1);
-        }
-        else {
-          this.chartDictionary.set(row.Color, 1);
-        }
+    for (let row of this.dataSource.filteredData) {
+      if (this.chartDictionary.has(row.Color)) {
+        let ex = this.chartDictionary.get(row.Color)!;
+        this.chartDictionary.set(row.Color, ex + 1);
       }
-      for (let [key, value] of this.chartDictionary) {
-        this.pieChartData.labels!.push(key);
-        this.pieChartData.datasets[0].data.push(value);
+      else {
+        this.chartDictionary.set(row.Color, 1);
       }
     }
+    for (let [key, value] of this.chartDictionary) {
+      this.pieChartData.labels!.push(key);
+      this.pieChartData.datasets[0].data.push(value);
+    }
+
     this.chart?.update();
   }
   ngOnInit(): void {
@@ -130,7 +129,7 @@ export class ChartPieCarColorComponent implements OnInit {
             }
             return isMatch;
           }
-
+          this.displayData();
         },
         error: (err) => {
           console.log("Error while fetching licenses ");

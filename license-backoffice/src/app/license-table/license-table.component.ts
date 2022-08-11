@@ -23,7 +23,8 @@ export class LicenseTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private api: ApiService, private filterService: FilterlicenseService) { }
+  constructor(private api: ApiService, private filterService: FilterlicenseService) {
+  }
 
   filter: string = "";
   notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
@@ -31,16 +32,22 @@ export class LicenseTableComponent implements OnInit {
     this.dataSource.filter = this.filter;
   });
 
+  isLoading: boolean = true;
   ngOnInit(): void {
     // get data from api
     this.getAllLicense();
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.sort.
+      sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+  }
+  ngDoCheck() {
+
   }
   ngOnDestroy() {
     this.notifierSubscription.unsubscribe();
   }
 
   getAllLicense() {
+    this.isLoading = true;
     this.api.getLicenses().
       subscribe({
         next: (res) => {
@@ -84,13 +91,11 @@ export class LicenseTableComponent implements OnInit {
             }
             return isMatch;
           }
-
+          this.isLoading = false;
         },
         error: (err) => {
           console.log("Error while fetching licenses ");
         }
       });
   }
-
-
 }

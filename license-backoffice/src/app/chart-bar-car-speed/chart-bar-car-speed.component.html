@@ -1,12 +1,47 @@
 <div class="container">
   <h1>chart-bar-car-speed works!</h1>
-  <canvas
-    baseChart
-    [data]="barChartData"
-    [options]="barChartOptions"
-    [plugins]="barChartPlugins"
-    [legend]="barChartLegend"
-    [type]="'bar'"
-  >
-  </canvas>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>ระหว่างวันที่</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input
+          matStartDate
+          [(ngModel)]="datepickerInput1"
+          formControlName="start"
+          placeholder="เริ่มต้น"
+        />
+        <input
+          [(ngModel)]="datepickerInput2"
+          matEndDate
+          formControlName="end"
+          placeholder="สิ้นสุด"
+          (dateChange)="DatePickervalueChanged()"
+        />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+        >รูปแบบวันที่เริ่มต้นไม่ถูกต้อง</mat-error
+      >
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+        >รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error
+      >
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="clearFilter()">
+      ล้างการค้นหา
+    </button>
+  </div>
+  <div style="display: block">
+    <canvas
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [type]="barChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"
+    >
+    </canvas>
+  </div>
 </div>
