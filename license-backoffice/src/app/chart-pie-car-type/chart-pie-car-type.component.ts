@@ -1,60 +1,96 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { ApiService } from '../../services/api.service';
-import { License } from '../../model/license';
-import { FilterlicenseService } from '../../services/filterlicense.service';
+import { ApiService } from '../services/api.service';
+import { FilterlicenseService } from '../services/filterlicense.service';
 import { Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { License } from '../model/license';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 
 @Component({
-  selector: 'app-license-table',
-  templateUrl: './license-table.component.html',
-  styleUrls: ['./license-table.component.css']
+  selector: 'app-chart-pie-car-type',
+  templateUrl: './chart-pie-car-type.component.html',
+  styleUrls: ['./chart-pie-car-type.component.css']
 })
+export class ChartPieCarTypeComponent implements OnInit {
+  title = 'แผนภูมิประเภทรถ';
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-export class LicenseTableComponent implements OnInit {
-
-  resultsLength = 0;
-
-  displayedColumns: string[] = ['position', 'LicNo', 'Province', 'Color', 'Brand', 'Type', 'Speed', 'Location', 'aDate', 'bDate'];
   dataSource!: MatTableDataSource<any>;
+  chartdataset: string[] = [];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  constructor(private api: ApiService, private filterService: FilterlicenseService) {
-  }
+  // Pie
+  public pieChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'left',
+      },
+      datalabels: {
+        formatter: (value, ctx) => {
+          if (ctx.chart.data.labels) {
+            return ctx.chart.data.labels[ctx.dataIndex];
+          }
+        },
+      },
+    }
+  };
+  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+    labels: [],
+    datasets: [{
+      data: []
+    }]
+  };
+  public pieChartType: ChartType = 'pie';
+  public pieChartPlugins = [DatalabelsPlugin];
 
   filter: string = "";
   notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
     this.filter = this.filterService.getFilter();
     this.dataSource.filter = this.filter;
+    this.displayData();
   });
 
-  isLoading: boolean = true;
-  ngOnInit(): void {
-    // get data from api
-    this.getAllLicense();
-    this.sort.
-      sortChange.subscribe(() => (this.paginator.pageIndex = 0));
-  }
-  ngDoCheck() {
+  constructor(private api: ApiService, private filterService: FilterlicenseService) { }
 
+  chartDictionary = new Map<string, number>();
+
+  pieChartDatasets: string[] = [];
+  displayData() {
+    this.chartDictionary.clear();
+    this.pieChartData.datasets[0].data = [];
+    this.pieChartData.labels = [];
+
+    for (let row of this.dataSource.filteredData) {
+      if (this.chartDictionary.has(row.Type)) {
+        let ex = this.chartDictionary.get(row.Type)!;
+        this.chartDictionary.set(row.Type, ex + 1);
+      }
+      else {
+        this.chartDictionary.set(row.Type, 1);
+      }
+    }
+    for (let [key, value] of this.chartDictionary) {
+      this.pieChartData.labels!.push(key);
+      this.pieChartData.datasets[0].data.push(value);
+    }
+
+    this.chart?.update();
+  }
+  ngOnInit(): void {
+    this.getAllLicense();
   }
   ngOnDestroy() {
     this.notifierSubscription.unsubscribe();
   }
-
   getAllLicense() {
-    this.isLoading = true;
     this.api.getLicenses().
       subscribe({
         next: (res) => {
           //console.log(res);
           this.dataSource = new MatTableDataSource(res);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
           this.dataSource.filter = this.filter;
           this.dataSource.filterPredicate = function (record, filter) {
             var map = new Map(JSON.parse(filter));
@@ -91,7 +127,7 @@ export class LicenseTableComponent implements OnInit {
             }
             return isMatch;
           }
-          this.isLoading = false;
+          this.displayData();
         },
         error: (err) => {
           console.log("Error while fetching licenses ");

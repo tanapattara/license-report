@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ApiService } from '../../services/api.service';
-import { FilterlicenseService } from '../../services/filterlicense.service';
+import { ApiService } from '../services/api.service';
+import { FilterlicenseService } from '../services/filterlicense.service';
 
 @Component({
   selector: 'app-filter-time-speed',
