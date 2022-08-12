@@ -1,25 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartOptions } from 'chart.js';
-import { ApiService } from '../services/api.service';
-import { FilterlicenseService } from '../services/filterlicense.service';
+import { ApiService } from '../../../services/api.service';
+import { FilterlicenseService } from '../../../services/filterlicense.service';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
-import { License } from '../model/license';
+import { License } from '../../../model/license';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
-import DatalabelsPlugin from 'chartjs-plugin-datalabels'
+import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 
 @Component({
-  selector: 'app-chart-pie-car-color',
-  templateUrl: './chart-pie-car-color.component.html',
-  styleUrls: ['./chart-pie-car-color.component.css']
+  selector: 'app-chart-pie-car-type',
+  templateUrl: './chart-pie-car-type.component.html',
+  styleUrls: ['./chart-pie-car-type.component.css']
 })
-export class ChartPieCarColorComponent implements OnInit {
-  title = 'แผนภูมิสีรถ';
+export class ChartPieCarTypeComponent implements OnInit {
+  title = 'แผนภูมิประเภทรถ';
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   dataSource!: MatTableDataSource<any>;
   chartdataset: string[] = [];
+
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -37,7 +37,6 @@ export class ChartPieCarColorComponent implements OnInit {
       },
     }
   };
-
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [],
     datasets: [{
@@ -59,19 +58,18 @@ export class ChartPieCarColorComponent implements OnInit {
   chartDictionary = new Map<string, number>();
 
   pieChartDatasets: string[] = [];
-
   displayData() {
     this.chartDictionary.clear();
     this.pieChartData.datasets[0].data = [];
     this.pieChartData.labels = [];
 
     for (let row of this.dataSource.filteredData) {
-      if (this.chartDictionary.has(row.Color)) {
-        let ex = this.chartDictionary.get(row.Color)!;
-        this.chartDictionary.set(row.Color, ex + 1);
+      if (this.chartDictionary.has(row.Type)) {
+        let ex = this.chartDictionary.get(row.Type)!;
+        this.chartDictionary.set(row.Type, ex + 1);
       }
       else {
-        this.chartDictionary.set(row.Color, 1);
+        this.chartDictionary.set(row.Type, 1);
       }
     }
     for (let [key, value] of this.chartDictionary) {
@@ -136,5 +134,4 @@ export class ChartPieCarColorComponent implements OnInit {
         }
       });
   }
-
 }

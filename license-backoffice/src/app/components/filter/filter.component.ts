@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LicenseFilter } from '../model/licensefilter';
+import { LicenseFilter } from '../../model/licensefilter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
-import { ApiService } from '../services/api.service';
-import { FilterlicenseService } from '../services/filterlicense.service';
+import { ApiService } from '../../services/api.service';
+import { FilterlicenseService } from '../../services/filterlicense.service';
 import { MatOption } from '@angular/material/core';
 
 @Component({

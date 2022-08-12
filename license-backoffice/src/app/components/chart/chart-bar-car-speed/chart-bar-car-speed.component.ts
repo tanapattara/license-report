@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import { License } from '../model/license';
+import { License } from '../../../model/license';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../../services/api.service';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({

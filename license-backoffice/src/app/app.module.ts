@@ -5,15 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { LicenseTableComponent } from './license-table/license-table.component';
+import { LicenseTableComponent } from './components/license-table/license-table.component';
 import { NgChartsModule } from 'ng2-charts';
-import { ChartPieCarColorComponent } from './chart-pie-car-color/chart-pie-car-color.component';
-import { ChartPieCarTypeComponent } from './chart-pie-car-type/chart-pie-car-type.component';
-import { ChartBarCarPerHourComponent } from './chart-bar-car-per-hour/chart-bar-car-per-hour.component';
-import { ChartBarCarPerMonthComponent } from './chart-bar-car-per-month/chart-bar-car-per-month.component';
-import { ChartBarCarSpeedComponent } from './chart-bar-car-speed/chart-bar-car-speed.component';
-import { FilterComponent } from './filter/filter.component';
-import { FilterTimeSpeedComponent } from './filter-time-speed/filter-time-speed.component';
+import { ChartPieCarColorComponent } from './components/chart/chart-pie-car-color/chart-pie-car-color.component';
+import { ChartPieCarTypeComponent } from './components/chart/chart-pie-car-type/chart-pie-car-type.component';
+import { ChartBarCarPerHourComponent } from './components/chart/chart-bar-car-per-hour/chart-bar-car-per-hour.component';
+import { ChartBarCarPerMonthComponent } from './components/chart/chart-bar-car-per-month/chart-bar-car-per-month.component';
+import { ChartBarCarSpeedComponent } from './components/chart/chart-bar-car-speed/chart-bar-car-speed.component';
+import { FilterComponent } from './components/filter/filter.component';
+import { FilterTimeSpeedComponent } from './components/filter-time-speed/filter-time-speed.component';
+import { LoginComponent } from './components/login/login.component';
+import { UserComponent } from './user/user.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { FilterTimeSpeedComponent } from './filter-time-speed/filter-time-speed.
     ChartBarCarPerMonthComponent,
     ChartBarCarSpeedComponent,
     FilterComponent,
-    FilterTimeSpeedComponent
+    FilterTimeSpeedComponent,
+    LoginComponent,
+    UserComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

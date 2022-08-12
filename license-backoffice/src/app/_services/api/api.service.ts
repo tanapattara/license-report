@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HOST_URL } from './api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  HOST_URL = "http://localhost:3000"
+  HOST_URL = HOST_URL;
 
   getLicenses() {
     return this.http.get<any>(this.HOST_URL + "/license");
