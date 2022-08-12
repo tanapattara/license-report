@@ -17,7 +17,7 @@ export class LicenseTableComponent implements OnInit {
 
   resultsLength = 0;
 
-  displayedColumns: string[] = ['LicNo', 'Province', 'Color', 'Brand', 'Type', 'Speed', 'Location', 'aDate', 'bDate'];
+  displayedColumns: string[] = ['position', 'LicNo', 'Province', 'Color', 'Brand', 'Type', 'Speed', 'Location', 'aDate', 'bDate'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
