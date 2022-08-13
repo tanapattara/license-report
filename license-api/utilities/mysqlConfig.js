@@ -1,5 +1,6 @@
 var config = require("./config").config;
 var mysql = require("mysql");
+const Sequelize = require("sequelize");
 
 var connection = mysql.createConnection({
   host: config.DB_URL_MYSQL.host,
@@ -9,7 +10,9 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(() => {
-  require("../license/license.model").initialize();
+  require("../models/license.model").initialize();
+  require("../models/user.model").initialize();
+  require("../models/roll.model").initialize();
 });
 
 let getDB = () => {

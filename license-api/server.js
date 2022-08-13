@@ -1,4 +1,4 @@
-let app = require("express")(),
+let app = require("express")().json(),
   server = require("http").Server(app),
   bodyParser = require("body-parser");
 (express = require("express")),
@@ -6,14 +6,25 @@ let app = require("express")(),
   (http = require("http")),
   (path = require("path"));
 
+const cookieSession = require("cookie-session");
+
 let licenseRoute = require("./license/license.route");
 let dataRoute = require("./data/data.route");
 let util = require("./utilities/util");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(cors());
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  cookieSession({
+    name: "license-session",
+    secret: "COOKIE_SECRET", // should use as secret environment variable
+    httpOnly: true,
+  })
+);
 
 app.use(function (err, req, res, next) {
   return res.send({
