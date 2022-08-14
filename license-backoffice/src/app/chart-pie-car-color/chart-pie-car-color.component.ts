@@ -35,7 +35,9 @@ export class ChartPieCarColorComponent implements OnInit {
           }
         },
       },
-    }
+    },
+    maintainAspectRatio: false,
+
   };
 
   public pieChartData: ChartData<'pie', number[], string | string[]> = {

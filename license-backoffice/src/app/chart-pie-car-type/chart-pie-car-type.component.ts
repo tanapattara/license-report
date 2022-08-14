@@ -35,7 +35,8 @@ export class ChartPieCarTypeComponent implements OnInit {
           }
         },
       },
-    }
+    },
+    maintainAspectRatio: false,
   };
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [],
