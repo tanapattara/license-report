@@ -1,4 +1,4 @@
-let app = require("express")().json(),
+let app = require("express")(),
   server = require("http").Server(app),
   bodyParser = require("body-parser");
 (express = require("express")),
@@ -32,7 +32,9 @@ app.use(function (err, req, res, next) {
     statusMessage: util.statusMessage.SOMETHING_WENT_WRONG,
   });
 });
-
+// routes
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 app.use("/license", licenseRoute);
 app.use("/data", dataRoute);
 

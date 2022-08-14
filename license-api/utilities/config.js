@@ -26,6 +26,20 @@ let config = {
   },
 };
 
+let secret = "bezkoder-secret-key";
+
 module.exports = {
   config: config,
+  secret: secret,
+  HOST: serverURLs.dev.MYSQL_HOST,
+  USER: serverURLs.dev.MYSQL_USER,
+  PASSWORD: serverURLs.dev.MYSQL_PASSWORD,
+  DB: serverURLs.dev.MYSQL_DATABASE,
+  dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
 };

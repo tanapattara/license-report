@@ -10,9 +10,9 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(() => {
-  require("../models/license.model").initialize();
-  require("../models/user.model").initialize();
-  require("../models/roll.model").initialize();
+  //require("../models/license.model").initialize();
+  //require("../models/user.model").initialize();
+  //require("../models/roll.model").initialize();
 });
 
 let getDB = () => {
