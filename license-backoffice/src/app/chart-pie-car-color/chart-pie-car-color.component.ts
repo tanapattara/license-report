@@ -43,8 +43,10 @@ export class ChartPieCarColorComponent implements OnInit {
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [],
     datasets: [{
-      data: []
-    }]
+      data: [],
+      backgroundColor: [],
+    }],
+
   };
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [DatalabelsPlugin];
@@ -64,24 +66,56 @@ export class ChartPieCarColorComponent implements OnInit {
 
   displayData() {
     this.chartDictionary.clear();
-    this.pieChartData.datasets[0].data = [];
+    this.pieChartData.datasets = []
     this.pieChartData.labels = [];
 
     for (let row of this.dataSource.filteredData) {
-      if (this.chartDictionary.has(row.Color)) {
-        let ex = this.chartDictionary.get(row.Color)!;
-        this.chartDictionary.set(row.Color, ex + 1);
+
+      let car_color = row.Color;
+      switch (row.Color) {
+        case 'ขาว': { car_color = 'White'; break; }
+        case 'ดำ': { car_color = 'Black'; break; }
+        case 'เทา': { car_color = 'Gray'; break; }
+        case 'Grey': { car_color = 'Gray'; break; }
+      }
+
+      if (this.chartDictionary.has(car_color)) {
+        let ex = this.chartDictionary.get(car_color)!;
+        this.chartDictionary.set(car_color, ex + 1);
       }
       else {
-        this.chartDictionary.set(row.Color, 1);
+        this.chartDictionary.set(car_color, 1);
       }
     }
+    let datavalue: number[] = [];
+    let datacolor: string[] = [];
     for (let [key, value] of this.chartDictionary) {
       this.pieChartData.labels!.push(key);
-      this.pieChartData.datasets[0].data.push(value);
+      //this.pieChartData.datasets[0].data.push(value);
+      datavalue.push(value);
+      datacolor.push(this.getColor(key));
     }
+    this.pieChartData.datasets.push({
+      data: datavalue,
+      backgroundColor: datacolor,
+    });
 
     this.chart?.update();
+  }
+  getColor(colorname: string): string {
+    let colorcode = "";
+
+    switch (colorname) {
+      case 'Black': { colorcode = 'rgb(0, 0, 0)'; break; }
+      case 'Gray': { colorcode = 'rgb(128, 128, 128)'; break; }
+      case 'Red': { colorcode = 'rgb(222, 49, 99)'; break; }
+      case 'White': { colorcode = 'rgb(220, 220, 220)'; break; }
+      case 'Green': { colorcode = 'rgb(0, 128, 0'; break; }
+      case 'Blue': { colorcode = 'rgb(0, 0, 255)'; break; }
+      case 'Yellow': { colorcode = 'rgb(255, 255, 10)'; break; }
+      case 'Unknown': { colorcode = 'rgb(128, 0, 128)'; break; }
+    }
+    return colorcode;
   }
   ngOnInit(): void {
     this.getAllLicense();
