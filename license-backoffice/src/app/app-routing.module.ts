@@ -8,7 +8,7 @@ import { ChartBarCarPerMonthComponent } from './chart-bar-car-per-month/chart-ba
 import { ChartBarCarSpeedComponent } from './chart-bar-car-speed/chart-bar-car-speed.component';
 import { SigninComponent } from './signin/signin.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
-
+import { UsersComponent } from './users/users.component';
 const routes: Routes = [
   { path: '', redirectTo: 'license', pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'speed', component: ChartBarCarSpeedComponent, canActivate: [AuthGuard] },
   { path: 'hour', component: ChartBarCarPerHourComponent, canActivate: [AuthGuard] },
   { path: 'month', component: ChartBarCarPerMonthComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

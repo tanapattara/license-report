@@ -17,6 +17,7 @@ import { FilterTimeSpeedComponent } from './filter-time-speed/filter-time-speed.
 import { AuthService } from './services/auth.service';
 import { SigninComponent } from './signin/signin.component';
 import { SignupNewUserComponent } from './signup-new-user/signup-new-user.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SignupNewUserComponent } from './signup-new-user/signup-new-user.compon
     FilterTimeSpeedComponent,
     SigninComponent,
     SignupNewUserComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
