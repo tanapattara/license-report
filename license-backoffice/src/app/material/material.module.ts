@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -33,7 +34,8 @@ const MaterialComponents = [
   MatSidenavModule,
   MatListModule,
   MatNativeDateModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatCardModule
 ];
 
 @NgModule({

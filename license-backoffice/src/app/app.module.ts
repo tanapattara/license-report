@@ -14,7 +14,9 @@ import { ChartBarCarPerMonthComponent } from './chart-bar-car-per-month/chart-ba
 import { ChartBarCarSpeedComponent } from './chart-bar-car-speed/chart-bar-car-speed.component';
 import { FilterComponent } from './filter/filter.component';
 import { FilterTimeSpeedComponent } from './filter-time-speed/filter-time-speed.component';
-
+import { AuthService } from './services/auth.service';
+import { SigninComponent } from './signin/signin.component';
+import { SignupNewUserComponent } from './signup-new-user/signup-new-user.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { FilterTimeSpeedComponent } from './filter-time-speed/filter-time-speed.
     ChartBarCarPerMonthComponent,
     ChartBarCarSpeedComponent,
     FilterComponent,
-    FilterTimeSpeedComponent
+    FilterTimeSpeedComponent,
+    SigninComponent,
+    SignupNewUserComponent,
   ],
   imports: [
     BrowserModule,

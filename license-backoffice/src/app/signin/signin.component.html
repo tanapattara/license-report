@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-title>ลงชื่อเข้าสู่ระบบ</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" required formControlName="username" />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" required formControlName="password" />
+        </mat-form-field>
+      </p>
+      <div class="button">
+        <button type="submit" mat-raised-button color="accent">
+          เข้าสู่ระบบ
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

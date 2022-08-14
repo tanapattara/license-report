@@ -14,13 +14,13 @@
     class="lic-icon"
     aria-label="Example icon-button with share icon"
   >
-    <mat-icon>logout</mat-icon>
+    <mat-icon (click)="logout()">logout</mat-icon>
   </button>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened class="lic-sidenav">
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/'"> หน้าแรก </a>
+      <a mat-list-item [routerLink]="'/license'"> ข้อมูลรถ </a>
       <mat-divider></mat-divider>
       <div mat-subheader>แผนภูมิกราฟ</div>
       <a mat-list-item [routerLink]="'/color'"> สีรถ </a>

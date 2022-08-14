@@ -1,17 +1,12 @@
 <div class="container">
-  <app-filter></app-filter>
   <div
     *ngIf="isLoading"
-    style="
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: white;
-    "
+    style="display: flex; justify-content: center; align-items: center"
   >
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
   </div>
+  <app-filter></app-filter>
   <div class="mat-elevation-z2">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="position">

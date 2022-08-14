@@ -6,6 +6,7 @@ import { ApiService } from '../services/api.service';
 import { License } from '../model/license';
 import { FilterlicenseService } from '../services/filterlicense.service';
 import { Subscription } from 'rxjs';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-license-table',
@@ -23,7 +24,9 @@ export class LicenseTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private api: ApiService, private filterService: FilterlicenseService) {
+  constructor(private api: ApiService,
+    private filterService: FilterlicenseService,
+    private storageService: StorageService) {
   }
 
   filter: string = "";
@@ -36,8 +39,6 @@ export class LicenseTableComponent implements OnInit {
   ngOnInit(): void {
     // get data from api
     this.getAllLicense();
-    this.sort.
-      sortChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
   ngDoCheck() {
 
@@ -92,6 +93,9 @@ export class LicenseTableComponent implements OnInit {
             return isMatch;
           }
           this.isLoading = false;
+
+          this.sort.
+            sortChange.subscribe(() => (this.paginator.pageIndex = 0));
         },
         error: (err) => {
           console.log("Error while fetching licenses ");
