@@ -15,13 +15,13 @@ export class ApiService {
   }
 
   getColor() {
-    return this.http.get<any>(this.HOST_URL + "/data/color");
+    return this.http.get<any>(this.HOST_URL + "/color");
   }
 
   getProvince() {
-    return this.http.get<any>(this.HOST_URL + "/data/province");
+    return this.http.get<any>(this.HOST_URL + "/province");
   }
   getBrand() {
-    return this.http.get<any>(this.HOST_URL + "/data/brand");
+    return this.http.get<any>(this.HOST_URL + "/brand");
   }
 }

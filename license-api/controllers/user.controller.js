@@ -42,5 +42,5 @@ let dbConfig = require("../utilities/mysqlConfig");
 let getUsersFromDB = (criteria, callback) => {
   dbConfig
     .getDB()
-    .query(`SELECT username,email FROM users`, criteria, callback);
+    .query(`SELECT id, username, firstname, lastname, email, phone FROM users`, criteria, callback);
 };

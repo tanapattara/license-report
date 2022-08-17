@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
-  selector: 'app-users',
+selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
@@ -14,7 +14,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = ['position', 'username', 'email'];
+  displayedColumns: string[] = ['position', 'username', 'firstname','lastname','phone','email'];
   dataSource!: MatTableDataSource<any>;
 
   resultsLength = 0;

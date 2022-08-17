@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="header-sector">
+    <h1>ชื่อผู้ใช้งาน</h1>
+    <span class="lic-spacer"></span>
+    <button mat-raised-button color="accent" class="rightbtn"><mat-icon>add</mat-icon> เพิ่มใหม่</button>
+  </div>
   <div class="mat-elevation-z2">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="position">
@@ -6,6 +11,18 @@
         <td mat-cell *matCellDef="let element; let i = index">
           {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
         </td>
+      </ng-container>
+
+      <!-- Firstname Column -->
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ชื่อ</th>
+        <td mat-cell *matCellDef="let element">{{ element.firstname }}</td>
+      </ng-container>
+
+      <!-- Lastname Column -->
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>นามสกุล</th>
+        <td mat-cell *matCellDef="let element">{{ element.lastname }}</td>
       </ng-container>
 
       <!-- username Column -->
@@ -18,6 +35,12 @@
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
         <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <!-- phone Column -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>เบอร์โทรศัพท์</th>
+        <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
