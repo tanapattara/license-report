@@ -1,54 +1,63 @@
-let app = require("express")(),
-  server = require("http").Server(app),
-  bodyParser = require("body-parser");
-(express = require("express")),
-  (cors = require("cors")),
-  (http = require("http")),
-  (path = require("path"));
-
+const express = require("express");
+const cors = require("cors");
 const cookieSession = require("cookie-session");
-
-let licenseRoute = require("./license/license.route");
-let dataRoute = require("./data/data.route");
-let util = require("./utilities/util");
+const path = require("path")
+const app = express();
 
 app.use(cors());
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
+app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cookieSession({
     name: "license-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
-    httpOnly: true,
+    httpOnly: true,    
+    sameSite: 'strict'
   })
 );
 
-app.use(function (err, req, res, next) {
-  return res.send({
-    statusCode: util.statusCode.ONE,
-    statusMessage: util.statusMessage.SOMETHING_WENT_WRONG,
-  });
-});
-// routes
-require("./routes/auth.routes")(app);
-require("./routes/user.routes")(app);
-app.use("/license", licenseRoute);
-app.use("/data", dataRoute);
+const db = require("./models");
+const Role = db.role;
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next();
-});
+// db.sequelize.sync();
+// force: true will drop the table if it already exists
+// db.sequelize.sync({force: true}).then(() => {
+//   console.log('Drop and Resync Database with { force: true }');
+//   initial();
+// });
 
 /*first API to check if server is running**/
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./view/index.html"));
 });
 
+// routes
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/license.routes")(app);
+require("./routes/filterdata.routes")(app);
+
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, function () {
+app.listen(PORT, function () {
   console.log(`Server is listening on http://localhost:${PORT}`);
 });
+
+function initial() {
+  Role.create({
+    id: 1,
+    name: "user",
+  });
+
+  Role.create({
+    id: 2,
+    name: "moderator",
+  });
+
+  Role.create({
+    id: 3,
+    name: "admin",
+  });
+}

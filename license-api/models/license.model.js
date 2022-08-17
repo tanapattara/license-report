@@ -1,9 +1,10 @@
 let initialize = (sequelize, Sequelize) => {
   //mysqlConfig.getDB().query("create table IF NOT EXISTS CREATE TABLE licenses");
-  const license = sequelize.define("licenses", {
+  const license = sequelize.define("license", {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     LicNo: {
       type: Sequelize.STRING,
@@ -21,27 +22,30 @@ let initialize = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     Path1: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
     Path2: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
     aDate: {
-      type: Sequelize.STRING,
+      type: Sequelize.DATE,
     },
     bDate: {
-      type: Sequelize.STRING,
+      type: Sequelize.DATE,
     },
     Speed: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
     },
     Type: {
       type: Sequelize.STRING,
     },
     Reserve1: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
-  });
+    
+  },{
+    timestamps: false,
+    freezeTableName: true});
   return license;
 };
 
