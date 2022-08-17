@@ -14,7 +14,7 @@ app.use(
   cookieSession({
     name: "license-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
-    httpOnly: true,    
+    httpOnly: true,
     sameSite: 'strict'
   })
 );
@@ -35,8 +35,10 @@ app.get("/", (req, res) => {
 });
 
 // routes
+const userRouter = require("./routes/user.routes");
+app.use("/user", userRouter);
 require("./routes/auth.routes")(app);
-require("./routes/user.routes")(app);
+//require("./routes/user.routes")(app);
 require("./routes/license.routes")(app);
 require("./routes/filterdata.routes")(app);
 

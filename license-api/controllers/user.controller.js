@@ -1,42 +1,56 @@
-exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
-};
-exports.userBoard = (req, res) => {
-  res.status(200).send("User Content.");
-};
-exports.adminBoard = (req, res) => {
-  res.status(200).send("Admin Content.");
-};
-exports.moderatorBoard = (req, res) => {
-  res.status(200).send("Moderator Content.");
-};
+const db = require("../models");
+const user = db.user;
+
 exports.getUsers = (req, res) => {
   getAlluser(req.query, (data) => {
     res.send(data);
   });
 };
-let async = require("async");
-let getAlluser = (data, callback) => {
-  async.auto(
-    {
-      article: (cb) => {
-        getUsersFromDB({}, (err, data) => {
-          if (err) {
-            cb(null, {
-              errorCode: util.statusCode.INTERNAL_SERVER_ERROR,
-              statusMessage: util.statusMessage.SERVER_BUSY,
-            });
-            return;
-          }
-          cb(null, data);
-          return;
-        });
+exports.updateUser = async (req, res) => {
+  try {
+    const updatedRows = await user.update(
+      {
+        username: req.body.username,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        phone: req.body.phone,
+        email: req.body.email
       },
+      { where: { id: req.body.id } }
+    ).then(function (rowsUpdated) {
+      res.status(201).send({ message: `data update successful` });
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+let async = require("async");
+let updateUser = (data, callback) => {
+  async.auto({
+    article: (cb) => { }
+  }, (err, response) => {
+    callback(response.article);
+  });
+};
+let getAlluser = (data, callback) => {
+  async.auto({
+    article: (cb) => {
+      getUsersFromDB({}, (err, data) => {
+        if (err) {
+          cb(null, {
+            errorCode: util.statusCode.INTERNAL_SERVER_ERROR,
+            statusMessage: util.statusMessage.SERVER_BUSY,
+          });
+          return;
+        }
+        cb(null, data);
+        return;
+      });
     },
-    (err, response) => {
-      callback(response.article);
-    }
-  );
+  }, (err, response) => {
+    callback(response.article);
+  });
 };
 let dbConfig = require("../utilities/mysqlConfig");
 let getUsersFromDB = (criteria, callback) => {
@@ -44,3 +58,6 @@ let getUsersFromDB = (criteria, callback) => {
     .getDB()
     .query(`SELECT id, username, firstname, lastname, email, phone FROM users`, criteria, callback);
 };
+let updateUserToDB = (criteria, callback) => {
+  dbConfig.getDB().query(``, callback)
+}

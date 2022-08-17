@@ -3,10 +3,13 @@ import { UserService } from '../services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserNewDialogComponent } from '../user-new-dialog/user-new-dialog.component';
+import { UserEditDialogComponent } from '../user-edit-dialog/user-edit-dialog.component';
+import { User } from '../model/user';
+
 @Component({
-selector: 'app-users',
+  selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
@@ -15,12 +18,12 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = ['position', 'username', 'firstname','lastname','phone','email'];
+  displayedColumns: string[] = ['position', 'username', 'firstname', 'lastname', 'phone', 'email', 'actions'];
   dataSource!: MatTableDataSource<any>;
 
   resultsLength = 0;
 
-  constructor(private api: UserService,public dialog: MatDialog) { }
+  constructor(private api: UserService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -38,11 +41,17 @@ export class UsersComponent implements OnInit {
       error: (err) => { console.log(err); }
     });
   }
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDialog(): void {
     this.dialog.open(UserNewDialogComponent, {
-      width: '450px',
-      enterAnimationDuration,
-      exitAnimationDuration,
+      width: '650px',
+    }).afterClosed().subscribe(() => {
+      this.getUser();
+    });
+  }
+  cellClick(user: User) {
+    this.dialog.open(UserEditDialogComponent, {
+      width: '650px',
+      data: user,
     }).afterClosed().subscribe(() => {
       this.getUser();
     });
