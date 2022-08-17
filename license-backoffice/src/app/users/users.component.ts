@@ -3,7 +3,8 @@ import { UserService } from '../services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { UserNewDialogComponent } from '../user-new-dialog/user-new-dialog.component';
 @Component({
 selector: 'app-users',
   templateUrl: './users.component.html',
@@ -19,7 +20,7 @@ export class UsersComponent implements OnInit {
 
   resultsLength = 0;
 
-  constructor(private api: UserService,) { }
+  constructor(private api: UserService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -37,5 +38,13 @@ export class UsersComponent implements OnInit {
       error: (err) => { console.log(err); }
     });
   }
-
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(UserNewDialogComponent, {
+      width: '450px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    }).afterClosed().subscribe(() => {
+      this.getUser();
+    });
+  }
 }

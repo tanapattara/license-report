@@ -18,6 +18,7 @@ import { AuthService } from './services/auth.service';
 import { SigninComponent } from './signin/signin.component';
 import { SignupNewUserComponent } from './signup-new-user/signup-new-user.component';
 import { UsersComponent } from './users/users.component';
+import { UserNewDialogComponent } from './user-new-dialog/user-new-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UsersComponent } from './users/users.component';
     SigninComponent,
     SignupNewUserComponent,
     UsersComponent,
+    UserNewDialogComponent,
   ],
   imports: [
     BrowserModule,
