@@ -47,7 +47,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
       },
       datalabels: {
         anchor: 'center',
-        align: 'end'
+        align: 'center'
       }
     }
   };

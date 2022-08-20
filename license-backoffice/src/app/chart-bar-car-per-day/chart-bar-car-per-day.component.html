@@ -1,1 +1,32 @@
-<p>chart-bar-car-per-day works!</p>
+<div class="container">
+  <h1>{{ title }}</h1>
+  <div>
+    <mat-form-field class="filterspace col-4" appearance="legacy">
+      <mat-label>เดือน</mat-label>
+      <mat-select
+        #monthSelection
+        [value]="defaultValue"
+        (selectionChange)="applyFilter($event)"
+      >
+        <mat-option *ngFor="let item of month" [value]="item">{{
+          item
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="clearFilter()">
+      ล้างการค้นหา
+    </button>
+  </div>
+  <div style="display: block">
+    <canvas
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [type]="barChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"
+    >
+    </canvas>
+  </div>
+</div>

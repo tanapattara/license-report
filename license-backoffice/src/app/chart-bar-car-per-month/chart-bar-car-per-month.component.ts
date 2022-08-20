@@ -44,7 +44,7 @@ export class ChartBarCarPerMonthComponent implements OnInit {
       },
       datalabels: {
         anchor: 'center',
-        align: 'end'
+        align: 'center'
       }
     }
   };
@@ -89,10 +89,28 @@ export class ChartBarCarPerMonthComponent implements OnInit {
               var isMatchFilter: boolean = false;
 
               if (key == 'Speed') {
-                if (value as string == 'All')
+                let strValue = value as string;
+                if (value as string == 'All') {
                   isMatchFilter = true;
-                let speedFilter: number = parseInt(value as string);
-                isMatchFilter = (record[key as keyof License] <= speedFilter);
+                } else if (strValue.includes('-')) {
+                  let strSplited = strValue.split('-');
+                  if (strValue.length > 1) {
+                    let min = parseInt(strSplited[0]);
+                    let max = parseInt(strSplited[1]);
+                    if (min < max) {
+                      isMatchFilter = (record[key as keyof License] >= min && record[key as keyof License] <= max);
+                    } else {
+                      isMatchFilter = (record[key as keyof License] <= min && record[key as keyof License] >= max);
+                    }
+                  } else {
+                    let min = parseInt(strValue[0]);
+                    isMatchFilter = (record[key as keyof License] <= min);
+
+                  }
+                } else {
+                  let max: number = parseInt(value as string);
+                  isMatchFilter = (record[key as keyof License] <= max);
+                }
               } else if (key == 'LicNo') {
                 if (value as string == 'All')
                   isMatchFilter = true;

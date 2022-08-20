@@ -48,7 +48,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
       },
       datalabels: {
         anchor: 'center',
-        align: 'end'
+        align: 'center'
       }
     }
   };
