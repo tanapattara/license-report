@@ -9,4 +9,5 @@ module.exports = function (app) {
   app.get("/color", controller.getDataColor);
   app.get("/province", controller.getDataProvice);
   app.get("/brand", controller.getDataBrand);
+  app.get("/location", controller.getDataLocation);
 };

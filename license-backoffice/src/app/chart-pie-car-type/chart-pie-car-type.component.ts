@@ -30,10 +30,15 @@ export class ChartPieCarTypeComponent implements OnInit {
       },
       datalabels: {
         formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
+          var txt = ctx.chart.data.labels![ctx.dataIndex] + " " + value.toString();
+          return txt;
+
         },
+        //color: '#fff',
+        font: {
+          weight: 'bold',
+          size: 18,
+        }
       },
     },
     maintainAspectRatio: false,
@@ -65,12 +70,17 @@ export class ChartPieCarTypeComponent implements OnInit {
     this.pieChartData.labels = [];
 
     for (let row of this.dataSource.filteredData) {
-      if (this.chartDictionary.has(row.Type)) {
-        let ex = this.chartDictionary.get(row.Type)!;
-        this.chartDictionary.set(row.Type, ex + 1);
+      let type = "รถยนต์"
+      if (row.Type == '8' || row.Type == '7') {
+        type = "รถจักรยานยนต์"
+      }
+
+      if (this.chartDictionary.has(type)) {
+        let ex = this.chartDictionary.get(type)!;
+        this.chartDictionary.set(type, ex + 1);
       }
       else {
-        this.chartDictionary.set(row.Type, 1);
+        this.chartDictionary.set(type, 1);
       }
     }
     for (let [key, value] of this.chartDictionary) {

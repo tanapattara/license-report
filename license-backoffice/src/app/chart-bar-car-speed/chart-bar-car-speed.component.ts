@@ -41,7 +41,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
     },
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
       datalabels: {
         anchor: 'end',

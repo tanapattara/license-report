@@ -38,7 +38,7 @@ export class ChartBarCarPerMonthComponent implements OnInit {
     },
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
       datalabels: {
         anchor: 'end',

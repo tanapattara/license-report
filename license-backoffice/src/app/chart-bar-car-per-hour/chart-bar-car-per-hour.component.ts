@@ -6,7 +6,7 @@ import { License } from '../model/license';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import { FilterlicenseService } from '../services/filterlicense.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-chart-bar-car-per-hour',
@@ -23,6 +23,10 @@ export class ChartBarCarPerHourComponent implements OnInit {
   datepickerInput1 = "";
   datepickerInput2 = "";
   speedInput = "";
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
   filterDictionary = new Map<string, any>();
   chartDictionary = new Map<string, number>();
@@ -38,7 +42,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
     },
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
       datalabels: {
         anchor: 'end',
@@ -59,13 +63,9 @@ export class ChartBarCarPerHourComponent implements OnInit {
   };
 
   filter: string = "";
-  notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
-    this.filter = this.filterService.getFilter();
-    this.dataSource.filter = this.filter;
-    this.displayData();
-  });
 
-  constructor(private api: ApiService, private filterService: FilterlicenseService) { }
+
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     this.getAllLicense();
@@ -168,6 +168,15 @@ export class ChartBarCarPerHourComponent implements OnInit {
 
     this.chart?.update();
   }
+  DatePickervalueChanged() {
+    var startdate = this.range.value.start as Date
+    var enddate = this.range.value.end as Date
+    this.filterDictionary.set("date", [startdate, enddate]);
+    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
+    this.filter = jsonString;
+    this.dataSource.filter = this.filter;
+    this.displayData();
+  }
   clearDic() {
     this.chartDictionary.set("00", 0);
     this.chartDictionary.set("01", 0);
@@ -194,6 +203,13 @@ export class ChartBarCarPerHourComponent implements OnInit {
     this.chartDictionary.set("21", 0);
     this.chartDictionary.set("22", 0);
     this.chartDictionary.set("23", 0);
+  }
+  clearFilter() {
+    this.datepickerInput1 = "";
+    this.datepickerInput2 = "";
+    this.filter = "";
+    this.dataSource.filter = this.filter;
+    this.displayData();
   }
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     console.log(event, active);

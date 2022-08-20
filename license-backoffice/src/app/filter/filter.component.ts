@@ -22,7 +22,7 @@ export class FilterComponent implements OnInit {
   licenseFilter: LicenseFilter[] = [];
   color: string[] = ['All'];
   province: string[] = ['All'];
-  brand: string[] = ['All'];
+  location: string[] = ['All'];
   defaultValue = "All";
   filterDictionary = new Map<string, any>();
 
@@ -55,12 +55,12 @@ export class FilterComponent implements OnInit {
         }
 
       });
-    this.api.getBrand().
+    this.api.getLocation().
       subscribe({
         next: (res) => {
           for (var item of res)
-            this.brand.push(item['brand']);
-          this.licenseFilter.push({ name: 'Brand', options: this.brand, defaultValue: this.defaultValue });
+            this.location.push(item['location']);
+          this.licenseFilter.push({ name: 'Location', options: this.location, defaultValue: this.defaultValue });
         },
         error: (err) => {
           console.log("Error while fetching filter ");

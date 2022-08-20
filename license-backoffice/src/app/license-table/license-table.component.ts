@@ -102,4 +102,11 @@ export class LicenseTableComponent implements OnInit {
         }
       });
   }
+
+  getType(type: string) {
+    if (type == '7' || type == '8')
+      return "รถจักรยานยนต์";
+    else
+      return "รถยนต์";
+  }
 }

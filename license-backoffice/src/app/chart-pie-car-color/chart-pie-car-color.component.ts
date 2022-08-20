@@ -30,10 +30,14 @@ export class ChartPieCarColorComponent implements OnInit {
       },
       datalabels: {
         formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
+          var txt = ctx.chart.data.labels![ctx.dataIndex] + " " + value.toString();
+          return txt;
+
         },
+        font: {
+          weight: 'bold',
+          size: 18,
+        }
       },
     },
     maintainAspectRatio: false,

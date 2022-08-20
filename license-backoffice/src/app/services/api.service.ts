@@ -21,7 +21,7 @@ export class ApiService {
   getProvince() {
     return this.http.get<any>(this.HOST_URL + "/province");
   }
-  getBrand() {
-    return this.http.get<any>(this.HOST_URL + "/brand");
+  getLocation() {
+    return this.http.get<any>(this.HOST_URL + "/location");
   }
 }
