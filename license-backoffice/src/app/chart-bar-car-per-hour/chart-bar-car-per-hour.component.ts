@@ -29,15 +29,17 @@ export class ChartBarCarPerHourComponent implements OnInit {
   });
 
   filterDictionary = new Map<string, any>();
-  chartDictionary = new Map<string, number>();
+  chartDictionaryCar = new Map<string, number>();
+  chartDictionaryBike = new Map<string, number>();
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      x: {},
+      x: { stacked: true, },
       y: {
-        min: 10
+        stacked: true,
+        min: 0
       }
     },
     plugins: {
@@ -45,7 +47,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
         display: true,
       },
       datalabels: {
-        anchor: 'end',
+        anchor: 'center',
         align: 'end'
       }
     }
@@ -58,7 +60,8 @@ export class ChartBarCarPerHourComponent implements OnInit {
   public barChartData: ChartData<'bar'> = {
     labels: [],
     datasets: [
-      { data: [], label: 'จำนวนรถ' },
+      { data: [], label: 'รถยนต์' },
+      { data: [], label: 'รถจักรยานยนต์' },
     ]
   };
 
@@ -122,50 +125,59 @@ export class ChartBarCarPerHourComponent implements OnInit {
   displayData() {
     this.clearDic();
     this.barChartData.datasets[0].data = [];
+    this.barChartData.datasets[1].data = [];
     this.barChartData.labels = [];
 
     for (let row of this.dataSource.filteredData) {
       let d: Date = new Date(row.aDate);
+      let isBike: boolean = row.Type == '7' || row.Type == '8';
+
       let hour = "";
       let value = 0;
       switch (d.getHours()) {
-        case 0: { hour = "00"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 1: { hour = "01"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 2: { hour = "02"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 3: { hour = "03"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 4: { hour = "04"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 5: { hour = "05"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 6: { hour = "06"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 7: { hour = "07"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 8: { hour = "08"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 9: { hour = "09"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 10: { hour = "10"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 11: { hour = "11"; value = this.chartDictionary.get(hour)! + 1; break; }
+        case 0: { hour = "00"; value = value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 1: { hour = "01"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 2: { hour = "02"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 3: { hour = "03"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 4: { hour = "04"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 5: { hour = "05"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 6: { hour = "06"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 7: { hour = "07"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 8: { hour = "08"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 9: { hour = "09"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 10: { hour = "10"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 11: { hour = "11"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
 
-        case 12: { hour = "12"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 13: { hour = "13"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 14: { hour = "14"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 15: { hour = "15"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 16: { hour = "16"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 17: { hour = "17"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 18: { hour = "18"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 19: { hour = "19"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 20: { hour = "20"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 21: { hour = "21"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 22: { hour = "22"; value = this.chartDictionary.get(hour)! + 1; break; }
-        case 23: { hour = "23"; value = this.chartDictionary.get(hour)! + 1; break; }
+        case 12: { hour = "12"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 13: { hour = "13"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 14: { hour = "14"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 15: { hour = "15"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 16: { hour = "16"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 17: { hour = "17"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 18: { hour = "18"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 19: { hour = "19"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 20: { hour = "20"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 21: { hour = "21"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 22: { hour = "22"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 23: { hour = "23"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
       }
 
       if (hour == "")
         continue;
 
-      this.chartDictionary.set(hour, value);
+      if (isBike)
+        this.chartDictionaryBike.set(hour, value);
+      else
+        this.chartDictionaryCar.set(hour, value);
     }
-    for (let [key, value] of this.chartDictionary) {
+    for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);
     }
-
+    for (let [key, value] of this.chartDictionaryBike) {
+      // this.barChartData.labels!.push(key);
+      this.barChartData.datasets[1].data.push(value);
+    }
     this.chart?.update();
   }
   DatePickervalueChanged() {
@@ -178,31 +190,55 @@ export class ChartBarCarPerHourComponent implements OnInit {
     this.displayData();
   }
   clearDic() {
-    this.chartDictionary.set("00", 0);
-    this.chartDictionary.set("01", 0);
-    this.chartDictionary.set("02", 0);
-    this.chartDictionary.set("03", 0);
-    this.chartDictionary.set("04", 0);
-    this.chartDictionary.set("05", 0);
-    this.chartDictionary.set("06", 0);
-    this.chartDictionary.set("07", 0);
-    this.chartDictionary.set("08", 0);
-    this.chartDictionary.set("09", 0);
-    this.chartDictionary.set("10", 0);
-    this.chartDictionary.set("11", 0);
+    this.chartDictionaryCar.set("00", 0);
+    this.chartDictionaryCar.set("01", 0);
+    this.chartDictionaryCar.set("02", 0);
+    this.chartDictionaryCar.set("03", 0);
+    this.chartDictionaryCar.set("04", 0);
+    this.chartDictionaryCar.set("05", 0);
+    this.chartDictionaryCar.set("06", 0);
+    this.chartDictionaryCar.set("07", 0);
+    this.chartDictionaryCar.set("08", 0);
+    this.chartDictionaryCar.set("09", 0);
+    this.chartDictionaryCar.set("10", 0);
+    this.chartDictionaryCar.set("11", 0);
+    this.chartDictionaryCar.set("12", 0);
+    this.chartDictionaryCar.set("13", 0);
+    this.chartDictionaryCar.set("14", 0);
+    this.chartDictionaryCar.set("15", 0);
+    this.chartDictionaryCar.set("16", 0);
+    this.chartDictionaryCar.set("17", 0);
+    this.chartDictionaryCar.set("18", 0);
+    this.chartDictionaryCar.set("19", 0);
+    this.chartDictionaryCar.set("20", 0);
+    this.chartDictionaryCar.set("21", 0);
+    this.chartDictionaryCar.set("22", 0);
+    this.chartDictionaryCar.set("23", 0);
 
-    this.chartDictionary.set("12", 0);
-    this.chartDictionary.set("13", 0);
-    this.chartDictionary.set("14", 0);
-    this.chartDictionary.set("15", 0);
-    this.chartDictionary.set("16", 0);
-    this.chartDictionary.set("17", 0);
-    this.chartDictionary.set("18", 0);
-    this.chartDictionary.set("19", 0);
-    this.chartDictionary.set("20", 0);
-    this.chartDictionary.set("21", 0);
-    this.chartDictionary.set("22", 0);
-    this.chartDictionary.set("23", 0);
+    this.chartDictionaryBike.set("00", 0);
+    this.chartDictionaryBike.set("01", 0);
+    this.chartDictionaryBike.set("02", 0);
+    this.chartDictionaryBike.set("03", 0);
+    this.chartDictionaryBike.set("04", 0);
+    this.chartDictionaryBike.set("05", 0);
+    this.chartDictionaryBike.set("06", 0);
+    this.chartDictionaryBike.set("07", 0);
+    this.chartDictionaryBike.set("08", 0);
+    this.chartDictionaryBike.set("09", 0);
+    this.chartDictionaryBike.set("10", 0);
+    this.chartDictionaryBike.set("11", 0);
+    this.chartDictionaryBike.set("12", 0);
+    this.chartDictionaryBike.set("13", 0);
+    this.chartDictionaryBike.set("14", 0);
+    this.chartDictionaryBike.set("15", 0);
+    this.chartDictionaryBike.set("16", 0);
+    this.chartDictionaryBike.set("17", 0);
+    this.chartDictionaryBike.set("18", 0);
+    this.chartDictionaryBike.set("19", 0);
+    this.chartDictionaryBike.set("20", 0);
+    this.chartDictionaryBike.set("21", 0);
+    this.chartDictionaryBike.set("22", 0);
+    this.chartDictionaryBike.set("23", 0);
   }
   clearFilter() {
     this.datepickerInput1 = "";

@@ -25,15 +25,17 @@ export class ChartBarCarPerMonthComponent implements OnInit {
   speedInput = "";
 
   filterDictionary = new Map<string, any>();
-  chartDictionary = new Map<string, number>();
+  chartDictionaryCar = new Map<string, number>();
+  chartDictionaryBike = new Map<string, number>();
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      x: {},
+      x: { stacked: true, },
       y: {
-        min: 10
+        stacked: true,
+        min: 0
       }
     },
     plugins: {
@@ -41,7 +43,7 @@ export class ChartBarCarPerMonthComponent implements OnInit {
         display: true,
       },
       datalabels: {
-        anchor: 'end',
+        anchor: 'center',
         align: 'end'
       }
     }
@@ -55,7 +57,8 @@ export class ChartBarCarPerMonthComponent implements OnInit {
     labels: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
       'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
     datasets: [
-      { data: [], label: 'จำนวนรถ' },
+      { data: [], label: 'รถยนต์' },
+      { data: [], label: 'รถจักรยานยนต์' },
     ]
   };
 
@@ -123,54 +126,76 @@ export class ChartBarCarPerMonthComponent implements OnInit {
   displayData() {
     this.clearDic();
     this.barChartData.datasets[0].data = [];
+    this.barChartData.datasets[1].data = [];
     this.barChartData.labels = [];
 
     for (let row of this.dataSource.filteredData) {
       let d: Date = new Date(row.aDate);
+      let isBike: boolean = row.Type == '7' || row.Type == '8';
+
       let month = "";
       let value = 0;
       switch (d.getMonth()) {
-        case 1: { month = "มกราคม"; value = this.chartDictionary.get("มกราคม")! + 1; break; }
-        case 2: { month = "กุมภาพันธ์"; value = this.chartDictionary.get("กุมภาพันธ์")! + 1; break; }
-        case 3: { month = "มีนาคม"; value = this.chartDictionary.get("มีนาคม")! + 1; break; }
-        case 4: { month = "เมษายน"; value = this.chartDictionary.get("เมษายน")! + 1; break; }
-        case 5: { month = "พฤษภาคม"; value = this.chartDictionary.get("พฤษภาคม")! + 1; break; }
-        case 6: { month = "มิถุนายน"; value = this.chartDictionary.get("มิถุนายน")! + 1; break; }
-
-        case 7: { month = "กรกฎาคม"; value = this.chartDictionary.get("กรกฎาคม")! + 1; break; }
-        case 8: { month = "สิงหาคม"; value = this.chartDictionary.get("สิงหาคม")! + 1; break; }
-        case 9: { month = "กันยายน"; value = this.chartDictionary.get("กันยายน")! + 1; break; }
-        case 10: { month = "ตุลาคม"; value = this.chartDictionary.get("ตุลาคม")! + 1; break; }
-        case 11: { month = "พฤศจิกายน"; value = this.chartDictionary.get("พฤศจิกายน")! + 1; break; }
-        case 12: { month = "ธันวาคม"; value = this.chartDictionary.get("ธันวาคม")! + 1; break; }
+        case 1: { month = "มกราคม"; value = isBike ? this.chartDictionaryBike.get("มกราคม")! + 1 : this.chartDictionaryCar.get("มกราคม")! + 1; break; }
+        case 2: { month = "กุมภาพันธ์"; value = isBike ? this.chartDictionaryBike.get("กุมภาพันธ์")! + 1 : this.chartDictionaryCar.get("กุมภาพันธ์")! + 1; break; }
+        case 3: { month = "มีนาคม"; value = isBike ? this.chartDictionaryBike.get("มีนาคม")! + 1 : this.chartDictionaryCar.get("มีนาคม")! + 1; break; }
+        case 4: { month = "เมษายน"; value = isBike ? this.chartDictionaryBike.get("เมษายน")! + 1 : this.chartDictionaryCar.get("เมษายน")! + 1; break; }
+        case 5: { month = "พฤษภาคม"; value = isBike ? this.chartDictionaryBike.get("พฤษภาคม")! + 1 : this.chartDictionaryCar.get("พฤษภาคม")! + 1; break; }
+        case 6: { month = "มิถุนายน"; value = isBike ? this.chartDictionaryBike.get("มิถุนายน")! + 1 : this.chartDictionaryCar.get("มิถุนายน")! + 1; break; }
+        case 7: { month = "กรกฎาคม"; value = isBike ? this.chartDictionaryBike.get("กรกฎาคม")! + 1 : this.chartDictionaryCar.get("กรกฎาคม")! + 1; break; }
+        case 8: { month = "สิงหาคม"; value = isBike ? this.chartDictionaryBike.get("สิงหาคม")! + 1 : this.chartDictionaryCar.get("สิงหาคม")! + 1; break; }
+        case 9: { month = "กันยายน"; value = isBike ? this.chartDictionaryBike.get("กันยายน")! + 1 : this.chartDictionaryCar.get("กันยายน")! + 1; break; }
+        case 10: { month = "ตุลาคม"; value = isBike ? this.chartDictionaryBike.get("ตุลาคม")! + 1 : this.chartDictionaryCar.get("ตุลาคม")! + 1; break; }
+        case 11: { month = "พฤศจิกายน"; value = isBike ? this.chartDictionaryBike.get("พฤศจิกายน")! + 1 : this.chartDictionaryCar.get("พฤศจิกายน")! + 1; break; }
+        case 12: { month = "ธันวาคม"; value = isBike ? this.chartDictionaryBike.get("ธันวาคม")! + 1 : this.chartDictionaryCar.get("ธันวาคม")! + 1; break; }
       }
 
       if (month == "")
         continue;
 
-      this.chartDictionary.set(month, value);
+      if (isBike)
+        this.chartDictionaryBike.set(month, value);
+      else
+        this.chartDictionaryCar.set(month, value);
+
     }
-    for (let [key, value] of this.chartDictionary) {
+    for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);
+    }
+    for (let [key, value] of this.chartDictionaryBike) {
+      // this.barChartData.labels!.push(key);
+      this.barChartData.datasets[1].data.push(value);
     }
 
     this.chart?.update();
   }
   clearDic() {
-    this.chartDictionary.set("มกราคม", 0);
-    this.chartDictionary.set("กุมภาพันธ์", 0);
-    this.chartDictionary.set("มีนาคม", 0);
-    this.chartDictionary.set("เมษายน", 0);
-    this.chartDictionary.set("พฤษภาคม", 0);
-    this.chartDictionary.set("มิถุนายน", 0);
+    this.chartDictionaryCar.set("มกราคม", 0);
+    this.chartDictionaryCar.set("กุมภาพันธ์", 0);
+    this.chartDictionaryCar.set("มีนาคม", 0);
+    this.chartDictionaryCar.set("เมษายน", 0);
+    this.chartDictionaryCar.set("พฤษภาคม", 0);
+    this.chartDictionaryCar.set("มิถุนายน", 0);
+    this.chartDictionaryCar.set("กรกฎาคม", 0);
+    this.chartDictionaryCar.set("สิงหาคม", 0);
+    this.chartDictionaryCar.set("กันยายน", 0);
+    this.chartDictionaryCar.set("ตุลาคม", 0);
+    this.chartDictionaryCar.set("พฤศจิกายน", 0);
+    this.chartDictionaryCar.set("ธันวาคม", 0);
 
-    this.chartDictionary.set("กรกฎาคม", 0);
-    this.chartDictionary.set("สิงหาคม", 0);
-    this.chartDictionary.set("กันยายน", 0);
-    this.chartDictionary.set("ตุลาคม", 0);
-    this.chartDictionary.set("พฤศจิกายน", 0);
-    this.chartDictionary.set("ธันวาคม", 0);
+    this.chartDictionaryBike.set("มกราคม", 0);
+    this.chartDictionaryBike.set("กุมภาพันธ์", 0);
+    this.chartDictionaryBike.set("มีนาคม", 0);
+    this.chartDictionaryBike.set("เมษายน", 0);
+    this.chartDictionaryBike.set("พฤษภาคม", 0);
+    this.chartDictionaryBike.set("มิถุนายน", 0);
+    this.chartDictionaryBike.set("กรกฎาคม", 0);
+    this.chartDictionaryBike.set("สิงหาคม", 0);
+    this.chartDictionaryBike.set("กันยายน", 0);
+    this.chartDictionaryBike.set("ตุลาคม", 0);
+    this.chartDictionaryBike.set("พฤศจิกายน", 0);
+    this.chartDictionaryBike.set("ธันวาคม", 0);
   }
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     console.log(event, active);

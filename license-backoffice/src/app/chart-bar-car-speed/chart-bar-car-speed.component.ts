@@ -28,15 +28,17 @@ export class ChartBarCarSpeedComponent implements OnInit {
   });
 
   filterDictionary = new Map<string, any>();
-  chartDictionary = new Map<number, number>();
+  chartDictionaryCar = new Map<number, number>();
+  chartDictionaryBike = new Map<number, number>();
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      x: {},
+      x: { stacked: true, },
       y: {
-        min: 10
+        stacked: true,
+        min: 0
       }
     },
     plugins: {
@@ -44,7 +46,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
         display: true,
       },
       datalabels: {
-        anchor: 'end',
+        anchor: 'center',
         align: 'end'
       }
     }
@@ -55,9 +57,10 @@ export class ChartBarCarSpeedComponent implements OnInit {
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: ['40', '50', '60', '70', '80', '90', '100', '110', '120+'],
+    labels: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110', '120', '130+'],
     datasets: [
-      { data: [] },
+      { data: [], label: 'รถยนต์' },
+      { data: [], label: 'รถจักรยานยนต์' },
     ]
   };
 
@@ -127,41 +130,72 @@ export class ChartBarCarSpeedComponent implements OnInit {
     this.displayData();
   }
   clearDic() {
-    //'40', '50', '60', '70', '80', '90', '100', '110', '120+'
-    this.chartDictionary.set(40, 0);
-    this.chartDictionary.set(50, 0);
-    this.chartDictionary.set(60, 0);
-    this.chartDictionary.set(70, 0);
-    this.chartDictionary.set(80, 0);
-    this.chartDictionary.set(90, 0);
-    this.chartDictionary.set(100, 0);
-    this.chartDictionary.set(110, 0);
-    this.chartDictionary.set(120, 0);
+    this.chartDictionaryCar.set(0, 0);
+    this.chartDictionaryCar.set(10, 0);
+    this.chartDictionaryCar.set(20, 0);
+    this.chartDictionaryCar.set(30, 0);
+    this.chartDictionaryCar.set(40, 0);
+    this.chartDictionaryCar.set(50, 0);
+    this.chartDictionaryCar.set(60, 0);
+    this.chartDictionaryCar.set(70, 0);
+    this.chartDictionaryCar.set(80, 0);
+    this.chartDictionaryCar.set(90, 0);
+    this.chartDictionaryCar.set(100, 0);
+    this.chartDictionaryCar.set(110, 0);
+    this.chartDictionaryCar.set(120, 0);
+
+    this.chartDictionaryBike.set(0, 0);
+    this.chartDictionaryBike.set(10, 0);
+    this.chartDictionaryBike.set(20, 0);
+    this.chartDictionaryBike.set(30, 0);
+    this.chartDictionaryBike.set(40, 0);
+    this.chartDictionaryBike.set(50, 0);
+    this.chartDictionaryBike.set(60, 0);
+    this.chartDictionaryBike.set(70, 0);
+    this.chartDictionaryBike.set(80, 0);
+    this.chartDictionaryBike.set(90, 0);
+    this.chartDictionaryBike.set(100, 0);
+    this.chartDictionaryBike.set(110, 0);
+    this.chartDictionaryBike.set(120, 0);
   }
   displayData() {
     this.clearDic();
     this.barChartData.datasets[0].data = [];
+    this.barChartData.datasets[1].data = [];
     this.barChartData.labels = [];
 
     for (let row of this.dataSource.filteredData) {
       let speed: Number = parseInt(row.Speed);
-      let k = 40;
+      let isBike: boolean = row.Type == '7' || row.Type == '8';
+      let k = 0;
       let value = 0;
-      if (speed < 50) { value = this.chartDictionary.get(40)! + 1; k = 40; }
-      else if (speed < 60) { value = this.chartDictionary.get(50)! + 1; k = 50; }
-      else if (speed < 70) { value = this.chartDictionary.get(60)! + 1; k = 60; }
-      else if (speed < 80) { value = this.chartDictionary.get(70)! + 1; k = 70; }
-      else if (speed < 90) { value = this.chartDictionary.get(80)! + 1; k = 80; }
-      else if (speed < 100) { value = this.chartDictionary.get(90)! + 1; k = 90; }
-      else if (speed < 110) { value = this.chartDictionary.get(100)! + 1; k = 100; }
-      else if (speed < 120) { value = this.chartDictionary.get(110)! + 1; k = 110; }
-      else if (speed >= 120) { value = this.chartDictionary.get(120)! + 1; k = 120; }
 
-      this.chartDictionary.set(k, value);
+      if (speed < 10) { value = isBike ? this.chartDictionaryBike.get(0)! + 1 : this.chartDictionaryCar.get(0)! + 1; k = 0; }
+      else if (speed < 20) { isBike ? this.chartDictionaryBike.get(10)! + 1 : value = this.chartDictionaryCar.get(10)! + 1; k = 10; }
+      else if (speed < 30) { isBike ? this.chartDictionaryBike.get(20)! + 1 : value = this.chartDictionaryCar.get(20)! + 1; k = 20; }
+      else if (speed < 40) { isBike ? this.chartDictionaryBike.get(30)! + 1 : value = this.chartDictionaryCar.get(30)! + 1; k = 30; }
+      else if (speed < 50) { isBike ? this.chartDictionaryBike.get(40)! + 1 : value = this.chartDictionaryCar.get(40)! + 1; k = 40; }
+      else if (speed < 60) { isBike ? this.chartDictionaryBike.get(50)! + 1 : value = this.chartDictionaryCar.get(50)! + 1; k = 50; }
+      else if (speed < 70) { isBike ? this.chartDictionaryBike.get(60)! + 1 : value = this.chartDictionaryCar.get(60)! + 1; k = 60; }
+      else if (speed < 80) { isBike ? this.chartDictionaryBike.get(70)! + 1 : value = this.chartDictionaryCar.get(70)! + 1; k = 70; }
+      else if (speed < 90) { isBike ? this.chartDictionaryBike.get(80)! + 1 : value = this.chartDictionaryCar.get(80)! + 1; k = 80; }
+      else if (speed < 100) { isBike ? this.chartDictionaryBike.get(90)! + 1 : value = this.chartDictionaryCar.get(90)! + 1; k = 90; }
+      else if (speed < 110) { isBike ? this.chartDictionaryBike.get(100)! + 1 : value = this.chartDictionaryCar.get(100)! + 1; k = 100; }
+      else if (speed < 120) { isBike ? this.chartDictionaryBike.get(110)! + 1 : value = this.chartDictionaryCar.get(110)! + 1; k = 110; }
+      else if (speed < 130) { isBike ? this.chartDictionaryBike.get(120)! + 1 : value = this.chartDictionaryCar.get(120)! + 1; k = 120; }
+      else if (speed >= 130) { isBike ? this.chartDictionaryBike.get(130)! + 1 : value = this.chartDictionaryCar.get(130)! + 1; k = 130; }
+
+      if (isBike)
+        this.chartDictionaryBike.set(k, value);
+      else
+        this.chartDictionaryCar.set(k, value);
     }
-    for (let [key, value] of this.chartDictionary) {
+    for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);
+    } for (let [key, value] of this.chartDictionaryBike) {
+      // this.barChartData.labels!.push(key);
+      this.barChartData.datasets[1].data.push(value);
     }
 
     this.chart?.update();

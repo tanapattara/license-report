@@ -110,14 +110,15 @@ export class ChartPieCarColorComponent implements OnInit {
     let colorcode = "";
 
     switch (colorname) {
-      case 'Black': { colorcode = 'rgb(0, 0, 0)'; break; }
-      case 'Gray': { colorcode = 'rgb(128, 128, 128)'; break; }
-      case 'Red': { colorcode = 'rgb(222, 49, 99)'; break; }
-      case 'White': { colorcode = 'rgb(220, 220, 220)'; break; }
-      case 'Green': { colorcode = 'rgb(0, 128, 0'; break; }
-      case 'Blue': { colorcode = 'rgb(0, 0, 255)'; break; }
-      case 'Yellow': { colorcode = 'rgb(255, 255, 10)'; break; }
-      case 'Unknown': { colorcode = 'rgb(128, 0, 128)'; break; }
+      case 'Black': { colorcode = 'rgb(50, 50, 50)'; break; }
+      case 'Gray': { colorcode = 'rgb(201, 203, 207)'; break; }
+      case 'Red': { colorcode = 'rgb(255, 99, 132)'; break; }
+      case 'White': { colorcode = 'rgb(240, 240, 240)'; break; }
+      case 'Green': { colorcode = 'rgb(75, 192, 192)'; break; }
+      case 'Blue': { colorcode = 'rgb(54, 162, 235)'; break; }
+      case 'Yellow': { colorcode = 'rgb(255, 205, 86)'; break; }
+      case 'Purple': { colorcode = 'rgb(153, 102, 255)'; break; }
+      case 'Unknown': { colorcode = 'rgb(153, 102, 255)'; break; }
     }
     return colorcode;
   }
