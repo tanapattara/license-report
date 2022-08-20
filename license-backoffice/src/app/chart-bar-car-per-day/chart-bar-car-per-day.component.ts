@@ -27,6 +27,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
   defaultValue = "ALL";
   month = ['ALL', 'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
     'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+  speedInput = "";
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -83,10 +84,27 @@ export class ChartBarCarPerDayComponent implements OnInit {
               var isMatchFilter: boolean = false;
 
               if (key == 'Speed') {
-                if (value as string == 'All')
+                let strValue = value as string;
+                if (value as string == 'All') {
                   isMatchFilter = true;
-                let speedFilter: number = parseInt(value as string);
-                isMatchFilter = (record[key as keyof License] <= speedFilter);
+                } else if (strValue.includes('-')) {
+                  let strSplited = strValue.split('-');
+                  if (strValue.length > 1) {
+                    let min = parseInt(strSplited[0]);
+                    let max = parseInt(strSplited[1]);
+                    if (min < max) {
+                      isMatchFilter = (record[key as keyof License] >= min && record[key as keyof License] <= max);
+                    } else {
+                      isMatchFilter = (record[key as keyof License] <= min && record[key as keyof License] >= max);
+                    }
+                  } else {
+                    let min = parseInt(strValue[0]);
+                    isMatchFilter = (record[key as keyof License] <= min);
+                  }
+                } else {
+                  let max: number = parseInt(value as string);
+                  isMatchFilter = (record[key as keyof License] <= max);
+                }
               } else if (key == 'LicNo') {
                 if (value as string == 'All')
                   isMatchFilter = true;
@@ -249,6 +267,13 @@ export class ChartBarCarPerDayComponent implements OnInit {
   clearFilter() {
     this.monthSelection.options.first.select();
     this.dataSource.filter = "";
+    this.displayData();
+  }
+  onChangeEvent(event: any, filtername: string) {
+    var filtervalue = (event.target as HTMLInputElement).value == "" ? "All" : (event.target as HTMLInputElement).value;
+    this.filterDictionary.set(filtername, filtervalue);
+    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
+    this.dataSource.filter = jsonString;
     this.displayData();
   }
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {

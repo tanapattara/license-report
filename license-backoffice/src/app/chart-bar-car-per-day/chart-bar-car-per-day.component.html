@@ -1,7 +1,7 @@
 <div class="container">
   <h1>{{ title }}</h1>
-  <div>
-    <mat-form-field class="filterspace col-4" appearance="legacy">
+  <div class="searchbox">
+    <mat-form-field appearance="legacy">
       <mat-label>เดือน</mat-label>
       <mat-select
         #monthSelection
@@ -12,6 +12,17 @@
           item
         }}</mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>ช่วงความเร็ว</mat-label>
+      <input
+        matInput
+        [(ngModel)]="speedInput"
+        type="text"
+        min="0"
+        (keyup)="onChangeEvent($event, 'Speed')"
+        placeholder="0-40"
+      />
     </mat-form-field>
     <button mat-raised-button color="accent" (click)="clearFilter()">
       ล้างการค้นหา

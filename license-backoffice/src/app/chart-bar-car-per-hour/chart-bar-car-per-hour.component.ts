@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { FormGroup, FormControl } from '@angular/forms';
+import { FilterlicenseService } from '../services/filterlicense.service';
 
 @Component({
   selector: 'app-chart-bar-car-per-hour',
@@ -66,9 +67,12 @@ export class ChartBarCarPerHourComponent implements OnInit {
   };
 
   filter: string = "";
-
-
-  constructor(private api: ApiService) { }
+  notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
+    this.filter = this.filterService.getFilter();
+    this.dataSource.filter = this.filter;
+    this.displayData();
+  });
+  constructor(private api: ApiService, private filterService: FilterlicenseService) { }
 
   ngOnInit(): void {
     this.getAllLicense();
@@ -88,10 +92,28 @@ export class ChartBarCarPerHourComponent implements OnInit {
               var isMatchFilter: boolean = false;
 
               if (key == 'Speed') {
-                if (value as string == 'All')
+                let strValue = value as string;
+                if (value as string == 'All') {
                   isMatchFilter = true;
-                let speedFilter: number = parseInt(value as string);
-                isMatchFilter = (record[key as keyof License] <= speedFilter);
+                } else if (strValue.includes('-')) {
+                  let strSplited = strValue.split('-');
+                  if (strValue.length > 1) {
+                    let min = parseInt(strSplited[0]);
+                    let max = parseInt(strSplited[1]);
+                    if (min < max) {
+                      isMatchFilter = (record[key as keyof License] >= min && record[key as keyof License] <= max);
+                    } else {
+                      isMatchFilter = (record[key as keyof License] <= min && record[key as keyof License] >= max);
+                    }
+                  } else {
+                    let min = parseInt(strValue[0]);
+                    isMatchFilter = (record[key as keyof License] <= min);
+
+                  }
+                } else {
+                  let max: number = parseInt(value as string);
+                  isMatchFilter = (record[key as keyof License] <= max);
+                }
               } else if (key == 'LicNo') {
                 if (value as string == 'All')
                   isMatchFilter = true;
