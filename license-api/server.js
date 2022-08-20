@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const path = require("path")
+const path = require("path");
 const app = express();
 
 app.use(cors());
@@ -15,17 +15,18 @@ app.use(
     name: "license-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
     httpOnly: true,
-    sameSite: 'strict'
+    sameSite: "strict",
   })
 );
 
 const db = require("./models");
 const Role = db.role;
 
-// db.sequelize.sync();
+//db.sequelize.sync();
+//initial();
 // force: true will drop the table if it already exists
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync Database with { force: true }');
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and Resync Database with { force: true }");
 //   initial();
 // });
 

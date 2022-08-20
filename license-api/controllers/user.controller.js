@@ -14,12 +14,12 @@ exports.updateUser = async (req, res) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         phone: req.body.phone,
-        email: req.body.email
+        email: req.body.email,
       },
       { where: { id: req.body.id } }
-    ).then(function (rowsUpdated) {
-      res.status(201).send({ message: `data update successful` });
-    });
+    );
+
+    res.status(201).send({ message: `data update successful` });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -27,37 +27,47 @@ exports.updateUser = async (req, res) => {
 
 let async = require("async");
 let updateUser = (data, callback) => {
-  async.auto({
-    article: (cb) => { }
-  }, (err, response) => {
-    callback(response.article);
-  });
+  async.auto(
+    {
+      article: (cb) => {},
+    },
+    (err, response) => {
+      callback(response.article);
+    }
+  );
 };
 let getAlluser = (data, callback) => {
-  async.auto({
-    article: (cb) => {
-      getUsersFromDB({}, (err, data) => {
-        if (err) {
-          cb(null, {
-            errorCode: util.statusCode.INTERNAL_SERVER_ERROR,
-            statusMessage: util.statusMessage.SERVER_BUSY,
-          });
+  async.auto(
+    {
+      article: (cb) => {
+        getUsersFromDB({}, (err, data) => {
+          if (err) {
+            cb(null, {
+              errorCode: util.statusCode.INTERNAL_SERVER_ERROR,
+              statusMessage: util.statusMessage.SERVER_BUSY,
+            });
+            return;
+          }
+          cb(null, data);
           return;
-        }
-        cb(null, data);
-        return;
-      });
+        });
+      },
     },
-  }, (err, response) => {
-    callback(response.article);
-  });
+    (err, response) => {
+      callback(response.article);
+    }
+  );
 };
 let dbConfig = require("../utilities/mysqlConfig");
 let getUsersFromDB = (criteria, callback) => {
   dbConfig
     .getDB()
-    .query(`SELECT id, username, firstname, lastname, email, phone FROM users`, criteria, callback);
+    .query(
+      `SELECT id, username, firstname, lastname, email, phone FROM users`,
+      criteria,
+      callback
+    );
 };
 let updateUserToDB = (criteria, callback) => {
-  dbConfig.getDB().query(``, callback)
-}
+  dbConfig.getDB().query(``, callback);
+};

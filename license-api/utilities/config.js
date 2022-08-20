@@ -11,7 +11,7 @@ let serverURLs = {
   },
 };
 
-let config = {
+let dbconfig = {
   DB_URL_MYSQL: {
     host: `${serverURLs[environment].MYSQL_HOST}`,
     user: `${serverURLs[environment].MYSQL_USER}`,
@@ -29,7 +29,7 @@ let config = {
 let secret = "bezkoder-secret-key";
 
 module.exports = {
-  config: config,
+  dbconfig: dbconfig,
   secret: secret,
   HOST: serverURLs.dev.MYSQL_HOST,
   USER: serverURLs.dev.MYSQL_USER,
