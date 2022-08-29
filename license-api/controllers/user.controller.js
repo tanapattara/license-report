@@ -1,5 +1,6 @@
 const db = require("../models");
 const user = db.user;
+const util = require("../utilities/util");
 
 exports.getUsers = (req, res) => {
   getAlluser(req.query, (data) => {
