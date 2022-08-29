@@ -1,32 +1,79 @@
-<mat-toolbar color="primary">
-  <button
-    mat-icon-button
-    class="lic-icon"
-    aria-label="Example icon-button with menu icon"
-    (click)="sidenav.toggle()"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>{{ title }}</span>
+<mat-toolbar>
+  <img class="logo" src="assets/img/logo.png" />
+  <div class="toolbar">
+    <span class="toolbar-title">{{ title }}</span
+    ><br />
+    <span class="toolbar-subtitle">{{ subtitle }}</span>
+  </div>
   <span class="lic-spacer"></span>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened class="lic-sidenav">
     <mat-nav-list>
-      <div mat-subheader>ภาพรวม</div>
-      <a mat-list-item [routerLink]="'/'">รายละเอียด</a>
-      <div mat-subheader>จำนวนตามรายละเอียด</div>
-      <a mat-list-item [routerLink]="'/license'">รายชื่อ</a>
-      <a mat-list-item [routerLink]="'/color'"> สีรถ </a>
-      <a mat-list-item [routerLink]="'/type'"> ประเภทรถ </a>
-      <div mat-subheader>จำนวนตามสถิติ</div>
-      <a mat-list-item [routerLink]="'/speed'"> ความเร็วรถ </a>
-      <a mat-list-item [routerLink]="'/hour'"> รายชั่วโมง </a>
-      <a mat-list-item [routerLink]="'/day'"> รายวัน </a>
-      <a mat-list-item [routerLink]="'/month'"> รายเดือน </a>
-      <div mat-subheader>ตั้งค่า</div>
-      <a mat-list-item [routerLink]="'/users'"> ผู้ใช้งาน </a>
-      <a mat-list-item [routerLink]="'/users'"> ออกจากระบบ </a>
+      <div mat-subheader class="divider-text">ภาพรวม</div>
+      <a
+        mat-list-item
+        [routerLinkActive]="['is-active']"
+        [routerLink]="'/dashboard'"
+      >
+        <mat-icon svgIcon="dashboard"></mat-icon>
+        รายละเอียด</a
+      >
+
+      <div mat-subheader class="divider-space">จำนวนตามรายละเอียด</div>
+      <a
+        mat-list-item
+        [routerLinkActive]="['is-active']"
+        [routerLink]="'/license'"
+        ><mat-icon svgIcon="license"></mat-icon>รายชื่อ</a
+      >
+      <a
+        mat-list-item
+        [routerLinkActive]="['is-active']"
+        [routerLink]="'/color'"
+        ><mat-icon svgIcon="color"></mat-icon>
+        สีรถ
+      </a>
+      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'/type'"
+        ><mat-icon svgIcon="type"></mat-icon>
+        ประเภทรถ
+      </a>
+
+      <div mat-subheader class="divider-space">จำนวนตามสถิติ</div>
+      <a
+        mat-list-item
+        [routerLinkActive]="['is-active']"
+        [routerLink]="'/speed'"
+        ><mat-icon svgIcon="speed"></mat-icon>
+        ความเร็วรถ
+      </a>
+      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'/hour'"
+        ><mat-icon svgIcon="hour"></mat-icon>
+        รายชั่วโมง
+      </a>
+      <a mat-list-item [routerLinkActive]="['is-active']" [routerLink]="'/day'">
+        <mat-icon svgIcon="month"></mat-icon>รายวัน
+      </a>
+      <a
+        mat-list-item
+        [routerLinkActive]="['is-active']"
+        [routerLink]="'/month'"
+        ><mat-icon svgIcon="month"></mat-icon>
+        รายเดือน
+      </a>
+
+      <div mat-subheader class="divider-space">ตั้งค่า</div>
+      <a
+        mat-list-item
+        [routerLinkActive]="['is-active']"
+        [routerLink]="'/users'"
+        ><mat-icon svgIcon="user"></mat-icon>
+        ผู้ใช้งาน
+      </a>
+      <div mat-subheader class="divider-space"></div>
+      <a mat-list-item class="logout" (click)="logout()"
+        ><mat-icon svgIcon="logout"></mat-icon> ออกจากระบบ
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

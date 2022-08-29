@@ -10,8 +10,10 @@ import { SigninComponent } from './signin/signin.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { UsersComponent } from './users/users.component';
 import { ChartBarCarPerDayComponent } from './chart-bar-car-per-day/chart-bar-car-per-day.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
-  { path: '', redirectTo: 'license', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninComponent },
   { path: 'license', component: LicenseTableComponent, canActivate: [AuthGuard] },
   { path: 'color', component: ChartPieCarColorComponent, canActivate: [AuthGuard] },
