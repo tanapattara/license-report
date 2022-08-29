@@ -36,16 +36,17 @@
 .divider-space{
   padding-top: 46px;
 }
-.mat-list-item{
+/* .mat-list-item{
   background: #FFFFFF;
-  /* border-radius: 16px; */
-}
+  border-radius: 16px;
+} */
 .logout{
   color: #EB5A47;
   border: solid;
   border-radius: 16px; 
 }
 .is-active {
+  background: #FFFFFF;
   color: #EB5A47;
   border-left: 8px solid #EB5A47;
 }
