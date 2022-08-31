@@ -12,11 +12,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 
 export class DashboardComponent implements OnInit {
-  @ViewChild(BaseChartDirective) chartHour: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) chartMonth: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) chartDay: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  datas: any;
   car = 0;
   moto = 0;
   // Bar chart by Hour
@@ -137,7 +134,7 @@ export class DashboardComponent implements OnInit {
   public barChartDayType: ChartType = 'bar';
   public barChartDayPlugins = [DataLabelsPlugin];
   public barChartDayData: ChartData<'bar'> = {
-    labels: [],
+    labels: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'],
     datasets: [{
       data: [],
       borderColor: 'rgb(233, 237, 247)',
@@ -157,18 +154,15 @@ export class DashboardComponent implements OnInit {
     this.apiService.getLicenses().
       subscribe({
         next: (res) => {
-          this.datas = res;
-          if (this.datas != undefined && this.datas?.length > 0) {
-            this.setVehicle();
-          }
+          this.setVehicle(res);
         },
         error: (err) => {
           console.log("Error while fetching licenses ");
         }
       });
   }
-  setVehicle = () => {
-    for (let license of this.datas!) {
+  setVehicle = (data: any) => {
+    for (let license of data!) {
       let adate = new Date(license['aDate']);
       let h = adate.getHours();
       let w = adate.getDay();
@@ -195,15 +189,9 @@ export class DashboardComponent implements OnInit {
       this.barChartMonthData.datasets[0].data.push(this.monthCar[i]);
       this.barChartMonthData.datasets[1].data.push(this.monthMoto[i]);
     }
-    index = 0;
     for (let value of this.day) {
-      this.barChartDayData.labels?.push(index++);
       this.barChartDayData.datasets[0].data.push(value);
     }
-    console.log(this.day);
-    console.log(this.monthCar);
-    this.chartHour?.update();
-    this.chartDay?.update();
-    this.chartMonth?.update();
+    this.chart?.update();
   }
 }
