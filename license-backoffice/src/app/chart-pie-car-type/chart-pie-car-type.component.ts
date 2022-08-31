@@ -34,7 +34,7 @@ export class ChartPieCarTypeComponent implements OnInit {
           return txt;
 
         },
-        //color: '#fff',
+        color: '#fff',
         font: {
           weight: 'bold',
           size: 18,
@@ -44,9 +44,11 @@ export class ChartPieCarTypeComponent implements OnInit {
     maintainAspectRatio: false,
   };
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [],
+    labels: ['รถยนต์', 'รถจักรยานยนต์'],
     datasets: [{
-      data: []
+      data: [],
+      backgroundColor: ['rgb(204, 61, 0)', 'rgb(255, 172, 131)']
+
     }]
   };
   public pieChartType: ChartType = 'pie';

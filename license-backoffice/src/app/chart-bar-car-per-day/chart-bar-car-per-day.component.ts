@@ -42,6 +42,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
     plugins: {
       legend: {
         display: true,
+        align: 'start'
       },
       datalabels: {
         anchor: 'center',
@@ -59,8 +60,14 @@ export class ChartBarCarPerDayComponent implements OnInit {
       '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
       '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     datasets: [
-      { data: [], label: 'รถยนต์' },
-      { data: [], label: 'รถจักรยานยนต์' },
+      {
+        data: [], label: 'รถยนต์', borderColor: 'rgb(204, 61, 0)',
+        backgroundColor: 'rgb(204, 61, 0)',
+      },
+      {
+        data: [], label: 'รถจักรยานยนต์', borderColor: 'rgb(255, 172, 131)',
+        backgroundColor: 'rgb(255, 172, 131)'
+      },
     ]
   };
 

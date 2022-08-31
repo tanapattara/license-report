@@ -1,37 +1,35 @@
 <h1 mat-dialog-title>ข้อมูลผู้ใช้งานใหม่</h1>
 <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
-    <div mat-dialog-content>
-        <mat-form-field class=" col-6" appearance="legacy">
-            <mat-label>ชื่อ</mat-label>
-            <input matInput formControlName="firstname" type="text" />
-        </mat-form-field>
-        <mat-form-field class="col-6" appearance="legacy">
-            <mat-label>นามสกุล</mat-label>
-            <input matInput formControlName="lastname" type="text" />
-        </mat-form-field>
-        <mat-form-field class="col-6" appearance="legacy">
-            <mat-label>เบอร์โทรศัพท์</mat-label>
-            <input matInput formControlName="phone" type="text" />
-        </mat-form-field>
-        <mat-form-field class="col-6" appearance="legacy">
-            <mat-label>อีเมล</mat-label>
-            <input matInput formControlName="email" type="email" required />
-
-        </mat-form-field>
-        <mat-form-field class="col-12" appearance="legacy">
-            <mat-label>ชื่อผู้ใช้งาน</mat-label>
-            <input matInput formControlName="username" type="text" required />
-
-        </mat-form-field>
-        <mat-form-field class="col-12" appearance="legacy">
-            <mat-label>รหัสผ่าน</mat-label>
-            <input matInput formControlName="password" type="password" required />
-
-        </mat-form-field>
-    </div>
-    <div mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>ยกเลิก</button>
-        <button mat-raised-button cdkFocusInitial color="accent" type="submit">
-            <mat-icon>save</mat-icon> บันทึก
-        </button>
-    </div>
+  <div mat-dialog-content>
+    <mat-form-field class="col-6" appearance="fill">
+      <mat-label>ชื่อ</mat-label>
+      <input matInput formControlName="firstname" type="text" />
+    </mat-form-field>
+    <mat-form-field class="col-6" appearance="fill">
+      <mat-label>นามสกุล</mat-label>
+      <input matInput formControlName="lastname" type="text" />
+    </mat-form-field>
+    <mat-form-field class="col-6" appearance="fill">
+      <mat-label>เบอร์โทรศัพท์</mat-label>
+      <input matInput formControlName="phone" type="text" />
+    </mat-form-field>
+    <mat-form-field class="col-6" appearance="fill">
+      <mat-label>อีเมล</mat-label>
+      <input matInput formControlName="email" type="email" required />
+    </mat-form-field>
+    <mat-form-field class="col-12" appearance="fill">
+      <mat-label>ชื่อผู้ใช้งาน</mat-label>
+      <input matInput formControlName="username" type="text" required />
+    </mat-form-field>
+    <mat-form-field class="col-12" appearance="fill">
+      <mat-label>รหัสผ่าน</mat-label>
+      <input matInput formControlName="password" type="password" required />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>ยกเลิก</button>
+    <button mat-raised-button cdkFocusInitial color="accent" type="submit">
+      <mat-icon>save</mat-icon> บันทึก
+    </button>
+  </div>
+</form>

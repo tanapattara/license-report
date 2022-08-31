@@ -44,6 +44,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
     plugins: {
       legend: {
         display: true,
+        align: 'start'
       },
       datalabels: {
         anchor: 'center',
@@ -59,8 +60,15 @@ export class ChartBarCarSpeedComponent implements OnInit {
   public barChartData: ChartData<'bar'> = {
     labels: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110', '120', '130+'],
     datasets: [
-      { data: [], label: 'รถยนต์' },
-      { data: [], label: 'รถจักรยานยนต์' },
+      {
+        data: [], label: 'รถยนต์',
+        borderColor: 'rgb(204, 61, 0)',
+        backgroundColor: 'rgb(204, 61, 0)',
+      },
+      {
+        data: [], label: 'รถจักรยานยนต์', borderColor: 'rgb(255, 172, 131)',
+        backgroundColor: 'rgb(255, 172, 131)'
+      },
     ]
   };
 

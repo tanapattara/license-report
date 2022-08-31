@@ -8,9 +8,8 @@
       <div class="card-red">
         <div>
           <h4 class="h4-red-card">ทั้งหมด</h4>
-          <h1 class="h1-red-card">4,000</h1>
+          <h1 class="h1-red-card">{{ car + moto | number }}</h1>
         </div>
-        <div>chart</div>
       </div>
     </div>
 
@@ -18,7 +17,7 @@
       <div class="card-white">
         <div>
           <h4 class="h4-white-card">รถยนต์</h4>
-          <h1 class="h1-white-card">2,000</h1>
+          <h1 class="h1-white-card">{{ car | number }}</h1>
         </div>
         <div>chart</div>
       </div>
@@ -28,7 +27,7 @@
       <div class="card-white">
         <div>
           <h4 class="h4-white-card">รถจักรยานยนต์</h4>
-          <h1 class="h1-white-card">2,000</h1>
+          <h1 class="h1-white-card">{{ moto | number }}</h1>
         </div>
         <div>chart</div>
       </div>
@@ -40,6 +39,17 @@
           <h6 class="card-subtitle mb-2 text-muted">
             5 ลำดับจากสถิติยี่ห้อรถ ของภาพรวมทั้งหมด
           </h6>
+          <div style="display: block">
+            <canvas
+              #chartHour
+              baseChart
+              [data]="barChartHourData"
+              [options]="barChartHourOptions"
+              [plugins]="barChartHourPlugins"
+              [type]="barChartHourType"
+            >
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -51,6 +61,17 @@
           <h6 class="card-subtitle mb-2 text-muted">
             สถิตรถเข้าออกในแต่ละเดือน ของรถแต่ละประเภทรถ
           </h6>
+          <div style="display: block">
+            <canvas
+              #chartMonth
+              baseChart
+              [data]="barChartMonthData"
+              [options]="barChartMonthOptions"
+              [plugins]="barChartMonthPlugins"
+              [type]="barChartMonthType"
+            >
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +82,17 @@
           <h6 class="card-subtitle mb-2 text-muted">
             5 ลำดับจากสถิติยี่ห้อรถ ของภาพรวมทั้งหมด
           </h6>
+          <div style="display: block">
+            <canvas
+              #chartDay
+              baseChart
+              [data]="barChartDayData"
+              [options]="barChartDayOptions"
+              [plugins]="barChartDayPlugins"
+              [type]="barChartDayType"
+            >
+            </canvas>
+          </div>
         </div>
       </div>
     </div>

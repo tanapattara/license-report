@@ -1,5 +1,5 @@
 <div class="searchbox">
-  <mat-form-field class="filterspace col-4" appearance="legacy">
+  <mat-form-field class="filterspace col-4" appearance="fill">
     <mat-label>ระหว่างวันที่</mat-label>
     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
       <input
@@ -26,7 +26,7 @@
       >รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error
     >
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="legacy">
+  <mat-form-field class="filterspace col-4" appearance="fill">
     <mat-label>เลขทะเบียน</mat-label>
     <input
       matInput
@@ -35,7 +35,7 @@
       (keyup)="onChangeEvent($event, 'LicNo')"
     />
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="legacy">
+  <mat-form-field class="filterspace col-4" appearance="fill">
     <mat-label>ความเร็วไม่เกิน</mat-label>
     <input
       matInput
@@ -46,7 +46,7 @@
     />
   </mat-form-field>
   <br />
-  <mat-form-field class="filterspace col-4" appearance="legacy">
+  <mat-form-field class="filterspace col-4" appearance="fill">
     <mat-label>จังหวัด</mat-label>
     <mat-select
       #provinceSelection
@@ -58,7 +58,7 @@
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="legacy">
+  <mat-form-field class="filterspace col-4" appearance="fill">
     <mat-label>สี</mat-label>
     <mat-select
       #colorSelection
@@ -70,7 +70,7 @@
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="legacy">
+  <mat-form-field class="filterspace col-4" appearance="fill">
     <mat-label>สถานที่</mat-label>
     <mat-select
       #brandSelection
