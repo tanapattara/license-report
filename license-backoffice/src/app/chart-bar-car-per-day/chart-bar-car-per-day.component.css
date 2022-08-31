@@ -1,5 +1,8 @@
 .searchbox {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.center-btn {
+  text-align: center;
+  padding-top: 1rem;
+}

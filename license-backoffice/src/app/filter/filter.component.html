@@ -1,5 +1,5 @@
-<div class="searchbox">
-  <mat-form-field class="filterspace col-4" appearance="fill">
+<div class="searchbox row">
+  <mat-form-field class="col-4" appearance="outline">
     <mat-label>ระหว่างวันที่</mat-label>
     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
       <input
@@ -26,7 +26,7 @@
       >รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error
     >
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="fill">
+  <mat-form-field class="col-4" appearance="outline">
     <mat-label>เลขทะเบียน</mat-label>
     <input
       matInput
@@ -35,7 +35,7 @@
       (keyup)="onChangeEvent($event, 'LicNo')"
     />
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="fill">
+  <mat-form-field class="col-4" appearance="outline">
     <mat-label>ความเร็วไม่เกิน</mat-label>
     <input
       matInput
@@ -45,8 +45,7 @@
       (keyup)="onChangeEvent($event, 'Speed')"
     />
   </mat-form-field>
-  <br />
-  <mat-form-field class="filterspace col-4" appearance="fill">
+  <mat-form-field class="col-4" appearance="outline">
     <mat-label>จังหวัด</mat-label>
     <mat-select
       #provinceSelection
@@ -58,7 +57,7 @@
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="fill">
+  <mat-form-field class="col-4" appearance="outline">
     <mat-label>สี</mat-label>
     <mat-select
       #colorSelection
@@ -70,7 +69,7 @@
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="filterspace col-4" appearance="fill">
+  <mat-form-field class="col-4" appearance="outline">
     <mat-label>สถานที่</mat-label>
     <mat-select
       #brandSelection
@@ -83,7 +82,7 @@
     </mat-select>
   </mat-form-field>
   <div align="end">
-    <button mat-raised-button color="accent" (click)="clearFilter()">
+    <button mat-flat-button color="primary" (click)="clearFilter()">
       ล้างการค้นหา
     </button>
   </div>

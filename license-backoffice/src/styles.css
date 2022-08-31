@@ -1,70 +1,77 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 /* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: "BaiJamjuree", Arial, Helvetica, sans-serif; }
+html,
+body {
+  height: 100%;
+  font-family: "BaiJamjuree", Arial, Helvetica, sans-serif;
+}
 
 @font-face {
-    font-family: "BaiJamjuree";
-    src: local("BaiJamjuree"), url(./assets/fonts/BaiJamjuree-Medium.ttf) format("truetype");
+  font-family: "BaiJamjuree";
+  src: local("BaiJamjuree"),
+    url(./assets/fonts/BaiJamjuree-Medium.ttf) format("truetype");
 }
 
-h1{
-    font-style: normal!important;
-    font-weight: 700!important;
-    font-size: 48px!important;
-    line-height: 60px!important;
-  }
-  h2{
-    font-style: normal!important;
-    font-weight: 700!important;
-    font-size: 40px!important;
-    line-height: 50px!important;
+h1 {
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 48px !important;
+  line-height: 60px !important;
 }
-  h3{
-    font-style: normal!important;
-    font-weight: 600!important;
-    font-size: 32px!important;
-    line-height: 40px!important;
-  }
-  h4{
-    font-style: normal!important;
-  font-weight: 600!important;
-  font-size: 26px!important;
-  line-height: 32px!important;
-  }
-  h5{
-    font-style: normal!important;
-  font-weight: 500!important;
-  font-size: 20px!important;
-  line-height: 25px!important;
-  }
-  h6{
-    font-style: normal!important;
-  font-weight: 500!important;
-  font-size: 16px!important;
-  line-height: 20px!important;
-  }
-  .title-page{
-    margin-bottom: 24px;
-  }
-  .card{
-  background: #FFFFFF;
+h2 {
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 40px !important;
+  line-height: 50px !important;
+}
+h3 {
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 32px !important;
+  line-height: 40px !important;
+}
+h4 {
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 26px !important;
+  line-height: 32px !important;
+}
+h5 {
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  line-height: 25px !important;
+}
+h6 {
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 20px !important;
+}
+.title-page {
+  margin-bottom: 24px;
+}
+.card {
+  background: #ffffff;
   border-radius: 20px;
-  }
-  .card-title{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 32px;
-    /* identical to box height */
-    color: #000000;
-  }
-  .card-subtitle{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #717171;
-  }
+}
+.card-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 32px;
+  /* identical to box height */
+  color: #000000;
+}
+.card-subtitle {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #717171;
+}
+button {
+  border-radius: 20px !important;
+}

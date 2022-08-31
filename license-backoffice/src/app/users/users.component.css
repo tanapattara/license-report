@@ -1,16 +1,16 @@
 table {
-    width: 100%;
+  width: 100%;
 }
-.header-sector{
-    display: flex;
-    vertical-align: top;
-    width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.header-sector {
+  display: flex;
+  vertical-align: top;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .lic-spacer {
-    flex: 1 1 auto;
-  }
-  button {
-    margin-right: 8px;
-  }
+  flex: 1 1 auto;
+}
+button {
+  margin-top: 1rem;
+}

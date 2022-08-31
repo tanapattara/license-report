@@ -1,30 +1,30 @@
 <h1 mat-dialog-title>แก้ไขผู้ใช้งาน</h1>
 <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content>
-    <mat-form-field class="col-6" appearance="fill">
+    <mat-form-field class="col-6" appearance="outline">
       <mat-label>ชื่อ</mat-label>
       <input matInput formControlName="firstname" type="text" />
     </mat-form-field>
-    <mat-form-field class="col-6" appearance="fill">
+    <mat-form-field class="col-6" appearance="outline">
       <mat-label>นามสกุล</mat-label>
       <input matInput formControlName="lastname" type="text" />
     </mat-form-field>
-    <mat-form-field class="col-6" appearance="fill">
+    <mat-form-field class="col-6" appearance="outline">
       <mat-label>เบอร์โทรศัพท์</mat-label>
       <input matInput formControlName="phone" type="text" />
     </mat-form-field>
-    <mat-form-field class="col-6" appearance="fill">
+    <mat-form-field class="col-6" appearance="outline">
       <mat-label>อีเมล</mat-label>
       <input matInput formControlName="email" type="email" required />
     </mat-form-field>
-    <mat-form-field class="col-12" appearance="fill">
+    <mat-form-field class="col-12" appearance="outline">
       <mat-label>ชื่อผู้ใช้งาน</mat-label>
       <input matInput formControlName="username" type="text" required />
     </mat-form-field>
   </div>
   <div mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>ยกเลิก</button>
-    <button mat-raised-button cdkFocusInitial color="accent" type="submit">
+    <button mat-flat-button mat-dialog-close>ยกเลิก</button>
+    <button mat-flat-button cdkFocusInitial color="primary" type="submit">
       <mat-icon>save</mat-icon> บันทึก
     </button>
   </div>

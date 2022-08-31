@@ -1,7 +1,7 @@
 <div class="container">
   <h1>{{ title }}</h1>
-  <div class="searchbox">
-    <mat-form-field appearance="fill">
+  <div class="searchbox row">
+    <mat-form-field class="col-5" appearance="outline">
       <mat-label>เดือน</mat-label>
       <mat-select
         #monthSelection
@@ -13,7 +13,7 @@
         }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field class="col-5" appearance="outline">
       <mat-label>ช่วงความเร็ว</mat-label>
       <input
         matInput
@@ -24,20 +24,24 @@
         placeholder="0-40"
       />
     </mat-form-field>
-    <button mat-raised-button color="accent" (click)="clearFilter()">
-      ล้างการค้นหา
-    </button>
+    <div class="col-2 center-btn">
+      <button mat-flat-button color="primary" (click)="clearFilter()">
+        ล้างการค้นหา
+      </button>
+    </div>
   </div>
-  <div style="display: block">
-    <canvas
-      baseChart
-      [data]="barChartData"
-      [options]="barChartOptions"
-      [plugins]="barChartPlugins"
-      [type]="barChartType"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)"
-    >
-    </canvas>
+  <div class="card">
+    <div class="card-body">
+      <canvas
+        baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      >
+      </canvas>
+    </div>
   </div>
 </div>
