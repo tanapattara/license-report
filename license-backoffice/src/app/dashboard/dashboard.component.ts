@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -12,11 +12,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 
 export class DashboardComponent implements OnInit {
-  @ViewChild(BaseChartDirective) chartHour: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) chartDay: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) chartMonth: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) chartCar: BaseChartDirective | undefined;
-  @ViewChild(BaseChartDirective) chartMoto: BaseChartDirective | undefined;
+  //@ViewChild(BaseChartDirective) chartHour: BaseChartDirective | undefined;
+  @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective> | undefined;
 
   car = 0;
   moto = 0;
@@ -57,7 +54,7 @@ export class DashboardComponent implements OnInit {
   };
   public barChartMotoData: ChartData<'doughnut'> = {
     datasets: [{
-      data: [64, 855],
+      data: [],
       rotation: 90,
       backgroundColor: [
         'rgb(235, 90, 71)',
@@ -244,10 +241,8 @@ export class DashboardComponent implements OnInit {
     for (let value of this.day) {
       this.barChartDayData.datasets[0].data.push(value);
     }
-    this.chartDay?.update();
-    this.chartHour?.update();
-    this.chartMonth?.update();
-    this.chartMoto?.update();
-    this.chartCar?.update();
+    this.charts?.forEach((child) => {
+      child.chart?.update()
+    });
   }
 }
