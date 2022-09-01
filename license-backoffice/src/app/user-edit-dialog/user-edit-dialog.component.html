@@ -1,19 +1,22 @@
-<h1 mat-dialog-title>แก้ไขผู้ใช้งาน</h1>
+<div align="center">
+  <div class="component-title">แก้ไขผู้ใช้งาน</div>
+  <div class="component-subtitle">กรุณากรอกข้อมูลด้านล่าง</div>
+</div>
 <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content>
-    <mat-form-field class="col-6" appearance="outline">
+    <mat-form-field class="col-12" appearance="outline">
       <mat-label>ชื่อ</mat-label>
       <input matInput formControlName="firstname" type="text" />
     </mat-form-field>
-    <mat-form-field class="col-6" appearance="outline">
+    <mat-form-field class="col-12" appearance="outline">
       <mat-label>นามสกุล</mat-label>
       <input matInput formControlName="lastname" type="text" />
     </mat-form-field>
-    <mat-form-field class="col-6" appearance="outline">
+    <mat-form-field class="col-12" appearance="outline">
       <mat-label>เบอร์โทรศัพท์</mat-label>
       <input matInput formControlName="phone" type="text" />
     </mat-form-field>
-    <mat-form-field class="col-6" appearance="outline">
+    <mat-form-field class="col-12" appearance="outline">
       <mat-label>อีเมล</mat-label>
       <input matInput formControlName="email" type="email" required />
     </mat-form-field>
@@ -24,6 +27,7 @@
   </div>
   <div mat-dialog-actions align="end">
     <button mat-flat-button mat-dialog-close>ยกเลิก</button>
+    <div class="flex-spacer"></div>
     <button mat-flat-button cdkFocusInitial color="primary" type="submit">
       <mat-icon>save</mat-icon> บันทึก
     </button>

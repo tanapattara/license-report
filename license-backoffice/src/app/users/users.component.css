@@ -14,3 +14,6 @@ table {
 button {
   margin-top: 1rem;
 }
+.mat-dialog-container {
+  border-radius: 20px !important;
+}

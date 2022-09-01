@@ -1,14 +1,19 @@
 <div class="container">
   <div class="header-sector">
-    <h1>ชื่อผู้ใช้งาน</h1>
+    <div>
+      <div class="component-title">รายชื่อผู้เข้าใช้บริการ</div>
+      <div class="component-subtitle">
+        รายชื่อผู้ใช้ใช้บริการทั้งหมด ของรถแต่ละประเภทรถ
+      </div>
+    </div>
     <span class="lic-spacer"></span>
     <div>
       <button mat-flat-button color="primary" (click)="openDialog()">
-        <mat-icon>add</mat-icon> เพิ่มใหม่
+        เพิ่มใหม่
       </button>
     </div>
   </div>
-  <div class="mat-elevation-z2">
+  <div class="mat-elevation-z1">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>ลำดับ</th>
@@ -51,8 +56,8 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>จัดการ</th>
 
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="accent" (click)="cellClick(element)">
-            <mat-icon>edit</mat-icon>
+          <button mat-button color="accent" (click)="cellClick(element)">
+            แก้ไข
           </button>
         </td>
       </ng-container>

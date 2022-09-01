@@ -43,14 +43,15 @@ export class UsersComponent implements OnInit {
   }
   openDialog(): void {
     this.dialog.open(UserNewDialogComponent, {
-      width: '650px',
+      width: '348px',
+
     }).afterClosed().subscribe(() => {
       this.getUser();
     });
   }
   cellClick(user: User) {
     this.dialog.open(UserEditDialogComponent, {
-      width: '650px',
+      width: '348px',
       data: user,
     }).afterClosed().subscribe(() => {
       this.getUser();
