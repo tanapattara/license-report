@@ -4,7 +4,7 @@
 html,
 body {
   height: 100%;
-  font-family: "BaiJamjuree", Arial, Helvetica, sans-serif;
+  font-family: "BaiJamjuree" !important;
 }
 
 @font-face {

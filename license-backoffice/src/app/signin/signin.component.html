@@ -1,24 +1,51 @@
-<mat-card>
-  <mat-card-title>ลงชื่อเข้าสู่ระบบ</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Username</mat-label>
-          <input matInput type="text" required formControlName="username" />
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" required formControlName="password" />
-        </mat-form-field>
-      </p>
-      <div class="button">
-        <button type="submit" mat-flat-button primary="accent">
-          เข้าสู่ระบบ
-        </button>
+<div class="login-card">
+  <div class="row" style="height: 100%">
+    <div class="col login-logo">
+      <img
+        src="../../assets/img/LogoKKU.png"
+        class="img-fluid rounded-start"
+        alt="..."
+        style="margin-top: 46px"
+      />
+      <div class="login-title">WELCOME BACK</div>
+
+      <div class="login-subtitle">
+        ระบบจัดการรถเข้าออก<br />ภายในมหาวิทยาลัยขอนแก่น
       </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+    </div>
+    <div class="col login-form">
+      <div class="card-body">
+        <h5 class="card-title">ลงชื่อเข้าสู่ระบบ</h5>
+        <div>
+          <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  required
+                  formControlName="username"
+                />
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  type="password"
+                  required
+                  formControlName="password"
+                />
+              </mat-form-field>
+            </p>
+            <button type="submit" mat-flat-button color="primary">
+              เข้าสู่ระบบ
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
