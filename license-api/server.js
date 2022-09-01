@@ -20,9 +20,8 @@ app.use(
 );
 
 const db = require("./models");
+db.sequelize.sync();
 const Role = db.role;
-
-//db.sequelize.sync();
 //initial();
 // force: true will drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {

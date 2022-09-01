@@ -11,18 +11,21 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { UsersComponent } from './users/users.component';
 import { ChartBarCarPerDayComponent } from './chart-bar-car-per-day/chart-bar-car-per-day.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
+import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
+
 const routes: Routes = [
+  { path: 'signin', component: LoginLayoutComponent, children: [{ path: '', component: SigninComponent }] },
+  { path: 'dashboard', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: DashboardComponent }] },
+  { path: 'license', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: LicenseTableComponent },] },
+  { path: 'color', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartPieCarColorComponent },] },
+  { path: 'type', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartPieCarTypeComponent },] },
+  { path: 'speed', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarSpeedComponent },] },
+  { path: 'hour', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerHourComponent },] },
+  { path: 'day', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerDayComponent },] },
+  { path: 'month', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerMonthComponent },] },
+  { path: 'users', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: UsersComponent },] },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'signin', component: SigninComponent },
-  { path: 'license', component: LicenseTableComponent, canActivate: [AuthGuard] },
-  { path: 'color', component: ChartPieCarColorComponent, canActivate: [AuthGuard] },
-  { path: 'type', component: ChartPieCarTypeComponent, canActivate: [AuthGuard] },
-  { path: 'speed', component: ChartBarCarSpeedComponent, canActivate: [AuthGuard] },
-  { path: 'hour', component: ChartBarCarPerHourComponent, canActivate: [AuthGuard] },
-  { path: 'day', component: ChartBarCarPerDayComponent, canActivate: [AuthGuard] },
-  { path: 'month', component: ChartBarCarPerMonthComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

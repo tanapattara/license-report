@@ -22,6 +22,8 @@ import { UserNewDialogComponent } from './user-new-dialog/user-new-dialog.compon
 import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog.component';
 import { ChartBarCarPerDayComponent } from './chart-bar-car-per-day/chart-bar-car-per-day.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     UserEditDialogComponent,
     ChartBarCarPerDayComponent,
     DashboardComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent,
   ],
   imports: [
     BrowserModule,

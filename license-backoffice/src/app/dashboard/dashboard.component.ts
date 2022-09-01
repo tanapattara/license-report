@@ -154,6 +154,7 @@ export class DashboardComponent implements OnInit {
     this.apiService.getLicenses().
       subscribe({
         next: (res) => {
+          console.log(res);
           this.setVehicle(res);
         },
         error: (err) => {

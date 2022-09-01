@@ -1,0 +1,79 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.mat-toolbar {
+  height: 120px;
+  background-color: rgba(250, 250, 250, 1);
+}
+.logo {
+  width: 55px;
+  height: 88.44px;
+}
+.toolbar {
+  margin-left: 26px;
+}
+.toolbar-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+}
+.toolbar-subtitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 35px;
+}
+.lic-spacer {
+  flex: 1 1 auto;
+}
+.lic-sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  background-color: rgba(250, 250, 250, 1);
+}
+.mat-subheader {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+.divider-space {
+  padding-top: 46px;
+}
+/* .mat-list-item{
+  background: #FFFFFF;
+  border-radius: 16px;
+} */
+.logout {
+  color: #eb5a47;
+  border: solid;
+  border-radius: 16px;
+}
+.is-active {
+  background: #ffffff;
+  color: #eb5a47;
+  border-left: 8px solid #eb5a47;
+}
+.is-active .mat-icon {
+  filter: invert(42%) sepia(17%) saturate(4468%) hue-rotate(332deg)
+    brightness(102%) contrast(84%);
+}
+mat-icon {
+  margin-right: 16px;
+}
+html,
+body,
+.material-app,
+.mat-sidenav-container {
+  height: calc(100vh - 120px);
+  width: 100%;
+  background-color: rgba(250, 250, 250, 1);
+}
+.mat-sidenav-content {
+  background-image: url("../../../assets/img/Polygon2.png");
+  background-color: rgba(250, 250, 250, 1);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right bottom !important;
+}
