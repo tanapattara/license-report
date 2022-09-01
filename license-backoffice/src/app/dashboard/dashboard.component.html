@@ -19,7 +19,16 @@
           <h4 class="h4-white-card">รถยนต์</h4>
           <h1 class="h1-white-card">{{ car | number }}</h1>
         </div>
-        <div>chart</div>
+        <div class="doughnut-chart">
+          <canvas
+            #chartCar
+            baseChart
+            [data]="barChartCarData"
+            [options]="barChartCarOptions"
+            [type]="doughnutChartType"
+          >
+          </canvas>
+        </div>
       </div>
     </div>
 
@@ -29,7 +38,16 @@
           <h4 class="h4-white-card">รถจักรยานยนต์</h4>
           <h1 class="h1-white-card">{{ moto | number }}</h1>
         </div>
-        <div>chart</div>
+        <div class="doughnut-chart">
+          <canvas
+            #chartMoto
+            baseChart
+            [data]="barChartMotoData"
+            [options]="barChartMotoOptions"
+            [type]="doughnutChartType"
+          >
+          </canvas>
+        </div>
       </div>
     </div>
     <div class="col-lg-12 mb-4">
@@ -45,8 +63,7 @@
               baseChart
               [data]="barChartHourData"
               [options]="barChartHourOptions"
-              [plugins]="barChartHourPlugins"
-              [type]="barChartHourType"
+              [type]="barChartType"
             >
             </canvas>
           </div>
@@ -67,8 +84,7 @@
               baseChart
               [data]="barChartMonthData"
               [options]="barChartMonthOptions"
-              [plugins]="barChartMonthPlugins"
-              [type]="barChartMonthType"
+              [type]="barChartType"
             >
             </canvas>
           </div>
@@ -88,8 +104,7 @@
               baseChart
               [data]="barChartDayData"
               [options]="barChartDayOptions"
-              [plugins]="barChartDayPlugins"
-              [type]="barChartDayType"
+              [type]="barChartType"
             >
             </canvas>
           </div>

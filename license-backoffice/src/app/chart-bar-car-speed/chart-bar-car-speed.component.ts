@@ -35,10 +35,20 @@ export class ChartBarCarSpeedComponent implements OnInit {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      x: { stacked: true, },
+      x: {
+        stacked: true,
+        title: {
+          display: true,
+          text: 'ความเร็ว km/hr'
+        }
+      },
       y: {
         stacked: true,
-        min: 0
+        min: 0,
+        title: {
+          display: true,
+          text: 'จำนวน'
+        }
       }
     },
     plugins: {
@@ -64,10 +74,13 @@ export class ChartBarCarSpeedComponent implements OnInit {
         data: [], label: 'รถยนต์',
         borderColor: 'rgb(204, 61, 0)',
         backgroundColor: 'rgb(204, 61, 0)',
+        borderRadius: Number.MAX_VALUE,
       },
       {
-        data: [], label: 'รถจักรยานยนต์', borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)'
+        data: [], label: 'รถจักรยานยนต์',
+        borderColor: 'rgb(255, 172, 131)',
+        backgroundColor: 'rgb(255, 172, 131)',
+        borderRadius: Number.MAX_VALUE,
       },
     ]
   };
@@ -151,6 +164,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
     this.chartDictionaryCar.set(100, 0);
     this.chartDictionaryCar.set(110, 0);
     this.chartDictionaryCar.set(120, 0);
+    this.chartDictionaryCar.set(130, 0);
 
     this.chartDictionaryBike.set(0, 0);
     this.chartDictionaryBike.set(10, 0);
@@ -165,6 +179,8 @@ export class ChartBarCarSpeedComponent implements OnInit {
     this.chartDictionaryBike.set(100, 0);
     this.chartDictionaryBike.set(110, 0);
     this.chartDictionaryBike.set(120, 0);
+    this.chartDictionaryBike.set(130, 0);
+
   }
   displayData() {
     this.clearDic();
@@ -199,7 +215,11 @@ export class ChartBarCarSpeedComponent implements OnInit {
         this.chartDictionaryCar.set(k, value);
     }
     for (let [key, value] of this.chartDictionaryCar) {
-      this.barChartData.labels!.push(key);
+      let ktext = key.toString();
+      if (key == 130)
+        ktext = '130+';
+      this.barChartData.labels!.push(ktext);
+
       this.barChartData.datasets[0].data.push(value);
     } for (let [key, value] of this.chartDictionaryBike) {
       // this.barChartData.labels!.push(key);

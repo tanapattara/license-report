@@ -75,3 +75,8 @@ h6 {
 button {
   border-radius: 20px !important;
 }
+.mat-paginator-navigation-next,
+.mat-paginator-navigation-previous {
+  color: #eb5a47;
+  /* background-color: #eb5a47; */
+}

@@ -33,10 +33,22 @@ export class ChartBarCarPerDayComponent implements OnInit {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      x: { stacked: true, },
+      x: {
+        stacked: true,
+        display: true,
+        title: {
+          display: true,
+          text: 'วันที่'
+        }
+      },
       y: {
         stacked: true,
-        min: 0
+        min: 0,
+        display: true,
+        title: {
+          display: true,
+          text: 'จำนวน'
+        }
       }
     },
     plugins: {
@@ -63,10 +75,12 @@ export class ChartBarCarPerDayComponent implements OnInit {
       {
         data: [], label: 'รถยนต์', borderColor: 'rgb(204, 61, 0)',
         backgroundColor: 'rgb(204, 61, 0)',
+        borderRadius: Number.MAX_VALUE,
       },
       {
         data: [], label: 'รถจักรยานยนต์', borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)'
+        backgroundColor: 'rgb(255, 172, 131)',
+        borderRadius: Number.MAX_VALUE,
       },
     ]
   };

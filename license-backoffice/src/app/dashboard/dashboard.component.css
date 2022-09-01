@@ -1,79 +1,83 @@
-.card-red{
-   /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 30px 16px;
-    gap: 8px;
-    height: 156px;
-    /* bg-primary */
-    background: #EB5A47;
-    border-radius: 20px;
-    margin-bottom: 1rem;
+.card-red {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 16px;
+  gap: 8px;
+  height: 156px;
+  /* bg-primary */
+  background: #eb5a47;
+  border-radius: 20px;
+  margin-bottom: 1rem;
 }
-.card-white{
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 30px 16px;
-    gap: 8px;
-    height: 156px;    
-    /* text-white */    
-    background: #FFFFFF;
-    /* bg-primary */    
-    border: 2px solid #EB5A47;
-    border-radius: 20px;
-    margin-bottom: 1rem;
+.card-white {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 16px;
+  gap: 8px;
+  height: 156px;
+  /* text-white */
+  background: #ffffff;
+  /* bg-primary */
+  border: 2px solid #eb5a47;
+  border-radius: 20px;
+  margin-bottom: 1rem;
 }
 .h1-red-card {
-    /* title1 */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 60px;
-    /* identical to box height */
-    text-align: center;
-    color: #FFFFFF;
+  /* title1 */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+  /* identical to box height */
+  text-align: center;
+  color: #ffffff;
 }
-.h4-red-card {    
-    /* title4 */    
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 32px;
-    /* identical to box height */    
-    /* text-white */    
-    color: #FFFFFF;
+.h4-red-card {
+  /* title4 */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 32px;
+  /* identical to box height */
+  /* text-white */
+  color: #ffffff;
 }
 .h1-white-card {
-    /* title1 */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 60px;
-    /* identical to box height */
-    color: #EB5A47;
+  /* title1 */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+  /* identical to box height */
+  color: #eb5a47;
 }
 .h4-white-card {
-    /* title4 */    
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 32px;
-    /* identical to box height */
-    /* bg-primary */    
-    color: #EB5A47;
+  /* title4 */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 32px;
+  /* identical to box height */
+  /* bg-primary */
+  color: #eb5a47;
 }
-.sub-title{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    /* identical to box height */
-    color: #717171;
-    margin-bottom: 24px;
+.sub-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  color: #717171;
+  margin-bottom: 24px;
+}
+.doughnut-chart {
+  width: 100px;
+  height: 100px;
 }

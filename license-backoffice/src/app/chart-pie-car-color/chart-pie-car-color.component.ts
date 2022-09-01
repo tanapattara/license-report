@@ -26,7 +26,7 @@ export class ChartPieCarColorComponent implements OnInit {
     plugins: {
       legend: {
         display: true,
-        position: 'left',
+        position: 'right',
       },
       datalabels: {
         formatter: (value, ctx) => {
@@ -118,7 +118,7 @@ export class ChartPieCarColorComponent implements OnInit {
       case 'Blue': { colorcode = 'rgb(26, 138, 214)'; break; }
       case 'Yellow': { colorcode = 'rgb(255, 185, 84)'; break; }
       case 'Purple': { colorcode = 'rgb(146, 123, 214)'; break; }
-      case 'Unknown': { colorcode = 'rgb(0, 184, 155)'; break; }
+      case 'Unknown': { colorcode = 'rgb(234, 182, 148)'; break; }
     }
     return colorcode;
   }

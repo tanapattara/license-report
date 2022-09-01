@@ -26,7 +26,7 @@ export class ChartPieCarTypeComponent implements OnInit {
     plugins: {
       legend: {
         display: true,
-        position: 'left',
+        position: 'right',
       },
       datalabels: {
         formatter: (value, ctx) => {

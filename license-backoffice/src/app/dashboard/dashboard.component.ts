@@ -12,7 +12,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 
 export class DashboardComponent implements OnInit {
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) chartHour: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) chartDay: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) chartMonth: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) chartCar: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) chartMoto: BaseChartDirective | undefined;
 
   car = 0;
   moto = 0;
@@ -21,6 +25,49 @@ export class DashboardComponent implements OnInit {
   monthCar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   monthMoto = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];;
   day = [0, 0, 0, 0, 0, 0, 0]
+
+  // Car Chart
+  public barChartCarOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      datalabels: {
+        display: false
+      }
+    }
+  };
+  public barChartCarData: ChartData<'doughnut'> = {
+    datasets: [{
+      data: [],
+      rotation: 90,
+      backgroundColor: [
+        'rgb(235, 90, 71)',
+        'rgb(238, 238, 238)',
+      ],
+      borderRadius: Number.MAX_VALUE,
+    }]
+  };
+  // Moto Chart
+  public barChartMotoOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      datalabels: {
+        display: false
+      }
+    }
+  };
+  public barChartMotoData: ChartData<'doughnut'> = {
+    datasets: [{
+      data: [64, 855],
+      rotation: 90,
+      backgroundColor: [
+        'rgb(235, 90, 71)',
+        'rgb(238, 238, 238)',
+      ],
+
+      borderRadius: Number.MAX_VALUE,
+    }]
+  };
+  // Bar chart by Hour
   public barChartHourOptions: ChartConfiguration['options'] = {
     responsive: true,
     scales: {
@@ -45,8 +92,6 @@ export class DashboardComponent implements OnInit {
     }
 
   };
-  public barChartHourType: ChartType = 'bar';
-  public barChartHourPlugins = [DataLabelsPlugin];
   public barChartHourData: ChartData<'bar'> = {
     labels: [],
     datasets: [{
@@ -59,7 +104,6 @@ export class DashboardComponent implements OnInit {
       hoverBackgroundColor: 'rgb(204, 61, 0)',
     }]
   };
-
   // Month
   public barChartMonthOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -87,8 +131,6 @@ export class DashboardComponent implements OnInit {
       }
     }
   };
-  public barChartMonthType: ChartType = 'bar';
-  public barChartMonthPlugins = [DataLabelsPlugin];
   public barChartMonthData: ChartData<'bar'> = {
     labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.',
       'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
@@ -97,13 +139,12 @@ export class DashboardComponent implements OnInit {
       data: [],
       borderColor: 'rgb(204, 61, 0)',
       backgroundColor: 'rgb(204, 61, 0)',
-      borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
-      borderSkipped: false,
     }, {
       label: 'รถจักรยานยนต์',
       data: [],
       borderColor: 'rgb(255, 172, 131)',
+      borderRadius: Number.MAX_VALUE,
       backgroundColor: 'rgb(255, 172, 131)'
     }]
   };
@@ -131,8 +172,6 @@ export class DashboardComponent implements OnInit {
       }
     }
   };
-  public barChartDayType: ChartType = 'bar';
-  public barChartDayPlugins = [DataLabelsPlugin];
   public barChartDayData: ChartData<'bar'> = {
     labels: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'],
     datasets: [{
@@ -145,9 +184,16 @@ export class DashboardComponent implements OnInit {
       hoverBackgroundColor: 'rgb(204, 61, 0)',
     },]
   };
+
+  public doughnutChartType: ChartType = 'doughnut';
+  public barChartType: ChartType = 'bar';
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
+
+  }
+  ngAfterViewInit(): void {
     this.getAllLicense();
   }
   getAllLicense() {
@@ -180,6 +226,11 @@ export class DashboardComponent implements OnInit {
         this.monthCar[--m]++;
       }
     }
+    this.barChartCarData.datasets[0].data.push(this.car);
+    this.barChartCarData.datasets[0].data.push(this.moto);
+
+    this.barChartMotoData.datasets[0].data.push(this.moto);
+    this.barChartMotoData.datasets[0].data.push(this.car);
 
     let index = 0;
     for (let value of this.hour) {
@@ -193,6 +244,10 @@ export class DashboardComponent implements OnInit {
     for (let value of this.day) {
       this.barChartDayData.datasets[0].data.push(value);
     }
-    this.chart?.update();
+    this.chartDay?.update();
+    this.chartHour?.update();
+    this.chartMonth?.update();
+    this.chartMoto?.update();
+    this.chartCar?.update();
   }
 }
