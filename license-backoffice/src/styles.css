@@ -14,42 +14,49 @@ body {
 }
 
 h1 {
+  font-family: "BaiJamjuree";
   font-style: normal !important;
   font-weight: 700 !important;
   font-size: 48px !important;
   line-height: 60px !important;
 }
 h2 {
+  font-family: "BaiJamjuree";
   font-style: normal !important;
   font-weight: 700 !important;
   font-size: 40px !important;
   line-height: 50px !important;
 }
 h3 {
+  font-family: "BaiJamjuree";
   font-style: normal !important;
   font-weight: 600 !important;
   font-size: 32px !important;
   line-height: 40px !important;
 }
 h4 {
+  font-family: "BaiJamjuree";
   font-style: normal !important;
   font-weight: 600 !important;
   font-size: 26px !important;
   line-height: 32px !important;
 }
 h5 {
+  font-family: "BaiJamjuree";
   font-style: normal !important;
   font-weight: 500 !important;
   font-size: 20px !important;
   line-height: 25px !important;
 }
 h6 {
+  font-family: "BaiJamjuree";
   font-style: normal !important;
   font-weight: 500 !important;
   font-size: 16px !important;
   line-height: 20px !important;
 }
 .title-page {
+  font-family: "BaiJamjuree";
   margin-bottom: 24px;
 }
 .card {
@@ -57,6 +64,7 @@ h6 {
   border-radius: 20px;
 }
 .card-title {
+  font-family: "BaiJamjuree";
   font-style: normal;
   font-weight: 600;
   font-size: 26px;
