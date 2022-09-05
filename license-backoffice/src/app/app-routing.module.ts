@@ -13,6 +13,7 @@ import { ChartBarCarPerDayComponent } from './chart-bar-car-per-day/chart-bar-ca
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
+import { ChartHeatmapMonthComponent } from './chart-heatmap-month/chart-heatmap-month.component';
 
 const routes: Routes = [
   { path: 'signin', component: LoginLayoutComponent, children: [{ path: '', component: SigninComponent }] },
@@ -23,7 +24,9 @@ const routes: Routes = [
   { path: 'speed', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarSpeedComponent },] },
   { path: 'hour', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerHourComponent },] },
   { path: 'day', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerDayComponent },] },
-  { path: 'month', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerMonthComponent },] },
+  //{ path: 'month', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerMonthComponent },] },
+  { path: 'month', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartHeatmapMonthComponent },] },
+
   { path: 'users', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: UsersComponent },] },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

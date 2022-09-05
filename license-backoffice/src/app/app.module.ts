@@ -24,6 +24,10 @@ import { ChartBarCarPerDayComponent } from './chart-bar-car-per-day/chart-bar-ca
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
+import { ChartHeatmapMonthComponent } from './chart-heatmap-month/chart-heatmap-month.component';
+import { ChartHeatmapHourComponent } from './chart-heatmap-hour/chart-heatmap-hour.component';
+
+import { NgApexchartsModule } from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -45,6 +49,8 @@ import { LoginLayoutComponent } from './layouts/login-layout/login-layout.compon
     DashboardComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
+    ChartHeatmapMonthComponent,
+    ChartHeatmapHourComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,8 @@ import { LoginLayoutComponent } from './layouts/login-layout/login-layout.compon
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    NgChartsModule
+    NgChartsModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
