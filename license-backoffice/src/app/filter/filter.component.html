@@ -1,84 +1,47 @@
 <div class="searchbox row">
-  <mat-form-field class="col-4" appearance="outline">
+  <mat-form-field class="col-md-4" appearance="outline">
     <mat-label>ระหว่างวันที่</mat-label>
     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-      <input
-        matStartDate
-        [(ngModel)]="datepickerInput1"
-        formControlName="start"
-        placeholder="เริ่มต้น"
-      />
-      <input
-        [(ngModel)]="datepickerInput2"
-        matEndDate
-        formControlName="end"
-        placeholder="สิ้นสุด"
-        (dateChange)="DatePickervalueChanged()"
-      />
+      <input matStartDate [(ngModel)]="datepickerInput1" formControlName="start" placeholder="เริ่มต้น" />
+      <input [(ngModel)]="datepickerInput2" matEndDate formControlName="end" placeholder="สิ้นสุด"
+        (dateChange)="DatePickervalueChanged()" />
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
 
-    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
-      >รูปแบบวันที่เริ่มต้นไม่ถูกต้อง</mat-error
-    >
-    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
-      >รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error
-    >
+    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">รูปแบบวันที่เริ่มต้นไม่ถูกต้อง</mat-error>
+    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error>
   </mat-form-field>
-  <mat-form-field class="col-4" appearance="outline">
+  <mat-form-field class="col-md-4" appearance="outline">
     <mat-label>เลขทะเบียน</mat-label>
-    <input
-      matInput
-      [(ngModel)]="licensenoInput"
-      type="text"
-      (keyup)="onChangeEvent($event, 'LicNo')"
-    />
+    <input matInput [(ngModel)]="licensenoInput" type="text" (keyup)="onChangeEvent($event, 'LicNo')" />
   </mat-form-field>
-  <mat-form-field class="col-4" appearance="outline">
+  <mat-form-field class="col-md-4" appearance="outline">
     <mat-label>ความเร็วไม่เกิน</mat-label>
-    <input
-      matInput
-      [(ngModel)]="speedInput"
-      type="number"
-      min="0"
-      (keyup)="onChangeEvent($event, 'Speed')"
-    />
+    <input matInput [(ngModel)]="speedInput" type="number" min="0" (keyup)="onChangeEvent($event, 'Speed')" />
   </mat-form-field>
-  <mat-form-field class="col-4" appearance="outline">
+  <mat-form-field class="col-md-4" appearance="outline">
     <mat-label>จังหวัด</mat-label>
-    <mat-select
-      #provinceSelection
-      [value]="defaultValue"
-      (selectionChange)="applyLicenseFilter($event, 'Province')"
-    >
+    <mat-select #provinceSelection [value]="defaultValue" (selectionChange)="applyLicenseFilter($event, 'Province')">
       <mat-option *ngFor="let item of province" [value]="item">{{
         item
-      }}</mat-option>
+        }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="col-4" appearance="outline">
+  <mat-form-field class="col-md-4" appearance="outline">
     <mat-label>สี</mat-label>
-    <mat-select
-      #colorSelection
-      [value]="defaultValue"
-      (selectionChange)="applyLicenseFilter($event, 'Color')"
-    >
+    <mat-select #colorSelection [value]="defaultValue" (selectionChange)="applyLicenseFilter($event, 'Color')">
       <mat-option *ngFor="let item of color" [value]="item">{{
         item
-      }}</mat-option>
+        }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="col-4" appearance="outline">
+  <mat-form-field class="col-md-4" appearance="outline">
     <mat-label>สถานที่</mat-label>
-    <mat-select
-      #brandSelection
-      [value]="defaultValue"
-      (selectionChange)="applyLicenseFilter($event, 'Location')"
-    >
+    <mat-select #brandSelection [value]="defaultValue" (selectionChange)="applyLicenseFilter($event, 'Location')">
       <mat-option *ngFor="let item of location" [value]="item">{{
         item
-      }}</mat-option>
+        }}</mat-option>
     </mat-select>
   </mat-form-field>
   <div align="end">

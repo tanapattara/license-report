@@ -1,5 +1,5 @@
 <div class="searchbox row">
-  <mat-form-field class="col-5" appearance="outline">
+  <mat-form-field class="col-md-5" appearance="outline">
     <mat-label>ระหว่างวันที่</mat-label>
     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
       <input matStartDate [(ngModel)]="datepickerInput1" formControlName="start" placeholder="เริ่มต้น" />
@@ -13,12 +13,12 @@
     <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="col-5" appearance="outline">
+  <mat-form-field class="col-md-5" appearance="outline">
     <mat-label>ช่วงความเร็ว</mat-label>
     <input matInput [(ngModel)]="speedInput" type="text" min="0" (keyup)="onChangeEvent($event, 'Speed')"
       placeholder="0-40" />
   </mat-form-field>
-  <div class="col center-btn">
+  <div class="col-md-2 center-btn">
     <button mat-flat-button color="primary" (click)="clearFilter()">
       ล้างการค้นหา
     </button>

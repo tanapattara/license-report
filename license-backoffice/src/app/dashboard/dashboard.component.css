@@ -67,16 +67,6 @@
   /* bg-primary */
   color: #eb5a47;
 }
-.sub-title {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  /* identical to box height */
-  color: #717171;
-  margin-bottom: 24px;
-}
 .doughnut-chart {
   width: 100px;
   height: 100px;

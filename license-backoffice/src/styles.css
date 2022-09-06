@@ -61,10 +61,6 @@ h6 {
   font-size: 16px !important;
   line-height: 20px !important;
 }
-.title-page {
-  font-family: "BaiJamjuree";
-  margin-bottom: 24px;
-}
 .card {
   background: #ffffff;
   border-radius: 20px;
@@ -112,6 +108,7 @@ button {
   font-size: 16px;
   line-height: 19px;
   color: #717171;
+  margin-top: 8px;
   margin-bottom: 30px;
 }
 .mat-form-field-outline {
