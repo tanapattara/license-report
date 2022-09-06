@@ -87,7 +87,11 @@ h6 {
   color: #717171;
 }
 button {
+  font-family: "BaiJamjuree" !important;
   border-radius: 20px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
 }
 .mat-paginator-navigation-next,
 .mat-paginator-navigation-previous {
