@@ -32,7 +32,17 @@ export class ChartPieCarColorComponent implements OnInit {
         formatter: (value, ctx) => {
           var txt = ctx.chart.data.labels![ctx.dataIndex] + " " + value.toString();
           return txt;
-
+        },
+        display: (context) => {
+          console.log(context);
+          var datas = context.dataset.data;
+          var data = context.dataset.data[context.dataIndex] as number;
+          var sum = 0;
+          datas.forEach((obj) => {
+            sum += obj as number;
+          });
+          const percent = data / sum * 100 || 0;
+          return percent > 4;
         },
         font: {
           weight: 'bold',

@@ -11,7 +11,7 @@ table {
 .lic-spacer {
   flex: 1 1 auto;
 }
-button {
+.mat-flat-button {
   margin-top: 1rem;
 }
 .mat-dialog-container {

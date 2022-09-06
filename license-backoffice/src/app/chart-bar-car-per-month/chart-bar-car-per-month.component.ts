@@ -55,11 +55,9 @@ export class ChartBarCarPerMonthComponent implements OnInit {
         anchor: 'center',
         align: 'center',
         display: (context) => {
-          var datai = context.dataIndex;
-          return context.dataset.data[datai] != 0;
+          return context.dataset.data[context.dataIndex] != 0;
         },
         color: (context) => {
-          console.log(context);
           var strColor = context.datasetIndex == 0 ? 'white' : 'black';
           return strColor;
         }

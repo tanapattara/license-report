@@ -5,16 +5,14 @@
 
   <div class="card">
     <div class="card-body">
-      <canvas
-        baseChart
-        [data]="barChartData"
-        [options]="barChartOptions"
-        [plugins]="barChartPlugins"
-        [type]="barChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"
-      >
-      </canvas>
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="กราฟแท่ง">
+          <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+            [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+          </canvas>
+        </mat-tab>
+        <mat-tab label="กราฟปริมาณ">Content 2</mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
