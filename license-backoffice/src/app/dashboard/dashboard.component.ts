@@ -22,10 +22,11 @@ export class DashboardComponent implements OnInit {
   monthCar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   monthMoto = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];;
   day = [0, 0, 0, 0, 0, 0, 0]
-
+  public dynHeight = 300;
   // Car Chart
   public barChartCarOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       datalabels: {
         display: false
@@ -67,6 +68,7 @@ export class DashboardComponent implements OnInit {
   // Bar chart by Hour
   public barChartHourOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         grid: {
@@ -104,6 +106,7 @@ export class DashboardComponent implements OnInit {
   // Month
   public barChartMonthOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         stacked: true,
@@ -148,6 +151,7 @@ export class DashboardComponent implements OnInit {
   // Day
   public barChartDayOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         grid: {

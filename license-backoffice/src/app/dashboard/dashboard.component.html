@@ -20,13 +20,8 @@
           <h1 class="h1-white-card">{{ car | number }}</h1>
         </div>
         <div class="doughnut-chart">
-          <canvas
-            #chartCar
-            baseChart
-            [data]="barChartCarData"
-            [options]="barChartCarOptions"
-            [type]="doughnutChartType"
-          >
+          <canvas #chartCar baseChart [data]="barChartCarData" [options]="barChartCarOptions"
+            [type]="doughnutChartType">
           </canvas>
         </div>
       </div>
@@ -39,13 +34,8 @@
           <h1 class="h1-white-card">{{ moto | number }}</h1>
         </div>
         <div class="doughnut-chart">
-          <canvas
-            #chartMoto
-            baseChart
-            [data]="barChartMotoData"
-            [options]="barChartMotoOptions"
-            [type]="doughnutChartType"
-          >
+          <canvas #chartMoto baseChart [data]="barChartMotoData" [options]="barChartMotoOptions"
+            [type]="doughnutChartType">
           </canvas>
         </div>
       </div>
@@ -57,14 +47,8 @@
           <h6 class="card-subtitle mb-2 text-muted">
             5 ลำดับจากสถิติยี่ห้อรถ ของภาพรวมทั้งหมด
           </h6>
-          <div style="display: block">
-            <canvas
-              #chartHour
-              baseChart
-              [data]="barChartHourData"
-              [options]="barChartHourOptions"
-              [type]="barChartType"
-            >
+          <div style="display: block; height:424px">
+            <canvas baseChart [data]="barChartHourData" [options]="barChartHourOptions" [type]="barChartType">
             </canvas>
           </div>
         </div>
@@ -78,14 +62,9 @@
           <h6 class="card-subtitle mb-2 text-muted">
             สถิตรถเข้าออกในแต่ละเดือน ของรถแต่ละประเภทรถ
           </h6>
-          <div style="display: block">
-            <canvas
-              #chartMonth
-              baseChart
-              [data]="barChartMonthData"
-              [options]="barChartMonthOptions"
-              [type]="barChartType"
-            >
+          <div style="display: block; height:250px">
+            <canvas #chartMonth baseChart [data]="barChartMonthData" [options]="barChartMonthOptions"
+              [type]="barChartType">
             </canvas>
           </div>
         </div>
@@ -98,14 +77,8 @@
           <h6 class="card-subtitle mb-2 text-muted">
             5 ลำดับจากสถิติยี่ห้อรถ ของภาพรวมทั้งหมด
           </h6>
-          <div style="display: block">
-            <canvas
-              #chartDay
-              baseChart
-              [data]="barChartDayData"
-              [options]="barChartDayOptions"
-              [type]="barChartType"
-            >
+          <div style="display: block; height:250px">
+            <canvas #chartDay baseChart [data]="barChartDayData" [options]="barChartDayOptions" [type]="barChartType">
             </canvas>
           </div>
         </div>
