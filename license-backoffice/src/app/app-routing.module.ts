@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'type', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartPieCarTypeComponent },] },
   { path: 'speed', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarSpeedComponent },] },
   //{ path: 'hour', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerHourComponent },] },
-  //{ path: 'day', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerDayComponent },] },
+  { path: 'day', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerDayComponent },] },
   //{ path: 'month', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerMonthComponent },] },
   { path: 'hour', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartHeatmapHourComponent },] },
   { path: 'month', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartHeatmapMonthComponent },] },
