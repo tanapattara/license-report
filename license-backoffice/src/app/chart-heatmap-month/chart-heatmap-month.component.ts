@@ -11,6 +11,7 @@ import {
 import { FilterlicenseService } from '../services/filterlicense.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { License } from '../model/license';
+import { Subscription } from 'rxjs';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -32,6 +33,13 @@ export class ChartHeatmapMonthComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   filter: string = "";
   chartDictionary = new Map<string, number[]>();
+
+  notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
+    this.filter = this.filterService.getFilter();
+    this.dataSource.filter = this.filter;
+    this.displayData();
+  });
+
   constructor(private api: ApiService, private filterService: FilterlicenseService) {
     this.clearDic();
     this.getAllLicense();
@@ -51,7 +59,7 @@ export class ChartHeatmapMonthComponent implements OnInit {
         { name: "ธันวาคม", data: this.generateData("ธันวาคม") }
       ],
       chart: {
-        height: 400,
+        height: 560,
         type: "heatmap"
       },
       dataLabels: {
@@ -136,6 +144,7 @@ export class ChartHeatmapMonthComponent implements OnInit {
       });
   }
   displayData() {
+    this.clearDic();
     for (let row of this.dataSource.filteredData) {
       let d: Date = new Date(row.aDate);
       let month = "";
