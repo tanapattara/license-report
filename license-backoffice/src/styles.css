@@ -5,6 +5,12 @@ html,
 body {
   height: 100%;
   font-family: "BaiJamjuree" !important;
+  background: #fafafa;
+  background-image: url("./assets/img/Polygon2.png");
+  background-color: rgba(250, 250, 250, 1);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right bottom !important;
 }
 
 @font-face {
@@ -103,4 +109,7 @@ button {
   line-height: 19px;
   color: #717171;
   margin-bottom: 30px;
+}
+.mat-form-field-outline {
+  background-color: #f3f3f3;
 }

@@ -1,79 +1,108 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
-.mat-toolbar {
-  height: 120px;
-  background-color: rgba(250, 250, 250, 1);
+.sidebar {
+  position: fixed;
+  z-index: 100; /* Behind the navbar */
+  padding: 0 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
-.logo {
-  width: 55px;
-  height: 88.44px;
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
-.toolbar {
-  margin-left: 26px;
-}
-.toolbar-title {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 28px;
-}
-.toolbar-subtitle {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 35px;
-}
-.lic-spacer {
-  flex: 1 1 auto;
-}
-.lic-sidenav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 300px;
-  background-color: rgba(250, 250, 250, 1);
-}
-.mat-subheader {
+.sidebar-divider-space {
+  padding-left: 24px;
+  padding-top: 1rem;
+  padding-bottom: 24px;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
 }
-.divider-space {
-  padding-top: 46px;
+.nav-item {
+  height: 54px;
 }
-/* .mat-list-item{
-  background: #FFFFFF;
-  border-radius: 16px;
-} */
-.logout {
-  color: #eb5a47;
+.nav-item .logout {
+  color: #eb5a47 !important;
   border: solid;
-  border-radius: 16px;
+  border-radius: 16px solid #eb5a47;
 }
-.is-active {
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
   background: #ffffff;
-  color: #eb5a47;
-  border-left: 8px solid #eb5a47;
+  border-radius: 16px;
+  margin-bottom: 8px;
+  margin-left: 24px;
+  margin-right: 24px;
 }
+.sidebar .stupid-bar {
+  color: #eb5a47;
+  height: 100px !important;
+  border-right: 8px solid #eb5a47;
+}
+.sidebar .nav-link.is-active {
+  color: #eb5a47;
+  /* border-left: 8px solid #eb5a47; */
+}
+
 .is-active .mat-icon {
   filter: invert(42%) sepia(17%) saturate(4468%) hue-rotate(332deg)
     brightness(102%) contrast(84%);
 }
-mat-icon {
+.mat-icon {
   margin-right: 16px;
 }
-html,
-body,
-.material-app,
-.mat-sidenav-container {
-  height: calc(100vh - 120px);
-  width: 100%;
-  background-color: rgba(250, 250, 250, 1);
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #727272;
 }
-.mat-sidenav-content {
-  background-image: url("../../../assets/img/Polygon2.png");
-  background-color: rgba(250, 250, 250, 1);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: right bottom !important;
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+.logo {
+  width: 55px;
+  height: 88.44px;
+}
+header {
+  height: 120px;
+  margin-left: 26px;
+}
+.header-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+  margin-left: 26px;
+}
+.header-subtitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 35px;
+  margin-left: 26px;
+}
+.header-spacer {
+  flex: 1 1 auto;
 }
