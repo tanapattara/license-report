@@ -37,8 +37,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
         stacked: true,
         display: true,
         title: {
-          display: true,
-          text: 'วันที่'
+          display: true, text: 'วันที่', color: 'rgb(204, 61, 0)'
         }
       },
       y: {
@@ -46,8 +45,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
         min: 0,
         display: true,
         title: {
-          display: true,
-          text: 'จำนวน'
+          display: true, text: 'จำนวน', color: 'rgb(204, 61, 0)'
         }
       }
     },
@@ -58,7 +56,16 @@ export class ChartBarCarPerDayComponent implements OnInit {
       },
       datalabels: {
         anchor: 'center',
-        align: 'center'
+        align: 'center',
+        display: (context) => {
+          var datai = context.dataIndex;
+          return context.dataset.data[datai] != 0;
+        },
+        color: (context) => {
+          console.log(context);
+          var strColor = context.datasetIndex == 0 ? 'white' : 'black';
+          return strColor;
+        }
       }
     }
   };

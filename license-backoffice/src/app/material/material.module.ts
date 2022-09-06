@@ -17,7 +17,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -37,7 +38,8 @@ const MaterialComponents = [
   MatNativeDateModule,
   MatProgressSpinnerModule,
   MatCardModule,
-  MatDialogModule
+  MatDialogModule,
+  MatTabsModule
 ];
 
 @NgModule({

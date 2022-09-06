@@ -39,7 +39,8 @@ export class ChartBarCarSpeedComponent implements OnInit {
         stacked: true,
         title: {
           display: true,
-          text: 'ความเร็ว km/hr'
+          text: 'ความเร็ว km/hr',
+          color: 'rgb(204, 61, 0)'
         }
       },
       y: {
@@ -47,18 +48,28 @@ export class ChartBarCarSpeedComponent implements OnInit {
         min: 0,
         title: {
           display: true,
-          text: 'จำนวน'
+          text: 'จำนวน',
+          color: 'rgb(204, 61, 0)'
         }
       }
     },
     plugins: {
       legend: {
         display: true,
-        align: 'start'
+        align: 'start',
       },
       datalabels: {
+        display: (context) => {
+          var datai = context.dataIndex;
+          return context.dataset.data[datai] != 0;
+        },
         anchor: 'center',
-        align: 'center'
+        align: 'center',
+        color: (context) => {
+          console.log(context);
+          var strColor = context.datasetIndex == 0 ? 'white' : 'black';
+          return strColor;
+        }
       }
     }
   };
