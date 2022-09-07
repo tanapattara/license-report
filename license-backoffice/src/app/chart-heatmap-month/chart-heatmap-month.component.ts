@@ -41,7 +41,6 @@ export class ChartHeatmapMonthComponent implements OnInit {
   });
 
   constructor(private api: ApiService, private filterService: FilterlicenseService) {
-    this.clearDic();
     this.getAllLicense();
     this.chartOptions = {
       series: [
@@ -69,10 +68,7 @@ export class ChartHeatmapMonthComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-
-
-  }
+  ngOnInit(): void { }
   ngAfterViewInit(): void {
 
   }
