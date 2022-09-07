@@ -1,13 +1,21 @@
-<header class="navbar navbar-dark fixed-top  bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
+<header class="navbar fixed-top">
+  <div class="header-section">
+    <img class="logo" src="assets/img/logo.png" />
+    <!-- <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a> -->
+    <div class="header">
+      <span class="header-title">{{ title }}</span><br />
+      <span class="header-subtitle">{{ subtitle }}</span>
+    </div>
+  </div>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
     data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
 </header>
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="overflow-auto col-md-4 col-lg-3 d-md-block bg-light sidebar collapse ">
+    <nav id="sidebarMenu" class="overflow-auto col-md-4 col-lg-3 col-xl-2 d-md-block bg-light sidebar collapse ">
       <div class="position-sticky pt-1">
         <div class="sidebar-divider-space">ภาพรวม</div>
         <ul class="nav flex-column">
@@ -87,10 +95,8 @@
         </ul>
       </div>
     </nav>
-    <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4">
-      <div class="mt-5">
-        <router-outlet></router-outlet>
-      </div>
+    <main class="main-component col-md-8 ms-sm-auto col-lg-9 col-xl-10 px-md-4 mt-5 pt-5">
+      <router-outlet></router-outlet>
     </main>
   </div>
 </div>

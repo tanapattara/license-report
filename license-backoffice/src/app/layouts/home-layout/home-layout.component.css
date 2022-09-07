@@ -7,7 +7,38 @@ body {
   height: 16px;
   vertical-align: text-bottom;
 }
-
+.logo {
+  width: 55px;
+  height: 88.44px;
+}
+header {
+  height: 120px;
+  padding: 2px 26px;
+}
+.header {
+  margin-top: 24;
+}
+.header-section {
+  display: flex;
+  flex-direction: row;
+}
+.header-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+  margin-left: 26px;
+}
+.header-subtitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 35px;
+  margin-left: 26px;
+}
+.main-component {
+  margin-top: 1rem;
+}
 /*
    * Sidebar
    */
@@ -22,7 +53,7 @@ body {
   /* rtl:remove */
   left: 0;
   z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
+  margin: 120px 0 0; /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
