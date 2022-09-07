@@ -82,7 +82,17 @@ body {
   font-size: 0.75rem;
   text-transform: uppercase;
 }
-
+.sidebar .nav-link.is-active {
+  color: #eb5a47;
+  /* border-left: 8px solid #eb5a47; */
+}
+.is-active .mat-icon {
+  filter: invert(42%) sepia(17%) saturate(4468%) hue-rotate(332deg)
+    brightness(102%) contrast(84%);
+}
+.mat-icon {
+  margin-right: 16px;
+}
 /*
    * Navbar
    */
