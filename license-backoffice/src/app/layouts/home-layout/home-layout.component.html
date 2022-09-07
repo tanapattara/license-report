@@ -1,15 +1,14 @@
-<header class="navbar sticky-top flex-md-nowrap p-0">
-  <img class="logo" src="assets/img/logo.png" />
-  <div class="header">
-    <span class="header-title">{{ title }}</span><br />
-    <span class="header-subtitle">{{ subtitle }}</span>
-  </div>
-  <span class="header-spacer"></span>
+<header class="navbar navbar-dark fixed-top  bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 </header>
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block lic-sidenav sidebar collapse">
-      <div class="position-sticky">
+    <nav id="sidebarMenu" class="overflow-auto col-md-4 col-lg-3 d-md-block bg-light sidebar collapse ">
+      <div class="position-sticky pt-1">
         <div class="sidebar-divider-space">ภาพรวม</div>
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -19,7 +18,6 @@
             </a>
           </li>
         </ul>
-
         <div class="sidebar-divider-space">จำนวนตามรายละเอียด</div>
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -89,9 +87,10 @@
         </ul>
       </div>
     </nav>
-
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <router-outlet></router-outlet>
+    <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4">
+      <div class="mt-5">
+        <router-outlet></router-outlet>
+      </div>
     </main>
   </div>
 </div>
