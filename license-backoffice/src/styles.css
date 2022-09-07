@@ -6,11 +6,12 @@ body {
   height: 100%;
   font-family: "BaiJamjuree" !important;
   background: #fafafa;
-  background-image: url("./assets/img/Polygon2.png");
+  background-image: url("./assets/img/Polygon2.png"),
+    url("./assets/img/Polygon1.png");
+  background-position: right bottom, left top !important;
   background-color: rgba(250, 250, 250, 1);
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: right bottom !important;
 }
 
 @font-face {
