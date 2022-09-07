@@ -4,14 +4,11 @@
     รายชื่อผู้ใช้ใช้บริการทั้งหมดทั้งหมด ของรถแต่ละประเภทรถ
   </div>
   <app-filter-time-speed></app-filter-time-speed>
-  <div class="chart-container">
-    <canvas
-      baseChart
-      [data]="pieChartData"
-      [type]="pieChartType"
-      [options]="pieChartOptions"
-      [plugins]="pieChartPlugins"
-    >
-    </canvas>
+  <div class="card chart-container">
+    <div class="card-body">
+      <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
+        [plugins]="pieChartPlugins">
+      </canvas>
+    </div>
   </div>
 </div>

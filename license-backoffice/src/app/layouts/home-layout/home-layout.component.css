@@ -15,8 +15,8 @@ header {
   height: 120px;
   padding: 2px 26px;
 }
-.header {
-  margin-top: 24;
+.header-text {
+  margin-top: 22px;
 }
 .header-section {
   display: flex;
@@ -45,13 +45,7 @@ header {
 
 .sidebar {
   position: fixed;
-  top: 0;
-  /* rtl:raw:
-    right: 0;
-    */
-  bottom: 0;
-  /* rtl:remove */
-  left: 0;
+  /* min-width: 250px; */
   z-index: 100; /* Behind the navbar */
   margin: 120px 0 0; /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
@@ -168,5 +162,13 @@ header {
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
+  }
+}
+@media (max-width: 425px) {
+  .sidebar {
+    background-color: rgb(250, 250, 250);
+  }
+  header {
+    background-color: rgba(250, 250, 250, 1);
   }
 }
