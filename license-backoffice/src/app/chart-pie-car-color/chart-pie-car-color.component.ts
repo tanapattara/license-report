@@ -187,5 +187,6 @@ export class ChartPieCarColorComponent implements OnInit {
         }
       });
   }
+  print() { }
 
 }

@@ -11,9 +11,17 @@ table {
 .lic-spacer {
   flex: 1 1 auto;
 }
-.mat-flat-button {
-  margin-top: 1rem;
+.right-button {
+  margin-top: 2.5rem;
+  text-align: end;
 }
 .mat-dialog-container {
   border-radius: 20px !important;
+}
+.user-container {
+  position: relative;
+}
+.user-table-container {
+  position: relative;
+  overflow: auto;
 }

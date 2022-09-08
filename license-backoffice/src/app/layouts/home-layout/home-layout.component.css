@@ -20,8 +20,12 @@ header {
 }
 .header-section {
   display: flex;
-  flex-direction: row;
+  vertical-align: top;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
+
 .header-title {
   font-style: normal;
   font-weight: 600;

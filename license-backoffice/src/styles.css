@@ -116,3 +116,23 @@ button {
 .mat-form-field-outline {
   background-color: #f3f3f3;
 }
+.header-sector {
+  display: flex;
+  vertical-align: top;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.lic-spacer {
+  flex: 1 1 auto;
+}
+.right-button {
+  margin-top: 2.5rem;
+  text-align: end;
+}
+.print-icon-button {
+  background-color: rgb(200, 208, 216) !important;
+}
+.print-icon-button:hover {
+  background-color: #a73b24 !important;
+}

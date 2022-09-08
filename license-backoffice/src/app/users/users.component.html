@@ -1,80 +1,78 @@
 <div class="container">
-  <div class="header-sector">
-    <div>
+  <div class="header-section row">
+    <div class="col-10">
       <div class="component-title">รายชื่อผู้เข้าใช้บริการ</div>
       <div class="component-subtitle">
         รายชื่อผู้ใช้ใช้บริการทั้งหมด ของรถแต่ละประเภทรถ
       </div>
     </div>
-    <span class="lic-spacer"></span>
-    <div>
+    <div class="col-2 right-button">
       <button mat-flat-button color="primary" (click)="openDialog()">
         เพิ่มใหม่
       </button>
     </div>
   </div>
-  <div class="mat-elevation-z1">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ลำดับ</th>
-        <td mat-cell *matCellDef="let element; let i = index">
-          {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
-        </td>
-      </ng-container>
+  <div class="user-container">
+    <div class="user-table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ลำดับ</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
+          </td>
+        </ng-container>
 
-      <!-- Firstname Column -->
-      <ng-container matColumnDef="firstname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ชื่อ</th>
-        <td mat-cell *matCellDef="let element">{{ element.firstname }}</td>
-      </ng-container>
+        <!-- Firstname Column -->
+        <ng-container matColumnDef="firstname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ชื่อ</th>
+          <td mat-cell *matCellDef="let element">{{ element.firstname }}</td>
+        </ng-container>
 
-      <!-- Lastname Column -->
-      <ng-container matColumnDef="lastname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>นามสกุล</th>
-        <td mat-cell *matCellDef="let element">{{ element.lastname }}</td>
-      </ng-container>
+        <!-- Lastname Column -->
+        <ng-container matColumnDef="lastname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>นามสกุล</th>
+          <td mat-cell *matCellDef="let element">{{ element.lastname }}</td>
+        </ng-container>
 
-      <!-- username Column -->
-      <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
-        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
-      </ng-container>
+        <!-- username Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+          <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+        </ng-container>
 
-      <!-- phone Column -->
-      <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>เบอร์โทรศัพท์</th>
-        <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
-      </ng-container>
+        <!-- phone Column -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>เบอร์โทรศัพท์</th>
+          <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+        </ng-container>
 
-      <!-- container Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-      </ng-container>
+        <!-- container Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+          <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>จัดการ</th>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>จัดการ</th>
 
-        <td mat-cell *matCellDef="let element">
-          <button mat-button color="accent" (click)="cellClick(element)">
-            แก้ไข
-          </button>
-        </td>
-      </ng-container>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button color="accent" (click)="cellClick(element)">
+              แก้ไข
+            </button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-      <!-- Row shown when there is no data-->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="5">No data matching the filter</td>
-      </tr>
-    </table>
-    <mat-paginator
-      [length]="resultsLength"
-      [pageSize]="10"
-      [pageSizeOptions]="[10, 50, 100]"
-      aria-label="Select page of GitHub search results"
-    ></mat-paginator>
+        <!-- Row shown when there is no data-->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="5">No data matching the filter</td>
+        </tr>
+      </table>
+
+      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 50, 100]"
+        aria-label="Select page of GitHub search results"></mat-paginator>
+    </div>
   </div>
 </div>

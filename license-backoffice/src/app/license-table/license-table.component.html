@@ -4,8 +4,9 @@
     รายชื่อผู้ใช้ใช้บริการทั้งหมด ของรถแต่ละประเภทรถ
   </div>
   <app-filter></app-filter>
-  <div class="card">
-    <div class="card-body">
+
+  <div class="license-container">
+    <div class="license-table-container">
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ลำดับ</th>
