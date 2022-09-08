@@ -27,6 +27,11 @@ export class ChartPieCarTypeComponent implements OnInit {
       legend: {
         display: true,
         position: 'right',
+        labels: {
+          font: {
+            size: 18,
+          }
+        }
       },
       datalabels: {
         formatter: (value, ctx) => {
@@ -146,5 +151,8 @@ export class ChartPieCarTypeComponent implements OnInit {
           console.log("Error while fetching licenses ");
         }
       });
+  }
+  print() {
+    window.print();
   }
 }

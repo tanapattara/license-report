@@ -1,7 +1,16 @@
 <div class="container">
-  <div class="component-title">รายชื่อผู้เข้าใช้บริการ</div>
-  <div class="component-subtitle">
-    รายชื่อผู้ใช้ใช้บริการทั้งหมดทั้งหมด ของรถแต่ละประเภทรถ
+  <div class="header-section row">
+    <div class="col-10">
+      <div class="component-title">รายชื่อผู้เข้าใช้บริการ</div>
+      <div class="component-subtitle">
+        รายชื่อผู้ใช้ใช้บริการทั้งหมดทั้งหมด ของรถแต่ละประเภทรถ
+      </div>
+    </div>
+    <div class="col-2 right-button">
+      <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print();">
+        <mat-icon>print</mat-icon>
+      </button>
+    </div>
   </div>
   <app-filter-time-speed></app-filter-time-speed>
   <div class="card chart-container">

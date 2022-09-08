@@ -27,6 +27,11 @@ export class ChartPieCarColorComponent implements OnInit {
       legend: {
         display: true,
         position: 'right',
+        labels: {
+          font: {
+            size: 18,
+          }
+        }
       },
       datalabels: {
         formatter: (value, ctx) => {
@@ -187,6 +192,9 @@ export class ChartPieCarColorComponent implements OnInit {
         }
       });
   }
-  print() { }
+  print() {
+    window.print();
+  }
+
 
 }

@@ -7,13 +7,13 @@
       </div>
     </div>
     <div class="col-2 right-button">
-      <button mat-mini-fab class="print-icon-button" aria-label="print to pdf">
+      <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
         <mat-icon>print</mat-icon>
       </button>
     </div>
   </div>
   <app-filter-time-speed></app-filter-time-speed>
-  <div class="card chart-container">
+  <div class="card chart-container ">
     <div class="card-body">
       <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
         [plugins]="pieChartPlugins">
