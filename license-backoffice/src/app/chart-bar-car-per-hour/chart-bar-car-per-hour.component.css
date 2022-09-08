@@ -1,0 +1,13 @@
+@media print {
+  apx-chart {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .apx-container {
+    height: auto !important;
+  }
+  .card-tab {
+    height: auto !important;
+  }
+}

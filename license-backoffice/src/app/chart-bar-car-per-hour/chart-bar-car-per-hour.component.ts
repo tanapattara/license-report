@@ -163,7 +163,8 @@ export class ChartBarCarPerHourComponent implements OnInit {
       ],
       chart: {
         redrawOnWindowResize: true,
-        width: '100%',
+        redrawOnParentResize: true,
+
         height: 500,
         type: "heatmap"
       },
@@ -476,7 +477,6 @@ export class ChartBarCarPerHourComponent implements OnInit {
     console.log(event, active);
   }
   print() {
-    this.chartOptions.chart!.width = 650;
     window.print();
   }
   @HostListener("window:beforeprint", ["$event"])
