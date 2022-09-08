@@ -13,24 +13,14 @@
 
   <app-filter-time-speed></app-filter-time-speed>
 
-  <div class="card card-tab">
-    <div class="card-body">
-      <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="กราฟความร้อน">
-          <div id="mychart" class="apx-container">
-            <apx-chart class="apx-chart" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
-              [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
-            </apx-chart>
-          </div>
-        </mat-tab>
-        <mat-tab label="กราฟแท่ง">
-          <div class="chart-container" style="display: block; height:520px">
-            <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-              [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-            </canvas>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
+  <apx-chart class="apx-chart-s" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+    [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
+  </apx-chart>
+  <div class="card">
+    <div class="chart-container" style="display: block; height:520px">
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+        [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+      </canvas>
     </div>
   </div>
 </div>

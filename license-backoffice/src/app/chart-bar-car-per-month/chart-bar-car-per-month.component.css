@@ -1,4 +1,12 @@
-#chart {
-  max-width: 650px;
-  margin: 35px auto;
+@media print {
+  .apx-chart {
+    min-height: 100%;
+    max-width: 100% !important;
+    max-height: 100%;
+    height: auto !important;
+    width: auto !important;
+  }
+  .card-tab {
+    height: auto !important;
+  }
 }

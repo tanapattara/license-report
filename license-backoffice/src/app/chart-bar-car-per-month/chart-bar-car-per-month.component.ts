@@ -135,14 +135,21 @@ export class ChartBarCarPerMonthComponent implements OnInit {
         { name: "ธันวาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
       ],
       chart: {
+        redrawOnWindowResize: true,
+        redrawOnParentResize: true,
         width: '100%',
-        height: 560,
+        height: 500,
         type: "heatmap"
       },
       dataLabels: {
         enabled: false
       },
       colors: ["#CC3D00"],
+      yaxis: {
+        title: {
+          text: 'วันที่',
+        },
+      }
     };
     this.getAllLicense();
 
