@@ -178,6 +178,7 @@ header {
 }
 @media print {
   .main-component {
-    padding-top: 0rem !important;
+    padding: 0 0;
+    margin: 0 0;
   }
 }

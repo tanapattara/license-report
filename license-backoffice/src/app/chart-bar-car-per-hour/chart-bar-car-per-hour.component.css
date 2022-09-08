@@ -1,11 +1,10 @@
 @media print {
-  apx-chart {
+  .apx-chart {
+    min-height: 100%;
+    max-width: 100% !important;
+    max-height: 100%;
+    height: auto !important;
     width: auto !important;
-    height: auto !important;
-  }
-
-  .apx-container {
-    height: auto !important;
   }
   .card-tab {
     height: auto !important;
