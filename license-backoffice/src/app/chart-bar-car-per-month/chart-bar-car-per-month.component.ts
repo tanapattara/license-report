@@ -135,6 +135,7 @@ export class ChartBarCarPerMonthComponent implements OnInit {
         { name: "ธันวาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
       ],
       chart: {
+        width: '100%',
         height: 560,
         type: "heatmap"
       },
@@ -379,5 +380,8 @@ export class ChartBarCarPerMonthComponent implements OnInit {
 
   public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     console.log(event, active);
+  }
+  print() {
+    window.print();
   }
 }

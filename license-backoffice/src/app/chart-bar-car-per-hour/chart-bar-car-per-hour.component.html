@@ -1,20 +1,30 @@
 <div class="container">
-  <div class="component-title">สถิติแยกตามรายชั่วโมง</div>
-  <div class="component-subtitle">สถิติแยกรายชั่วโมง ของภาพรวมทั้งหมด</div>
+  <div class="header-section row">
+    <div class="col-10">
+      <div class="component-title">สถิติแยกตามรายชั่วโมง</div>
+      <div class="component-subtitle">สถิติแยกรายชั่วโมง ของภาพรวมทั้งหมด</div>
+    </div>
+    <div class="col-2 right-button">
+      <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
+        <mat-icon>print</mat-icon>
+      </button>
+    </div>
+  </div>
+
   <app-filter-time-speed></app-filter-time-speed>
 
-  <div class="card">
+  <div class="card card-tab">
     <div class="card-body">
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="กราฟความร้อน">
-          <div id="mychart">
+          <div id="mychart" class="apx-container">
             <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"
               [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
             </apx-chart>
           </div>
         </mat-tab>
         <mat-tab label="กราฟแท่ง">
-          <div style="display: block; height:566px">
+          <div class="chart-container" style="display: block; height:520px">
             <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
               [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
             </canvas>

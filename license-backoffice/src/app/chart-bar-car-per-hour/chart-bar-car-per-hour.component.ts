@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ApiService } from '../services/api.service';
@@ -17,6 +17,7 @@ import {
   ApexXAxis,
   ApexYAxis
 } from "ng-apexcharts";
+import * as ApexCharts from 'apexcharts';
 
 export type HeatMapChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -161,7 +162,9 @@ export class ChartBarCarPerHourComponent implements OnInit {
 
       ],
       chart: {
-        height: 560,
+        redrawOnWindowResize: true,
+        width: '100%',
+        height: 500,
         type: "heatmap"
       },
       dataLabels: {
@@ -471,5 +474,17 @@ export class ChartBarCarPerHourComponent implements OnInit {
 
   public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     console.log(event, active);
+  }
+  print() {
+    this.chartOptions.chart!.width = 650;
+    window.print();
+  }
+  @HostListener("window:beforeprint", ["$event"])
+  onBeforePrint() {
+
+  }
+  @HostListener("window:afterprint", [])
+  onWindowAfterPrint() {
+    console.log('... afterprint');
   }
 }

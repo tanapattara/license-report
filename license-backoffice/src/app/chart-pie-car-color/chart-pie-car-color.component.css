@@ -1,0 +1,10 @@
+@media print {
+  .card-body {
+    display: block;
+    height: 100% !important;
+  }
+}
+.card-body {
+  display: block;
+  height: 550px;
+}

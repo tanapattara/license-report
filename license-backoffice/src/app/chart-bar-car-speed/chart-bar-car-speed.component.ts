@@ -33,7 +33,6 @@ export class ChartBarCarSpeedComponent implements OnInit {
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {
         stacked: true,

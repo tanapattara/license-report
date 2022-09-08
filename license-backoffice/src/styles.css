@@ -28,14 +28,25 @@ body {
     width: auto !important;
     height: auto !important;
   }
+  apx-chart {
+    max-width: 100%;
+    width: auto !important;
+    height: auto !important;
+  }
   .chart-container {
     height: 100% !important;
   }
+  .apx-container {
+    height: 100% !important;
+  }
+}
+.card-tab {
+  height: 600px;
 }
 .chart-container {
   position: relative;
   margin: auto;
-  height: 68vh;
+  height: 100%;
   width: 100%;
 }
 
