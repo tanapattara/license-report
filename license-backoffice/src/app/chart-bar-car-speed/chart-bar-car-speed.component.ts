@@ -253,4 +253,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
   public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     console.log(event, active);
   }
+  print() {
+    window.print();
+  }
 }
