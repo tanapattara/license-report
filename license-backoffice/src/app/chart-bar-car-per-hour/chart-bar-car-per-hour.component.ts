@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, QueryList, ViewChildren } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ApiService } from '../services/api.service';
@@ -37,7 +37,8 @@ export type HeatMapChartOptions = {
 export class ChartBarCarPerHourComponent implements OnInit {
   title = 'แผนภูมิจำนวนรถต่อวัน';
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  // @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective> | undefined;
 
   dataSource!: MatTableDataSource<any>;
   chartdataset: string[] = [];
@@ -345,7 +346,10 @@ export class ChartBarCarPerHourComponent implements OnInit {
       // this.barChartData.labels!.push(key);
       this.barChartData.datasets[1].data.push(value);
     }
-    this.chart?.update();
+    // this.chart!.update();
+    this.charts?.forEach((child) => {
+      child.chart?.update()
+    });
   }
   setHourinDate(iDate: number, hour: number) {
     let series = this.chartDictionary.get(iDate)!;
