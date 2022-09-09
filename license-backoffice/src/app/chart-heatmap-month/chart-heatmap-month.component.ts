@@ -19,6 +19,7 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
   title: ApexTitleSubtitle;
   colors: any;
+  yaxis: ApexYAxis;
 };
 @Component({
   selector: 'app-chart-heatmap-month',
@@ -41,31 +42,39 @@ export class ChartHeatmapMonthComponent implements OnInit {
   });
 
   constructor(private api: ApiService, private filterService: FilterlicenseService) {
-    this.getAllLicense();
     this.chartOptions = {
       series: [
-        { name: "มกราคม", data: this.generateData("มกราคม") },
-        { name: "กุมภาพันธ์", data: this.generateData("กุมภาพันธ์") },
-        { name: "มีนาคม", data: this.generateData("มีนาคม") },
-        { name: "เมษายน", data: this.generateData("เมษายน") },
-        { name: "พฤษภาคม", data: this.generateData("พฤษภาคม") },
-        { name: "มิถุนายน", data: this.generateData("มิถุนายน") },
-        { name: "กรกฎาคม", data: this.generateData("กรกฎาคม") },
-        { name: "สิงหาคม", data: this.generateData("สิงหาคม") },
-        { name: "กันยายน", data: this.generateData("กันยายน") },
-        { name: "ตุลาคม", data: this.generateData("ตุลาคม") },
-        { name: "พฤศจิกายน", data: this.generateData("พฤศจิกายน") },
-        { name: "ธันวาคม", data: this.generateData("ธันวาคม") }
+        { name: "มกราคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "กุมภาพันธ์", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "มีนาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "เมษายน", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "พฤษภาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "มิถุนายน", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "กรกฎาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "สิงหาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "กันยายน", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "ตุลาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "พฤศจิกายน", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+        { name: "ธันวาคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
       ],
       chart: {
-        height: 560,
+        redrawOnWindowResize: true,
+        redrawOnParentResize: true,
+        width: '100%',
+        height: 500,
         type: "heatmap"
       },
       dataLabels: {
         enabled: false
       },
       colors: ["#CC3D00"],
+      yaxis: {
+        title: {
+          text: 'วันที่',
+        },
+      }
     };
+    this.getAllLicense();
   }
 
   ngOnInit(): void { }
@@ -141,8 +150,11 @@ export class ChartHeatmapMonthComponent implements OnInit {
   }
   displayData() {
     this.clearDic();
+
     for (let row of this.dataSource.filteredData) {
       let d: Date = new Date(row.aDate);
+      let isBike: boolean = row.Type == '7' || row.Type == '8';
+
       let month = "";
       let value = 0;
       switch (d.getMonth()) {
@@ -160,6 +172,7 @@ export class ChartHeatmapMonthComponent implements OnInit {
         case 12: { month = "ธันวาคม"; this.setDateinMonth(month, d.getDate()); break; }
       }
     }
+
     this.chartOptions.series = [
       { name: "มกราคม", data: this.generateData("มกราคม") },
       { name: "กุมภาพันธ์", data: this.generateData("กุมภาพันธ์") },
@@ -194,6 +207,7 @@ export class ChartHeatmapMonthComponent implements OnInit {
     this.chartDictionary.set('ตุลาคม', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set('พฤศจิกายน', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set('ธันวาคม', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
   }
   public generateData(strMonth: string) {
     var i = 0;
@@ -207,5 +221,8 @@ export class ChartHeatmapMonthComponent implements OnInit {
       i++;
     }
     return series;
+  }
+  print() {
+    window.print();
   }
 }

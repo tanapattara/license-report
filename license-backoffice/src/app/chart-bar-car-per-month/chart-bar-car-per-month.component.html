@@ -12,13 +12,6 @@
   </div>
   <app-filter-time-speed></app-filter-time-speed>
 
-
-  <div id="mychart" class="apx-container">
-    <apx-chart class="apx-chart" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
-      [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
-    </apx-chart>
-  </div>
-
   <div class="card">
     <div class="chart-container" style="display: block; height:566px">
       <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"

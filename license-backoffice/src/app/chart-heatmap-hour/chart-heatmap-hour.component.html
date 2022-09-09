@@ -1,18 +1,17 @@
 <div class="container">
-  <div class="component-title">สถิติแยกตามรายชั่วโมง</div>
-  <div class="component-subtitle">สถิติแยกรายชั่วโมง ของภาพรวมทั้งหมด</div>
-  <app-filter-time-speed></app-filter-time-speed>
-  <div class="card">
-    <div class="card-body">
-      <div id="mychart">
-        <apx-chart
-          [series]="chartOptions.series!"
-          [chart]="chartOptions.chart!"
-          [dataLabels]="chartOptions.dataLabels!"
-          [title]="chartOptions.title!"
-          [colors]="chartOptions.colors"
-        ></apx-chart>
-      </div>
+  <div class="header-section row">
+    <div class="col-10">
+      <div class="component-title">สถิติแยกตามรายชั่วโมง</div>
+      <div class="component-subtitle">สถิติแยกรายชั่วโมง ของภาพรวมทั้งหมด</div>
+    </div>
+    <div class="col-2 right-button">
+      <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
+        <mat-icon>print</mat-icon>
+      </button>
     </div>
   </div>
+  <app-filter-time-speed></app-filter-time-speed>
+  <apx-chart class="apx-chart-s" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+    [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
+  </apx-chart>
 </div>

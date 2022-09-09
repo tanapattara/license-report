@@ -12,13 +12,16 @@ import { FilterlicenseService } from '../services/filterlicense.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { License } from '../model/license';
 import { Subscription } from 'rxjs';
+import { FormGroup, FormControl } from '@angular/forms';
 
-export type ChartOptions = {
+export type HeatMapChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
   chart?: ApexChart;
   dataLabels: ApexDataLabels;
   title: ApexTitleSubtitle;
   colors: any;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
 };
 
 @Component({
@@ -29,11 +32,18 @@ export type ChartOptions = {
 export class ChartHeatmapHourComponent implements OnInit {
 
   @ViewChild("mychart") mychart!: ChartComponent;
-
-  public chartOptions!: Partial<ChartOptions>;
+  datepickerInput1 = "";
+  datepickerInput2 = "";
   dataSource!: MatTableDataSource<any>;
   filter: string = "";
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+  // heatmap
+  public chartOptions!: Partial<HeatMapChartOptions>;
   chartDictionary = new Map<number, number[]>();
+  filterDictionary = new Map<string, any>();
 
   notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
     this.filter = this.filterService.getFilter();
@@ -43,7 +53,7 @@ export class ChartHeatmapHourComponent implements OnInit {
 
   constructor(private api: ApiService, private filterService: FilterlicenseService) {
     this.clearDic();
-    this.getAllLicense();
+
     this.chartOptions = {
       series: [
         { name: "1", data: this.generateData(1) },
@@ -83,14 +93,23 @@ export class ChartHeatmapHourComponent implements OnInit {
 
       ],
       chart: {
-        height: 560,
+        redrawOnWindowResize: true,
+        redrawOnParentResize: true,
+        width: '100%',
+        height: 500,
         type: "heatmap"
       },
       dataLabels: {
         enabled: false
       },
       colors: ["#CC3D00"],
+      yaxis: {
+        title: {
+          text: 'วันที่',
+        },
+      }
     };
+    this.getAllLicense();
   }
 
   ngOnInit(): void {
@@ -210,7 +229,18 @@ export class ChartHeatmapHourComponent implements OnInit {
     series[hour] = series[hour] + 1;
     this.chartDictionary.set(iDate, series);
   }
+
+  DatePickervalueChanged() {
+    var startdate = this.range.value.start as Date
+    var enddate = this.range.value.end as Date
+    this.filterDictionary.set("date", [startdate, enddate]);
+    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
+    this.filter = jsonString;
+    this.dataSource.filter = this.filter;
+    this.displayData();
+  }
   clearDic() {
+
     this.chartDictionary.set(1, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set(2, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set(3, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
@@ -245,6 +275,14 @@ export class ChartHeatmapHourComponent implements OnInit {
     this.chartDictionary.set(30, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
     this.chartDictionary.set(31, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+  }
+  clearFilter() {
+    this.datepickerInput1 = "";
+    this.datepickerInput2 = "";
+    this.filter = "";
+    this.dataSource.filter = this.filter;
+    this.displayData();
   }
   public generateData(iDate: number) {
     var i = 0;
@@ -252,12 +290,14 @@ export class ChartHeatmapHourComponent implements OnInit {
     var datas = this.chartDictionary.get(iDate);
     while (i < 31) {
       series.push({
-        x: (i + 1).toString(),
+        x: i < 10 ? '0' + i.toString() : (i).toString(),
         y: datas![i],
       });
       i++;
     }
     return series;
   }
-
+  print() {
+    window.print();
+  }
 }
