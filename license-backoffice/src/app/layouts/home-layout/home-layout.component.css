@@ -53,6 +53,8 @@ header {
   z-index: 100; /* Behind the navbar */
   padding: 120px 0 0; /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  justify-content: space-between !important;
+  flex-direction: column;
 }
 
 .sidebar-sticky {
@@ -66,13 +68,13 @@ header {
 .sidebar-divider-space {
   padding-left: 24px;
   padding-top: 1rem;
-  padding-bottom: 24px;
+  padding-bottom: 1rem;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
 }
-.nav-item {
+.sidebar-space {
 }
 .nav-item .logout {
   color: #eb5a47 !important;
