@@ -3,7 +3,7 @@ let dbConfig = require("../utilities/mysqlConfig");
 let getLicense = (criteria, callback) => {
   dbConfig
     .getDB()
-    .query(`SELECT * FROM licenses ORDER BY aDate DESC`, criteria, callback);
+    .query(`SELECT * FROM license ORDER BY aDate DESC`, criteria, callback);
 };
 
 let getLicenseByID = (criteria, callback) => {
@@ -12,12 +12,21 @@ let getLicenseByID = (criteria, callback) => {
   dbConfig
     .getDB()
     .query(
-      `SELECT * FROM licenses WHERE 1 ${conditions} ORDER BY aDate DESC`,
+      `SELECT * FROM license WHERE 1 ${conditions} ORDER BY aDate DESC`,
       callback
     );
 };
-
+let getLicenseToday = (criteria, callback) => {
+  dbConfig
+    .getDB()
+    .query(
+      `SELECT * FROM license WHERE CAST(aDate AS DATE) = CAST(CURRENT_TIMESTAMP AS DATE) ORDER BY aDate DESC;`,
+      criteria,
+      callback
+    );
+};
 module.exports = {
   getLicense: getLicense,
   getLicenseByID: getLicenseByID,
+  getLicenseToday: getLicenseToday,
 };

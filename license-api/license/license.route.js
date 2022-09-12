@@ -16,4 +16,10 @@ router.get("/:id", (req, res) => {
   });
 });
 
+router.get("/today", (req, res) => {
+  licenseService.getLicenseToday(req.query, (data) => {
+    res.send(data);
+  });
+});
+
 module.exports = router;

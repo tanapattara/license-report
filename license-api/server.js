@@ -38,9 +38,12 @@ app.get("/", (req, res) => {
 const userRouter = require("./routes/user.routes");
 app.use("/user", userRouter);
 require("./routes/auth.routes")(app);
-//require("./routes/user.routes")(app);
 require("./routes/license.routes")(app);
 require("./routes/filterdata.routes")(app);
+
+process.on("uncaughtException", (err, origin) => {
+  console.log(err);
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {

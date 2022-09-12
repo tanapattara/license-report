@@ -56,7 +56,32 @@ let getLicenseByID = (data, callback) => {
   );
 };
 
+/***API to get the license detail by id */
+let getLicenseToday = (data, callback) => {
+  async.auto(
+    {
+      article: (cb) => {
+        licenstController.getLicenseToday({}, (err, data) => {
+          if (err) {
+            cb(null, {
+              errorCode: util.statusCode.INTERNAL_SERVER_ERROR,
+              statusMessage: util.statusMessage.SERVER_BUSY,
+            });
+            return;
+          }
+          cb(null, data);
+          return;
+        });
+      },
+    },
+    (err, response) => {
+      callback(response.article);
+    }
+  );
+};
+
 module.exports = {
   getLicense: getLicense,
   getLicenseByID: getLicenseByID,
+  getLicenseToday: getLicenseToday,
 };

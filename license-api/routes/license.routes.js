@@ -1,5 +1,6 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/license.controller");
+const licenseService = require("../license/license.service");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -7,4 +8,9 @@ module.exports = function (app) {
     next();
   });
   app.get("/license", controller.getAllLicense);
+  app.get("/today", (req, res) => {
+    licenseService.getLicenseToday(req.query, (data) => {
+      res.send(data);
+    });
+  });
 };
