@@ -21,6 +21,18 @@
           <td mat-cell *matCellDef="let element">{{ element.LicNo }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="Image">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>รูปภาพ</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent">
+              <mat-icon svgIcon="car"></mat-icon>
+            </button>
+            <button mat-icon-button color="accent">
+              <mat-icon svgIcon="license"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <!-- Province Column -->
         <ng-container matColumnDef="Province">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>จังหวัด</th>

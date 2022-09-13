@@ -7,6 +7,8 @@ import { License } from '../model/license';
 import { FilterlicenseService } from '../services/filterlicense.service';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../services/storage.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-license-table',
@@ -18,7 +20,7 @@ export class LicenseTableComponent implements OnInit {
 
   resultsLength = 0;
 
-  displayedColumns: string[] = ['position', 'LicNo', 'Province', 'Color', 'Brand', 'Type', 'Speed', 'Location', 'aDate', 'bDate'];
+  displayedColumns: string[] = ['position', 'LicNo', 'Image', 'Province', 'Color', 'Brand', 'Type', 'Speed', 'Location', 'aDate', 'bDate'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,7 +28,12 @@ export class LicenseTableComponent implements OnInit {
 
   constructor(private api: ApiService,
     private filterService: FilterlicenseService,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('car', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Car.svg'));
+    iconRegistry.addSvgIcon('license', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/License.svg'));
+
   }
 
   filter: string = "";
