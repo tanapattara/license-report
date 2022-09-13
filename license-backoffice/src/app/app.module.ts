@@ -28,6 +28,7 @@ import { ChartHeatmapMonthComponent } from './chart-heatmap-month/chart-heatmap-
 import { ChartHeatmapHourComponent } from './chart-heatmap-hour/chart-heatmap-hour.component';
 
 import { NgApexchartsModule } from "ng-apexcharts";
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     LoginLayoutComponent,
     ChartHeatmapMonthComponent,
     ChartHeatmapHourComponent,
+    ImageDialogComponent,
   ],
   imports: [
     BrowserModule,

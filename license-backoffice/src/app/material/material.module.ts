@@ -22,6 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 const MaterialComponents = [
+
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
@@ -41,7 +42,8 @@ const MaterialComponents = [
   MatCardModule,
   MatDialogModule,
   MatTabsModule,
-  MatExpansionModule
+  MatExpansionModule,
+
 ];
 
 @NgModule({

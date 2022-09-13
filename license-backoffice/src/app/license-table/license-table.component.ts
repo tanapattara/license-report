@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-license-table',
@@ -29,6 +31,7 @@ export class LicenseTableComponent implements OnInit {
   constructor(private api: ApiService,
     private filterService: FilterlicenseService,
     private storageService: StorageService,
+    public dialog: MatDialog,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon('car', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Car.svg'));
@@ -119,5 +122,20 @@ export class LicenseTableComponent implements OnInit {
       return "รถจักรยานยนต์";
     else
       return "รถยนต์";
+  }
+
+  openDialog(imgPath: string, type: number): void {
+    //removedata
+    //C:\DFLicense\Photos\ขม7298_Type1_Num1_650901040036.jpg
+    var splitted = imgPath.split("\\");
+    let imagename = splitted[splitted.length - 1]
+    let assetsPath = "../assets/photo/" + imagename;
+    let w = type == 2 ? '160px' : '900px';
+    let h = type == 2 ? '140px' : '520px';
+    this.dialog.open(ImageDialogComponent, {
+      width: w,
+      height: h,
+      data: assetsPath
+    }).afterClosed().subscribe(() => { });
   }
 }
