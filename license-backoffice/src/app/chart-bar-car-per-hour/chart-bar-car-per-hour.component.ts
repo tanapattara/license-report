@@ -280,7 +280,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
       let hour = "";
       let value = 0;
       switch (d.getHours()) {
-        case 0: { hour = "00"; value = value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        case 0: { hour = "00"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
         case 1: { hour = "01"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
         case 2: { hour = "02"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
         case 3: { hour = "03"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
