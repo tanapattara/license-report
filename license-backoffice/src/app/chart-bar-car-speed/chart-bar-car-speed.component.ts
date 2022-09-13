@@ -65,7 +65,6 @@ export class ChartBarCarSpeedComponent implements OnInit {
         anchor: 'center',
         align: 'center',
         color: (context) => {
-          console.log(context);
           var strColor = context.datasetIndex == 0 ? 'white' : 'black';
           return strColor;
         }
@@ -135,7 +134,13 @@ export class ChartBarCarSpeedComponent implements OnInit {
                 let RecValueA = new Date(record[adate_key as keyof License]);
                 let RecValueB = new Date(record[bdate_key as keyof License]);
 
-                isMatchFilter = (RecValueA >= sDate && RecValueA <= eDate) || (RecValueB >= sDate && RecValueB <= eDate);
+                if (sDate.getTime() == eDate.getTime()) {
+                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() == sDate.getDate()) ||
+                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() == sDate.getDate());
+                }
+                else {
+                  isMatchFilter = (RecValueA >= sDate && RecValueA <= eDate) || (RecValueB >= sDate && RecValueB <= eDate);
+                }
               } else {
                 isMatchFilter = (record[key as keyof License] == value);
               }
@@ -246,11 +251,11 @@ export class ChartBarCarSpeedComponent implements OnInit {
     this.displayData();
   }
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
+    //console.log(event, active);
   }
 
   public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
+    //console.log(event, active);
   }
   print() {
     window.print();

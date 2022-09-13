@@ -176,7 +176,13 @@ export class ChartPieCarColorComponent implements OnInit {
                 let RecValueA = new Date(record[adate_key as keyof License]);
                 let RecValueB = new Date(record[bdate_key as keyof License]);
 
-                isMatchFilter = (RecValueA >= sDate && RecValueA <= eDate) || (RecValueB >= sDate && RecValueB <= eDate);
+                if (sDate.getTime() == eDate.getTime()) {
+                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() == sDate.getDate()) ||
+                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() == sDate.getDate());
+                }
+                else {
+                  isMatchFilter = (RecValueA >= sDate && RecValueA <= eDate) || (RecValueB >= sDate && RecValueB <= eDate);
+                }
               } else {
                 isMatchFilter = (record[key as keyof License] == value);
               }
