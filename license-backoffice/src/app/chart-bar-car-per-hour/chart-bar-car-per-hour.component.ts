@@ -18,6 +18,8 @@ import {
   ApexYAxis
 } from "ng-apexcharts";
 import * as ApexCharts from 'apexcharts';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export type HeatMapChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -130,7 +132,12 @@ export class ChartBarCarPerHourComponent implements OnInit {
     this.displayData();
   });
 
-  constructor(private api: ApiService, private filterService: FilterlicenseService) {
+  constructor(private api: ApiService,
+    private filterService: FilterlicenseService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
+
     this.clearDic();
     this.chartOptions = {
       series: [

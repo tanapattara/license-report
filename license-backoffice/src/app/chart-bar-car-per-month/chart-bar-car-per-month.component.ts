@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { FilterlicenseService } from '../services/filterlicense.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chart-bar-car-per-month',
@@ -103,7 +105,11 @@ export class ChartBarCarPerMonthComponent implements OnInit {
     this.displayData();
   });
 
-  constructor(private api: ApiService, private filterService: FilterlicenseService) {
+  constructor(private api: ApiService, private filterService: FilterlicenseService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
+
     this.getAllLicense();
   }
 

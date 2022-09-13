@@ -107,3 +107,4 @@ dist
 license-api/node_modules/
 # license-backoffice
 license-backoffice/node_modules/
+license-backoffice/src/assets/photo/*

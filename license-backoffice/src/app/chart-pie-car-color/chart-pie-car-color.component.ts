@@ -8,6 +8,8 @@ import { License } from '../model/license';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels'
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chart-pie-car-color',
@@ -77,7 +79,12 @@ export class ChartPieCarColorComponent implements OnInit {
     this.displayData();
   });
 
-  constructor(private api: ApiService, private filterService: FilterlicenseService) { }
+  constructor(private api: ApiService, private filterService: FilterlicenseService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
+
+  }
 
   chartDictionary = new Map<string, number>();
 

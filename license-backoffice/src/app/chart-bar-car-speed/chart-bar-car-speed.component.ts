@@ -6,6 +6,8 @@ import { License } from '../model/license';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from '../services/api.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chart-bar-car-speed',
@@ -104,7 +106,11 @@ export class ChartBarCarSpeedComponent implements OnInit {
 
   filter: string = "";
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+      iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
+  }
 
   ngOnInit(): void {
     this.getAllLicense();

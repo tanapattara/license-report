@@ -12,6 +12,8 @@ import { FilterlicenseService } from '../services/filterlicense.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { License } from '../model/license';
 import { Subscription } from 'rxjs';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -41,7 +43,11 @@ export class ChartHeatmapMonthComponent implements OnInit {
     this.displayData();
   });
 
-  constructor(private api: ApiService, private filterService: FilterlicenseService) {
+  constructor(private api: ApiService, private filterService: FilterlicenseService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
+
     this.chartOptions = {
       series: [
         { name: "มกราคม", data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },

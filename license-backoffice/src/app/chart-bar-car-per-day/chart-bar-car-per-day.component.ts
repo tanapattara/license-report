@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chart-bar-car-per-day',
@@ -95,7 +98,11 @@ export class ChartBarCarPerDayComponent implements OnInit {
     ]
   };
 
-  constructor(private api: ApiService,) { }
+  constructor(private api: ApiService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
+  }
 
   ngOnInit(): void {
     this.getAllLicense();
