@@ -4,6 +4,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { FormGroup, FormControl } from '@angular/forms';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -189,7 +190,7 @@ export class DashboardComponent implements OnInit {
   public doughnutChartType: ChartType = 'doughnut';
   public barChartType: ChartType = 'bar';
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: DashboardService) { }
 
   ngOnInit(): void {
 

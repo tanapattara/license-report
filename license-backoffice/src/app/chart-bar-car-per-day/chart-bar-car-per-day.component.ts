@@ -102,6 +102,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
           this.dataSource = new MatTableDataSource(res);
           //this.dataSource.filter = this.filter;
           this.dataSource.filterPredicate = function (record, filter) {
+
             var map = new Map(JSON.parse(filter));
             let isMatch = false;
             for (let [key, value] of map) {
@@ -152,24 +153,25 @@ export class ChartBarCarPerDayComponent implements OnInit {
                   let strMonth = value as string;
                   let now_date = new Date();
                   let vmonth = now_date.getMonth()
+                  console.log(strMonth);
                   switch (strMonth) {
-                    case 'มกราคม': vmonth = 1; break;
-                    case 'กุมภาพันธ์': vmonth = 2; break;
-                    case 'มีนาคม': vmonth = 3; break;
-                    case 'เมษายน': vmonth = 4; break;
-                    case 'พฤษภาคม': vmonth = 5; break;
-                    case 'มิถุนายน': vmonth = 6; break;
-                    case 'กรกฎาคม': vmonth = 7; break;
-                    case 'สิงหาคม': vmonth = 8; break;
-                    case 'กันยายน': vmonth = 9; break;
-                    case 'ตุลาคม': vmonth = 10; break;
-                    case 'พฤศจิกายน': vmonth = 11; break;
-                    case 'ธันวาคม': vmonth = 12; break;
+                    case 'มกราคม': vmonth = 0; break;
+                    case 'กุมภาพันธ์': vmonth = 1; break;
+                    case 'มีนาคม': vmonth = 2; break;
+                    case 'เมษายน': vmonth = 3; break;
+                    case 'พฤษภาคม': vmonth = 4; break;
+                    case 'มิถุนายน': vmonth = 5; break;
+                    case 'กรกฎาคม': vmonth = 6; break;
+                    case 'สิงหาคม': vmonth = 7; break;
+                    case 'กันยายน': vmonth = 8; break;
+                    case 'ตุลาคม': vmonth = 9; break;
+                    case 'พฤศจิกายน': vmonth = 10; break;
+                    case 'ธันวาคม': vmonth = 11; break;
                   }
                   let adate_key = 'aDate', bdate_key = 'bDate'
                   let RecValueA = new Date(record[adate_key as keyof License]);
                   let RecValueB = new Date(record[bdate_key as keyof License]);
-
+                  debugger;
                   isMatchFilter = (RecValueA.getMonth() == vmonth || RecValueB.getMonth() == vmonth);
                 }
               }
@@ -302,11 +304,11 @@ export class ChartBarCarPerDayComponent implements OnInit {
     this.displayData();
   }
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
+    //console.log(event, active);
   }
 
   public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
+    //console.log(event, active);
   }
   print() {
     window.print();
