@@ -102,11 +102,19 @@ export class ChartBarCarPerHourComponent implements OnInit {
         data: [], label: 'รถยนต์', borderColor: 'rgb(204, 61, 0)',
         backgroundColor: 'rgb(204, 61, 0)',
         borderRadius: Number.MAX_VALUE,
+        datalabels: {
+          align: 'center',
+          anchor: 'center'
+        }
       },
       {
         data: [], label: 'รถจักรยานยนต์', borderColor: 'rgb(255, 172, 131)',
         backgroundColor: 'rgb(255, 172, 131)',
         borderRadius: Number.MAX_VALUE,
+        datalabels: {
+          align: 'center',
+          anchor: 'center'
+        }
       },
     ]
   };
@@ -348,9 +356,15 @@ export class ChartBarCarPerHourComponent implements OnInit {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);
     }
+    let n = this.dataSource.filteredData.length;
+
     for (let [key, value] of this.chartDictionaryBike) {
-      // this.barChartData.labels!.push(key);
+      let perValue = value / n * 100;
       this.barChartData.datasets[1].data.push(value);
+      if (perValue < 2) {
+        this.barChartData.datasets[1].datalabels!.align! = 'top';
+        this.barChartData.datasets[1].datalabels!.anchor! = 'end';
+      }
     }
     // this.chart!.update();
     this.charts?.forEach((child) => {

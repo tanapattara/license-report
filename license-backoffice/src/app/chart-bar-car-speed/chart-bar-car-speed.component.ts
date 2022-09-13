@@ -84,12 +84,20 @@ export class ChartBarCarSpeedComponent implements OnInit {
         borderColor: 'rgb(204, 61, 0)',
         backgroundColor: 'rgb(204, 61, 0)',
         borderRadius: Number.MAX_VALUE,
+        datalabels: {
+          align: 'center',
+          anchor: 'center'
+        }
       },
       {
         data: [], label: 'รถจักรยานยนต์',
         borderColor: 'rgb(255, 172, 131)',
         backgroundColor: 'rgb(255, 172, 131)',
         borderRadius: Number.MAX_VALUE,
+        datalabels: {
+          align: 'center',
+          anchor: 'center'
+        }
       },
     ]
   };
@@ -202,7 +210,6 @@ export class ChartBarCarSpeedComponent implements OnInit {
     this.barChartData.datasets[0].data = [];
     this.barChartData.datasets[1].data = [];
     this.barChartData.labels = [];
-
     for (let row of this.dataSource.filteredData) {
       let speed: Number = parseInt(row.Speed);
       let isBike: boolean = row.Type == '7' || row.Type == '8';
@@ -234,11 +241,16 @@ export class ChartBarCarSpeedComponent implements OnInit {
       if (key == 130)
         ktext = '130+';
       this.barChartData.labels!.push(ktext);
-
       this.barChartData.datasets[0].data.push(value);
-    } for (let [key, value] of this.chartDictionaryBike) {
-      // this.barChartData.labels!.push(key);
+    }
+    let n = this.dataSource.filteredData.length;
+    for (let [key, value] of this.chartDictionaryBike) {
+      let perValue = value / n * 100;
       this.barChartData.datasets[1].data.push(value);
+      if (perValue < 2) {
+        this.barChartData.datasets[1].datalabels!.align! = 'top';
+        this.barChartData.datasets[1].datalabels!.anchor! = 'end';
+      }
     }
 
     this.chart?.update();
