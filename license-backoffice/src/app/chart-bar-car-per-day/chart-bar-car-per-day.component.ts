@@ -235,10 +235,10 @@ export class ChartBarCarPerDayComponent implements OnInit {
     for (let [key, value] of this.chartDictionaryBike) {
       let perValue = value / n * 100;
       this.barChartData.datasets[1].data.push(value);
-      if (perValue < 2) {
-        this.barChartData.datasets[1].datalabels!.align! = 'top';
-        this.barChartData.datasets[1].datalabels!.anchor! = 'end';
-      }
+      // if (perValue < 2) {
+      //   this.barChartData.datasets[1].datalabels!.align! = 'top';
+      //   this.barChartData.datasets[1].datalabels!.anchor! = 'end';
+      // }
     }
 
     this.chart?.update();

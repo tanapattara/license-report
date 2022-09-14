@@ -201,40 +201,40 @@ export class ChartBarCarPerMonthComponent implements OnInit {
       let month = "";
       let value = 0;
       switch (d.getMonth()) {
-        case 1: {
+        case 0: {
           month = "มกราคม"; value = isBike ? this.chartDictionaryBike.get("มกราคม")! + 1 : this.chartDictionaryCar.get("มกราคม")! + 1; break;
         }
-        case 2: {
+        case 1: {
           month = "กุมภาพันธ์"; value = isBike ? this.chartDictionaryBike.get("กุมภาพันธ์")! + 1 : this.chartDictionaryCar.get("กุมภาพันธ์")! + 1; break;
         }
-        case 3: {
+        case 2: {
           month = "มีนาคม"; value = isBike ? this.chartDictionaryBike.get("มีนาคม")! + 1 : this.chartDictionaryCar.get("มีนาคม")! + 1; break;
         }
-        case 4: {
+        case 3: {
           month = "เมษายน"; value = isBike ? this.chartDictionaryBike.get("เมษายน")! + 1 : this.chartDictionaryCar.get("เมษายน")! + 1; break;
         }
-        case 5: {
+        case 4: {
           month = "พฤษภาคม"; value = isBike ? this.chartDictionaryBike.get("พฤษภาคม")! + 1 : this.chartDictionaryCar.get("พฤษภาคม")! + 1; break;
         }
-        case 6: {
+        case 5: {
           month = "มิถุนายน"; value = isBike ? this.chartDictionaryBike.get("มิถุนายน")! + 1 : this.chartDictionaryCar.get("มิถุนายน")! + 1; break;
         }
-        case 7: {
+        case 6: {
           month = "กรกฎาคม"; value = isBike ? this.chartDictionaryBike.get("กรกฎาคม")! + 1 : this.chartDictionaryCar.get("กรกฎาคม")! + 1; break;
         }
-        case 8: {
+        case 7: {
           month = "สิงหาคม"; value = isBike ? this.chartDictionaryBike.get("สิงหาคม")! + 1 : this.chartDictionaryCar.get("สิงหาคม")! + 1; break;
         }
-        case 9: {
+        case 8: {
           month = "กันยายน"; value = isBike ? this.chartDictionaryBike.get("กันยายน")! + 1 : this.chartDictionaryCar.get("กันยายน")! + 1; break;
         }
-        case 10: {
+        case 9: {
           month = "ตุลาคม"; value = isBike ? this.chartDictionaryBike.get("ตุลาคม")! + 1 : this.chartDictionaryCar.get("ตุลาคม")! + 1; break;
         }
-        case 11: {
+        case 10: {
           month = "พฤศจิกายน"; value = isBike ? this.chartDictionaryBike.get("พฤศจิกายน")! + 1 : this.chartDictionaryCar.get("พฤศจิกายน")! + 1; break;
         }
-        case 12: {
+        case 11: {
           month = "ธันวาคม"; value = isBike ? this.chartDictionaryBike.get("ธันวาคม")! + 1 : this.chartDictionaryCar.get("ธันวาคม")! + 1; break;
         }
       }
@@ -256,10 +256,10 @@ export class ChartBarCarPerMonthComponent implements OnInit {
     for (let [key, value] of this.chartDictionaryBike) {
       let perValue = value / n * 100;
       this.barChartData.datasets[1].data.push(value);
-      if (perValue < 2) {
-        this.barChartData.datasets[1].datalabels!.align! = 'top';
-        this.barChartData.datasets[1].datalabels!.anchor! = 'end';
-      }
+      // if (value < 100) {
+      //   this.barChartData.datasets[1].datalabels!.align! = 'top';
+      //   this.barChartData.datasets[1].datalabels!.anchor! = 'end';
+      // }
     }
 
     this.chart?.update();
