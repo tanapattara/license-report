@@ -41,3 +41,13 @@ exports.getDataLocation = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+exports.getToday = async (req, res) => {
+  try {
+    const [results, metadata] = await db.sequelize.query(
+      "SELECT * FROM license WHERE CAST(aDate AS DATE) = CAST(CURRENT_TIMESTAMP AS DATE) ORDER BY aDate DESC;"
+    );
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
