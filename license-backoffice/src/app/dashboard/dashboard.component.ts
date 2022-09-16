@@ -19,10 +19,12 @@ export class DashboardComponent implements OnInit {
   car = 0;
   moto = 0;
   // Bar chart by Hour
-  hour = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  hourCar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  hourBike = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   monthCar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  monthMoto = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];;
-  day = [0, 0, 0, 0, 0, 0, 0]
+  monthMoto = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  weekdayCar = [0, 0, 0, 0, 0, 0, 0];
+  weekdayBike = [0, 0, 0, 0, 0, 0, 0];
   public dynHeight = 300;
   // Car Chart
   public barChartCarOptions: ChartConfiguration['options'] = {
@@ -72,11 +74,13 @@ export class DashboardComponent implements OnInit {
     maintainAspectRatio: false,
     scales: {
       x: {
+        stacked: true,
         grid: {
           display: false
         },
       },
       y: {
+        stacked: true,
         grid: {
           display: false
         }
@@ -95,13 +99,20 @@ export class DashboardComponent implements OnInit {
   public barChartHourData: ChartData<'bar'> = {
     labels: [],
     datasets: [{
+      label: 'รถยนต์',
       data: [],
-      borderColor: 'rgb(233, 237, 247)',
-      backgroundColor: 'rgb(233, 237, 247)',
-      borderWidth: 2,
+      borderColor: 'rgb(204, 61, 0)',
+      backgroundColor: 'rgb(204, 61, 0)',
       borderRadius: Number.MAX_VALUE,
-      borderSkipped: false,
-      hoverBackgroundColor: 'rgb(204, 61, 0)',
+      hoverBackgroundColor: 'rgb(233, 237, 247)',
+      borderSkipped: "middle"
+    }, {
+      label: 'รถจักรยานยนต์',
+      data: [],
+      borderColor: 'rgb(255, 172, 131)',
+      backgroundColor: 'rgb(255, 172, 131)',
+      borderRadius: Number.MAX_VALUE,
+      hoverBackgroundColor: 'rgb(233, 237, 247)',
     }]
   };
   // Month
@@ -141,12 +152,15 @@ export class DashboardComponent implements OnInit {
       borderColor: 'rgb(204, 61, 0)',
       backgroundColor: 'rgb(204, 61, 0)',
       borderRadius: Number.MAX_VALUE,
+      hoverBackgroundColor: 'rgb(233, 237, 247)',
+      borderSkipped: "middle"
     }, {
       label: 'รถจักรยานยนต์',
       data: [],
       borderColor: 'rgb(255, 172, 131)',
+      backgroundColor: 'rgb(255, 172, 131)',
       borderRadius: Number.MAX_VALUE,
-      backgroundColor: 'rgb(255, 172, 131)'
+      hoverBackgroundColor: 'rgb(233, 237, 247)',
     }]
   };
   // Day
@@ -155,11 +169,13 @@ export class DashboardComponent implements OnInit {
     maintainAspectRatio: false,
     scales: {
       x: {
+        stacked: true,
         grid: {
           display: false
         },
       },
       y: {
+        stacked: true,
         grid: {
           display: false
         }
@@ -177,14 +193,21 @@ export class DashboardComponent implements OnInit {
   public barChartDayData: ChartData<'bar'> = {
     labels: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'],
     datasets: [{
+      label: 'รถยนต์',
       data: [],
-      borderColor: 'rgb(233, 237, 247)',
-      backgroundColor: 'rgb(233, 237, 247)',
-      borderWidth: 2,
+      borderColor: 'rgb(204, 61, 0)',
+      backgroundColor: 'rgb(204, 61, 0)',
       borderRadius: Number.MAX_VALUE,
-      borderSkipped: false,
-      hoverBackgroundColor: 'rgb(204, 61, 0)',
-    },]
+      hoverBackgroundColor: 'rgb(233, 237, 247)',
+      borderSkipped: "middle"
+    }, {
+      label: 'รถจักรยานยนต์',
+      data: [],
+      borderColor: 'rgb(255, 172, 131)',
+      backgroundColor: 'rgb(255, 172, 131)',
+      borderRadius: Number.MAX_VALUE,
+      hoverBackgroundColor: 'rgb(233, 237, 247)',
+    }]
   };
 
   public doughnutChartType: ChartType = 'doughnut';
@@ -217,34 +240,42 @@ export class DashboardComponent implements OnInit {
       let w = adate.getDay();
       let m = adate.getMonth();
 
-      this.hour[h]++;
-      this.day[w]++;
       if (license['Type'] == '7' || license['Type'] == '8') {
         this.moto++;
         this.monthMoto[--m]++;
+        this.hourBike[h]++;
+        this.weekdayBike[w]++;
       }
       else {
         this.car++;
         this.monthCar[--m]++;
+        this.hourCar[h]++;
+        this.weekdayCar[w]++;
       }
     }
     this.barChartCarData.datasets[0].data.push(this.car);
     this.barChartCarData.datasets[0].data.push(this.moto);
-
     this.barChartMotoData.datasets[0].data.push(this.moto);
     this.barChartMotoData.datasets[0].data.push(this.car);
 
     let index = 0;
-    for (let value of this.hour) {
-      this.barChartHourData.labels?.push(index++);
-      this.barChartHourData.datasets[0].data.push(value);
-    }
-    for (let i = 0; i < this.monthCar.length; i++) {
-      this.barChartMonthData.datasets[0].data.push(this.monthCar[i]);
-      this.barChartMonthData.datasets[1].data.push(this.monthMoto[i]);
-    }
-    for (let value of this.day) {
-      this.barChartDayData.datasets[0].data.push(value);
+    for (let i = 0; i < 24; i++) {
+      if (i < 7) {
+        // Sunday = 0
+        this.barChartDayData.datasets[0].data.push(this.weekdayCar[i]);
+        this.barChartDayData.datasets[1].data.push(this.weekdayBike[i]);
+      }
+      if (i < 12) {
+        // January = 0
+        this.barChartMonthData.datasets[0].data.push(this.monthCar[i]);
+        this.barChartMonthData.datasets[1].data.push(this.monthMoto[i]);
+      }
+
+      if (i < 24) {
+        this.barChartHourData.labels?.push(index++);
+        this.barChartHourData.datasets[0].data.push(this.hourCar[i]);
+        this.barChartHourData.datasets[1].data.push(this.hourBike[i]);
+      }
     }
     this.charts?.forEach((child) => {
       child.chart?.update()

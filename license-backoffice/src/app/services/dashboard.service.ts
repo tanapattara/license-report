@@ -12,6 +12,6 @@ export class DashboardService {
   HOST_URL = API_URL;
 
   getLicenses() {
-    return this.http.get<any>(this.HOST_URL + "/today");
+    return this.http.get<any>(this.HOST_URL + "/license");
   }
 }

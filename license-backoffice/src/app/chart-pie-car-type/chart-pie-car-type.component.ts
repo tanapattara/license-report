@@ -37,9 +37,8 @@ export class ChartPieCarTypeComponent implements OnInit {
       },
       datalabels: {
         formatter: (value, ctx) => {
-          var txt = ctx.chart.data.labels![ctx.dataIndex] + " " + value.toString();
+          var txt = ctx.chart.data.labels![ctx.dataIndex] + " " + value.toLocaleString();
           return txt;
-
         },
         color: '#fff',
         font: {
