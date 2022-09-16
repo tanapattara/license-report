@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
 
   car = 0;
   moto = 0;
+  speedavg = 0;
   // Bar chart by Hour
   hourCar = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   hourBike = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -239,6 +240,7 @@ export class DashboardComponent implements OnInit {
       let h = adate.getHours();
       let w = adate.getDay();
       let m = adate.getMonth();
+      this.speedavg += parseInt(license['Speed']);
 
       if (license['Type'] == '7' || license['Type'] == '8') {
         this.moto++;
@@ -277,6 +279,7 @@ export class DashboardComponent implements OnInit {
         this.barChartHourData.datasets[1].data.push(this.hourBike[i]);
       }
     }
+    this.speedavg = this.speedavg / (this.car + this.moto);
     this.charts?.forEach((child) => {
       child.chart?.update()
     });

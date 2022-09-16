@@ -3,7 +3,7 @@
   <div class="component-title">สถิติทั้งหมด</div>
   <div class="component-subtitle">สถิติทั้งหมด ของรถแต่ละประเภท</div>
   <div class="row">
-    <div class="col-md-12 col-lg-12 col-xl-4">
+    <div class="col-md-12 col-lg-6 col-xl-3">
       <div class="card-red">
         <div>
           <h4 class="h4-red-card">ทั้งหมด</h4>
@@ -11,8 +11,16 @@
         </div>
       </div>
     </div>
+    <div class="col-md-12 col-lg-6 col-xl-3">
+      <div class="card-red">
+        <div>
+          <h4 class="h4-red-card">ความเร็วเฉลี่ย</h4>
+          <h1 class="h1-red-card">{{ speedavg | number : '1.0-2' }} <small style="font-size: 26px;">km/hr</small></h1>
+        </div>
+      </div>
+    </div>
 
-    <div class="col-md-12 col-lg-6 col-xl-4">
+    <div class="col-md-12 col-lg-6 col-xl-3">
       <div class="card-white">
         <div>
           <h4 class="h4-white-card">รถยนต์</h4>
@@ -26,10 +34,10 @@
       </div>
     </div>
 
-    <div class="col-md-12 col-lg-6 col-xl-4">
+    <div class="col-md-12 col-lg-6 col-xl-3">
       <div class="card-white">
         <div>
-          <h4 class="h4-white-card">รถจักรยานยนต์</h4>
+          <h4 class="h4-white-card">จักรยานยนต์</h4>
           <h1 class="h1-white-card">{{ moto | number }}</h1>
         </div>
         <div class="doughnut-chart">
