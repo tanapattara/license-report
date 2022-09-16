@@ -188,7 +188,10 @@ export class ChartPieCarColorComponent implements OnInit {
                     (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() == sDate.getDate());
                 }
                 else {
-                  isMatchFilter = (RecValueA >= sDate && RecValueA <= eDate) || (RecValueB >= sDate && RecValueB <= eDate);
+                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() >= sDate.getDate()) &&
+                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() >= sDate.getDate()) &&
+                    (RecValueA.getFullYear() == eDate.getFullYear() && RecValueA.getMonth() == eDate.getMonth() && RecValueA.getDate() <= eDate.getDate()) &&
+                    (RecValueB.getFullYear() == eDate.getFullYear() && RecValueB.getMonth() == eDate.getMonth() && RecValueB.getDate() <= eDate.getDate());
                 }
               } else {
                 isMatchFilter = (record[key as keyof License] == value);

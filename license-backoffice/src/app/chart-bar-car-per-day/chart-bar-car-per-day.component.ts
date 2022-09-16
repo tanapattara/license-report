@@ -162,7 +162,10 @@ export class ChartBarCarPerDayComponent implements OnInit {
                     (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() == sDate.getDate());
                 }
                 else {
-                  isMatchFilter = (RecValueA >= sDate && RecValueA <= eDate) || (RecValueB >= sDate && RecValueB <= eDate);
+                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() >= sDate.getDate()) &&
+                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() >= sDate.getDate()) &&
+                    (RecValueA.getFullYear() == eDate.getFullYear() && RecValueA.getMonth() == eDate.getMonth() && RecValueA.getDate() <= eDate.getDate()) &&
+                    (RecValueB.getFullYear() == eDate.getFullYear() && RecValueB.getMonth() == eDate.getMonth() && RecValueB.getDate() <= eDate.getDate());
                 }
               } else if (key == 'Month') {
                 if (value as string == 'All')
@@ -189,7 +192,6 @@ export class ChartBarCarPerDayComponent implements OnInit {
                   let adate_key = 'aDate', bdate_key = 'bDate'
                   let RecValueA = new Date(record[adate_key as keyof License]);
                   let RecValueB = new Date(record[bdate_key as keyof License]);
-                  debugger;
                   isMatchFilter = (RecValueA.getMonth() == vmonth || RecValueB.getMonth() == vmonth);
                 }
               }
