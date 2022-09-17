@@ -1,7 +1,24 @@
 <div class="container">
-  <div class="component-title">รายชื่อผู้เข้าใช้บริการ</div>
-  <div class="component-subtitle">
-    รายชื่อผู้ใช้ใช้บริการทั้งหมด ของรถแต่ละประเภทรถ
+  <div class="d-flex flex-row">
+    <div class="mr-auto p-2">
+      <div class="component-title">รายชื่อผู้เข้าใช้บริการ</div>
+      <div class="component-subtitle">
+        รายชื่อผู้ใช้ใช้บริการทั้งหมด ของรถแต่ละประเภทรถ
+      </div>
+    </div>
+    <div class="lic-spacer"></div>
+    <div class="p-2 align-self-center card card-summation-red">
+      <div class="card-body">
+        <p class="card-text card-summation-red-text">รถยนต์</p>
+        <h4 class="card-title card-summation-red-text">{{ car | number }}</h4>
+      </div>
+    </div>
+    <div class="p-2 align-self-center card  card-summation-white">
+      <div class="card-body">
+        <p class="card-text card-summation-white-text">จักรยานยนต์</p>
+        <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
+      </div>
+    </div>
   </div>
   <app-filter></app-filter>
 

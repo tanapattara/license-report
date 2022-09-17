@@ -28,6 +28,9 @@ export class LicenseTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  bike = 0;
+  car = 0;
+
   constructor(private api: ApiService,
     private filterService: FilterlicenseService,
     private storageService: StorageService,
@@ -43,6 +46,7 @@ export class LicenseTableComponent implements OnInit {
   notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
     this.filter = this.filterService.getFilter();
     this.dataSource.filter = this.filter;
+    this.summarise();
   });
 
   isLoading: boolean = true;
@@ -110,7 +114,7 @@ export class LicenseTableComponent implements OnInit {
             return isMatch;
           }
           this.isLoading = false;
-
+          this.summarise();
           this.sort.
             sortChange.subscribe(() => (this.paginator.pageIndex = 0));
         },
@@ -126,7 +130,17 @@ export class LicenseTableComponent implements OnInit {
     else
       return "รถยนต์";
   }
-
+  summarise() {
+    this.bike = 0;
+    this.car = 0;
+    for (let row of this.dataSource.filteredData) {
+      let isBike: boolean = row.Type == '7' || row.Type == '8';
+      if (isBike)
+        this.bike++;
+      else
+        this.car++;
+    }
+  }
   openDialog(imgPath: string, type: number): void {
     //removedata
     //C:\DFLicense\Photos\ขม7298_Type1_Num1_650901040036.jpg
