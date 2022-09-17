@@ -36,7 +36,8 @@ export class FilterComponent implements OnInit {
   datepickerInput1 = "";
   datepickerInput2 = "";
   licensenoInput = "";
-  speedInput = "";
+  speedInputA = "";
+  speedInputB = "";
 
   ngOnInit(): void {
     this.getFilter();
@@ -102,7 +103,8 @@ export class FilterComponent implements OnInit {
     this.datepickerInput1 = "";
     this.datepickerInput2 = "";
     this.licensenoInput = "";
-    this.speedInput = "";
+    this.speedInputA = "";
+    this.speedInputB = ""
     this.provinceSelection.options.first.select();
     this.colorSelection.options.first.select();
     this.brandSelection.options.first.select();

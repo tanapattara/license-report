@@ -1,26 +1,32 @@
 <div class="container">
-  <div class="d-flex flex-row">
-    <div class="mr-auto p-2">
-      <div class="component-title">สถิติแยกตามรายวัน</div>
-      <div class="component-subtitle">สถิติแยกรายวัน ของภาพรวมทั้งหมด</div>
-    </div>
-    <div class="lic-spacer"></div>
-    <div class="p-2 align-self-center card card-summation-red">
-      <div class="card-body">
-        <p class="card-text card-summation-red-text">รถยนต์</p>
-        <h4 class="card-title card-summation-red-text">{{ car | number }}</h4>
+  <div class="row">
+    <div class="col-lg-8 d-flex flex-row">
+      <div class="mr-auto p-2">
+        <div class="component-title">สถิติแยกตามรายวัน</div>
+        <div class="component-subtitle">สถิติแยกรายวัน ของภาพรวมทั้งหมด</div>
+      </div>
+      <div class="lic-spacer"></div>
+      <div class="p-2 align-self-center">
+        <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
+          <mat-icon svgIcon="printer"></mat-icon>
+        </button>
       </div>
     </div>
-    <div class="p-2 align-self-center card  card-summation-white">
-      <div class="card-body">
-        <p class="card-text card-summation-white-text">จักรยานยนต์</p>
-        <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
+    <div class="col-sm-6 col-lg-2">
+      <div class="card card-summation-red">
+        <div class="card-body">
+          <p class="card-text card-summation-red-text">รถยนต์</p>
+          <h4 class="card-title card-summation-red-text">{{ car | number }}</h4>
+        </div>
       </div>
     </div>
-    <div class="p-2 align-self-center">
-      <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
-        <mat-icon svgIcon="printer"></mat-icon>
-      </button>
+    <div class="col-sm-6 col-lg-2">
+      <div class="card card-summation-white">
+        <div class="card-body">
+          <p class="card-text card-summation-white-text">จักรยานยนต์</p>
+          <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
+        </div>
+      </div>
     </div>
   </div>
 

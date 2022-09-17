@@ -173,6 +173,7 @@ export class ChartHeatmapMonthComponent implements OnInit {
       let d: Date = new Date(row.aDate);
       let isBike: boolean = row.Type == '7' || row.Type == '8';
 
+
       let month = "";
       let value = 0;
       switch (d.getMonth()) {
