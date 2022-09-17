@@ -43,6 +43,9 @@ export class ChartHeatmapMonthComponent implements OnInit {
     this.displayData();
   });
 
+  bike = 0;
+  car = 0;
+
   constructor(private api: ApiService, private filterService: FilterlicenseService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer) {
@@ -210,6 +213,8 @@ export class ChartHeatmapMonthComponent implements OnInit {
     this.chartDictionary.set(strMonth, series);
   }
   clearDic() {
+    this.car = 0;
+    this.bike = 0;
     this.chartDictionary.set('มกราคม', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set('กุมภาพันธ์', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set('มีนาคม', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);

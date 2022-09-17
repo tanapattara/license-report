@@ -47,6 +47,9 @@ export class ChartHeatmapHourComponent implements OnInit {
   chartDictionary = new Map<number, number[]>();
   filterDictionary = new Map<string, any>();
 
+  bike = 0;
+  car = 0;
+
   notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
     this.filter = this.filterService.getFilter();
     this.dataSource.filter = this.filter;
@@ -177,9 +180,9 @@ export class ChartHeatmapHourComponent implements OnInit {
                 }
                 else {
                   isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() >= sDate.getDate()) &&
-                  (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() >= sDate.getDate()) &&
-                  (RecValueA.getFullYear() == eDate.getFullYear() && RecValueA.getMonth() == eDate.getMonth() && RecValueA.getDate() <= eDate.getDate()) &&
-                  (RecValueB.getFullYear() == eDate.getFullYear() && RecValueB.getMonth() == eDate.getMonth() && RecValueB.getDate() <= eDate.getDate());
+                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() >= sDate.getDate()) &&
+                    (RecValueA.getFullYear() == eDate.getFullYear() && RecValueA.getMonth() == eDate.getMonth() && RecValueA.getDate() <= eDate.getDate()) &&
+                    (RecValueB.getFullYear() == eDate.getFullYear() && RecValueB.getMonth() == eDate.getMonth() && RecValueB.getDate() <= eDate.getDate());
                 }
               } else {
                 isMatchFilter = (record[key as keyof License] == value);
@@ -255,7 +258,8 @@ export class ChartHeatmapHourComponent implements OnInit {
     this.displayData();
   }
   clearDic() {
-
+    this.bike = 0;
+    this.car = 0;
     this.chartDictionary.set(1, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set(2, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     this.chartDictionary.set(3, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);

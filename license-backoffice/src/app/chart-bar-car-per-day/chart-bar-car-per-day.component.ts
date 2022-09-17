@@ -32,6 +32,8 @@ export class ChartBarCarPerDayComponent implements OnInit {
     'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
   speedInput = "";
 
+  car: number = 0;
+  bike: number = 0;
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true, maintainAspectRatio: false,
     scales: {
@@ -223,10 +225,14 @@ export class ChartBarCarPerDayComponent implements OnInit {
       let date = d.getDate();
       let value = isBike ? this.chartDictionaryBike.get(date)! + 1 : this.chartDictionaryCar.get(date)! + 1;
 
-      if (isBike)
+      if (isBike) {
         this.chartDictionaryBike.set(date, value);
-      else
+        this.bike++;
+      }
+      else {
         this.chartDictionaryCar.set(date, value);
+        this.car++;
+      }
 
     }
     for (let [key, value] of this.chartDictionaryCar) {
@@ -246,6 +252,8 @@ export class ChartBarCarPerDayComponent implements OnInit {
     this.chart?.update();
   }
   clearDic() {
+    this.bike = 0;
+    this.car = 0;
     this.chartDictionaryCar.set(1, 0);
     this.chartDictionaryCar.set(2, 0);
     this.chartDictionaryCar.set(3, 0);

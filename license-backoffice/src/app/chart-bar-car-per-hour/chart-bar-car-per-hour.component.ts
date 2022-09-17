@@ -56,6 +56,8 @@ export class ChartBarCarPerHourComponent implements OnInit {
   chartDictionaryCar = new Map<string, number>();
   chartDictionaryBike = new Map<string, number>();
 
+  car = 0;
+  bike = 0;
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
@@ -320,10 +322,14 @@ export class ChartBarCarPerHourComponent implements OnInit {
       if (hour == "")
         continue;
 
-      if (isBike)
+      if (isBike) {
         this.chartDictionaryBike.set(hour, value);
-      else
+        this.bike++;
+      }
+      else {
         this.chartDictionaryCar.set(hour, value);
+        this.car++;
+      }
 
       this.chartOptions.series = [
         { name: "1", data: this.generateData(1) },
@@ -397,6 +403,8 @@ export class ChartBarCarPerHourComponent implements OnInit {
     this.displayData();
   }
   clearDic() {
+    this.car = 0;
+    this.bike = 0;
     this.chartDictionaryCar.set("00", 0);
     this.chartDictionaryCar.set("01", 0);
     this.chartDictionaryCar.set("02", 0);

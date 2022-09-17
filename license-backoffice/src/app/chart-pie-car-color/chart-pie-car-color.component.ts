@@ -22,6 +22,9 @@ export class ChartPieCarColorComponent implements OnInit {
 
   dataSource!: MatTableDataSource<any>;
   chartdataset: string[] = [];
+
+  bike = 0;
+  car = 0;
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -91,6 +94,8 @@ export class ChartPieCarColorComponent implements OnInit {
   pieChartDatasets: string[] = [];
 
   displayData() {
+    this.bike = 0;
+    this.car = 0;
     this.chartDictionary.clear();
     this.pieChartData.datasets = []
     this.pieChartData.labels = [];

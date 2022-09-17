@@ -143,6 +143,7 @@ button {
   display: flex;
   vertical-align: top;
   width: 100%;
+  height: 155px;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
@@ -158,4 +159,21 @@ button {
 }
 .print-icon-button:hover {
   background-color: #a73b24 !important;
+}
+.card-summation-red {
+  background: #eb5a47;
+  width: 155px;
+  height: 125px;
+}
+.card-summation-red-text {
+  color: #ffffff;
+}
+.card-summation-white {
+  background: #ffffff;
+  width: 155px;
+  margin: 1rem;
+  height: 125px;
+}
+.card-summation-white-text {
+  color: #eb5a47;
 }

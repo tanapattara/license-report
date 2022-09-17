@@ -33,6 +33,8 @@ export class ChartBarCarSpeedComponent implements OnInit {
   chartDictionaryCar = new Map<number, number>();
   chartDictionaryBike = new Map<number, number>();
 
+  bike = 0;
+  car = 0;
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     scales: {
@@ -183,6 +185,8 @@ export class ChartBarCarSpeedComponent implements OnInit {
     this.displayData();
   }
   clearDic() {
+    this.car = 0;
+    this.bike = 0;
     this.chartDictionaryCar.set(0, 0);
     this.chartDictionaryCar.set(10, 0);
     this.chartDictionaryCar.set(20, 0);
@@ -221,9 +225,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
     this.barChartData.labels = [];
     for (let row of this.dataSource.filteredData) {
       let speed: Number = parseInt(row.Speed);
-      debugger;
       let isBike: boolean = row.Type == '7' || row.Type == '8';
-      debugger;
       let k = 0;
       let value = 0;
 
@@ -242,10 +244,14 @@ export class ChartBarCarSpeedComponent implements OnInit {
       else if (speed < 130) { value = isBike ? this.chartDictionaryBike.get(120)! + 1 : this.chartDictionaryCar.get(120)! + 1; k = 120; }
       else if (speed >= 130) { value = isBike ? this.chartDictionaryBike.get(130)! + 1 : this.chartDictionaryCar.get(130)! + 1; k = 130; }
 
-      if (isBike)
+      if (isBike) {
         this.chartDictionaryBike.set(k, value);
-      else
+        this.bike++;
+      }
+      else {
         this.chartDictionaryCar.set(k, value);
+        this.car++;
+      }
     }
     for (let [key, value] of this.chartDictionaryCar) {
       let ktext = key.toString();

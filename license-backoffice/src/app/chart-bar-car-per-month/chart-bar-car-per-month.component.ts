@@ -30,6 +30,9 @@ export class ChartBarCarPerMonthComponent implements OnInit {
   chartDictionaryCar = new Map<string, number>();
   chartDictionaryBike = new Map<string, number>();
 
+  car = 0;
+  bike = 0;
+
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
@@ -245,10 +248,14 @@ export class ChartBarCarPerMonthComponent implements OnInit {
       if (month == "")
         continue;
 
-      if (isBike)
+      if (isBike) {
         this.chartDictionaryBike.set(month, value);
-      else
+        this.bike++;
+      }
+      else {
         this.chartDictionaryCar.set(month, value);
+        this.car++;
+      }
 
     }
     for (let [key, value] of this.chartDictionaryCar) {
@@ -269,6 +276,8 @@ export class ChartBarCarPerMonthComponent implements OnInit {
 
   }
   clearDic() {
+    this.bike = 0;
+    this.car = 0;
     this.chartDictionaryCar.set("มกราคม", 0);
     this.chartDictionaryCar.set("กุมภาพันธ์", 0);
     this.chartDictionaryCar.set("มีนาคม", 0);
