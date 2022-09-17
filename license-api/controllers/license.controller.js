@@ -10,9 +10,3 @@ exports.getAllLicense = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-
-exports.getTodayLicense = async (req, res) => {
-  lController.getLicenseToday(req.query, (data) => {
-    res.send(data);
-  });
-};

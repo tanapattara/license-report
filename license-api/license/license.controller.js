@@ -25,8 +25,14 @@ let getLicenseToday = (criteria, callback) => {
       callback
     );
 };
+let getLicenseWithParams = (criteria, callback) => {
+  dbConfig
+    .getDB()
+    .query(`SELECT * FROM license ORDER BY aDate DESC`, criteria, callback);
+};
 module.exports = {
   getLicense: getLicense,
   getLicenseByID: getLicenseByID,
   getLicenseToday: getLicenseToday,
+  getLicenseWithParams: getLicenseWithParams,
 };

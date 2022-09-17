@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { LicenseFilter } from '../model/licensefilter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -6,6 +6,8 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { ApiService } from '../services/api.service';
 import { FilterlicenseService } from '../services/filterlicense.service';
 import { MatOption } from '@angular/material/core';
+import { Filter } from '../model/Filter';
+import { License } from '../model/license';
 
 @Component({
   selector: 'app-filter',
@@ -26,10 +28,14 @@ export class FilterComponent implements OnInit {
   defaultValue = "All";
   filterDictionary = new Map<string, any>();
 
+  data: License[] = [];
+
   @ViewChild('provinceSelection') provinceSelection!: MatSelect;
   @ViewChild('colorSelection') colorSelection!: MatSelect;
-  @ViewChild('brandSelection') brandSelection!: MatSelect;
-  constructor(private api: ApiService, private filterService: FilterlicenseService) { }
+  @ViewChild('placeSelection') placeSelection!: MatSelect;
+  @Output() searchedDataEvent: EventEmitter<any> = new EventEmitter(true);
+  constructor(private api: ApiService,
+    private filterService: FilterlicenseService) { }
 
   _filter: string = "";
 
@@ -81,23 +87,37 @@ export class FilterComponent implements OnInit {
 
       });
   }
-  applyLicenseFilter(ob: MatSelectChange, filtername: string) {
-    this.filterDictionary.set(filtername, ob.value);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.filterService.setFilter(jsonString);
-  }
-  onChangeEvent(event: any, filtername: string) {
-    var filtervalue = (event.target as HTMLInputElement).value == "" ? "All" : (event.target as HTMLInputElement).value;
-    this.filterDictionary.set(filtername, filtervalue);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.filterService.setFilter(jsonString);
-  }
-  DatePickervalueChanged() {
-    var startdate = this.range.value.start as Date
-    var enddate = this.range.value.end as Date
-    this.filterDictionary.set("date", [startdate, enddate]);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.filterService.setFilter(jsonString);
+  search() {
+    let placeSeleted = this.placeSelection.value;
+    let colorSelected = this.colorSelection.value;
+    let provinceSelected = this.provinceSelection.value;
+    let startdate = this.range.value.start as Date
+    let enddate = this.range.value.end as Date
+    let licenseInput = this.licensenoInput.valueOf();
+    let speedA = this.speedInputA.valueOf();
+    let speedB = this.speedInputB.valueOf();
+
+    let filter = {} as Filter;
+    filter.color = colorSelected;
+    filter.place = placeSeleted;
+    filter.province = provinceSelected;
+    filter.startDate = startdate;
+    filter.endDate = enddate;
+    filter.license = licenseInput;
+    filter.minSpeed = parseInt(speedA);
+    filter.maxSpeed = parseInt(speedB);
+
+    this.api.getLicensesWithFilter(filter).subscribe({
+      next: (res) => {
+        this.data = res;
+        //console.log(this.data);
+        this.searchedDataEvent.emit(res);
+      },
+      error: (err) => {
+        console.log("Error while fetching licenses with params");
+      }
+    });
+
   }
   clearFilter() {
     this.datepickerInput1 = "";
@@ -107,7 +127,7 @@ export class FilterComponent implements OnInit {
     this.speedInputB = ""
     this.provinceSelection.options.first.select();
     this.colorSelection.options.first.select();
-    this.brandSelection.options.first.select();
+    this.placeSelection.options.first.select();
 
     this.filterService.setFilter("");
   }
