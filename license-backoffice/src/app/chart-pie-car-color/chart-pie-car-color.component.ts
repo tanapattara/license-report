@@ -101,6 +101,13 @@ export class ChartPieCarColorComponent implements OnInit {
     this.pieChartData.labels = [];
 
     for (let row of this.dataSource.filteredData) {
+      let isBike: boolean = row.Type == '7' || row.Type == '8';
+      if (isBike) {
+        this.bike++;
+      }
+      else {
+        this.car++;
+      }
 
       let car_color = row.Color;
       switch (row.Color) {

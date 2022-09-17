@@ -65,7 +65,10 @@ export class ChartBarCarPerDayComponent implements OnInit {
         color: (context) => {
           var strColor = context.datasetIndex == 0 ? 'white' : 'black';
           return strColor;
-        }
+        },
+        formatter: (value, ctx) => {
+          return value.toLocaleString();
+        },
       }
     }
   };

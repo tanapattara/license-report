@@ -90,7 +90,10 @@ export class ChartBarCarPerHourComponent implements OnInit {
         color: (context) => {
           var strColor = context.datasetIndex == 0 ? 'white' : 'black';
           return strColor;
-        }
+        },
+        formatter: (value, ctx) => {
+          return value.toLocaleString();
+        },
       }
     }
   };
@@ -187,7 +190,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
         type: "heatmap"
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       colors: ["#CC3D00"],
       yaxis: {
