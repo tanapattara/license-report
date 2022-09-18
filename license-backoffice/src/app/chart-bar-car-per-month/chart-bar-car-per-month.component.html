@@ -30,7 +30,7 @@
     </div>
 
   </div>
-  <app-filter-time-speed></app-filter-time-speed>
+  <app-filter-time-speed (searchedDataEvent)="searchedDataEvent($event)"></app-filter-time-speed>
 
   <div class="card">
     <div class="chart-container" style="display: block; height:566px">

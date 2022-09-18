@@ -88,24 +88,15 @@ export class FilterComponent implements OnInit {
       });
   }
   search() {
-    let placeSeleted = this.placeSelection.value;
-    let colorSelected = this.colorSelection.value;
-    let provinceSelected = this.provinceSelection.value;
-    let startdate = this.range.value.start as Date
-    let enddate = this.range.value.end as Date
-    let licenseInput = this.licensenoInput.valueOf();
-    let speedA = this.speedInputA.valueOf();
-    let speedB = this.speedInputB.valueOf();
-
     let filter = {} as Filter;
-    filter.color = colorSelected;
-    filter.place = placeSeleted;
-    filter.province = provinceSelected;
-    filter.startDate = startdate;
-    filter.endDate = enddate;
-    filter.license = licenseInput;
-    filter.minSpeed = parseInt(speedA);
-    filter.maxSpeed = parseInt(speedB);
+    filter.color = this.colorSelection.value;
+    filter.place = this.placeSelection.value;
+    filter.province = this.provinceSelection.value;
+    filter.startDate = this.range.value.start as Date;
+    filter.endDate = this.range.value.end as Date;
+    filter.license = this.licensenoInput.valueOf();
+    filter.minSpeed = parseInt(this.speedInputA.valueOf());
+    filter.maxSpeed = parseInt(this.speedInputB.valueOf());
 
     this.api.getLicensesWithFilter(filter).subscribe({
       next: (res) => {
@@ -127,6 +118,23 @@ export class FilterComponent implements OnInit {
     this.colorSelection.options.first.select();
     this.placeSelection.options.first.select();
 
-    this.filterService.setFilter("");
+    let filter = {} as Filter;
+    filter.color = this.colorSelection.value;
+    filter.place = this.placeSelection.value;
+    filter.province = this.provinceSelection.value;
+    filter.startDate = this.range.value.start as Date;
+    filter.endDate = this.range.value.end as Date;
+    filter.license = this.licensenoInput.valueOf();
+    filter.minSpeed = parseInt(this.speedInputA.valueOf());
+    filter.maxSpeed = parseInt(this.speedInputB.valueOf());
+
+    this.api.getLicensesWithFilter(filter).subscribe({
+      next: (res) => {
+        this.searchedDataEvent.emit(res);
+      },
+      error: (err) => {
+        console.log("Error while fetching licenses with params");
+      }
+    });
   }
 }

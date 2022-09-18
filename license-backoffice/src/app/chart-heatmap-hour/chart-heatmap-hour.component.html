@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-  <app-filter-time-speed></app-filter-time-speed>
+  <app-filter-time-speed (searchedDataEvent)="searchedDataEvent($event)"></app-filter-time-speed>
   <apx-chart class="apx-chart-s" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
     [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
   </apx-chart>

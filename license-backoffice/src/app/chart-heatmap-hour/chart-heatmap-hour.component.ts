@@ -118,86 +118,9 @@ export class ChartHeatmapHourComponent implements OnInit {
         },
       }
     };
-    this.getAllLicense();
   }
 
   ngOnInit(): void {
-  }
-  getAllLicense() {
-    this.api.getLicenses().
-      subscribe({
-        next: (res) => {
-          //console.log(res);
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.filter = this.filter;
-          this.dataSource.filterPredicate = function (record, filter) {
-            var map = new Map(JSON.parse(filter));
-            let isMatch = false;
-            for (let [key, value] of map) {
-
-              var isMatchFilter: boolean = false;
-
-              if (key == 'Speed') {
-                let strValue = value as string;
-                if (value as string == 'All') {
-                  isMatchFilter = true;
-                } else if (strValue.includes('-')) {
-                  let strSplited = strValue.split('-');
-                  if (strValue.length > 1) {
-                    let min = parseInt(strSplited[0]);
-                    let max = parseInt(strSplited[1]);
-                    if (min < max) {
-                      isMatchFilter = (record[key as keyof License] >= min && record[key as keyof License] <= max);
-                    } else {
-                      isMatchFilter = (record[key as keyof License] <= min && record[key as keyof License] >= max);
-                    }
-                  } else {
-                    let min = parseInt(strValue[0]);
-                    isMatchFilter = (record[key as keyof License] <= min);
-
-                  }
-                } else {
-                  let max: number = parseInt(value as string);
-                  isMatchFilter = (record[key as keyof License] <= max);
-                }
-              } else if (key == 'LicNo') {
-                if (value as string == 'All')
-                  isMatchFilter = true;
-                else
-                  isMatchFilter = (record[key as keyof License].includes(value));
-              } else if (key == 'date') {
-                let date = value as string[];
-                let sDate = new Date(date[0]);
-                let eDate = new Date(date[1]);
-                let adate_key = 'aDate', bdate_key = 'bDate'
-
-                let RecValueA = new Date(record[adate_key as keyof License]);
-                let RecValueB = new Date(record[bdate_key as keyof License]);
-
-                if (sDate.getTime() == eDate.getTime()) {
-                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() == sDate.getDate()) ||
-                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() == sDate.getDate());
-                }
-                else {
-                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() >= sDate.getDate()) &&
-                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() >= sDate.getDate()) &&
-                    (RecValueA.getFullYear() == eDate.getFullYear() && RecValueA.getMonth() == eDate.getMonth() && RecValueA.getDate() <= eDate.getDate()) &&
-                    (RecValueB.getFullYear() == eDate.getFullYear() && RecValueB.getMonth() == eDate.getMonth() && RecValueB.getDate() <= eDate.getDate());
-                }
-              } else {
-                isMatchFilter = (record[key as keyof License] == value);
-              }
-              isMatch = (value == "All") || isMatchFilter;
-              if (!isMatch) return false;
-            }
-            return isMatch;
-          }
-          this.displayData();
-        },
-        error: (err) => {
-          console.log("Error while fetching licenses ");
-        }
-      });
   }
   displayData() {
     this.clearDic();
@@ -247,16 +170,6 @@ export class ChartHeatmapHourComponent implements OnInit {
     series[hour] = series[hour] + 1;
     this.chartDictionary.set(iDate, series);
   }
-
-  DatePickervalueChanged() {
-    var startdate = this.range.value.start as Date
-    var enddate = this.range.value.end as Date
-    this.filterDictionary.set("date", [startdate, enddate]);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.filter = jsonString;
-    this.dataSource.filter = this.filter;
-    this.displayData();
-  }
   clearDic() {
     this.bike = 0;
     this.car = 0;
@@ -294,7 +207,6 @@ export class ChartHeatmapHourComponent implements OnInit {
     this.chartDictionary.set(30, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
     this.chartDictionary.set(31, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
   }
   clearFilter() {
     this.datepickerInput1 = "";
@@ -315,6 +227,10 @@ export class ChartHeatmapHourComponent implements OnInit {
       i++;
     }
     return series;
+  }
+  searchedDataEvent(event: any) {
+    this.dataSource = new MatTableDataSource(event);
+    this.displayData();
   }
   print() {
     window.print();

@@ -60,7 +60,6 @@ export class LicenseTableComponent implements OnInit {
   }
 
   searchedDataEvent(event: any) {
-    debugger;
     this.dataSource = new MatTableDataSource(event);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

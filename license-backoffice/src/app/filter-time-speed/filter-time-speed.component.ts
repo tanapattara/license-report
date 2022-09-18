@@ -29,19 +29,9 @@ export class FilterTimeSpeedComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  DatePickervalueChanged() {
-    var startdate = this.range.value.start as Date
-    var enddate = this.range.value.end as Date
-    this.filterDictionary.set("date", [startdate, enddate]);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.filterService.setFilter(jsonString);
-  }
-  onChangeEvent(event: any, filtername: string) {
-    var filtervalue = (event.target as HTMLInputElement).value == "" ? "All" : (event.target as HTMLInputElement).value;
-    this.filterDictionary.set(filtername, filtervalue);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.filterService.setFilter(jsonString);
-  }
+  DatePickervalueChanged() { }
+  onChangeEvent(event: any, filtername: string) { }
+
   search() {
     let filter = {} as Filter;
     filter.startDate = this.range.value.start as Date
@@ -67,6 +57,24 @@ export class FilterTimeSpeedComponent implements OnInit {
     this.datepickerInput2 = "";
     this.speedInputA = "";
     this.speedInputB = "";
-    this.filterService.setFilter("");
+
+    let filter = {} as Filter;
+    filter.startDate = this.range.value.start as Date
+    filter.endDate = this.range.value.end as Date
+    filter.minSpeed = parseInt(this.speedInputA.valueOf());
+    filter.maxSpeed = parseInt(this.speedInputB.valueOf());
+    filter.color = "All";
+    filter.place = "All";
+    filter.province = "All";
+    filter.license = "All";
+
+    this.api.getLicensesWithFilter(filter).subscribe({
+      next: (res) => {
+        this.searchedDataEvent.emit(res);
+      },
+      error: (err) => {
+        console.log("Error while fetching licenses with params");
+      }
+    });
   }
 }
