@@ -23,6 +23,9 @@ export class ChartBarCarPerDayComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   @ViewChild('monthSelection') monthSelection!: MatSelect;
 
+  @ViewChild('startTimeSelection') startTimeSelection!: MatSelect;
+  @ViewChild('endTimeSelection') endTimeSelection!: MatSelect;
+
   dataSource!: MatTableDataSource<any>;
   chartdataset: string[] = [];
   filterDictionary = new Map<string, any>();
@@ -32,6 +35,9 @@ export class ChartBarCarPerDayComponent implements OnInit {
   month = ['ALL', 'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
     'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
   speedInput = "";
+  data: License[] = [];
+  time: string[] = ['All', '00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+    '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30'];
 
   car: number = 0;
   bike: number = 0;
@@ -220,7 +226,10 @@ export class ChartBarCarPerDayComponent implements OnInit {
   }
   clearFilter() {
     this.monthSelection.options.first.select();
-    this.dataSource.filter = "";
+    this.startTimeSelection.options.first.select();
+    this.endTimeSelection.options.first.select();
+    this.speedInputA = "";
+    this.speedInputB = ""
     this.dataSource = new MatTableDataSource();
     this.displayData();
   }
@@ -231,6 +240,8 @@ export class ChartBarCarPerDayComponent implements OnInit {
     let filter = {} as Filter;
     filter.minSpeed = parseInt(this.speedInputA.valueOf());
     filter.maxSpeed = parseInt(this.speedInputB.valueOf());
+    filter.startHour = this.startTimeSelection.value;
+    filter.endHour = this.endTimeSelection.value;
     if (selectedMonth != "ALL") {
       filter.startDate = this.getStartDate(selectedMonth);
       filter.endDate = this.getEndDate(selectedMonth)
