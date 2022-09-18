@@ -127,6 +127,13 @@ export class ChartHeatmapHourComponent implements OnInit {
     if (this.dataSource.filteredData.length) {
       for (let row of this.dataSource.filteredData) {
         let d: Date = new Date(row.aDate);
+        let isBike: boolean = row.Type == '7' || row.Type == '8';
+        if (isBike) {
+          this.bike++;
+        }
+        else {
+          this.car++;
+        }
         this.setHourinDate(d.getDate(), d.getHours());
       }
     }
