@@ -46,7 +46,6 @@ export class HomeLayoutComponent implements OnInit {
   logout(): void {
     this.authService.logout().subscribe({
       next: res => {
-        console.log(res);
         this.storageService.clean();
       },
       error: err => {

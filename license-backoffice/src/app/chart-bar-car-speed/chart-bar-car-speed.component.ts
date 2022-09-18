@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Filter } from '../model/Filter';
 
 @Component({
   selector: 'app-chart-bar-car-speed',
@@ -117,76 +118,7 @@ export class ChartBarCarSpeedComponent implements OnInit {
     iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
   }
 
-  ngOnInit(): void {
-    this.getAllLicense();
-  }
-  getAllLicense() {
-    this.api.getLicenses().
-      subscribe({
-        next: (res) => {
-          //console.log(res);
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.filter = this.filter;
-          this.dataSource.filterPredicate = function (record, filter) {
-            var map = new Map(JSON.parse(filter));
-            let isMatch = false;
-            for (let [key, value] of map) {
-
-              var isMatchFilter: boolean = false;
-
-              if (key == 'Speed') {
-                if (value as string == 'All')
-                  isMatchFilter = true;
-                let speedFilter: number = parseInt(value as string);
-                isMatchFilter = (record[key as keyof License] <= speedFilter);
-              } else if (key == 'LicNo') {
-                if (value as string == 'All')
-                  isMatchFilter = true;
-                else
-                  isMatchFilter = (record[key as keyof License].includes(value));
-              } else if (key == 'date') {
-                let date = value as string[];
-                let sDate = new Date(date[0]);
-                let eDate = new Date(date[1]);
-                let adate_key = 'aDate', bdate_key = 'bDate'
-
-                let RecValueA = new Date(record[adate_key as keyof License]);
-                let RecValueB = new Date(record[bdate_key as keyof License]);
-
-                if (sDate.getTime() == eDate.getTime()) {
-                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() == sDate.getDate()) ||
-                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() == sDate.getDate());
-                }
-                else {
-                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() >= sDate.getDate()) &&
-                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() >= sDate.getDate()) &&
-                    (RecValueA.getFullYear() == eDate.getFullYear() && RecValueA.getMonth() == eDate.getMonth() && RecValueA.getDate() <= eDate.getDate()) &&
-                    (RecValueB.getFullYear() == eDate.getFullYear() && RecValueB.getMonth() == eDate.getMonth() && RecValueB.getDate() <= eDate.getDate());
-                }
-              } else {
-                isMatchFilter = (record[key as keyof License] == value);
-              }
-              isMatch = (value == "All") || isMatchFilter;
-              if (!isMatch) return false;
-            }
-            return isMatch;
-          }
-          this.displayData();
-        },
-        error: (err) => {
-          console.log("Error while fetching licenses ");
-        }
-      });
-  }
-  DatePickervalueChanged() {
-    var startdate = this.range.value.start as Date
-    var enddate = this.range.value.end as Date
-    this.filterDictionary.set("date", [startdate, enddate]);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.filter = jsonString;
-    this.dataSource.filter = this.filter;
-    this.displayData();
-  }
+  ngOnInit(): void { }
   clearDic() {
     this.car = 0;
     this.bike = 0;
@@ -267,10 +199,6 @@ export class ChartBarCarSpeedComponent implements OnInit {
     for (let [key, value] of this.chartDictionaryBike) {
       let perValue = value / n * 100;
       this.barChartData.datasets[1].data.push(value);
-      // if (perValue < 2) {
-      //   this.barChartData.datasets[1].datalabels!.align! = 'top';
-      //   this.barChartData.datasets[1].datalabels!.anchor! = 'end';
-      // }
     }
 
     this.chart?.update();
@@ -278,10 +206,25 @@ export class ChartBarCarSpeedComponent implements OnInit {
   clearFilter() {
     this.datepickerInput1 = "";
     this.datepickerInput2 = "";
-    this.filter = "";
-    this.dataSource.filter = this.filter;
-    this.displayData();
+
+    let filter = {} as Filter;
+    filter.startDate = this.range.value.start as Date;
+    filter.endDate = this.range.value.end as Date;
+    filter.color = "All";
+    filter.province = "All";
+    filter.place = "All";
+    this.api.getLicensesWithFilter(filter).subscribe({
+      next: (res) => {
+        console.log(res.length);
+        this.dataSource = new MatTableDataSource(res);
+        this.displayData();
+      },
+      error: (err) => {
+        console.log("Error while fetching licenses with params");
+      }
+    });
   }
+
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     //console.log(event, active);
   }
@@ -291,5 +234,23 @@ export class ChartBarCarSpeedComponent implements OnInit {
   }
   print() {
     window.print();
+  }
+  search() {
+    let filter = {} as Filter;
+    filter.startDate = this.range.value.start as Date;
+    filter.endDate = this.range.value.end as Date;
+    filter.color = "All";
+    filter.province = "All";
+    filter.place = "All";
+
+    this.api.getLicensesWithFilter(filter).subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res);
+        this.displayData();
+      },
+      error: (err) => {
+        console.log("Error while fetching licenses with params");
+      }
+    });
   }
 }

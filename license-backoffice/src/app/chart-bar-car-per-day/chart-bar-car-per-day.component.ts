@@ -10,6 +10,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Filter } from '../model/Filter';
 
 @Component({
   selector: 'app-chart-bar-car-per-day',
@@ -102,119 +103,16 @@ export class ChartBarCarPerDayComponent implements OnInit {
       },
     ]
   };
-
+  speedInputA = "";
+  speedInputB = "";
   constructor(private api: ApiService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
   }
 
-  ngOnInit(): void {
-    this.getAllLicense();
-  }
-  getAllLicense() {
-    this.api.getLicenses().
-      subscribe({
-        next: (res) => {
-          //console.log(res);
-          this.dataSource = new MatTableDataSource(res);
-          //this.dataSource.filter = this.filter;
-          this.dataSource.filterPredicate = function (record, filter) {
+  ngOnInit(): void { }
 
-            var map = new Map(JSON.parse(filter));
-            let isMatch = false;
-            for (let [key, value] of map) {
-
-              var isMatchFilter: boolean = false;
-
-              if (key == 'Speed') {
-                let strValue = value as string;
-                if (value as string == 'All') {
-                  isMatchFilter = true;
-                } else if (strValue.includes('-')) {
-                  let strSplited = strValue.split('-');
-                  if (strValue.length > 1) {
-                    let min = parseInt(strSplited[0]);
-                    let max = parseInt(strSplited[1]);
-                    if (min < max) {
-                      isMatchFilter = (record[key as keyof License] >= min && record[key as keyof License] <= max);
-                    } else {
-                      isMatchFilter = (record[key as keyof License] <= min && record[key as keyof License] >= max);
-                    }
-                  } else {
-                    let min = parseInt(strValue[0]);
-                    isMatchFilter = (record[key as keyof License] <= min);
-                  }
-                } else {
-                  let max: number = parseInt(value as string);
-                  isMatchFilter = (record[key as keyof License] <= max);
-                }
-              } else if (key == 'LicNo') {
-                if (value as string == 'All')
-                  isMatchFilter = true;
-                else
-                  isMatchFilter = (record[key as keyof License].includes(value));
-              } else if (key == 'date') {
-                let date = value as string[];
-                let sDate = new Date(date[0]);
-                let eDate = new Date(date[1]);
-                let adate_key = 'aDate', bdate_key = 'bDate'
-
-                let RecValueA = new Date(record[adate_key as keyof License]);
-                let RecValueB = new Date(record[bdate_key as keyof License]);
-                if (sDate.getTime() == eDate.getTime()) {
-                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() == sDate.getDate()) ||
-                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() == sDate.getDate());
-                }
-                else {
-                  isMatchFilter = (RecValueA.getFullYear() == sDate.getFullYear() && RecValueA.getMonth() == sDate.getMonth() && RecValueA.getDate() >= sDate.getDate()) &&
-                    (RecValueB.getFullYear() == sDate.getFullYear() && RecValueB.getMonth() == sDate.getMonth() && RecValueB.getDate() >= sDate.getDate()) &&
-                    (RecValueA.getFullYear() == eDate.getFullYear() && RecValueA.getMonth() == eDate.getMonth() && RecValueA.getDate() <= eDate.getDate()) &&
-                    (RecValueB.getFullYear() == eDate.getFullYear() && RecValueB.getMonth() == eDate.getMonth() && RecValueB.getDate() <= eDate.getDate());
-                }
-              } else if (key == 'Month') {
-                if (value as string == 'All')
-                  isMatchFilter = true;
-                else {
-                  let strMonth = value as string;
-                  let now_date = new Date();
-                  let vmonth = now_date.getMonth()
-                  console.log(strMonth);
-                  switch (strMonth) {
-                    case 'มกราคม': vmonth = 0; break;
-                    case 'กุมภาพันธ์': vmonth = 1; break;
-                    case 'มีนาคม': vmonth = 2; break;
-                    case 'เมษายน': vmonth = 3; break;
-                    case 'พฤษภาคม': vmonth = 4; break;
-                    case 'มิถุนายน': vmonth = 5; break;
-                    case 'กรกฎาคม': vmonth = 6; break;
-                    case 'สิงหาคม': vmonth = 7; break;
-                    case 'กันยายน': vmonth = 8; break;
-                    case 'ตุลาคม': vmonth = 9; break;
-                    case 'พฤศจิกายน': vmonth = 10; break;
-                    case 'ธันวาคม': vmonth = 11; break;
-                  }
-                  let adate_key = 'aDate', bdate_key = 'bDate'
-                  let RecValueA = new Date(record[adate_key as keyof License]);
-                  let RecValueB = new Date(record[bdate_key as keyof License]);
-                  isMatchFilter = (RecValueA.getMonth() == vmonth || RecValueB.getMonth() == vmonth);
-                }
-              }
-              else {
-                isMatchFilter = (record[key as keyof License] == value);
-              }
-              isMatch = (value == "All") || isMatchFilter;
-              if (!isMatch) return false;
-            }
-            return isMatch;
-          }
-          this.displayData();
-        },
-        error: (err) => {
-          console.log("Error while fetching licenses ");
-        }
-      });
-  }
   displayData() {
     this.clearDic();
     this.barChartData.datasets[0].data = [];
@@ -246,10 +144,6 @@ export class ChartBarCarPerDayComponent implements OnInit {
     for (let [key, value] of this.chartDictionaryBike) {
       let perValue = value / n * 100;
       this.barChartData.datasets[1].data.push(value);
-      // if (perValue < 2) {
-      //   this.barChartData.datasets[1].datalabels!.align! = 'top';
-      //   this.barChartData.datasets[1].datalabels!.anchor! = 'end';
-      // }
     }
 
     this.chart?.update();
@@ -322,22 +216,80 @@ export class ChartBarCarPerDayComponent implements OnInit {
     this.chartDictionaryBike.set(31, 0);
   }
   applyFilter(ob: MatSelectChange) {
-    this.filterDictionary.set("Month", ob.value);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.dataSource.filter = jsonString;
-    this.displayData();
   }
   clearFilter() {
     this.monthSelection.options.first.select();
     this.dataSource.filter = "";
     this.displayData();
   }
+  search() {
+
+    let selectedMonth = this.monthSelection.value;
+
+    let filter = {} as Filter;
+    filter.minSpeed = parseInt(this.speedInputA.valueOf());
+    filter.maxSpeed = parseInt(this.speedInputB.valueOf());
+    if (selectedMonth != "ALL") {
+      filter.startDate = this.getStartDate(selectedMonth);
+      filter.endDate = this.getEndDate(selectedMonth)
+    }
+
+    this.api.getLicensesWithFilter(filter).subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res);
+        this.displayData();
+      },
+      error: (err) => {
+        console.log("Error while fetching licenses with params");
+      }
+    });
+  }
+  // month = ['ALL', 'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+  // 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+  getStartDate(month: string): Date {
+    let n = new Date();
+    let strDate = n.getFullYear().toString();
+    switch (month) {
+      case "มกราคม": { strDate += "-01-01"; break; }
+      case "กุมภาพันธ์": { strDate += "-02-01"; break; }
+      case "มีนาคม": { strDate += "-03-01"; break; }
+      case "เมษายน": { strDate += "-04-01"; break; }
+
+      case "พฤษภาคม": { strDate += "-05-01"; break; }
+      case "มิถุนายน": { strDate += "-06-01"; break; }
+      case "กรกฎาคม": { strDate += "-07-01"; break; }
+      case "สิงหาคม": { strDate += "-08-01"; break; }
+
+      case "กันยายน": { strDate += "-09-01"; break; }
+      case "ตุลาคม": { strDate += "-10-01"; break; }
+      case "พฤศจิกายน": { strDate += "-11-01"; break; }
+      case "ธันวาคม": { strDate += "-12-01"; break; }
+    }
+    return new Date(strDate);
+  }
+  getEndDate(month: string): Date {
+    let n = new Date();
+    let strDate = n.getFullYear().toString();
+    switch (month) {
+      case "มกราคม": { strDate += "-01-31"; break; }
+      case "กุมภาพันธ์": { strDate += "-02-29"; break; }
+      case "มีนาคม": { strDate += "-03-31"; break; }
+      case "เมษายน": { strDate += "-04-30"; break; }
+
+      case "พฤษภาคม": { strDate += "-05-31"; break; }
+      case "มิถุนายน": { strDate += "-06-30"; break; }
+      case "กรกฎาคม": { strDate += "-07-31"; break; }
+      case "สิงหาคม": { strDate += "-08-31"; break; }
+
+      case "กันยายน": { strDate += "-09-30"; break; }
+      case "ตุลาคม": { strDate += "-10-31"; break; }
+      case "พฤศจิกายน": { strDate += "-11-30"; break; }
+      case "ธันวาคม": { strDate += "-12-31"; break; }
+    }
+    return new Date(strDate);
+  }
   onChangeEvent(event: any, filtername: string) {
-    var filtervalue = (event.target as HTMLInputElement).value == "" ? "All" : (event.target as HTMLInputElement).value;
-    this.filterDictionary.set(filtername, filtervalue);
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.dataSource.filter = jsonString;
-    this.displayData();
+
   }
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     //console.log(event, active);

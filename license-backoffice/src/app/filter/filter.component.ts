@@ -119,22 +119,9 @@ export class FilterComponent implements OnInit {
     this.placeSelection.options.first.select();
 
     let filter = {} as Filter;
-    filter.color = this.colorSelection.value;
-    filter.place = this.placeSelection.value;
-    filter.province = this.provinceSelection.value;
-    filter.startDate = this.range.value.start as Date;
-    filter.endDate = this.range.value.end as Date;
-    filter.license = this.licensenoInput.valueOf();
-    filter.minSpeed = parseInt(this.speedInputA.valueOf());
-    filter.maxSpeed = parseInt(this.speedInputB.valueOf());
 
-    this.api.getLicensesWithFilter(filter).subscribe({
-      next: (res) => {
-        this.searchedDataEvent.emit(res);
-      },
-      error: (err) => {
-        console.log("Error while fetching licenses with params");
-      }
-    });
+
+    this.searchedDataEvent.emit({});
+
   }
 }

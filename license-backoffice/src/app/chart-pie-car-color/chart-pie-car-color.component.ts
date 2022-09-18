@@ -44,7 +44,6 @@ export class ChartPieCarColorComponent implements OnInit {
           return txt;
         },
         display: (context) => {
-          console.log(context);
           var datas = context.dataset.data;
           var data = context.dataset.data[context.dataIndex] as number;
           var sum = 0;

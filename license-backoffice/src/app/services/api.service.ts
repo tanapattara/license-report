@@ -19,13 +19,13 @@ export class ApiService {
 
   getLicensesWithFilter(filter: Filter) {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("color", filter.color);
-    queryParams = queryParams.append("province", filter.province);
-    queryParams = queryParams.append("location", filter.place);
+    queryParams = queryParams.append("color", filter.color || "All");
+    queryParams = queryParams.append("province", filter.province || "All");
+    queryParams = queryParams.append("location", filter.place || "All");
     queryParams = queryParams.append("licno", filter.license || "All");
 
     queryParams = queryParams.append("startdate", filter.startDate ? this.getSaveDateFormat(filter.startDate) : "All");
-    queryParams = queryParams.append("enddate", filter.endDate ? this.getSaveNextDateFormat(filter.endDate) : "All");
+    queryParams = queryParams.append("enddate", filter.endDate ? this.getSaveDateFormat(filter.endDate) : "All");
 
     queryParams = queryParams.append("minspeed", filter.minSpeed || "All");
     queryParams = queryParams.append("maxspeed", filter.maxSpeed || "All");

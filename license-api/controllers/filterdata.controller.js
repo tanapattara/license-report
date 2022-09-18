@@ -55,24 +55,42 @@ exports.getToday = async (req, res) => {
 exports.getLicenseWithParams = async (req, res) => {
   const q = req.query;
   try {
-    const [results, metadata] = await db.sequelize.query(
-      `
+    if (q.startdate == q.enddate && q.startdate != "All") {
+      const [results, metadata] = await db.sequelize.query(
+        `
       SELECT * FROM license WHERE color like '${
         q.color == "All" ? "%" : q.color
       }'
-        and province like '${q.province == "All" ? "%" : q.province}'
-        and location like '${q.location == "All" ? "%" : q.location}'
-        and licno like '${q.licno == "All" ? "%" : "%" + q.licno + "%"}'
-        and adate >= '${q.startdate == "All" ? "2000-01-01" : q.startdate}'
-        and adate < ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"}
-        and bdate >= '${q.startdate == "All" ? "2000-01-01" : q.startdate}'
-        and bdate < ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"}
-        and CAST(speed AS int) > ${q.minspeed == "All" ? "0" : q.minspeed}
-        and CAST(speed AS int) < ${q.maxspeed == "All" ? "999" : q.maxspeed} 
+        AND province like '${q.province == "All" ? "%" : q.province}'
+        AND location like '${q.location == "All" ? "%" : q.location}'
+        AND licno like '${q.licno == "All" ? "%" : "%" + q.licno + "%"}'
+        AND date_format(aDate, '%Y-%m-%d') = '${q.startdate}' 
+        AND CAST(speed AS int) > ${q.minspeed == "All" ? "0" : q.minspeed}
+        AND CAST(speed AS int) < ${q.maxspeed == "All" ? "999" : q.maxspeed} 
         ORDER BY adate
       `
-    );
-    res.status(200).send(results);
+      );
+      res.status(200).send(results);
+    } else {
+      const [results, metadata] = await db.sequelize.query(
+        `
+      SELECT * FROM license WHERE color like '${
+        q.color == "All" ? "%" : q.color
+      }'
+        AND province like '${q.province == "All" ? "%" : q.province}'
+        AND location like '${q.location == "All" ? "%" : q.location}'
+        AND licno like '${q.licno == "All" ? "%" : "%" + q.licno + "%"}'
+        AND (adate BETWEEN '${
+          q.startdate == "All" ? "2000-01-01" : q.startdate
+        }' 
+        AND ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"})
+        AND CAST(speed AS int) > ${q.minspeed == "All" ? "0" : q.minspeed}
+        AND CAST(speed AS int) < ${q.maxspeed == "All" ? "999" : q.maxspeed} 
+        ORDER BY adate
+      `
+      );
+      res.status(200).send(results);
+    }
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

@@ -31,7 +31,7 @@
   </div>
 
   <div class="searchbox row">
-    <mat-form-field class="col-5" appearance="outline">
+    <mat-form-field class="col-3" appearance="outline">
       <mat-label>เดือน</mat-label>
       <mat-select #monthSelection [value]="defaultValue" (selectionChange)="applyFilter($event)">
         <mat-option *ngFor="let item of month" [value]="item">{{
@@ -39,14 +39,20 @@
           }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="col-5" appearance="outline">
-      <mat-label>ช่วงความเร็ว</mat-label>
-      <input matInput [(ngModel)]="speedInput" type="text" min="0" (keyup)="onChangeEvent($event, 'Speed')"
-        placeholder="0-40" />
+    <mat-form-field class="col-md-3" appearance="outline">
+      <mat-label>ความเร็วเริ่มต้น</mat-label>
+      <input matInput [(ngModel)]="speedInputA" type="number" min="0" placeholder="0" />
     </mat-form-field>
-    <div class="col-2 center-btn">
-      <button mat-flat-button color="primary" class="noprint" (click)="clearFilter()">
+    <mat-form-field class="col-md-3" appearance="outline">
+      <mat-label>ความเร็วสูงสุด</mat-label>
+      <input matInput [(ngModel)]="speedInputB" type="number" min="0" placeholder="120" />
+    </mat-form-field>
+    <div class="col-md-3 d-flex align-items-center justify-content-center" style="padding-bottom: 22px;">
+      <button mat-flat-button color="accent" (click)="clearFilter()" style="margin: 1rem;">
         ล้างการค้นหา
+      </button>
+      <button mat-flat-button color="primary" (click)="search()">
+        ค้นหา
       </button>
     </div>
   </div>
