@@ -11,6 +11,11 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
+import autoTable from 'jspdf-autotable';
+import 'jspdf-autotable';
+import { fontString } from "../services/font";
 
 @Component({
   selector: 'app-license-table',
@@ -30,7 +35,6 @@ export class LicenseTableComponent implements OnInit {
 
   bike = 0;
   car = 0;
-
   constructor(private api: ApiService,
     private filterService: FilterlicenseService,
     private storageService: StorageService,
@@ -39,7 +43,7 @@ export class LicenseTableComponent implements OnInit {
     sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon('car', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Car.svg'));
     iconRegistry.addSvgIcon('license', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/License.svg'));
-
+    iconRegistry.addSvgIcon('printer', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg'));
   }
 
   filter: string = "";
@@ -60,6 +64,7 @@ export class LicenseTableComponent implements OnInit {
   }
 
   searchedDataEvent(event: any) {
+    console.log(event.length);
     this.dataSource = new MatTableDataSource(event);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -96,5 +101,32 @@ export class LicenseTableComponent implements OnInit {
       height: h,
       data: assetsPath
     }).afterClosed().subscribe(() => { });
+  }
+  print() {
+    let datas = this.dataSource.data;
+    let row: any[][] = [];
+
+    datas.forEach((value, index, array) => {
+      let type = value.Type == '7' || value == '8' ? 'มอเตอร์ไซด์' : 'รถยนต์';
+      let d = new Date(value.aDate);
+      let temp = [index + 1, value.LicNo, value.Province, value.Color, type, value.Speed, value.Location, d.toLocaleString()];
+      row.push(temp);
+    })
+    const doc = new jsPDF();
+    doc.addFileToVFS("BaiJamjuree-Medium-normal.ttf", fontString);
+    doc.addFont("BaiJamjuree-Medium-normal.ttf", 'BaiJamjuree-Medium', 'normal');
+    doc.setFont('BaiJamjuree-Medium', 'normal');
+    doc.text("รายชื่อผู้เข้าใช้บริการ", 15, 10);
+    autoTable(doc, {
+      head: [['no.', 'LicNo', 'Province', 'Color', 'Type', 'Speed', 'Location', 'aDate']],
+      body: row,
+      styles: {
+        font: 'BaiJamjuree-Medium',    // <-- place name of your font here
+        fontStyle: 'normal',
+      },
+      headStyles: { fillColor: [167, 59, 36] },
+    });
+
+    doc.save('license report.pdf')
   }
 }
