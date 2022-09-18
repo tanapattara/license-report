@@ -57,24 +57,7 @@ export class FilterTimeSpeedComponent implements OnInit {
     this.datepickerInput2 = "";
     this.speedInputA = "";
     this.speedInputB = "";
-
-    let filter = {} as Filter;
-    filter.startDate = this.range.value.start as Date
-    filter.endDate = this.range.value.end as Date
-    filter.minSpeed = parseInt(this.speedInputA.valueOf());
-    filter.maxSpeed = parseInt(this.speedInputB.valueOf());
-    filter.color = "All";
-    filter.place = "All";
-    filter.province = "All";
-    filter.license = "All";
-
-    this.api.getLicensesWithFilter(filter).subscribe({
-      next: (res) => {
-        this.searchedDataEvent.emit(res);
-      },
-      error: (err) => {
-        console.log("Error while fetching licenses with params");
-      }
-    });
+    let data = {};
+    this.searchedDataEvent.emit(data);
   }
 }

@@ -206,23 +206,8 @@ export class ChartBarCarSpeedComponent implements OnInit {
   clearFilter() {
     this.datepickerInput1 = "";
     this.datepickerInput2 = "";
-
-    let filter = {} as Filter;
-    filter.startDate = this.range.value.start as Date;
-    filter.endDate = this.range.value.end as Date;
-    filter.color = "All";
-    filter.province = "All";
-    filter.place = "All";
-    this.api.getLicensesWithFilter(filter).subscribe({
-      next: (res) => {
-        console.log(res.length);
-        this.dataSource = new MatTableDataSource(res);
-        this.displayData();
-      },
-      error: (err) => {
-        console.log("Error while fetching licenses with params");
-      }
-    });
+    this.dataSource = new MatTableDataSource();
+    this.displayData();
   }
 
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {

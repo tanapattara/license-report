@@ -119,22 +119,23 @@ export class ChartBarCarPerDayComponent implements OnInit {
     this.barChartData.datasets[1].data = [];
     this.barChartData.labels = [];
 
-    for (let row of this.dataSource.filteredData) {
-      let d: Date = new Date(row.aDate);
-      let isBike: boolean = row.Type == '7' || row.Type == '8';
+    if (this.dataSource.filteredData.length) {
+      for (let row of this.dataSource.filteredData) {
+        let d: Date = new Date(row.aDate);
+        let isBike: boolean = row.Type == '7' || row.Type == '8';
 
-      let date = d.getDate();
-      let value = isBike ? this.chartDictionaryBike.get(date)! + 1 : this.chartDictionaryCar.get(date)! + 1;
+        let date = d.getDate();
+        let value = isBike ? this.chartDictionaryBike.get(date)! + 1 : this.chartDictionaryCar.get(date)! + 1;
 
-      if (isBike) {
-        this.chartDictionaryBike.set(date, value);
-        this.bike++;
+        if (isBike) {
+          this.chartDictionaryBike.set(date, value);
+          this.bike++;
+        }
+        else {
+          this.chartDictionaryCar.set(date, value);
+          this.car++;
+        }
       }
-      else {
-        this.chartDictionaryCar.set(date, value);
-        this.car++;
-      }
-
     }
     for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
@@ -220,6 +221,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
   clearFilter() {
     this.monthSelection.options.first.select();
     this.dataSource.filter = "";
+    this.dataSource = new MatTableDataSource();
     this.displayData();
   }
   search() {

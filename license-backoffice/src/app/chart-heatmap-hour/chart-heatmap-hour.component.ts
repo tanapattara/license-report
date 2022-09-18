@@ -124,9 +124,11 @@ export class ChartHeatmapHourComponent implements OnInit {
   }
   displayData() {
     this.clearDic();
-    for (let row of this.dataSource.filteredData) {
-      let d: Date = new Date(row.aDate);
-      this.setHourinDate(d.getDate(), d.getHours());
+    if (this.dataSource.filteredData.length) {
+      for (let row of this.dataSource.filteredData) {
+        let d: Date = new Date(row.aDate);
+        this.setHourinDate(d.getDate(), d.getHours());
+      }
     }
     this.chartOptions.series = [
       { name: "1", data: this.generateData(1) },
@@ -213,6 +215,7 @@ export class ChartHeatmapHourComponent implements OnInit {
     this.datepickerInput2 = "";
     this.filter = "";
     this.dataSource.filter = this.filter;
+    this.dataSource = new MatTableDataSource();
     this.displayData();
   }
   public generateData(iDate: number) {

@@ -210,89 +210,91 @@ export class ChartBarCarPerHourComponent implements OnInit {
     this.barChartData.datasets[1].data = [];
     this.barChartData.labels = [];
 
-    for (let row of this.dataSource.filteredData) {
-      let d: Date = new Date(row.aDate);
-      let isBike: boolean = row.Type == '7' || row.Type == '8';
-      this.setHourinDate(d.getDate(), d.getHours());
+    if (this.dataSource.filteredData.length) {
+      for (let row of this.dataSource.filteredData) {
+        let d: Date = new Date(row.aDate);
+        let isBike: boolean = row.Type == '7' || row.Type == '8';
+        this.setHourinDate(d.getDate(), d.getHours());
 
-      let hour = "";
-      let value = 0;
-      switch (d.getHours()) {
-        case 0: { hour = "00"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 1: { hour = "01"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 2: { hour = "02"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 3: { hour = "03"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 4: { hour = "04"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 5: { hour = "05"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 6: { hour = "06"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 7: { hour = "07"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 8: { hour = "08"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 9: { hour = "09"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 10: { hour = "10"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 11: { hour = "11"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        let hour = "";
+        let value = 0;
+        switch (d.getHours()) {
+          case 0: { hour = "00"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 1: { hour = "01"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 2: { hour = "02"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 3: { hour = "03"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 4: { hour = "04"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 5: { hour = "05"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 6: { hour = "06"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 7: { hour = "07"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 8: { hour = "08"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 9: { hour = "09"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 10: { hour = "10"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 11: { hour = "11"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
 
-        case 12: { hour = "12"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 13: { hour = "13"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 14: { hour = "14"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 15: { hour = "15"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 16: { hour = "16"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 17: { hour = "17"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 18: { hour = "18"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 19: { hour = "19"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 20: { hour = "20"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 21: { hour = "21"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 22: { hour = "22"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
-        case 23: { hour = "23"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 12: { hour = "12"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 13: { hour = "13"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 14: { hour = "14"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 15: { hour = "15"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 16: { hour = "16"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 17: { hour = "17"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 18: { hour = "18"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 19: { hour = "19"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 20: { hour = "20"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 21: { hour = "21"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 22: { hour = "22"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+          case 23: { hour = "23"; value = isBike ? this.chartDictionaryBike.get(hour)! + 1 : this.chartDictionaryCar.get(hour)! + 1; break; }
+        }
+
+        if (hour == "")
+          continue;
+
+        if (isBike) {
+          this.chartDictionaryBike.set(hour, value);
+          this.bike++;
+        }
+        else {
+          this.chartDictionaryCar.set(hour, value);
+          this.car++;
+        }
+
+        this.chartOptions.series = [
+          { name: "1", data: this.generateData(1) },
+          { name: "2", data: this.generateData(2) },
+          { name: "3", data: this.generateData(3) },
+          { name: "4", data: this.generateData(4) },
+          { name: "5", data: this.generateData(5) },
+          { name: "6", data: this.generateData(6) },
+          { name: "7", data: this.generateData(7) },
+          { name: "8", data: this.generateData(8) },
+          { name: "9", data: this.generateData(9) },
+          { name: "10", data: this.generateData(10) },
+
+          { name: "11", data: this.generateData(11) },
+          { name: "12", data: this.generateData(12) },
+          { name: "13", data: this.generateData(13) },
+          { name: "14", data: this.generateData(14) },
+          { name: "15", data: this.generateData(15) },
+          { name: "16", data: this.generateData(16) },
+          { name: "17", data: this.generateData(17) },
+          { name: "18", data: this.generateData(18) },
+          { name: "19", data: this.generateData(19) },
+          { name: "20", data: this.generateData(20) },
+
+          { name: "21", data: this.generateData(21) },
+          { name: "22", data: this.generateData(22) },
+          { name: "23", data: this.generateData(23) },
+          { name: "24", data: this.generateData(24) },
+          { name: "25", data: this.generateData(25) },
+          { name: "26", data: this.generateData(26) },
+          { name: "27", data: this.generateData(27) },
+          { name: "28", data: this.generateData(28) },
+          { name: "29", data: this.generateData(29) },
+          { name: "30", data: this.generateData(30) },
+
+          { name: "31", data: this.generateData(31) },
+        ];
       }
-
-      if (hour == "")
-        continue;
-
-      if (isBike) {
-        this.chartDictionaryBike.set(hour, value);
-        this.bike++;
-      }
-      else {
-        this.chartDictionaryCar.set(hour, value);
-        this.car++;
-      }
-
-      this.chartOptions.series = [
-        { name: "1", data: this.generateData(1) },
-        { name: "2", data: this.generateData(2) },
-        { name: "3", data: this.generateData(3) },
-        { name: "4", data: this.generateData(4) },
-        { name: "5", data: this.generateData(5) },
-        { name: "6", data: this.generateData(6) },
-        { name: "7", data: this.generateData(7) },
-        { name: "8", data: this.generateData(8) },
-        { name: "9", data: this.generateData(9) },
-        { name: "10", data: this.generateData(10) },
-
-        { name: "11", data: this.generateData(11) },
-        { name: "12", data: this.generateData(12) },
-        { name: "13", data: this.generateData(13) },
-        { name: "14", data: this.generateData(14) },
-        { name: "15", data: this.generateData(15) },
-        { name: "16", data: this.generateData(16) },
-        { name: "17", data: this.generateData(17) },
-        { name: "18", data: this.generateData(18) },
-        { name: "19", data: this.generateData(19) },
-        { name: "20", data: this.generateData(20) },
-
-        { name: "21", data: this.generateData(21) },
-        { name: "22", data: this.generateData(22) },
-        { name: "23", data: this.generateData(23) },
-        { name: "24", data: this.generateData(24) },
-        { name: "25", data: this.generateData(25) },
-        { name: "26", data: this.generateData(26) },
-        { name: "27", data: this.generateData(27) },
-        { name: "28", data: this.generateData(28) },
-        { name: "29", data: this.generateData(29) },
-        { name: "30", data: this.generateData(30) },
-
-        { name: "31", data: this.generateData(31) },
-      ];
     }
     for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
@@ -404,13 +406,6 @@ export class ChartBarCarPerHourComponent implements OnInit {
     this.chartDictionary.set(31, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
   }
-  clearFilter() {
-    this.datepickerInput1 = "";
-    this.datepickerInput2 = "";
-    this.filter = "";
-    this.dataSource.filter = this.filter;
-    this.displayData();
-  }
   public generateData(iDate: number) {
     var i = 0;
     var series = [];
@@ -436,7 +431,10 @@ export class ChartBarCarPerHourComponent implements OnInit {
   }
 
   searchedDataEvent(event: any) {
-    this.dataSource = new MatTableDataSource(event);
+    if (event.length == 0)
+      this.dataSource = new MatTableDataSource();
+    else
+      this.dataSource = new MatTableDataSource(event);
     this.displayData();
   }
 }

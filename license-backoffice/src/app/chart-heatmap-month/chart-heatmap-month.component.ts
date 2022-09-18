@@ -90,26 +90,26 @@ export class ChartHeatmapMonthComponent implements OnInit {
   displayData() {
     this.clearDic();
 
-    for (let row of this.dataSource.filteredData) {
-      let d: Date = new Date(row.aDate);
-      let isBike: boolean = row.Type == '7' || row.Type == '8';
-
-
-      let month = "";
-      let value = 0;
-      switch (d.getMonth()) {
-        case 0: { month = "มกราคม"; this.setDateinMonth(month, d.getDate()); break; }
-        case 1: { month = "กุมภาพันธ์"; this.setDateinMonth(month, d.getDate()); break; }
-        case 2: { month = "มีนาคม"; this.setDateinMonth(month, d.getDate()); break; }
-        case 3: { month = "เมษายน"; this.setDateinMonth(month, d.getDate()); break; }
-        case 4: { month = "พฤษภาคม"; this.setDateinMonth(month, d.getDate()); break; }
-        case 5: { month = "มิถุนายน"; this.setDateinMonth(month, d.getDate()); break; }
-        case 6: { month = "กรกฎาคม"; this.setDateinMonth(month, d.getDate()); break; }
-        case 7: { month = "สิงหาคม"; this.setDateinMonth(month, d.getDate()); break; }
-        case 8: { month = "กันยายน"; this.setDateinMonth(month, d.getDate()); break; }
-        case 9: { month = "ตุลาคม"; this.setDateinMonth(month, d.getDate()); break; }
-        case 10: { month = "พฤศจิกายน"; this.setDateinMonth(month, d.getDate()); break; }
-        case 11: { month = "ธันวาคม"; this.setDateinMonth(month, d.getDate()); break; }
+    if (this.dataSource.filteredData.length) {
+      for (let row of this.dataSource.filteredData) {
+        let d: Date = new Date(row.aDate);
+        let isBike: boolean = row.Type == '7' || row.Type == '8';
+        let month = "";
+        let value = 0;
+        switch (d.getMonth()) {
+          case 0: { month = "มกราคม"; this.setDateinMonth(month, d.getDate()); break; }
+          case 1: { month = "กุมภาพันธ์"; this.setDateinMonth(month, d.getDate()); break; }
+          case 2: { month = "มีนาคม"; this.setDateinMonth(month, d.getDate()); break; }
+          case 3: { month = "เมษายน"; this.setDateinMonth(month, d.getDate()); break; }
+          case 4: { month = "พฤษภาคม"; this.setDateinMonth(month, d.getDate()); break; }
+          case 5: { month = "มิถุนายน"; this.setDateinMonth(month, d.getDate()); break; }
+          case 6: { month = "กรกฎาคม"; this.setDateinMonth(month, d.getDate()); break; }
+          case 7: { month = "สิงหาคม"; this.setDateinMonth(month, d.getDate()); break; }
+          case 8: { month = "กันยายน"; this.setDateinMonth(month, d.getDate()); break; }
+          case 9: { month = "ตุลาคม"; this.setDateinMonth(month, d.getDate()); break; }
+          case 10: { month = "พฤศจิกายน"; this.setDateinMonth(month, d.getDate()); break; }
+          case 11: { month = "ธันวาคม"; this.setDateinMonth(month, d.getDate()); break; }
+        }
       }
     }
 
