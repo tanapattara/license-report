@@ -75,7 +75,7 @@ exports.getLicenseWithParams = async (req, res) => {
         AND CAST(speed AS UNSIGNED) <= ${
           q.maxspeed == "All" ? "999" : q.maxspeed
         } 
-        ORDER BY adate
+        ORDER BY adate DESC
       `
       );
       res.status(200).send(results);
@@ -103,7 +103,7 @@ exports.getLicenseWithParams = async (req, res) => {
         AND CAST(speed AS UNSIGNED) <= ${
           q.maxspeed == "All" ? "999" : q.maxspeed
         } 
-        ORDER BY adate
+        ORDER BY adate DESC
       `
       );
       res.status(200).send(results);
