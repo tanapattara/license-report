@@ -65,8 +65,10 @@ exports.getLicenseWithParams = async (req, res) => {
         AND location like '${q.location == "All" ? "%" : q.location}'
         AND licno like '${q.licno == "All" ? "%" : "%" + q.licno + "%"}'
         AND date_format(aDate, '%Y-%m-%d') = '${q.startdate}' 
-        AND CAST(speed AS int) > ${q.minspeed == "All" ? "0" : q.minspeed}
-        AND CAST(speed AS int) < ${q.maxspeed == "All" ? "999" : q.maxspeed} 
+        AND CAST(speed AS UNSIGNED) >= ${q.minspeed == "All" ? "0" : q.minspeed}
+        AND CAST(speed AS UNSIGNED) <= ${
+          q.maxspeed == "All" ? "999" : q.maxspeed
+        } 
         ORDER BY adate
       `
       );
@@ -84,8 +86,10 @@ exports.getLicenseWithParams = async (req, res) => {
           q.startdate == "All" ? "2000-01-01" : q.startdate
         }' 
         AND ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"})
-        AND CAST(speed AS int) > ${q.minspeed == "All" ? "0" : q.minspeed}
-        AND CAST(speed AS int) < ${q.maxspeed == "All" ? "999" : q.maxspeed} 
+        AND CAST(speed AS UNSIGNED) >= ${q.minspeed == "All" ? "0" : q.minspeed}
+        AND CAST(speed AS UNSIGNED) <= ${
+          q.maxspeed == "All" ? "999" : q.maxspeed
+        } 
         ORDER BY adate
       `
       );
