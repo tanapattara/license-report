@@ -109,8 +109,6 @@ export class FilterComponent implements OnInit {
 
     this.api.getLicensesWithFilter(filter).subscribe({
       next: (res) => {
-        this.data = res;
-        //console.log(this.data);
         this.searchedDataEvent.emit(res);
       },
       error: (err) => {
