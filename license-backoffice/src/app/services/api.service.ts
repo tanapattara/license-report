@@ -30,6 +30,9 @@ export class ApiService {
     queryParams = queryParams.append("minspeed", filter.minSpeed || "All");
     queryParams = queryParams.append("maxspeed", filter.maxSpeed || "All");
 
+    queryParams = queryParams.append("starthour", filter.startHour || "All");
+    queryParams = queryParams.append("endhour", filter.endHour || "All");
+
     return this.http.get<any>(this.HOST_URL + "/filter", { params: queryParams });
   }
   getSaveDateFormat(d: Date): string {

@@ -7,4 +7,6 @@ export interface Filter {
     province: string,
     color: string,
     place: string
+    startHour: string,
+    endHour: string,
 }

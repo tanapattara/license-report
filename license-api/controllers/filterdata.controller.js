@@ -55,7 +55,13 @@ exports.getToday = async (req, res) => {
 exports.getLicenseWithParams = async (req, res) => {
   const q = req.query;
   try {
-    if (q.startdate == q.enddate && q.startdate != "All") {
+    if (
+      q.startdate == q.enddate &&
+      q.startdate != "All" &&
+      q.enddate != "All" &&
+      q.starthour == "All" &&
+      q.endhour == "All"
+    ) {
       const [results, metadata] = await db.sequelize.query(
         `
       SELECT * FROM license WHERE color like '${
@@ -74,6 +80,16 @@ exports.getLicenseWithParams = async (req, res) => {
       );
       res.status(200).send(results);
     } else {
+      let dtstart = q.startdate == "All" ? "2000-01-01" : q.startdate;
+      let dtend = q.enddate == "All" ? "NOW()" : q.enddate;
+
+      if (q.startdate != "All" && q.starthour != "All")
+        dtstart = dtstart + " " + q.starthour;
+      if (q.enddate != "All" && q.endhour != "All")
+        dtend = dtend + " " + q.endhour;
+
+      if (dtend != "NOW()") dtend = "'" + dtend + "'";
+
       const [results, metadata] = await db.sequelize.query(
         `
       SELECT * FROM license WHERE color like '${
@@ -82,10 +98,7 @@ exports.getLicenseWithParams = async (req, res) => {
         AND province like '${q.province == "All" ? "%" : q.province}'
         AND location like '${q.location == "All" ? "%" : q.location}'
         AND licno like '${q.licno == "All" ? "%" : "%" + q.licno + "%"}'
-        AND (adate BETWEEN '${
-          q.startdate == "All" ? "2000-01-01" : q.startdate
-        }' 
-        AND ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"})
+        AND (adate BETWEEN '${dtstart}' AND ${dtend})
         AND CAST(speed AS UNSIGNED) >= ${q.minspeed == "All" ? "0" : q.minspeed}
         AND CAST(speed AS UNSIGNED) <= ${
           q.maxspeed == "All" ? "999" : q.maxspeed
