@@ -18,6 +18,7 @@ export class UserEditDialogComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: User) {
 
+    this.id = data.id;
     this.angForm = this.fb.group({
       username: [data.username, Validators.required],
       firstname: [data.firstname],
