@@ -31,7 +31,7 @@
   </div>
 
   <div class="searchbox row">
-    <mat-form-field class="col-3" appearance="outline">
+    <mat-form-field class="col-4" appearance="outline">
       <mat-label>เดือน</mat-label>
       <mat-select #monthSelection [value]="defaultValue" (selectionChange)="applyFilter($event)">
         <mat-option *ngFor="let item of month" [value]="item">{{
@@ -39,15 +39,31 @@
           }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="col-md-3" appearance="outline">
+    <mat-form-field class="col-md-4" appearance="outline">
+      <mat-label>เวลาเริ่มต้น</mat-label>
+      <mat-select #startTimeSelection [value]="defaultValue">
+        <mat-option *ngFor="let item of time" [value]="item">{{
+          item
+          }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-4" appearance="outline">
+      <mat-label>เวลาสิ้นสุด</mat-label>
+      <mat-select #endTimeSelection [value]="defaultValue">
+        <mat-option *ngFor="let item of time" [value]="item">{{
+          item
+          }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-4" appearance="outline">
       <mat-label>ความเร็วเริ่มต้น</mat-label>
       <input matInput [(ngModel)]="speedInputA" type="number" min="0" placeholder="0" />
     </mat-form-field>
-    <mat-form-field class="col-md-3" appearance="outline">
+    <mat-form-field class="col-md-4" appearance="outline">
       <mat-label>ความเร็วสูงสุด</mat-label>
       <input matInput [(ngModel)]="speedInputB" type="number" min="0" placeholder="120" />
     </mat-form-field>
-    <div class="col-md-3 d-flex align-items-center justify-content-center" style="padding-bottom: 22px;">
+    <div class="col-md-4 d-flex align-items-center justify-content-center" style="padding-bottom: 22px;">
       <button mat-flat-button color="accent" (click)="clearFilter()" style="margin: 1rem;">
         ล้างการค้นหา
       </button>

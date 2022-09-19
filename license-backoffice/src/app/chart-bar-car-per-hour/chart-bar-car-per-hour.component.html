@@ -29,7 +29,39 @@
       </div>
     </div>
   </div>
-  <app-filter-time-speed (searchedDataEvent)="searchedDataEvent($event)"></app-filter-time-speed>
+
+  <div class="searchbox row">
+    <mat-form-field class="col-md-3" appearance="outline">
+      <mat-label>ระหว่างวันที่</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate [(ngModel)]="datepickerInput1" formControlName="start" placeholder="เริ่มต้น" />
+        <input [(ngModel)]="datepickerInput2" matEndDate formControlName="end" placeholder="สิ้นสุด" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">รูปแบบวันที่เริ่มต้นไม่ถูกต้อง</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3" appearance="outline">
+      <mat-label>ความเร็วเริ่มต้น</mat-label>
+      <input matInput [(ngModel)]="speedInputA" type="number" min="0" placeholder="0" />
+    </mat-form-field>
+    <mat-form-field class="col-md-3" appearance="outline">
+      <mat-label>ความเร็วสูงสุด</mat-label>
+      <input matInput [(ngModel)]="speedInputB" type="number" min="0" placeholder="120" />
+    </mat-form-field>
+    <div class="col-md-3 d-flex align-items-center justify-content-center" style="padding-bottom: 22px;">
+      <button mat-flat-button color="accent" (click)="clearFilter()" style="margin: 1rem;">
+        ล้างการค้นหา
+      </button>
+      <button mat-flat-button color="primary" (click)="search()">
+        ค้นหา
+      </button>
+    </div>
+  </div>
   <div class="card">
     <div class="card-body">
       <div class="chart-container" style="display: block; height:566px">

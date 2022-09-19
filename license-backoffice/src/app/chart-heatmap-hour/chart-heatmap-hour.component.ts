@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Filter } from '../model/Filter';
 
 export type HeatMapChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -49,7 +50,8 @@ export class ChartHeatmapHourComponent implements OnInit {
 
   bike = 0;
   car = 0;
-
+  speedInputA = "";
+  speedInputB = "";
   notifierSubscription: Subscription = this.filterService.event.subscribe(notified => {
     this.filter = this.filterService.getFilter();
     this.dataSource.filter = this.filter;
@@ -223,7 +225,12 @@ export class ChartHeatmapHourComponent implements OnInit {
     this.filter = "";
     this.dataSource.filter = this.filter;
     this.dataSource = new MatTableDataSource();
+
+    this.speedInputA = "";
+    this.speedInputB = ""
+    let filter = {} as Filter;
     this.displayData();
+
   }
   public generateData(iDate: number) {
     var i = 0;
@@ -238,9 +245,23 @@ export class ChartHeatmapHourComponent implements OnInit {
     }
     return series;
   }
-  searchedDataEvent(event: any) {
-    this.dataSource = new MatTableDataSource(event);
-    this.displayData();
+
+  search() {
+    let filter = {} as Filter;
+    filter.startDate = this.range.value.start as Date;
+    filter.endDate = this.range.value.end as Date;
+    filter.minSpeed = parseInt(this.speedInputA.valueOf());
+    filter.maxSpeed = parseInt(this.speedInputB.valueOf());
+
+    this.api.getLicensesWithFilter(filter).subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res);
+        this.displayData();
+      },
+      error: (err) => {
+        console.log("Error while fetching licenses with params");
+      }
+    });
   }
   print() {
     window.print();
