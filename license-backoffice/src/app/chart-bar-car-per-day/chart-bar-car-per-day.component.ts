@@ -226,8 +226,8 @@ export class ChartBarCarPerDayComponent implements OnInit {
   }
   clearFilter() {
     this.monthSelection.options.first.select();
-    this.startTimeSelection.options.first.select();
-    this.endTimeSelection.options.first.select();
+    // this.startTimeSelection.options.first.select();
+    // this.endTimeSelection.options.first.select();
     this.speedInputA = "";
     this.speedInputB = ""
     this.dataSource = new MatTableDataSource();
@@ -240,8 +240,8 @@ export class ChartBarCarPerDayComponent implements OnInit {
     let filter = {} as Filter;
     filter.minSpeed = parseInt(this.speedInputA.valueOf());
     filter.maxSpeed = parseInt(this.speedInputB.valueOf());
-    filter.startHour = this.startTimeSelection.value;
-    filter.endHour = this.endTimeSelection.value;
+    // filter.startHour = this.startTimeSelection.value;
+    // filter.endHour = this.endTimeSelection.value;
     if (selectedMonth != "ALL") {
       filter.startDate = this.getStartDate(selectedMonth);
       filter.endDate = this.getEndDate(selectedMonth)

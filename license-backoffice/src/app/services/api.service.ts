@@ -25,7 +25,7 @@ export class ApiService {
     queryParams = queryParams.append("licno", filter.license || "All");
 
     queryParams = queryParams.append("startdate", filter.startDate ? this.getSaveDateFormat(filter.startDate) : "All");
-    queryParams = queryParams.append("enddate", filter.endDate ? this.getSaveDateFormat(filter.endDate) : "All");
+    queryParams = queryParams.append("enddate", filter.endDate ? this.getSaveNextDateFormat(filter.endDate) : "All");
 
     queryParams = queryParams.append("minspeed", filter.minSpeed || "All");
     queryParams = queryParams.append("maxspeed", filter.maxSpeed || "All");

@@ -55,59 +55,30 @@ exports.getToday = async (req, res) => {
 exports.getLicenseWithParams = async (req, res) => {
   const q = req.query;
   try {
-    if (
-      q.startdate == q.enddate &&
-      q.startdate != "All" &&
-      q.enddate != "All" &&
-      q.starthour == "All" &&
-      q.endhour == "All"
-    ) {
-      const [results, metadata] = await db.sequelize.query(
-        `
+    const [results, metadata] = await db.sequelize.query(
+      `
       SELECT * FROM license WHERE color like '${
         q.color == "All" ? "%" : q.color
       }'
         AND province like '${q.province == "All" ? "%" : q.province}'
         AND location like '${q.location == "All" ? "%" : q.location}'
         AND licno like '${q.licno == "All" ? "%" : "%" + q.licno + "%"}'
-        AND date_format(aDate, '%Y-%m-%d') = '${q.startdate}' 
+        AND (adate BETWEEN '${
+          q.startdate == "All" ? "2000-01-01" : q.startdate
+        }' AND ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"})
+        and TIME_TO_SEC(TIME(adate)) BETWEEN TIME_TO_SEC('${
+          q.starthour == "All" ? "00:00" : q.starthour
+        }:00') AND TIME_TO_SEC('${
+        q.endhour == "All" ? "23:59:59" : q.endhour + ":00"
+      }')
         AND CAST(speed AS UNSIGNED) >= ${q.minspeed == "All" ? "0" : q.minspeed}
         AND CAST(speed AS UNSIGNED) <= ${
           q.maxspeed == "All" ? "999" : q.maxspeed
         } 
         ORDER BY adate DESC
       `
-      );
-      res.status(200).send(results);
-    } else {
-      let dtstart = q.startdate == "All" ? "2000-01-01" : q.startdate;
-      let dtend = q.enddate == "All" ? "NOW()" : q.enddate;
-
-      if (q.startdate != "All" && q.starthour != "All")
-        dtstart = dtstart + " " + q.starthour;
-      if (q.enddate != "All" && q.endhour != "All")
-        dtend = dtend + " " + q.endhour;
-
-      if (dtend != "NOW()") dtend = "'" + dtend + "'";
-
-      const [results, metadata] = await db.sequelize.query(
-        `
-      SELECT * FROM license WHERE color like '${
-        q.color == "All" ? "%" : q.color
-      }'
-        AND province like '${q.province == "All" ? "%" : q.province}'
-        AND location like '${q.location == "All" ? "%" : q.location}'
-        AND licno like '${q.licno == "All" ? "%" : "%" + q.licno + "%"}'
-        AND (adate BETWEEN '${dtstart}' AND ${dtend})
-        AND CAST(speed AS UNSIGNED) >= ${q.minspeed == "All" ? "0" : q.minspeed}
-        AND CAST(speed AS UNSIGNED) <= ${
-          q.maxspeed == "All" ? "999" : q.maxspeed
-        } 
-        ORDER BY adate DESC
-      `
-      );
-      res.status(200).send(results);
-    }
+    );
+    res.status(200).send(results);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

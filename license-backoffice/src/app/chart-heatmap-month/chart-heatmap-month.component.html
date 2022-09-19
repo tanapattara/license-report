@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 d-flex flex-row">
+    <div class="col-lg-12 d-flex flex-row">
       <div class="mr-auto p-2">
         <div class="component-title">สถิติแยกตามรายเดือน</div>
         <div class="component-subtitle">สถิติแยกรายเดือน ของภาพรวมทั้งหมด</div>
@@ -12,7 +12,7 @@
         </button>
       </div>
     </div>
-    <div class="col-sm-6 col-lg-2">
+    <!-- <div class="col-sm-6 col-lg-2">
       <div class="card card-summation-red">
         <div class="card-body">
           <p class="card-text card-summation-red-text">รถยนต์</p>
@@ -27,7 +27,7 @@
           <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <app-filter-time-speed (searchedDataEvent)="searchedDataEvent($event)"></app-filter-time-speed>
   <apx-chart class="apx-chart" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
