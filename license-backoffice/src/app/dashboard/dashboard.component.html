@@ -3,7 +3,7 @@
   <div class="component-title">สถิติทั้งหมด</div>
   <div class="component-subtitle">สถิติทั้งหมด ของรถแต่ละประเภท</div>
   <div class="row">
-    <div class="col-md-12 col-lg-6 col-xl-3">
+    <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-red">
         <div>
           <h4 class="h4-red-card">ทั้งหมด</h4>
@@ -11,7 +11,25 @@
         </div>
       </div>
     </div>
-    <div class="col-md-12 col-lg-6 col-xl-3">
+    <div class="col-md-12 col-lg-6 col-xl-2">
+      <div class="card-white">
+        <div>
+          <h4 class="h4-white-card">รถยนต์</h4>
+          <h1 class="h1-white-card">{{ car | number }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-6 col-xl-2">
+      <div class="card-white">
+        <div>
+          <h4 class="h4-white-card">จักรยานยนต์</h4>
+          <h1 class="h1-white-card">{{ moto | number }}</h1>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-red">
         <div>
           <h4 class="h4-red-card">ความเร็วเฉลี่ย</h4>
@@ -19,31 +37,11 @@
         </div>
       </div>
     </div>
-
-    <div class="col-md-12 col-lg-6 col-xl-3">
+    <div class="col-md-12 col-lg-6 col-xl-4">
       <div class="card-white">
         <div>
-          <h4 class="h4-white-card">รถยนต์</h4>
-          <h1 class="h1-white-card">{{ car | number }}</h1>
-        </div>
-        <div class="doughnut-chart">
-          <canvas #chartCar baseChart [data]="barChartCarData" [options]="barChartCarOptions"
-            [type]="doughnutChartType">
-          </canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12 col-lg-6 col-xl-3">
-      <div class="card-white">
-        <div>
-          <h4 class="h4-white-card">จักรยานยนต์</h4>
-          <h1 class="h1-white-card">{{ moto | number }}</h1>
-        </div>
-        <div class="doughnut-chart">
-          <canvas #chartMoto baseChart [data]="barChartMotoData" [options]="barChartMotoOptions"
-            [type]="doughnutChartType">
-          </canvas>
+          <h4 class="h4-white-card">ความเร็วเกิน 50km/hr</h4>
+          <h1 class="h1-white-card">3,231 (72.8%)</h1>
         </div>
 
       </div>
@@ -71,8 +69,7 @@
             สถิตรถเข้าออกในแต่ละเดือน ของรถแต่ละประเภทรถ
           </h6>
           <div style="display: block; height:250px">
-            <canvas #chartMonth baseChart [data]="barChartMonthData" [options]="barChartMonthOptions"
-              [type]="barChartType">
+            <canvas #chartMonth baseChart [data]="barChartMonthData" [options]="barChartMonthOptions" [type]="barChartType">
             </canvas>
           </div>
         </div>

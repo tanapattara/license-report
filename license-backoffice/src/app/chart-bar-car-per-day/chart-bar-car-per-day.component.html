@@ -6,13 +6,13 @@
         <div class="component-subtitle">สถิติแยกรายวัน ของภาพรวมทั้งหมด</div>
       </div>
       <div class="lic-spacer"></div>
-      <div class="p-2 align-self-center">
+      <!-- <div class="p-2 align-self-center">
         <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
           <mat-icon svgIcon="printer"></mat-icon>
         </button>
-      </div>
+      </div> -->
     </div>
-    <div class="col-sm-6 col-lg-2">
+    <!-- <div class="col-sm-6 col-lg-2">
       <div class="card card-summation-red">
         <div class="card-body">
           <p class="card-text card-summation-red-text">รถยนต์</p>
@@ -27,11 +27,11 @@
           <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="searchbox row">
-    <mat-form-field class="col-4" appearance="outline">
+    <mat-form-field class="col-2" appearance="outline">
       <mat-label>เดือน</mat-label>
       <mat-select #monthSelection [value]="defaultValue" (selectionChange)="applyFilter($event)">
         <mat-option *ngFor="let item of month" [value]="item">{{
@@ -39,7 +39,7 @@
           }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="col-md-4" appearance="outline">
+    <mat-form-field class="col-md-2" appearance="outline">
       <mat-label>เวลาเริ่มต้น</mat-label>
       <mat-select #startTimeSelection [value]="defaultValue">
         <mat-option *ngFor="let item of time" [value]="item">{{
@@ -47,7 +47,7 @@
           }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="col-md-4" appearance="outline">
+    <mat-form-field class="col-md-2" appearance="outline">
       <mat-label>เวลาสิ้นสุด</mat-label>
       <mat-select #endTimeSelection [value]="defaultValue">
         <mat-option *ngFor="let item of time" [value]="item">{{
@@ -55,20 +55,37 @@
           }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="col-md-4" appearance="outline">
+    <mat-form-field class="col-md-2" appearance="outline">
       <mat-label>ความเร็วเริ่มต้น</mat-label>
       <input matInput [(ngModel)]="speedInputA" type="number" min="0" placeholder="0" />
     </mat-form-field>
-    <mat-form-field class="col-md-4" appearance="outline">
+    <mat-form-field class="col-md-2" appearance="outline">
       <mat-label>ความเร็วสูงสุด</mat-label>
       <input matInput [(ngModel)]="speedInputB" type="number" min="0" placeholder="120" />
     </mat-form-field>
-    <div class="col-md-4 d-flex align-items-center justify-content-center" style="padding-bottom: 22px;">
-      <button mat-flat-button color="accent" (click)="clearFilter()" style="margin: 1rem;">
-        ล้างการค้นหา
-      </button>
-      <button mat-flat-button color="primary" (click)="search()">
+    <!-- <div class="col-md-2 d-flex justify-content-end align-items-center hidden-print">
+
+      <button mat-flat-button color="primary" (click)="search()" style="width: 120px!important;min-width: unset!important;">
         ค้นหา
+      </button>
+    </div> -->
+  </div>
+  <div class="row" style=" margin-bottom: 1rem;">
+    <div class="col-sm-6 col-lg-2">
+      <div class=" car-sum"> <span>รถยนต์ {{ car | number }} คัน</span></div>
+    </div>
+    <div class="col-sm-6 col-lg-2">
+      <div class=" car-sum"> <span>จักรยานยนต์ {{ bike | number }} คัน</span></div>
+
+    </div>
+    <div class="col-md-8 hidden-print" style="padding-bottom: 22px; direction: rtl;">
+
+      <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png">
+      <button mat-flat-button color="primary" (click)="search()" style="margin-right: 5px; width: 120px!important;min-width: unset!important;">
+        ค้นหา
+      </button>
+      <button mat-flat-button color="accent" (click)="clearFilter()" style="margin-right: 5px;width: 120px!important;min-width: unset!important;">
+        ล้างการค้นหา
       </button>
     </div>
   </div>
@@ -76,8 +93,7 @@
     <div class="card-body">
 
       <div class="chart-container" style="display: block; height:566px">
-        <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-          [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+        <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins" [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
         </canvas>
       </div>
 

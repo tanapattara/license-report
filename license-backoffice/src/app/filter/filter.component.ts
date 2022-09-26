@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Output,
+  EventEmitter,
+  Input,
+} from '@angular/core';
 import { LicenseFilter } from '../model/licensefilter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -12,10 +19,9 @@ import { License } from '../model/license';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent implements OnInit {
-
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
@@ -25,12 +31,64 @@ export class FilterComponent implements OnInit {
   color: string[] = ['All'];
   province: string[] = ['All'];
   location: string[] = ['All'];
-  defaultValue = "All";
+  defaultValue = 'All';
   filterDictionary = new Map<string, any>();
 
+  @Input() car: number = 0;
+  @Input() bike: number = 0;
+  @Input() isSum = false;
   data: License[] = [];
-  time: string[] = ['All', '00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
-    '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30'];
+  time: string[] = [
+    'All',
+    '00:00',
+    '00:30',
+    '01:00',
+    '01:30',
+    '02:00',
+    '02:30',
+    '03:00',
+    '03:30',
+    '04:00',
+    '04:30',
+    '05:00',
+    '05:30',
+    '06:00',
+    '06:30',
+    '07:00',
+    '07:30',
+    '08:00',
+    '08:30',
+    '09:00',
+    '09:30',
+    '10:00',
+    '10:30',
+    '11:00',
+    '11:30',
+    '12:00',
+    '12:30',
+    '13:00',
+    '13:30',
+    '14:00',
+    '14:30',
+    '15:00',
+    '15:30',
+    '16:00',
+    '16:30',
+    '17:00',
+    '17:30',
+    '18:00',
+    '18:30',
+    '19:00',
+    '19:30',
+    '20:00',
+    '20:30',
+    '21:00',
+    '21:30',
+    '22:00',
+    '22:30',
+    '23:00',
+    '23:30',
+  ];
 
   @ViewChild('provinceSelection') provinceSelection!: MatSelect;
   @ViewChild('colorSelection') colorSelection!: MatSelect;
@@ -39,58 +97,64 @@ export class FilterComponent implements OnInit {
   @ViewChild('endTimeSelection') endTimeSelection!: MatSelect;
 
   @Output() searchedDataEvent: EventEmitter<any> = new EventEmitter(true);
-  constructor(private api: ApiService,
-    private filterService: FilterlicenseService) { }
+  @Output() printDataEvent: EventEmitter<any> = new EventEmitter(true);
+  constructor(
+    private api: ApiService,
+    private filterService: FilterlicenseService
+  ) {}
 
-  _filter: string = "";
+  _filter: string = '';
 
-  datepickerInput1 = "";
-  datepickerInput2 = "";
-  licensenoInput = "";
-  speedInputA = "";
-  speedInputB = "";
+  datepickerInput1 = '';
+  datepickerInput2 = '';
+  licensenoInput = '';
+  speedInputA = '';
+  speedInputB = '';
 
   ngOnInit(): void {
     this.getFilter();
   }
 
   getFilter() {
-    this.api.getColor().
-      subscribe({
-        next: (res) => {
-          for (var item of res)
-            this.color.push(item['color']);
-          this.licenseFilter.push({ name: 'Color', options: this.color, defaultValue: this.defaultValue });
-        },
-        error: (err) => {
-          console.log("Error while fetching filter ");
-        }
-
-      });
-    this.api.getLocation().
-      subscribe({
-        next: (res) => {
-          for (var item of res)
-            this.location.push(item['location']);
-          this.licenseFilter.push({ name: 'Location', options: this.location, defaultValue: this.defaultValue });
-        },
-        error: (err) => {
-          console.log("Error while fetching filter ");
-        }
-
-      });
-    this.api.getProvince().
-      subscribe({
-        next: (res) => {
-          for (var item of res)
-            this.province.push(item['province']);
-          this.licenseFilter.push({ name: 'Province', options: this.province, defaultValue: this.defaultValue });
-        },
-        error: (err) => {
-          console.log("Error while fetching filter ");
-        }
-
-      });
+    this.api.getColor().subscribe({
+      next: (res) => {
+        for (var item of res) this.color.push(item['color']);
+        this.licenseFilter.push({
+          name: 'Color',
+          options: this.color,
+          defaultValue: this.defaultValue,
+        });
+      },
+      error: (err) => {
+        console.log('Error while fetching filter ');
+      },
+    });
+    this.api.getLocation().subscribe({
+      next: (res) => {
+        for (var item of res) this.location.push(item['location']);
+        this.licenseFilter.push({
+          name: 'Location',
+          options: this.location,
+          defaultValue: this.defaultValue,
+        });
+      },
+      error: (err) => {
+        console.log('Error while fetching filter ');
+      },
+    });
+    this.api.getProvince().subscribe({
+      next: (res) => {
+        for (var item of res) this.province.push(item['province']);
+        this.licenseFilter.push({
+          name: 'Province',
+          options: this.province,
+          defaultValue: this.defaultValue,
+        });
+      },
+      error: (err) => {
+        console.log('Error while fetching filter ');
+      },
+    });
   }
   search() {
     let filter = {} as Filter;
@@ -110,17 +174,16 @@ export class FilterComponent implements OnInit {
         this.searchedDataEvent.emit(res);
       },
       error: (err) => {
-        console.log("Error while fetching licenses with params");
-      }
+        console.log('Error while fetching licenses with params');
+      },
     });
-
   }
   clearFilter() {
-    this.datepickerInput1 = "";
-    this.datepickerInput2 = "";
-    this.licensenoInput = "";
-    this.speedInputA = "";
-    this.speedInputB = ""
+    this.datepickerInput1 = '';
+    this.datepickerInput2 = '';
+    this.licensenoInput = '';
+    this.speedInputA = '';
+    this.speedInputB = '';
     this.provinceSelection.options.first.select();
     this.colorSelection.options.first.select();
     this.placeSelection.options.first.select();
@@ -128,6 +191,8 @@ export class FilterComponent implements OnInit {
     this.endTimeSelection.options.first.select();
     let filter = {} as Filter;
     this.searchedDataEvent.emit({});
-
+  }
+  print() {
+    this.printDataEvent.emit({});
   }
 }

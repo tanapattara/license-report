@@ -8,31 +8,16 @@
         </div>
       </div>
       <div class="lic-spacer"></div>
-      <div class="p-2 align-self-center">
-        <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
+      <!-- <div class="p-2 align-self-center">
+         <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
           <mat-icon svgIcon="printer"></mat-icon>
         </button>
-      </div>
+      </div> -->
     </div>
-    <div class="col-sm-6 col-lg-2">
-      <div class="card card-summation-red">
-        <div class="card-body">
-          <p class="card-text card-summation-red-text">รถยนต์</p>
-          <h4 class="card-title card-summation-red-text">{{ car | number }}</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-2">
-      <div class="card card-summation-white">
-        <div class="card-body">
-          <p class="card-text card-summation-white-text">จักรยานยนต์</p>
-          <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
-        </div>
-      </div>
-    </div>
+
   </div>
 
-  <app-filter (searchedDataEvent)="searchedDataEvent($event)"></app-filter>
+  <app-filter [isSum]="true" [car]="car" [bike]="bike" (searchedDataEvent)="searchedDataEvent($event)" (printDataEvent)="printDataEvent($event)"></app-filter>
 
   <div class="license-container">
     <div class="license-table-container">
@@ -50,17 +35,7 @@
           <td mat-cell *matCellDef="let element">{{ element.LicNo }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="Image">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>รูปภาพ</th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="accent" (click)="openDialog(element.Path1, 1)">
-              <mat-icon svgIcon="car"></mat-icon>
-            </button>
-            <button mat-icon-button color="accent" (click)="openDialog(element.Path2, 2)">
-              <mat-icon svgIcon="license"></mat-icon>
-            </button>
-          </td>
-        </ng-container>
+
 
         <!-- Province Column -->
         <ng-container matColumnDef="Province">
@@ -111,7 +86,22 @@
             {{ element.bDate | date: "short" }}
           </td>
         </ng-container>
+        <ng-container matColumnDef="Image">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" (click)="openDialog(element.Path1, 1)">
+              <mat-icon svgIcon="carCar"></mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="openDialog(element.Path2, 2)">
+              <mat-icon svgIcon="cardCar"></mat-icon>
+            </button>
+            <button mat-icon-button class="svg-upload">
+              <mat-icon svgIcon="upload"></mat-icon>
 
+              <!-- <mat-icon svgIcon="upload-file"></mat-icon> -->
+            </button>
+          </td>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
@@ -120,8 +110,7 @@
           <td class="mat-cell" colspan="11">ไม่พอข้อมูลจากการค้นหา</td>
         </tr>
       </table>
-      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 50, 100]"
-        aria-label="Select page of GitHub search results"></mat-paginator>
+      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page of GitHub search results"></mat-paginator>
     </div>
   </div>
 </div>

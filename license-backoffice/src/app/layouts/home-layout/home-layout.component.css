@@ -36,7 +36,7 @@ header {
 .header-subtitle {
   font-style: normal;
   font-weight: 600;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 35px;
   margin-left: 26px;
 }
@@ -182,4 +182,7 @@ header {
     padding: 0 0;
     margin: 0 0;
   }
+}
+.bar-title{
+  border-left: 6px solid #EB5A47 !important;
 }

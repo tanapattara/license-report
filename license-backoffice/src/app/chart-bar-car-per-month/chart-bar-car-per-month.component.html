@@ -6,13 +6,13 @@
         <div class="component-subtitle">สถิติแยกรายเดือน ของภาพรวมทั้งหมด</div>
       </div>
       <div class="lic-spacer"></div>
-      <div class="p-2 align-self-center">
+      <!-- <div class="p-2 align-self-center">
         <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
           <mat-icon svgIcon="printer"></mat-icon>
         </button>
-      </div>
+      </div> -->
     </div>
-    <div class="col-sm-6 col-lg-2">
+    <!-- <div class="col-sm-6 col-lg-2">
       <div class="card card-summation-red">
         <div class="card-body">
           <p class="card-text card-summation-red-text">รถยนต์</p>
@@ -27,15 +27,23 @@
           <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
         </div>
       </div>
-    </div>
+    </div> -->
 
   </div>
-  <app-filter-time-speed (searchedDataEvent)="searchedDataEvent($event)"></app-filter-time-speed>
+  <app-filter-time-speed [isSum]="true" [car]="car" [bike]="bike" (searchedDataEvent)="searchedDataEvent($event)" (printDataEvent)="printDataEvent($event)"></app-filter-time-speed>
+  <!-- <div class="row" style=" margin-bottom: 1rem;">
+    <div class="col-sm-6 col-lg-2">
+      <div class=" car-sum"> <span>รถยนต์ {{ car | number }} คัน</span></div>
+    </div>
+    <div class="col-sm-6 col-lg-2">
+      <div class=" car-sum"> <span>จักรยานยนต์ {{ bike | number }} คัน</span></div>
 
+    </div>
+
+  </div> -->
   <div class="card">
     <div class="chart-container" style="display: block; height:566px">
-      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-        [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins" [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
       </canvas>
     </div>
   </div>

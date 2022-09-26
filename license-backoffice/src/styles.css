@@ -177,3 +177,52 @@ button {
 .card-summation-white-text {
   color: #eb5a47;
 }
+
+/* .mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 30px !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 30px !important;
+} */
+.mat-form-field-outline-start {
+  border-radius: 20px 0 0 20px !important;
+  min-width: 20px !important;
+}
+
+ .mat-form-field-outline-end {
+  border-radius: 0 20px 20px 0 !important;
+}
+
+ .mat-form-field-outline{
+  border-radius: 20px!important;
+}
+mat-form-field mat-label{
+  padding-left: 20px !important;
+}
+@media print {
+  .hidden-print {
+    display: none !important;
+  }
+}
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px 0 10px 0;
+}
+.car-sum{
+  height: 30px;border: 1px solid #EB5A47;text-align: center;padding-top: 6px;border-radius: 15px;
+}
+.svg-upload svg{
+
+    height: 23px;
+
+}
+table{
+
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    overflow:hidden !important;
+}
+mat-paginator{
+
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
