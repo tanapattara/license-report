@@ -55,15 +55,15 @@ export class LicenseTableComponent implements OnInit {
   ) {
     iconRegistry.addSvgIcon(
       'car',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Car.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/CarCar.svg')
     );
     iconRegistry.addSvgIcon(
       'license',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/License.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/CardCar.svg')
     );
     iconRegistry.addSvgIcon(
-      'printer',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg')
+      'upload',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Upload.svg')
     );
   }
 
@@ -77,8 +77,8 @@ export class LicenseTableComponent implements OnInit {
   );
 
   isLoading: boolean = true;
-  ngOnInit(): void {}
-  ngDoCheck() {}
+  ngOnInit(): void { }
+  ngDoCheck() { }
   ngOnDestroy() {
     this.notifierSubscription.unsubscribe();
   }
@@ -122,7 +122,7 @@ export class LicenseTableComponent implements OnInit {
         data: assetsPath,
       })
       .afterClosed()
-      .subscribe(() => {});
+      .subscribe(() => { });
   }
   print() {
     let datas = this.dataSource.data;
@@ -174,5 +174,8 @@ export class LicenseTableComponent implements OnInit {
     });
 
     doc.save('license report.pdf');
+  }
+  exportWarning(element: License) {
+    console.log(element);
   }
 }

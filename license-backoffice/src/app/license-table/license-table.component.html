@@ -17,7 +17,8 @@
 
   </div>
 
-  <app-filter [isSum]="true" [car]="car" [bike]="bike" (searchedDataEvent)="searchedDataEvent($event)" (printDataEvent)="printDataEvent($event)"></app-filter>
+  <app-filter [isSum]="true" [car]="car" [bike]="bike" (searchedDataEvent)="searchedDataEvent($event)"
+    (printDataEvent)="printDataEvent($event)"></app-filter>
 
   <div class="license-container">
     <div class="license-table-container">
@@ -89,15 +90,14 @@
         <ng-container matColumnDef="Image">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
           <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="accent" (click)="openDialog(element.Path1, 1)">
-              <mat-icon svgIcon="carCar"></mat-icon>
+            <button mat-icon-button (click)="openDialog(element.Path1, 1)">
+              <mat-icon [ngClass]="element.Speed > 50 ? 'overspeed' : 'underspeed'" svgIcon="car"></mat-icon>
             </button>
-            <button mat-icon-button color="accent" (click)="openDialog(element.Path2, 2)">
-              <mat-icon svgIcon="cardCar"></mat-icon>
+            <button mat-icon-button (click)="openDialog(element.Path2, 2)">
+              <mat-icon [ngClass]="element.Speed > 50 ? 'overspeed' : 'underspeed'" svgIcon="license"></mat-icon>
             </button>
-            <button mat-icon-button class="svg-upload">
-              <mat-icon svgIcon="upload"></mat-icon>
-
+            <button mat-icon-button (click)="exportWarning(element)">
+              <mat-icon [ngClass]="element.Speed > 50 ? 'overspeed' : 'underspeed'" svgIcon="upload"></mat-icon>
               <!-- <mat-icon svgIcon="upload-file"></mat-icon> -->
             </button>
           </td>
@@ -110,7 +110,8 @@
           <td class="mat-cell" colspan="11">ไม่พอข้อมูลจากการค้นหา</td>
         </tr>
       </table>
-      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page of GitHub search results"></mat-paginator>
+      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 50, 100]"
+        aria-label="Select page of GitHub search results"></mat-paginator>
     </div>
   </div>
 </div>

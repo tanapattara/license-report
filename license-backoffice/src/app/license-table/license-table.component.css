@@ -11,3 +11,11 @@ table {
   position: relative;
   overflow: auto;
 }
+.overspeed {
+  filter: invert(42%) sepia(17%) saturate(4468%) hue-rotate(332deg)
+    brightness(102%) contrast(84%);
+}
+.underspeed {
+  filter: invert(78%) sepia(46%) saturate(5143%) hue-rotate(47deg)
+    brightness(99%) contrast(101%);
+}
