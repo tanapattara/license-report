@@ -41,7 +41,7 @@
       <div class="card-white">
         <div>
           <h4 class="h4-white-card">ความเร็วเกิน 50km/hr</h4>
-          <h1 class="h1-white-card">3,231 (72.8%)</h1>
+          <h1 class="h1-white-card">{{ over50 | number}} ({{ over50percent | number:'1.0-2'}}%)</h1>
         </div>
 
       </div>
@@ -51,7 +51,7 @@
         <div class="card-body">
           <h5 class="card-title">สถิติในแต่ละชั่วโมง</h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            5 ลำดับจากสถิติยี่ห้อรถ ของภาพรวมทั้งหมด
+            สถิติยานพาหนะ ของภาพรวมทั้งหมด
           </h6>
           <div style="display: block; height:424px">
             <canvas baseChart [data]="barChartHourData" [options]="barChartHourOptions" [type]="barChartType">
@@ -66,10 +66,11 @@
         <div class="card-body">
           <h5 class="card-title">สถิติในแต่ละเดือน</h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            สถิตรถเข้าออกในแต่ละเดือน ของรถแต่ละประเภทรถ
+            สถิติยานพาหนะ ของรายเดือน
           </h6>
           <div style="display: block; height:250px">
-            <canvas #chartMonth baseChart [data]="barChartMonthData" [options]="barChartMonthOptions" [type]="barChartType">
+            <canvas #chartMonth baseChart [data]="barChartMonthData" [options]="barChartMonthOptions"
+              [type]="barChartType">
             </canvas>
           </div>
         </div>
@@ -80,7 +81,7 @@
         <div class="card-body">
           <h5 class="card-title">สถิติในแต่ละวัน</h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            5 ลำดับจากสถิติยี่ห้อรถ ของภาพรวมทั้งหมด
+            สถิติยานพาหนะ ของรายวัน
           </h6>
           <div style="display: block; height:250px">
             <canvas #chartDay baseChart [data]="barChartDayData" [options]="barChartDayOptions" [type]="barChartType">

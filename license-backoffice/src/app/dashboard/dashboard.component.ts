@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit {
   car = 0;
   moto = 0;
   speedavg = 0;
+  over50 = 0
+  over50percent = 0
   // Bar chart by Hour
   hourCar = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -243,9 +245,9 @@ export class DashboardComponent implements OnInit {
   public doughnutChartType: ChartType = 'doughnut';
   public barChartType: ChartType = 'bar';
 
-  constructor(private apiService: DashboardService) {}
+  constructor(private apiService: DashboardService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   ngAfterViewInit(): void {
     this.getAllLicense();
   }
@@ -261,12 +263,16 @@ export class DashboardComponent implements OnInit {
     });
   }
   setVehicle = (data: any) => {
+
     for (let license of data!) {
       let adate = new Date(license['aDate']);
       let h = adate.getHours();
       let w = adate.getDay();
       let m = adate.getMonth();
-      this.speedavg += parseInt(license['Speed']);
+      let speed = parseInt(license['Speed']);
+      this.speedavg += speed;
+      if (speed > 50)
+        this.over50++;
 
       if (license['Type'] == '7' || license['Type'] == '8') {
         this.moto++;
@@ -305,6 +311,8 @@ export class DashboardComponent implements OnInit {
       }
     }
     this.speedavg = this.speedavg / (this.car + this.moto);
+    this.over50percent = (this.over50 / (this.car + this.moto)) * 100;
+
     this.charts?.forEach((child) => {
       child.chart?.update();
     });
