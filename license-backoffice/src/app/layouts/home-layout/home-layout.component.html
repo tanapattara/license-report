@@ -7,7 +7,8 @@
       <span class="header-subtitle">{{ subtitle }}</span>
     </div>
   </div>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -54,7 +55,8 @@
           </li>
 
           <li class="nav-item" [ngClass]="{'bar-title': href.includes('/hour-heat') ||href.includes('/hour-bar') }">
-            <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#hour-collapse" aria-expanded="true" [routerLinkActive]="['is-active']">
+            <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#hour-collapse"
+              aria-expanded="true" [routerLinkActive]="['is-active']">
               <mat-icon svgIcon="hour"></mat-icon>
               รายชั่วโมง
             </a>
@@ -79,12 +81,14 @@
           </li>
 
           <li class="nav-item" [ngClass]="{'bar-title': href.includes('/month-heat') ||href.includes('/month-bar') }">
-            <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#month-collapse" aria-expanded="true" [routerLinkActive]="['is-active']">
+            <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#month-collapse"
+              aria-expanded="true" [routerLinkActive]="['is-active']">
               <mat-icon svgIcon="month"></mat-icon>
               รายเดือน
             </a>
             <div class="collapse" id="month-collapse">
               <ul class="toggle-nav list-unstyled">
+                <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/month-pie'">แผนภูมิวงกลม</a></li>
                 <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/month-heat'">แผนภูมิความร้อน</a></li>
                 <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/month-bar'">แผนภูมิแท่ง</a></li>
               </ul>

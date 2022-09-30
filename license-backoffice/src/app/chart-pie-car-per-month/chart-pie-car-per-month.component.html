@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 d-flex flex-row">
+            <div class="mr-auto p-2">
+                <div class="component-title">สถิติแยกตามรายเดือน</div>
+                <div class="component-subtitle">สถิติแยกรายเดือน ของภาพรวมทั้งหมด</div>
+            </div>
+            <div class="lic-spacer"></div>
+        </div>
+    </div>
+    <app-filter-time-speed [isSum]="true" [car]="car" [bike]="bike" (searchedDataEvent)="searchedDataEvent($event)"
+        (printDataEvent)="printDataEvent($event)"></app-filter-time-speed>
+
+    <div class="card">
+        <div class="chart-container" style="display: block; height:566px">
+            <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
+                [plugins]="pieChartPlugins">
+            </canvas>
+        </div>
+    </div>
+</div>
