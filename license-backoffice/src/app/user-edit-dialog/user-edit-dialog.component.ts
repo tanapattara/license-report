@@ -33,7 +33,6 @@ export class UserEditDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.angForm
   }
   onSubmit() {
     if (!this.angForm.get('email')?.valid ||

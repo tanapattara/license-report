@@ -30,6 +30,7 @@ import { ChartHeatmapHourComponent } from './chart-heatmap-hour/chart-heatmap-ho
 import { NgApexchartsModule } from "ng-apexcharts";
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pie-car-per-month.component';
+import { LicenseEditDialogComponent } from './license-edit-dialog/license-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pi
     ChartHeatmapHourComponent,
     ImageDialogComponent,
     ChartPieCarPerMonthComponent,
+    LicenseEditDialogComponent,
   ],
   imports: [
     BrowserModule,

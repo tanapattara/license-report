@@ -8,6 +8,7 @@ module.exports = function (app) {
     next();
   });
   app.get("/license", controller.getAllLicense);
+  app.put("/license", controller.updateLicense);
   app.get("/filter", filterController.getLicenseWithParams);
   app.get("/today", filterController.getToday);
 };

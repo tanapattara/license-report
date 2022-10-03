@@ -10,7 +10,7 @@ import { UserEditDialogComponent } from '../user-edit-dialog/user-edit-dialog.co
 export class ImageDialogComponent implements OnInit {
 
   imagePath: string = "";
-  constructor(public dialogRef: MatDialogRef<UserEditDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<ImageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string) {
     this.imagePath = data;
   }

@@ -1,0 +1,39 @@
+<div align="center">
+    <div class="component-title">แก้ไขข้อมูลรถ</div>
+    <div class="component-subtitle">กรุณากรอกข้อมูลด้านล่าง</div>
+</div>
+<form [formGroup]="angForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <mat-form-field class="col-12" appearance="outline">
+            <mat-label>ทะเบียน</mat-label>
+            <input matInput formControlName="licno" type="text" required />
+        </mat-form-field>
+        <mat-form-field class="col-12" appearance="outline">
+            <mat-label>จังหวัด</mat-label>
+            <mat-select #colorSelection [value]="" formControlName="province">
+                <mat-option *ngFor="let item of _province" [value]="item">{{
+                    item
+                    }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-12" appearance="outline">
+            <mat-label>สี</mat-label>
+            <mat-select #colorSelection [value]="" formControlName="color">
+                <mat-option *ngFor="let item of _color" [value]="item">{{
+                    item
+                    }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-12" appearance="outline">
+            <mat-label>ความเร็ว</mat-label>
+            <input matInput formControlName="speed" type="number" required />
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-flat-button mat-dialog-close>ยกเลิก</button>
+        <div class="flex-spacer"></div>
+        <button mat-flat-button cdkFocusInitial color="primary" type="submit">
+            <mat-icon>save</mat-icon> บันทึก
+        </button>
+    </div>
+</form>

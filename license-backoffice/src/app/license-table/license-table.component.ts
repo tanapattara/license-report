@@ -16,6 +16,8 @@ import html2canvas from 'html2canvas';
 import autoTable from 'jspdf-autotable';
 import 'jspdf-autotable';
 import { fontString } from '../services/font';
+import { LicenseEditDialogComponent } from '../license-edit-dialog/license-edit-dialog.component';
+import { FilterComponent } from '../filter/filter.component';
 
 @Component({
   selector: 'app-license-table',
@@ -42,6 +44,7 @@ export class LicenseTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(FilterComponent) childComponent!: FilterComponent;
 
   bike = 0;
   car = 0;
@@ -65,6 +68,10 @@ export class LicenseTableComponent implements OnInit {
       'upload',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Upload.svg')
     );
+    iconRegistry.addSvgIcon(
+      'pencil',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Pencil.svg')
+    );
   }
 
   filter: string = '';
@@ -84,7 +91,6 @@ export class LicenseTableComponent implements OnInit {
   }
 
   searchedDataEvent(event: any) {
-    console.log(event.length);
     this.dataSource = new MatTableDataSource(event);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -106,6 +112,21 @@ export class LicenseTableComponent implements OnInit {
       if (isBike) this.bike++;
       else this.car++;
     }
+  }
+  openEditDialog(element: License): void {
+    this.dialog
+      .open(LicenseEditDialogComponent, {
+        width: '348px',
+        data: {
+          license: element,
+          color: this.filterService.getColorData(),
+          province: this.filterService.getProvinceData()
+        }
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.childComponent.search()
+      });
   }
   openDialog(imgPath: string, type: number): void {
     //removedata

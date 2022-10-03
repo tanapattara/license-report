@@ -10,3 +10,21 @@ exports.getAllLicense = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+exports.updateLicense = async (req, res) => {
+  try {
+    const updatedRows = await License.update(
+      {
+        LicNo: req.body.LicNo,
+        Province: req.body.Province,
+        Speed: req.body.Speed,
+        Color: req.body.Color,
+        bDate: new Date(),
+      },
+      { where: { ID: req.body.ID } }
+    );
+
+    res.status(201).send({ message: `data update successful` });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};

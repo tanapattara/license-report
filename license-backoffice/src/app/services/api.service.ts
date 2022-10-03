@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Filter } from '../model/Filter';
@@ -12,9 +12,15 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   HOST_URL = API_URL;
-
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   getLicenses() {
     return this.http.get<any>(this.HOST_URL + "/license");
+  }
+
+  updateLicense(data: any): Observable<any> {
+    return this.http.put(API_URL + '/license', data, this.httpOptions);
   }
 
   getLicensesWithFilter(filter: Filter) {

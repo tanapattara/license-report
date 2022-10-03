@@ -101,7 +101,7 @@ export class FilterComponent implements OnInit {
   constructor(
     private api: ApiService,
     private filterService: FilterlicenseService
-  ) {}
+  ) { }
 
   _filter: string = '';
 
@@ -119,6 +119,7 @@ export class FilterComponent implements OnInit {
     this.api.getColor().subscribe({
       next: (res) => {
         for (var item of res) this.color.push(item['color']);
+        this.filterService.setColorData(this.color);
         this.licenseFilter.push({
           name: 'Color',
           options: this.color,
@@ -132,6 +133,7 @@ export class FilterComponent implements OnInit {
     this.api.getLocation().subscribe({
       next: (res) => {
         for (var item of res) this.location.push(item['location']);
+        this.filterService.setLocationData(this.location);
         this.licenseFilter.push({
           name: 'Location',
           options: this.location,
@@ -145,6 +147,7 @@ export class FilterComponent implements OnInit {
     this.api.getProvince().subscribe({
       next: (res) => {
         for (var item of res) this.province.push(item['province']);
+        this.filterService.setProvinceData(this.province);
         this.licenseFilter.push({
           name: 'Province',
           options: this.province,
