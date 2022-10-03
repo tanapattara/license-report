@@ -18,6 +18,7 @@ import 'jspdf-autotable';
 import { fontString } from '../services/font';
 import { LicenseEditDialogComponent } from '../license-edit-dialog/license-edit-dialog.component';
 import { FilterComponent } from '../filter/filter.component';
+import { ExcelService } from '../services/excel.service';
 
 @Component({
   selector: 'app-license-table',
@@ -53,8 +54,9 @@ export class LicenseTableComponent implements OnInit {
     private filterService: FilterlicenseService,
     private storageService: StorageService,
     public dialog: MatDialog,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
+    private excelService: ExcelService
   ) {
     iconRegistry.addSvgIcon(
       'car',
@@ -97,7 +99,8 @@ export class LicenseTableComponent implements OnInit {
     this.summarise();
   }
   printDataEvent(event: any) {
-    this.print();
+    //this.printPDF();
+    this.printExcel();
   }
 
   getType(type: string) {
@@ -145,7 +148,11 @@ export class LicenseTableComponent implements OnInit {
       .afterClosed()
       .subscribe(() => { });
   }
-  print() {
+  printExcel() {
+    let datas = this.dataSource.data;
+    this.excelService.exportAsExcelFile(datas);
+  }
+  printPDF() {
     let datas = this.dataSource.data;
     let row: any[][] = [];
 

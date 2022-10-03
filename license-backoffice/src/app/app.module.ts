@@ -32,6 +32,8 @@ import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pie-car-per-month.component';
 import { LicenseEditDialogComponent } from './license-edit-dialog/license-edit-dialog.component';
 
+import { ExcelDataType } from 'xlsx';
+
 @NgModule({
   declarations: [
     AppComponent,
