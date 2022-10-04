@@ -19,3 +19,10 @@ table {
   filter: invert(78%) sepia(46%) saturate(5143%) hue-rotate(47deg)
     brightness(99%) contrast(101%);
 }
+.disablespeed {
+  filter: brightness(0) saturate(100%) invert(71%) sepia(4%) saturate(14%)
+    hue-rotate(314deg) brightness(94%) contrast(93%);
+}
+.upload-icon {
+  padding-bottom: 2px;
+}

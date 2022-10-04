@@ -16,6 +16,7 @@ import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component
 import { ChartHeatmapMonthComponent } from './chart-heatmap-month/chart-heatmap-month.component';
 import { ChartHeatmapHourComponent } from './chart-heatmap-hour/chart-heatmap-hour.component';
 import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pie-car-per-month.component';
+import { LicenseWarningLetterComponent } from './license-warning-letter/license-warning-letter.component';
 
 const routes: Routes = [
   { path: 'signin', component: LoginLayoutComponent, children: [{ path: '', component: SigninComponent }] },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'month-heat', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartHeatmapMonthComponent },] },
   { path: 'month-bar', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerMonthComponent },] },
   { path: 'month-pie', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartPieCarPerMonthComponent },] },
+  { path: 'warningletter', component: LicenseWarningLetterComponent, canActivate: [AuthGuard] },
 
   { path: 'users', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: UsersComponent },] },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

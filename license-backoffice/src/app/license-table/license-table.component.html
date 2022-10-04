@@ -99,8 +99,10 @@
             <button mat-icon-button (click)="openDialog(element.Path2, 2)">
               <mat-icon [ngClass]="element.Speed > 50 ? 'overspeed' : 'underspeed'" svgIcon="license"></mat-icon>
             </button>
-            <button mat-icon-button (click)="exportWarning(element)">
-              <mat-icon [ngClass]="element.Speed > 50 ? 'overspeed' : 'underspeed'" svgIcon="upload"></mat-icon>
+            <button mat-icon-button (click)="exportWarning(element)" [disabled]="element.Speed <= 50">
+              <mat-icon [ngClass]="element.Speed > 50 ? 'overspeed upload-icon' : 'disablespeed upload-icon'"
+                svgIcon="upload">
+              </mat-icon>
               <!-- <mat-icon svgIcon="upload-file"></mat-icon> -->
             </button>
           </td>

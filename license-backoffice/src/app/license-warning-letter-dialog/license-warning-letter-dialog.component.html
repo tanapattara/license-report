@@ -1,0 +1,74 @@
+<mat-dialog-content>
+    <div class="container" id="lettercontent">
+        <div class="row">
+            <div class="col">
+                <div class="text-center" id="header">
+                    <img id="logo" src="assets/img/letterlogo.jpg" style="height: 128px;">
+                    <h6>ใบแจ้งขอความร่วมมือเพื่อรณรงค์การใช้ความเร็วไม่เกิน 50
+                        กิโลเมตรต่อชั่วโมงภายในสถานศึกษา <br>
+                        มหาวิทยาลัยขอนแก่น</h6>
+                </div>
+                <div>
+                    <p>สถานที่ออกใบแจ้งฯ : กองป้องกันและรักษาความปลอดภัยมหาวิทยาลัยขอนแก่น<br>
+                        Issuing Place :<br>
+                        เลขที่: 123456/6543211 รหัส: 12345
+                    </p>
+                </div>
+                <hr>
+                <div>
+                    <p>ข้อมูลรถ (Vehicle In formation)<br>
+                        หมายเลขทะเบียนรถ: {{licenseData.LicNo}} จังหวัด: {{licenseData.Province }}<br>
+                        สี: {{licenseData.Color}} ประเภท: {{cartype}}
+                    </p>
+                </div>
+                <hr>
+                <p>
+                    ชื่อผู้ครอบครอง<br>
+                    (Driver’s name, Owen or possessor)<br>
+                    เลขประจำตัวประชาชน: ................................................<br>
+                    Email: ..........................................................................
+                </p>
+                <hr>
+                <p>เหตุการณ์(Event) : <span id="eventtext">ขับรถเกินกว่าความเร็วที่กำหนด ที่ 50 กิโลเมตร
+                        ต่อชั่วโมง</span><br>
+                    วันที่เกิดเหตุ : {{strDate}} เวลา : {{licenseData.aDate |
+                    date:'HH:mm:ss'}} น.<br>
+                    (Date of incident)<br>
+                    สถานที่ : {{licenseData.Location }}<br>
+                    Place of incident<br>
+                </p>
+                <hr>
+                <p class="text-center"><b>คำชี้แจง (Explanation)</b></p>
+                <p>
+                    จึงขอความร่วมมือเพื่อรณรงค์การใช้ความเร็วไม่เกิน 50 กิโลเมตรต่อชั่วโมง
+                    และเพื่อความปลอดภัยในการขับขี่ต่อตนเองและเพื่อนร่วมทางภายในสถานศึกษา มหาวิทยาลัยขอนแก่น<br>
+                    : ติดต่อทางโทรศัพท์หมายเลข 043202191<br>
+                    กองป้องกันและรักษาความปลอดภัย มหาวิทยาลัยขอนแก่น
+                </p>
+            </div>
+            <div class="col" id="rightcolum">
+                <h6><b>ภาพประกอบพยานหลักฐาน (Evidence)</b>
+                </h6>
+                <img [src]="image1" class="img-fluid" style="width: 100%;">
+                <img [src]="image2" class="img-fluid" style="width: 100%; margin-bottom: 1rem;">
+                <p>ความเร็ว (Your Speed)</p>
+                <div class="text-center">
+                    <p> ความเร็วที่ใช้ตามวัน เวลา สถานที่ดังกล่าว คือ</p>
+                    <p>Your Speed : <span id="eventtext"> {{licenseData.Speed}} </span> km/hr
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" style="padding-top: 1rem;"><small>มหาวิทยาลัยขอนแก่น 123 หมู่ 16 ถ.มิตรภาพ ต.ในเมือง
+                อ.เมือง จ.ขอนแก่น 40002<br>
+                โทรศัพท์ 043-009700, 043-002539 โทรสาร 043-202216 Email: info@kku.ac.th</small>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>ยกเลิก</button>
+    <div class="flex-spacer"></div>
+    <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="savePDF()">
+        <mat-icon>save</mat-icon> บันทึก
+    </button>
+</mat-dialog-actions>

@@ -33,6 +33,8 @@ import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pi
 import { LicenseEditDialogComponent } from './license-edit-dialog/license-edit-dialog.component';
 
 import { ExcelDataType } from 'xlsx';
+import { LicenseWarningLetterComponent } from './license-warning-letter/license-warning-letter.component';
+import { LicenseWarningLetterDialogComponent } from './license-warning-letter-dialog/license-warning-letter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { ExcelDataType } from 'xlsx';
     ImageDialogComponent,
     ChartPieCarPerMonthComponent,
     LicenseEditDialogComponent,
+    LicenseWarningLetterComponent,
+    LicenseWarningLetterDialogComponent,
   ],
   imports: [
     BrowserModule,

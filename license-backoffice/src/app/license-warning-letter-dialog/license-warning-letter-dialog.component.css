@@ -1,0 +1,28 @@
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+.container {
+  background-color: white;
+  max-width: 870px;
+  padding: 2rem;
+}
+#logo {
+  padding-bottom: 1rem;
+}
+#eventtext {
+  color: red;
+}
+#rightcolum {
+  border-left: 2px solid black !important;
+}
+hr {
+  height: 2px;
+  background: black;
+}
+#header {
+  padding-bottom: 2rem;
+}

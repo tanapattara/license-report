@@ -19,6 +19,7 @@ import { fontString } from '../services/font';
 import { LicenseEditDialogComponent } from '../license-edit-dialog/license-edit-dialog.component';
 import { FilterComponent } from '../filter/filter.component';
 import { ExcelService } from '../services/excel.service';
+import { LicenseWarningLetterDialogComponent } from '../license-warning-letter-dialog/license-warning-letter-dialog.component';
 
 @Component({
   selector: 'app-license-table',
@@ -131,6 +132,18 @@ export class LicenseTableComponent implements OnInit {
         this.childComponent.search()
       });
   }
+  exportWarning(element: License) {
+    //window.open('/warningletter', '_blank');
+    if (element.Speed > 50) {
+      this.dialog
+        .open(LicenseWarningLetterDialogComponent, {
+          width: '890px',
+          data: element,
+        })
+        .afterClosed()
+        .subscribe(() => { });
+    }
+  }
   openDialog(imgPath: string, type: number): void {
     //removedata
     //C:\DFLicense\Photos\ขม7298_Type1_Num1_650901040036.jpg
@@ -148,6 +161,7 @@ export class LicenseTableComponent implements OnInit {
       .afterClosed()
       .subscribe(() => { });
   }
+
   printExcel() {
     let datas = this.dataSource.data;
     this.excelService.exportAsExcelFile(datas);
@@ -203,7 +217,5 @@ export class LicenseTableComponent implements OnInit {
 
     doc.save('license report.pdf');
   }
-  exportWarning(element: License) {
-    console.log(element);
-  }
+
 }
