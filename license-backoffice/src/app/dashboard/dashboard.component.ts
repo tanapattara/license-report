@@ -27,7 +27,11 @@ export class DashboardComponent implements OnInit {
   moto = 0;
   speedavg = 0;
   over50 = 0
-  over50percent = 0
+  over50bike = 0;
+  over50car = 0;
+  over50percent = 0;
+  over50percent_car = 0;
+  over50percent_bike = 0;
   // Bar chart by Hour
   hourCar = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -271,8 +275,14 @@ export class DashboardComponent implements OnInit {
       let m = adate.getMonth();
       let speed = parseInt(license['Speed']);
       this.speedavg += speed;
-      if (speed > 50)
+      if (speed > 50) {
         this.over50++;
+        if (license['Type'] == '7' || license['Type'] == '8') {
+          this.over50bike++;
+        } else {
+          this.over50car++;
+        }
+      }
 
       if (license['Type'] == '7' || license['Type'] == '8') {
         this.moto++;
@@ -312,6 +322,8 @@ export class DashboardComponent implements OnInit {
     }
     this.speedavg = this.speedavg / (this.car + this.moto);
     this.over50percent = (this.over50 / (this.car + this.moto)) * 100;
+    this.over50percent_bike = this.over50bike / this.over50 * 100;
+    this.over50percent_car = this.over50car / this.over50 * 100;
 
     this.charts?.forEach((child) => {
       child.chart?.update();

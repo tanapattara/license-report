@@ -33,15 +33,36 @@
       <div class="card-red">
         <div>
           <h4 class="h4-red-card">ความเร็วเฉลี่ย</h4>
-          <h1 class="h1-red-card">{{ speedavg | number : '1.0-2' }} <small style="font-size: 26px;">km/hr</small></h1>
+          <h1 class="h1-red-card">{{ speedavg | number : '1.0-2' }} <h4 style="font-size: 26px;">km/hr</h4>
+          </h1>
         </div>
       </div>
     </div>
     <div class="col-md-12 col-lg-6 col-xl-4">
-      <div class="card-white">
-        <div>
-          <h4 class="h4-white-card">ความเร็วเกิน 50km/hr</h4>
-          <h1 class="h1-white-card">{{ over50 | number}} ({{ over50percent | number:'1.0-2'}}%)</h1>
+      <div class="card-white-speed">
+        <div class="row">
+          <div class="col-7">
+            <h4 class="h4-white-card">ความเร็วเกิน 50</h4>
+            <h1 class="h1-white-card">{{ over50 | number}} <h4 style="font-size: 26px;">({{ over50percent |
+                number:'1.0-2'}}%)</h4>
+            </h1>
+          </div>
+          <div class="col-5" style="">
+            <div class="card-white-speed-small">
+              <div class="card-body">
+                <h6 class="card-title" style="color: #eb5a47 !important;">รถยนต์</h6>
+                <p class="card-text">{{ over50car | number: '1.0-0'}} ({{ over50percent_car |
+                  number: '1.0-0'}}%)</p>
+              </div>
+            </div>
+            <div class="card-white-speed-small">
+              <div class="card-body">
+                <h6 class="card-title" style="color: #eb5a47 !important;">จักรยานยนต์</h6>
+                <p class="card-text">{{ over50bike | number: '1.0-0'}} ({{ over50percent_bike |
+                  number: '1.0-0'}}%)</p>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
