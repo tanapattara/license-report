@@ -34,7 +34,7 @@ export class UserNewDialogComponent implements OnInit {
 
     this.service.createNewUser(this.angForm.value).subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.dialogRef.close();
       },
       error: (err) => { console.log(err); }

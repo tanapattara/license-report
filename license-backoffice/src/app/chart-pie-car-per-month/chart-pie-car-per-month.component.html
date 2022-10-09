@@ -8,8 +8,10 @@
             <div class="lic-spacer"></div>
         </div>
     </div>
-    <app-filter-time-speed [isSum]="true" [car]="car" [bike]="bike" (searchedDataEvent)="searchedDataEvent($event)"
-        (printDataEvent)="printDataEvent($event)"></app-filter-time-speed>
+    <app-filter-time-speed [isSum]="true" [car]="car" [bike]="bike" [o50]="o50" [o50car]="o50car"
+        [o50car_per]="o50car_per" [o50bike]="o50bike" [o50bike_per]="o50bike_per"
+        (searchedDataEvent)="searchedDataEvent($event)" (printDataEvent)="printDataEvent($event)">
+    </app-filter-time-speed>
 
     <div class="card">
         <div class="chart-container" style="display: block; height:566px">

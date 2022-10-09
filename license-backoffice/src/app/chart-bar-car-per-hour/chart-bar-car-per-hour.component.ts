@@ -120,8 +120,13 @@ export class ChartBarCarPerHourComponent implements OnInit {
 
   speedInputA = '';
   speedInputB = '';
-  car = 0;
   bike = 0;
+  car = 0;
+  o50bike = 0;
+  o50car = 0;
+  o50 = 0;
+  o50bike_per = 0;
+  o50car_per = 0;
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
@@ -464,7 +469,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   displayData() {
     this.clearDic();
     this.barChartData.datasets[0].data = [];
@@ -656,9 +661,13 @@ export class ChartBarCarPerHourComponent implements OnInit {
         if (isBike) {
           this.chartDictionaryBike.set(hour, value);
           this.bike++;
+          if (row.Speed > 50)
+            this.o50bike++;
         } else {
           this.chartDictionaryCar.set(hour, value);
           this.car++;
+          if (row.Speed > 50)
+            this.o50car++;
         }
 
         this.chartOptions.series = [
@@ -699,6 +708,9 @@ export class ChartBarCarPerHourComponent implements OnInit {
         ];
       }
     }
+    this.o50 = this.o50bike + this.o50car;
+    this.o50bike_per = this.o50bike / this.o50 * 100;
+    this.o50car_per = this.o50car / this.o50 * 100;
     for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);
@@ -721,8 +733,13 @@ export class ChartBarCarPerHourComponent implements OnInit {
   }
 
   clearDic() {
-    this.car = 0;
     this.bike = 0;
+    this.car = 0;
+    this.o50bike = 0;
+    this.o50car = 0;
+    this.o50 = 0;
+    this.o50bike_per = 0;
+    this.o50car_per = 0;
     this.chartDictionaryCar.set('00', 0);
     this.chartDictionaryCar.set('01', 0);
     this.chartDictionaryCar.set('02', 0);
@@ -950,7 +967,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
     filter.endDate = this.range.value.end as Date;
     filter.minSpeed = parseInt(this.speedInputA.valueOf());
     filter.maxSpeed = parseInt(this.speedInputB.valueOf());
-    console.log(filter);
+    // console.log(filter);
     this.api.getLicensesWithFilter(filter).subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);

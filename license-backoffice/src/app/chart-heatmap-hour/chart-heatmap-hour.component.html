@@ -54,24 +54,45 @@
     </mat-form-field>
   </div>
   <div class="row" style=" margin-bottom: 1rem;">
-    <div class="col-sm-6 col-lg-2">
-      <div class=" car-sum"> <span>รถยนต์ {{ car | number }} คัน</span></div>
+    <div class="col-lg-8 col-md-12" style="margin-bottom: 8px;">
+      <div class="row">
+        <div class="col-3" style="margin-bottom: 8px;">
+          <div class=" car-sum"> <span>รถยนต์ {{ car | number }} คัน</span></div>
+        </div>
+        <div class="col-3">
+          <div class=" car-sum"> <span>จักรยานยนต์ {{ bike | number }} คัน</span></div>
+        </div>
+        <div class="col-3">
+          <div class=" car-sum"> <span>รวม {{ car+bike | number }} คัน</span></div>
+        </div>
+        <div class="col-6">
+          <div class=" car-sum"> <span>ขับความเร็วเกิน 50 km/hr ทั้งหมด {{ o50 | number }} คัน</span></div>
+        </div>
+        <div class="col-3">
+          <div class=" car-sum"> <span>รถยนต์ {{ o50car | number }} ({{ o50car_per | number:'1.0-0' }}%)</span></div>
+        </div>
+        <div class="col-3">
+          <div class=" car-sum"> <span>จักรยานยนต์ {{ o50bike | number }} ({{ o50bike_per | number:'1.0-0' }}%)</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-6 col-lg-2">
-      <div class=" car-sum"> <span>จักรยานยนต์ {{ bike | number }} คัน</span></div>
-
-    </div>
-    <div class="col-md-8 d-flex align-items-center justify-content-end hidden-print" style="padding-bottom: 22px;">
-      <button mat-flat-button color="primary" (click)="search()" style="margin-right: 5px;width: 120px!important;min-width: unset!important;">
-        ค้นหา
-      </button>
-      <button mat-flat-button color="accent" (click)="clearFilter()" style="margin-right: 5px;width: 120px!important;min-width: unset!important;">
-        ล้างการค้นหา
-      </button>
-      <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png">
+    <div class="col-lg-4 col-md-12">
+      <div class="hidden-print d-flex align-items-center justify-content-end" style="padding-bottom: 22px;">
+        <button mat-flat-button color="primary" (click)="search()"
+          style="margin-right: 5px;width: 120px!important;min-width: unset!important;">
+          ค้นหา
+        </button>
+        <button mat-flat-button color="accent" (click)="clearFilter()"
+          style="margin-right: 5px;width: 120px!important;min-width: unset!important;">
+          ล้างการค้นหา
+        </button>
+        <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png">
+      </div>
     </div>
   </div>
-  <apx-chart class="apx-chart-s" [series]="chartOptions.series!" [chart]="chartOptions.chart!" [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
+  <apx-chart class="apx-chart-s" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+    [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [colors]="chartOptions.colors">
   </apx-chart>
   <div style=" text-align: right; padding-bottom: 35px;"><img src="/assets/img/heat-icon-bar.png" /></div>
 </div>

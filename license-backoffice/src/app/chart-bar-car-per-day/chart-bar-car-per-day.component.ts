@@ -101,8 +101,13 @@ export class ChartBarCarPerDayComponent implements OnInit {
     '23:30',
   ];
 
-  car: number = 0;
-  bike: number = 0;
+  bike = 0;
+  car = 0;
+  o50bike = 0;
+  o50car = 0;
+  o50 = 0;
+  o50bike_per = 0;
+  o50car_per = 0;
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
@@ -222,7 +227,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   displayData() {
     this.clearDic();
@@ -243,12 +248,19 @@ export class ChartBarCarPerDayComponent implements OnInit {
         if (isBike) {
           this.chartDictionaryBike.set(date, value);
           this.bike++;
+          if (row.Speed > 50)
+            this.o50bike++;
         } else {
           this.chartDictionaryCar.set(date, value);
           this.car++;
+          if (row.Speed > 50)
+            this.o50car++;
         }
       }
     }
+    this.o50 = this.o50bike + this.o50car;
+    this.o50bike_per = this.o50bike / this.o50 * 100;
+    this.o50car_per = this.o50car / this.o50 * 100;
     for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);
@@ -264,6 +276,11 @@ export class ChartBarCarPerDayComponent implements OnInit {
   clearDic() {
     this.bike = 0;
     this.car = 0;
+    this.o50bike = 0;
+    this.o50car = 0;
+    this.o50 = 0;
+    this.o50bike_per = 0;
+    this.o50car_per = 0;
     this.chartDictionaryCar.set(1, 0);
     this.chartDictionaryCar.set(2, 0);
     this.chartDictionaryCar.set(3, 0);
@@ -328,7 +345,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
     this.chartDictionaryBike.set(30, 0);
     this.chartDictionaryBike.set(31, 0);
   }
-  applyFilter(ob: MatSelectChange) {}
+  applyFilter(ob: MatSelectChange) { }
   clearFilter() {
     this.monthSelection.options.first.select();
     this.startTimeSelection.options.first.select();
@@ -477,7 +494,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
     }
     return new Date(strDate);
   }
-  onChangeEvent(event: any, filtername: string) {}
+  onChangeEvent(event: any, filtername: string) { }
   public chartClicked({
     event,
     active,

@@ -93,6 +93,11 @@ export class ChartBarCarSpeedComponent implements OnInit {
 
   bike = 0;
   car = 0;
+  o50bike = 0;
+  o50car = 0;
+  o50 = 0;
+  o50bike_per = 0;
+  o50car_per = 0;
   public barChartHourOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
@@ -222,10 +227,15 @@ export class ChartBarCarSpeedComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   clearDic() {
-    this.car = 0;
     this.bike = 0;
+    this.car = 0;
+    this.o50bike = 0;
+    this.o50car = 0;
+    this.o50 = 0;
+    this.o50bike_per = 0;
+    this.o50car_per = 0;
     this.chartDictionaryCar.set(0, 0);
     this.chartDictionaryCar.set(10, 0);
     this.chartDictionaryCar.set(20, 0);
@@ -342,11 +352,19 @@ export class ChartBarCarSpeedComponent implements OnInit {
       if (isBike) {
         this.chartDictionaryBike.set(k, value);
         this.bike++;
+        if (speed > 50)
+          this.o50bike++;
       } else {
         this.chartDictionaryCar.set(k, value);
         this.car++;
+        if (speed > 50)
+          this.o50car++;
       }
     }
+
+    this.o50 = this.o50bike + this.o50car;
+    this.o50bike_per = this.o50bike / this.o50 * 100;
+    this.o50car_per = this.o50car / this.o50 * 100;
     for (let [key, value] of this.chartDictionaryCar) {
       let ktext = key.toString();
       if (key == 130) ktext = '130+';

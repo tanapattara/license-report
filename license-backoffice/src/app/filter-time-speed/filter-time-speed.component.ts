@@ -25,6 +25,11 @@ export class FilterTimeSpeedComponent implements OnInit {
 
   @Input() car: number = 0;
   @Input() bike: number = 0;
+  @Input() o50: number = 0;
+  @Input() o50car: number = 0;
+  @Input() o50car_per: number = 0;
+  @Input() o50bike: number = 0;
+  @Input() o50bike_per: number = 0;
   @Input() isSum = false;
   @Output() printDataEvent: EventEmitter<any> = new EventEmitter(true);
   datepickerInput1 = '';
@@ -93,12 +98,12 @@ export class FilterTimeSpeedComponent implements OnInit {
   constructor(
     private api: ApiService,
     private filterService: FilterlicenseService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  DatePickervalueChanged() {}
-  onChangeEvent(event: any, filtername: string) {}
+  DatePickervalueChanged() { }
+  onChangeEvent(event: any, filtername: string) { }
 
   search() {
     let filter = {} as Filter;

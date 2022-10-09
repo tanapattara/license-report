@@ -171,7 +171,7 @@ export class FilterComponent implements OnInit {
     filter.maxSpeed = parseInt(this.speedInputB.valueOf());
     filter.startHour = this.startTimeSelection.value;
     filter.endHour = this.endTimeSelection.value;
-    console.log(filter);
+    // console.log(filter);
     this.api.getLicensesWithFilter(filter).subscribe({
       next: (res) => {
         this.searchedDataEvent.emit(res);
