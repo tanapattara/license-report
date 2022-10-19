@@ -88,7 +88,7 @@ export class HomeLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.href = this.router.url;
     this.roles = this.storageService.getUser().roles;
-    this.isAdmin = this.roles == 'admin';
+    this.isAdmin = this.roles == 'ROLE_ADMIN';
   }
 
   logout(): void {
