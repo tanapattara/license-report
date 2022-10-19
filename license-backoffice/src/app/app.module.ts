@@ -35,6 +35,7 @@ import { LicenseEditDialogComponent } from './license-edit-dialog/license-edit-d
 import { ExcelDataType } from 'xlsx';
 import { LicenseWarningLetterComponent } from './license-warning-letter/license-warning-letter.component';
 import { LicenseWarningLetterDialogComponent } from './license-warning-letter-dialog/license-warning-letter-dialog.component';
+import { SigninErrorDialogComponent } from './signin-error-dialog/signin-error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { LicenseWarningLetterDialogComponent } from './license-warning-letter-di
     LicenseEditDialogComponent,
     LicenseWarningLetterComponent,
     LicenseWarningLetterDialogComponent,
+    SigninErrorDialogComponent,
   ],
   imports: [
     BrowserModule,

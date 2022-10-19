@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { SigninErrorDialogComponent } from '../signin-error-dialog/signin-error-dialog.component';
 
 @Component({
   selector: 'app-signin',
@@ -23,13 +25,14 @@ export class SigninComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // if (this.storageService.isLoggedIn()) {
-    //   this.isLoggedIn = true;
-    //   this.roles = this.storageService.getUser().roles;
-    // }
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.roles = this.storageService.getUser().roles;
+    }
   }
   onSubmit(): void {
     const username = this.signinForm.value['username'];
@@ -46,6 +49,7 @@ export class SigninComponent implements OnInit {
       error: err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
+        this.openDialog();
         console.log(this.isLoggedIn);
       }
     });
@@ -53,4 +57,12 @@ export class SigninComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
+  openDialog() {
+    this.dialog.open(SigninErrorDialogComponent, {
+      width: '348px',
+      data: this.errorMessage,
+    });
+  }
 }
+
+
