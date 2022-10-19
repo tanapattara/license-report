@@ -17,9 +17,9 @@ export class HomeLayoutComponent implements OnInit {
   title = 'มหาวิทยาลัยขอนแก่น';
   subtitle = 'Khon Kaen University';
 
-  private roles: string[] = [];
+  private roles: string = 'user';
   isLoggedIn = false;
-  showAdminBoard = false;
+  public isAdmin = true;
   showModeratorBoard = false;
   username?: string;
   public href: string = '';
@@ -87,17 +87,21 @@ export class HomeLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.href = this.router.url;
+    this.roles = this.storageService.getUser().roles;
+    this.isAdmin = this.roles == 'admin';
+    console.log(this.isAdmin);
   }
 
   logout(): void {
     this.authService.logout().subscribe({
       next: (res) => {
         this.storageService.clean();
+        window.location.href = '/signin';
       },
       error: (err) => {
         console.log(err);
       },
     });
-    window.location.href = '/';
+    window.location.href = '/signin';
   }
 }

@@ -25,6 +25,12 @@ export class ChartPieCarColorComponent implements OnInit {
 
   bike = 0;
   car = 0;
+
+  o50bike = 0;
+  o50car = 0;
+  o50 = 0;
+  o50bike_per = 0;
+  o50car_per = 0;
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -105,6 +111,11 @@ export class ChartPieCarColorComponent implements OnInit {
   displayData() {
     this.bike = 0;
     this.car = 0;
+    this.o50bike = 0;
+    this.o50car = 0;
+    this.o50 = 0;
+    this.o50bike_per = 0;
+    this.o50car_per = 0;
     this.chartDictionary.clear();
     this.pieChartData.datasets = [];
     this.pieChartData.labels = [];
@@ -113,8 +124,14 @@ export class ChartPieCarColorComponent implements OnInit {
       let isBike: boolean = row.Type == '7' || row.Type == '8';
       if (isBike) {
         this.bike++;
+        if (row.Speed > 50)
+          this.o50bike++;
+        
       } else {
         this.car++;
+        if (row.Speed > 50)
+          this.o50car++;
+        
       }
 
       let car_color = row.Color;
@@ -146,6 +163,9 @@ export class ChartPieCarColorComponent implements OnInit {
     }
     let datavalue: number[] = [];
     let datacolor: string[] = [];
+    this.o50 = this.o50bike + this.o50car;
+    this.o50bike_per = this.o50bike / this.o50 * 100;
+    this.o50car_per = this.o50car / this.o50 * 100;
     for (let [key, value] of this.chartDictionary) {
       this.pieChartData.labels!.push(key);
       //this.pieChartData.datasets[0].data.push(value);

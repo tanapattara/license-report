@@ -47,6 +47,11 @@ export class ChartHeatmapMonthComponent implements OnInit {
   bike = 0;
   car = 0;
 
+  o50bike = 0;
+  o50car = 0;
+  o50 = 0;
+  o50bike_per = 0;
+  o50car_per = 0;
   constructor(
     private api: ApiService,
     private filterService: FilterlicenseService,
@@ -175,8 +180,12 @@ export class ChartHeatmapMonthComponent implements OnInit {
         let isBike: boolean = row.Type == '7' || row.Type == '8';
         if (isBike) {
           this.bike++;
+          if (row.Speed > 50)
+            this.o50bike++;
         } else {
           this.car++;
+          if (row.Speed > 50)
+            this.o50car++;
         }
         let month = '';
         let value = 0;
@@ -244,7 +253,9 @@ export class ChartHeatmapMonthComponent implements OnInit {
         }
       }
     }
-
+    this.o50 = this.o50bike + this.o50car;
+    this.o50bike_per = this.o50bike / this.o50 * 100;
+    this.o50car_per = this.o50car / this.o50 * 100;
     this.chartOptions.series = [
       { name: 'มกราคม', data: this.generateData('มกราคม') },
       { name: 'กุมภาพันธ์', data: this.generateData('กุมภาพันธ์') },
@@ -269,6 +280,12 @@ export class ChartHeatmapMonthComponent implements OnInit {
   clearDic() {
     this.car = 0;
     this.bike = 0;
+    
+    this.o50bike = 0;
+    this.o50car = 0;
+    this.o50 = 0;
+    this.o50bike_per = 0;
+    this.o50car_per = 0;
     this.chartDictionary.set(
       'มกราคม',
       [

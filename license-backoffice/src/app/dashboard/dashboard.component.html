@@ -6,7 +6,7 @@
     <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-red">
         <div>
-          <h4 class="h4-red-card">ทั้งหมด</h4>
+          <h4 class="h4-red-card">ทั้งหมด (คัน)</h4>
           <h1 class="h1-red-card">{{ car + moto | number }}</h1>
         </div>
       </div>
@@ -14,7 +14,7 @@
     <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-white">
         <div>
-          <h4 class="h4-white-card">รถยนต์</h4>
+          <h4 class="h4-white-card">รถยนต์ (คัน)</h4>
           <h1 class="h1-white-card">{{ car | number }}</h1>
         </div>
       </div>
@@ -23,7 +23,7 @@
     <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-white">
         <div>
-          <h4 class="h4-white-card">จักรยานยนต์</h4>
+          <h4 class="h4-white-card">จักรยานยนต์ (คัน)</h4>
           <h1 class="h1-white-card">{{ moto | number }}</h1>
         </div>
 
@@ -41,23 +41,23 @@
     <div class="col-md-12 col-lg-6 col-xl-4">
       <div class="card-white-speed">
         <div class="row">
-          <div class="col-7">
-            <h4 class="h4-white-card">ความเร็วเกิน 50</h4>
+          <div class="col-6">
+            <h6 class="h4-white-card">ความเร็วเกิน 50 km/hr</h6>
             <h1 class="h1-white-card">{{ over50 | number}} <h4 style="font-size: 26px;">({{ over50percent |
                 number:'1.0-2'}}%)</h4>
             </h1>
           </div>
-          <div class="col-5" style="">
+          <div class="col-6" style="">
             <div class="card-white-speed-small">
               <div class="card-body">
-                <h6 class="card-title" style="color: #eb5a47 !important;">รถยนต์</h6>
+                <h6 class="card-title" style="color: #eb5a47 !important;">รถยนต์ (คัน)</h6>
                 <p class="card-text">{{ over50car | number: '1.0-0'}} ({{ over50percent_car |
                   number: '1.0-0'}}%)</p>
               </div>
             </div>
             <div class="card-white-speed-small">
               <div class="card-body">
-                <h6 class="card-title" style="color: #eb5a47 !important;">จักรยานยนต์</h6>
+                <h6 class="card-title" style="color: #eb5a47 !important;">จักรยานยนต์ (คัน)</h6>
                 <p class="card-text">{{ over50bike | number: '1.0-0'}} ({{ over50percent_bike |
                   number: '1.0-0'}}%)</p>
               </div>
