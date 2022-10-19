@@ -8,10 +8,10 @@ export class AuthGuardService implements CanActivate {
 
   constructor(public router: Router, public storageservice: StorageService) { }
   canActivate(): boolean {
-    // if (!this.storageservice.isLoggedIn()) {
-    //   this.router.navigate(['signin']);
-    //   return false;
-    // }
+    if (!this.storageservice.isLoggedIn()) {
+      this.router.navigate(['signin']);
+      return false;
+    }
     return true;
   }
 }

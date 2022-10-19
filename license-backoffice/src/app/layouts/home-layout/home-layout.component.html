@@ -94,7 +94,7 @@
               </ul>
             </div>
           </li>
-          <div ng-if="isAdmin">
+          <div *ngIf="isAdmin">
             <div class="sidebar-divider-space">ตั้งค่า</div>
             <li class="nav-item" [ngClass]="{'bar-title': href.includes('/users')}">
               <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/users'">
@@ -103,6 +103,7 @@
               </a>
             </li>
           </div>
+          <div class="lic-spacer"></div>
         </ul>
         <ul class="list-unstyled ps-0">
           <li class="nav-item ">
