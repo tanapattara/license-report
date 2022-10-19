@@ -15,6 +15,8 @@ import { FilterlicenseService } from '../services/filterlicense.service';
 import { MatOption } from '@angular/material/core';
 import { Filter } from '../model/Filter';
 import { License } from '../model/license';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-filter',
@@ -97,11 +99,24 @@ export class FilterComponent implements OnInit {
   @ViewChild('endTimeSelection') endTimeSelection!: MatSelect;
 
   @Output() searchedDataEvent: EventEmitter<any> = new EventEmitter(true);
-  @Output() printDataEvent: EventEmitter<any> = new EventEmitter(true);
+  @Output() printPDFDataEvent: EventEmitter<any> = new EventEmitter(true);
+  @Output() printExcelDataEvent: EventEmitter<any> = new EventEmitter(true);
+
   constructor(
     private api: ApiService,
-    private filterService: FilterlicenseService
-  ) { }
+    private filterService: FilterlicenseService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer
+  ) { 
+    iconRegistry.addSvgIcon(
+      'pdf',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Pdf.svg')
+    );
+    iconRegistry.addSvgIcon(
+      'excel',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Excel.svg')
+    );
+  }
 
   _filter: string = '';
 
@@ -195,7 +210,10 @@ export class FilterComponent implements OnInit {
     let filter = {} as Filter;
     this.searchedDataEvent.emit({});
   }
-  print() {
-    this.printDataEvent.emit({});
+  printPDF() {
+    this.printPDFDataEvent.emit({});
+  }
+  printExcel(){
+    this.printExcelDataEvent.emit({});
   }
 }

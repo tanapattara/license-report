@@ -94,7 +94,12 @@
     <button mat-flat-button color="accent" (click)="clearFilter()" style="width: 120px! important;margin-right: 5px; min-width: unset!important;">
       ล้างการค้นหา
     </button>
-    <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png">
-
+    <!-- <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png"> -->
+    <button mat-mini-fab color="primary" (click)="printPDF()" style="margin-right: 5px">
+      <mat-icon svgIcon="pdf" class="fileicon"></mat-icon>
+    </button>    
+    <button mat-mini-fab color="primary" (click)="printExcel()" >
+      <mat-icon svgIcon="excel" class="fileicon"></mat-icon>
+    </button>
   </div>
 </div>

@@ -18,7 +18,8 @@
   </div>
 
   <app-filter [isSum]="true" [car]="car" [bike]="bike" (searchedDataEvent)="searchedDataEvent($event)"
-    (printDataEvent)="printDataEvent($event)"></app-filter>
+    (printPDFDataEvent)="printPDFDataEvent($event)"
+    (printExcelDataEvent)="printExcelDataEvent($event)"></app-filter>
 
   <div class="license-container">
     <div class="license-table-container">

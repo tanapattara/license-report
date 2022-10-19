@@ -99,9 +99,11 @@ export class LicenseTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.summarise();
   }
-  printDataEvent(event: any) {
-    //this.printPDF();
+  printExcelDataEvent(event: any) {
     this.printExcel();
+  }
+  printPDFDataEvent(event:any){
+    this.printPDF();
   }
 
   getType(type: string) {
