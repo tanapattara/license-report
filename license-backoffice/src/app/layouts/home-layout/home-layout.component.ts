@@ -95,12 +95,11 @@ export class HomeLayoutComponent implements OnInit {
     this.authService.logout().subscribe({
       next: (res) => {
         this.storageService.clean();
-        window.location.href = '/signin';
       },
       error: (err) => {
         console.log(err);
       },
     });
-    window.location.href = '/signin';
+    this.router.navigate(['/signin'])
   }
 }
