@@ -114,7 +114,11 @@ export class FilterComponent implements OnInit {
     );
     iconRegistry.addSvgIcon(
       'excel',
-      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Excel.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Excel2.svg')
+    );
+    iconRegistry.addSvgIcon(
+      'printer',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg')
     );
   }
 

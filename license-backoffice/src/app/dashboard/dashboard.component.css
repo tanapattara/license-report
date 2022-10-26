@@ -4,7 +4,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 18px 16px;
+  padding: 18px 10px;
   gap: 8px;
   height: 180px;
   /* bg-primary */
@@ -18,7 +18,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 18px 16px;
+  padding: 18px 10px;
   gap: 8px;
   height: 180px;
   /* text-white */

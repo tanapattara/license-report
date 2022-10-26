@@ -2,21 +2,35 @@
   <mat-form-field class="col-md-4" appearance="outline">
     <mat-label>ระหว่างวันที่</mat-label>
     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-      <input matStartDate [(ngModel)]="datepickerInput1" formControlName="start" placeholder="เริ่มต้น" />
-      <input [(ngModel)]="datepickerInput2" matEndDate formControlName="end" placeholder="สิ้นสุด" />
+      <input
+        matStartDate
+        [(ngModel)]="datepickerInput1"
+        formControlName="start"
+        placeholder="เริ่มต้น"
+      />
+      <input
+        [(ngModel)]="datepickerInput2"
+        matEndDate
+        formControlName="end"
+        placeholder="สิ้นสุด"
+      />
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
 
-    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">รูปแบบวันที่เริ่มต้นไม่ถูกต้อง</mat-error>
-    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error>
+    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+      >รูปแบบวันที่เริ่มต้นไม่ถูกต้อง</mat-error
+    >
+    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+      >รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error
+    >
   </mat-form-field>
   <mat-form-field class="col-md-2" appearance="outline">
     <mat-label>เวลาเริ่มต้น</mat-label>
     <mat-select #startTimeSelection [value]="defaultValue">
       <mat-option *ngFor="let item of time" [value]="item">{{
         item
-        }}</mat-option>
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="col-md-2" appearance="outline">
@@ -24,7 +38,7 @@
     <mat-select #endTimeSelection [value]="defaultValue">
       <mat-option *ngFor="let item of time" [value]="item">{{
         item
-        }}</mat-option>
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="col-md-2" appearance="outline">
@@ -36,7 +50,7 @@
     <mat-select #placeSelection [value]="defaultValue">
       <mat-option *ngFor="let item of location" [value]="item">{{
         item
-        }}</mat-option>
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
   <!-- <div class="col-md-2 d-flex  justify-content-end align-items-center " style="padding-bottom: 22px;">
@@ -47,11 +61,23 @@
   </div> -->
   <mat-form-field class="col-md-2" appearance="outline">
     <mat-label>ความเร็วเริ่มต้น</mat-label>
-    <input matInput [(ngModel)]="speedInputA" type="number" min="0" placeholder="0" />
+    <input
+      matInput
+      [(ngModel)]="speedInputA"
+      type="number"
+      min="0"
+      placeholder="0"
+    />
   </mat-form-field>
   <mat-form-field class="col-md-2" appearance="outline">
     <mat-label>ความเร็วสูงสุด</mat-label>
-    <input matInput [(ngModel)]="speedInputB" type="number" min="0" placeholder="120" />
+    <input
+      matInput
+      [(ngModel)]="speedInputB"
+      type="number"
+      min="0"
+      placeholder="120"
+    />
   </mat-form-field>
 
   <mat-form-field class="col-md-2" appearance="outline">
@@ -59,7 +85,7 @@
     <mat-select #provinceSelection [value]="defaultValue">
       <mat-option *ngFor="let item of province" [value]="item">{{
         item
-        }}</mat-option>
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="col-md-2" appearance="outline">
@@ -67,7 +93,7 @@
     <mat-select #colorSelection [value]="defaultValue">
       <mat-option *ngFor="let item of color" [value]="item">{{
         item
-        }}</mat-option>
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
   <!-- <div class="col-md-2 d-flex  justify-content-end align-items-center hidden-print" style="padding-bottom: 22px;">
@@ -79,26 +105,72 @@
   </div> -->
 </div>
 
-<div class="row" style=" margin-bottom: 1rem;" *ngIf="isSum">
+<div class="row" style="margin-bottom: 1rem" *ngIf="isSum">
   <div class="col-sm-6 col-lg-2">
-    <div class=" car-sum"> <span>รถยนต์ {{ car | number }} คัน</span></div>
+    <div class="car-sum">
+      <span>รถยนต์ {{ car | number }} คัน</span>
+    </div>
   </div>
   <div class="col-sm-6 col-lg-2">
-    <div class=" car-sum"> <span>จักรยานยนต์ {{ bike | number }} คัน</span></div>
-
+    <div class="car-sum">
+      <span>จักรยานยนต์ {{ bike | number }} คัน</span>
+    </div>
   </div>
-  <div class="col-md-8 d-flex  justify-content-end align-items-center hidden-print" style="padding-bottom: 22px;">
-    <button mat-raised-button color="primary" style="width: 120px!important;margin-right: 5px;min-width: unset!important;" (click)="search()">
+  <div
+    class="col-md-8 d-flex justify-content-end align-items-center hidden-print"
+    style="padding-bottom: 22px"
+  >
+    <button
+      mat-raised-button
+      color="primary"
+      style="
+        width: 120px !important;
+        margin-right: 5px;
+        min-width: unset !important;
+      "
+      (click)="search()"
+    >
       ค้นหา
     </button>
-    <button mat-flat-button color="accent" (click)="clearFilter()" style="width: 120px! important;margin-right: 5px; min-width: unset!important;">
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="clearFilter()"
+      style="
+        width: 120px !important;
+        margin-right: 5px;
+        min-width: unset !important;
+      "
+    >
       ล้างการค้นหา
     </button>
     <!-- <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png"> -->
-    <button mat-mini-fab color="primary" (click)="printPDF()" style="margin-right: 5px">
-      <mat-icon svgIcon="pdf" class="fileicon"></mat-icon>
-    </button>    
-    <button mat-mini-fab color="primary" (click)="printExcel()" >
+    <!-- <button
+      mat-mini-fab
+      color="primary"
+      (click)="printPDF()"
+      style="margin-right: 5px"
+    >
+      <mat-icon svgIcon="printer" class="fileicon"></mat-icon>
+    </button>
+    <button mat-mini-fab color="sucess" (click)="printExcel()">
+      <mat-icon svgIcon="excel" class="fileicon"></mat-icon>
+    </button> -->
+    <button
+      type="button"
+      class="btn btn-info btn-loader"
+      style="padding: 5px"
+      (click)="printPDF()"
+    >
+      <mat-icon svgIcon="printer" class="fileicon"></mat-icon>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-success btn-loader"
+      style="padding: 5px"
+      (click)="printExcel()"
+    >
       <mat-icon svgIcon="excel" class="fileicon"></mat-icon>
     </button>
   </div>
