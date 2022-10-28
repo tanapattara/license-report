@@ -1,5 +1,5 @@
 const { authJwt } = require("../middleware");
-const controller = require("../controllers/license.controller");
+const licenseController = require("../controllers/license.controller");
 const filterController = require("../controllers/filterdata.controller");
 
 module.exports = function (app) {
@@ -7,8 +7,10 @@ module.exports = function (app) {
     res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
     next();
   });
-  app.get("/license", controller.getAllLicense);
-  app.put("/license", controller.updateLicense);
+  app.get("/license", licenseController.getAllLicense);
+  app.put("/license", licenseController.updateLicense);
+  app.get("/dashboard", licenseController.getDashboard);
+  app.get("/graphdashboard", licenseController.getGraphDashboard);
   app.get("/filter", filterController.getLicenseWithParams);
   app.get("/today", filterController.getToday);
 };
