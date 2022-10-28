@@ -14,4 +14,12 @@ export class DashboardService {
   getLicenses() {
     return this.http.get<any>(this.HOST_URL + "/license");
   }
+
+  getDashboard(){
+    return this.http.get<any>(this.HOST_URL + "/dashboard");
+  }
+
+  getGraphDashboard(){
+    return this.http.get<any>(this.HOST_URL + "/graphdashboard");
+  }
 }
