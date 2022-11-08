@@ -26,6 +26,16 @@ exports.updateUser = async (req, res) => {
   }
 };
 
+exports.deleteUser = async (userid, res) => {
+  try {
+    console.log(userid);
+    await user.destroy({ where: { id: userid } });
+    res.status(200).send({ message: `data delete successful` });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 let async = require("async");
 let updateUser = (data, callback) => {
   async.auto(

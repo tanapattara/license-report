@@ -11,11 +11,14 @@ router.get("/", (req, res) => {
   userController.getUsers(req, res);
 });
 router.post("/", (req, res) => {
-  [verifySignUp.checkDuplicateUsernameOrEmail],
-    authController.signup(req, res);
+  [verifySignUp.checkDuplicateUsernameOrEmail], authController.signup(req, res);
 });
 router.put("/", (req, res) => {
   userController.updateUser(req, res);
+});
+router.delete("/:id", (req, res) => {
+  // const id = parseInt(req.params.id);
+  userController.deleteUser(req.params.id, res);
 });
 
 module.exports = router;

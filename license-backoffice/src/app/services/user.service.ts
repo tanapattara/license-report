@@ -6,15 +6,14 @@ import { User } from '../model/user';
 
 const APIURL = API_URL + '/api/test/';
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UserService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   getAllUsers(): Observable<any> {
     return this.http.get(API_URL + '/user', httpOptions);
   }
@@ -25,5 +24,9 @@ export class UserService {
 
   updateUser(data: User): Observable<any> {
     return this.http.put(API_URL + '/user', data, httpOptions);
+  }
+
+  deleteUser(id: Number): Observable<any> {
+    return this.http.delete(API_URL + '/user/' + id, httpOptions);
   }
 }

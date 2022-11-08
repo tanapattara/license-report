@@ -42,7 +42,9 @@
 
         <!-- phone Column -->
         <ng-container matColumnDef="phone">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>เบอร์โทรศัพท์</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            เบอร์โทรศัพท์
+          </th>
           <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
         </ng-container>
 
@@ -56,10 +58,16 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>จัดการ</th>
 
           <td mat-cell *matCellDef="let element">
-            <span style="cursor: pointer; color: #eb5a47;margin-right: 5px;" (click)="cellClick(element)">
+            <span
+              style="cursor: pointer; color: #eb5a47; margin-right: 5px"
+              (click)="cellClick(element)"
+            >
               แก้ไข
             </span>
-            <span style="cursor: pointer; color: #eb5a47;">
+            <span
+              style="cursor: pointer; color: #eb5a47"
+              (click)="delUser(element)"
+            >
               ลบ
             </span>
           </td>
@@ -74,7 +82,13 @@
         </tr>
       </table>
 
-      <mat-paginator style="" [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page of GitHub search results"></mat-paginator>
+      <mat-paginator
+        style=""
+        [length]="resultsLength"
+        [pageSize]="10"
+        [pageSizeOptions]="[10, 50, 100]"
+        aria-label="Select page of GitHub search results"
+      ></mat-paginator>
     </div>
   </div>
 </div>

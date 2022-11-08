@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+  }
+  .header-sector {
+    display: flex;
+    vertical-align: top;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .lic-spacer {
+    flex: 1 1 auto;
+  }
+  .right-button {
+    margin-top: 2.5rem;
+    text-align: end;
+  }
+  .mat-dialog-container {
+    border-radius: 20px !important;
+  }
+  .user-container {
+    position: relative;
+  }
+  .user-table-container {
+    position: relative;
+    overflow: auto;
+  }
+  

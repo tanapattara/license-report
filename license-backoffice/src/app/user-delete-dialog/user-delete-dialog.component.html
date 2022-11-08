@@ -1,0 +1,18 @@
+<div align="center">
+  <div class="component-title">ลบข้อมูลผู้ใช้งาน</div>
+</div>
+<div mat-dialog-content align="center">
+  <br />
+  <p>
+    คุณต้องการลบข้อมูลผู้ใช้งาน <b>{{ data.username }}</b> หรือไม่ ?
+  </p>
+</div>
+<form (ngSubmit)="onSubmit()">
+  <div mat-dialog-actions align="end">
+    <button mat-flat-button mat-dialog-close>ยกเลิก</button>
+    <div class="flex-spacer lic-spacer"></div>
+    <button mat-flat-button cdkFocusInitial color="primary" type="submit">
+      ลบข้อมูล
+    </button>
+  </div>
+</form>
