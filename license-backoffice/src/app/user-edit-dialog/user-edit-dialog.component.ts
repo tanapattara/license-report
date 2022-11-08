@@ -47,6 +47,7 @@ export class UserEditDialogComponent implements OnInit {
       phone: [data.phone],
       email: [data.email, Validators.required],
       password: ['', Validators.required],
+      role: [data.role],
     });
     this.angForm.controls['username'].setValue(data.username);
     this.roleselected = data.role;
@@ -67,6 +68,7 @@ export class UserEditDialogComponent implements OnInit {
     userData.phone = this.angForm.controls['phone'].value;
     userData.firstname = this.angForm.controls['firstname'].value;
     userData.lastname = this.angForm.controls['lastname'].value;
+    userData.role = this.angForm.controls['role'].value;
 
     this.service.updateUser(userData).subscribe({
       next: (res) => {

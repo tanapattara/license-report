@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
     'lastname',
     'phone',
     'email',
+    'role',
     'actions',
   ];
   dataSource!: MatTableDataSource<any>;

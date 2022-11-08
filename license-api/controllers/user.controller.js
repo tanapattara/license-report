@@ -19,6 +19,8 @@ exports.updateUser = async (req, res) => {
       },
       { where: { id: req.body.id } }
     );
+    var sql = "UPDATE user_roles SET roleId = ? WHERE userId = ?";
+    dbConfig.getDB().query(sql, [req.body.role, req.body.id]);
 
     res.status(201).send({ message: `data update successful` });
   } catch (err) {

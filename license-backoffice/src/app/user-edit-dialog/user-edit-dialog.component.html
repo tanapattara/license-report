@@ -26,7 +26,7 @@
     </mat-form-field>
     <mat-form-field class="col-12" appearance="outline">
       <mat-label>ประเภทผู้ใช้</mat-label>
-      <mat-select [(value)]="roleselected">
+      <mat-select formControlName="role" [(value)]="roleselected">
         <mat-option *ngFor="let role of userRole" [value]="role.id">
           {{ role.name }}
         </mat-option>
