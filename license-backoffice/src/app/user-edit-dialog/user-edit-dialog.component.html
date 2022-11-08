@@ -24,6 +24,14 @@
       <mat-label>ชื่อผู้ใช้งาน</mat-label>
       <input matInput formControlName="username" type="text" required />
     </mat-form-field>
+    <mat-form-field class="col-12" appearance="outline">
+      <mat-label>ประเภทผู้ใช้</mat-label>
+      <mat-select [(value)]="roleselected">
+        <mat-option *ngFor="let role of userRole" [value]="role.id">
+          {{ role.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div mat-dialog-actions align="end">
     <button mat-flat-button mat-dialog-close>ยกเลิก</button>

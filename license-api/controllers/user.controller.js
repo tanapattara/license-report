@@ -71,10 +71,11 @@ let getAlluser = (data, callback) => {
 };
 let dbConfig = require("../utilities/mysqlConfig");
 let getUsersFromDB = (criteria, callback) => {
+  //dbConfig.getDB().query(`SELECT * FROM users`, criteria, callback);
   dbConfig
     .getDB()
     .query(
-      `SELECT id, username, firstname, lastname, email, phone FROM users`,
+      `SELECT users.*, user_roles.roleId as role FROM users LEFT JOIN user_roles ON users.id = user_roles.userId;`,
       criteria,
       callback
     );
