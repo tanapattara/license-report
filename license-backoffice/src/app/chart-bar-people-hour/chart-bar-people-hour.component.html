@@ -106,19 +106,20 @@
       </div>
     </div>
   </div>
-</div>
-<div class="card-body">
-  <div class="chart-container" style="display: block; height: 566px">
-    <canvas
-      #barchart
-      baseChart
-      [data]="barChartData"
-      [options]="barChartOptions"
-      [plugins]="barChartPlugins"
-      [type]="barChartType"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)"
-    >
-    </canvas>
+
+  <div class="card-body">
+    <div class="chart-container" style="display: block; height: 566px">
+      <canvas
+        #barchart
+        baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      >
+      </canvas>
+    </div>
   </div>
 </div>
