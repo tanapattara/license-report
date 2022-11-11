@@ -17,28 +17,103 @@ import { ChartHeatmapMonthComponent } from './chart-heatmap-month/chart-heatmap-
 import { ChartHeatmapHourComponent } from './chart-heatmap-hour/chart-heatmap-hour.component';
 import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pie-car-per-month.component';
 import { LicenseWarningLetterComponent } from './license-warning-letter/license-warning-letter.component';
+import { ChartBarPeopleHourComponent } from './chart-bar-people-hour/chart-bar-people-hour.component';
 
 const routes: Routes = [
-  { path: 'signin', component: LoginLayoutComponent, children: [{ path: '', component: SigninComponent }] },
-  { path: 'dashboard', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: DashboardComponent }] },
-  { path: 'license', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: LicenseTableComponent },] },
-  { path: 'color', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartPieCarColorComponent },] },
-  { path: 'type', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartPieCarTypeComponent },] },
-  { path: 'speed', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarSpeedComponent },] },
-  { path: 'hour-heat', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartHeatmapHourComponent },] },
-  { path: 'hour-bar', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerHourComponent },] },
-  { path: 'day', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerDayComponent },] },
-  { path: 'month-heat', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartHeatmapMonthComponent },] },
-  { path: 'month-bar', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartBarCarPerMonthComponent },] },
-  { path: 'month-pie', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: ChartPieCarPerMonthComponent },] },
-  { path: 'warningletter', component: LicenseWarningLetterComponent, canActivate: [AuthGuard] },
+  {
+    path: 'signin',
+    component: LoginLayoutComponent,
+    children: [{ path: '', component: SigninComponent }],
+  },
+  {
+    path: 'dashboard',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: DashboardComponent }],
+  },
+  {
+    path: 'license',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: LicenseTableComponent }],
+  },
+  {
+    path: 'color',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartPieCarColorComponent }],
+  },
+  {
+    path: 'type',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartPieCarTypeComponent }],
+  },
+  {
+    path: 'speed',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartBarCarSpeedComponent }],
+  },
+  {
+    path: 'hour-heat',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartHeatmapHourComponent }],
+  },
+  {
+    path: 'hour-bar',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartBarCarPerHourComponent }],
+  },
+  {
+    path: 'day',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartBarCarPerDayComponent }],
+  },
+  {
+    path: 'month-heat',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartHeatmapMonthComponent }],
+  },
+  {
+    path: 'month-bar',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartBarCarPerMonthComponent }],
+  },
+  {
+    path: 'month-pie',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartPieCarPerMonthComponent }],
+  },
+  {
+    path: 'people',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: ChartBarPeopleHourComponent }],
+  },
+  {
+    path: 'warningletter',
+    component: LicenseWarningLetterComponent,
+    canActivate: [AuthGuard],
+  },
 
-  { path: 'users', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [{ path: '', component: UsersComponent },] },
+  {
+    path: 'users',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: UsersComponent }],
+  },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

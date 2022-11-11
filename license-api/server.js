@@ -40,6 +40,7 @@ app.use("/user", userRouter);
 require("./routes/auth.routes")(app);
 require("./routes/license.routes")(app);
 require("./routes/filterdata.routes")(app);
+require("./routes/peoplecount.routes")(app);
 
 process.on("uncaughtException", (err, origin) => {
   console.log(err);

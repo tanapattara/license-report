@@ -37,6 +37,7 @@ import { LicenseWarningLetterComponent } from './license-warning-letter/license-
 import { LicenseWarningLetterDialogComponent } from './license-warning-letter-dialog/license-warning-letter-dialog.component';
 import { SigninErrorDialogComponent } from './signin-error-dialog/signin-error-dialog.component';
 import { UserDeleteDialogComponent } from './user-delete-dialog/user-delete-dialog.component';
+import { ChartBarPeopleHourComponent } from './chart-bar-people-hour/chart-bar-people-hour.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { UserDeleteDialogComponent } from './user-delete-dialog/user-delete-dial
     LicenseWarningLetterDialogComponent,
     SigninErrorDialogComponent,
     UserDeleteDialogComponent,
+    ChartBarPeopleHourComponent,
   ],
   imports: [
     BrowserModule,

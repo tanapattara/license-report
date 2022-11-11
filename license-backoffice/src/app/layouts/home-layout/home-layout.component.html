@@ -3,67 +3,137 @@
     <img class="logo" src="assets/img/logo.png" />
     <!-- <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a> -->
     <div class="header-text">
-      <span class="header-title">{{ title }}</span><br />
+      <span class="header-title">{{ title }}</span
+      ><br />
       <span class="header-subtitle">{{ subtitle }}</span>
     </div>
   </div>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-    data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler position-absolute d-md-none collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#sidebarMenu"
+    aria-controls="sidebarMenu"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
-
 </header>
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="d-flek overflow-auto col-md-4 col-lg-3 col-xl-2 d-md-block sidebar collapse noprint">
+    <nav
+      id="sidebarMenu"
+      class="d-flek overflow-auto col-md-4 col-lg-3 col-xl-2 d-md-block sidebar collapse noprint"
+    >
       <div class="position-sticky pt-1">
         <ul class="list-unstyled ps-0 mb-auto">
           <div class="sidebar-divider-space">ภาพรวม</div>
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/dashboard')}">
-            <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/dashboard'">
+          <li
+            class="nav-item"
+            [ngClass]="{ 'bar-title': href.includes('/dashboard') }"
+          >
+            <a
+              class="nav-link"
+              [routerLinkActive]="['is-active']"
+              [routerLink]="'/dashboard'"
+            >
               <mat-icon svgIcon="dashboard"></mat-icon>
               รายละเอียด
             </a>
           </li>
           <div class="sidebar-divider-space">จำแนกตามรายละเอียด</div>
 
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/license')}">
-            <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/license'">
+          <li
+            class="nav-item"
+            [ngClass]="{ 'bar-title': href.includes('/license') }"
+          >
+            <a
+              class="nav-link"
+              [routerLinkActive]="['is-active']"
+              [routerLink]="'/license'"
+            >
               <mat-icon svgIcon="license"></mat-icon>
               รายชื่อ
             </a>
           </li>
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/color')}">
-            <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/color'">
+          <li
+            class="nav-item"
+            [ngClass]="{ 'bar-title': href.includes('/color') }"
+          >
+            <a
+              class="nav-link"
+              [routerLinkActive]="['is-active']"
+              [routerLink]="'/color'"
+            >
               <mat-icon svgIcon="color"></mat-icon>
               สีรถ
             </a>
           </li>
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/type')}">
-            <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/type'">
+          <li
+            class="nav-item"
+            [ngClass]="{ 'bar-title': href.includes('/type') }"
+          >
+            <a
+              class="nav-link"
+              [routerLinkActive]="['is-active']"
+              [routerLink]="'/type'"
+            >
               <mat-icon svgIcon="type"></mat-icon>
               ประเภทรถ
             </a>
           </li>
           <div class="sidebar-divider-space">จำแนกตามสถิติ</div>
 
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/speed')}">
-            <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/speed'">
+          <li
+            class="nav-item"
+            [ngClass]="{ 'bar-title': href.includes('/speed') }"
+          >
+            <a
+              class="nav-link"
+              [routerLinkActive]="['is-active']"
+              [routerLink]="'/speed'"
+            >
               <mat-icon svgIcon="speed"></mat-icon>
               ความเร็วรถ
             </a>
           </li>
 
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/hour-heat') ||href.includes('/hour-bar') }">
-            <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#hour-collapse"
-              aria-expanded="true" [routerLinkActive]="['is-active']">
+          <li
+            class="nav-item"
+            [ngClass]="{
+              'bar-title':
+                href.includes('/hour-heat') || href.includes('/hour-bar')
+            }"
+          >
+            <a
+              class="nav-link toggle collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#hour-collapse"
+              aria-expanded="true"
+              [routerLinkActive]="['is-active']"
+            >
               <mat-icon svgIcon="hour"></mat-icon>
               รายชั่วโมง
             </a>
             <div class="collapse" id="hour-collapse">
               <ul class="toggle-nav list-unstyled">
-                <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/hour-heat'">แผนภูมิความร้อน</a></li>
-                <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/hour-bar'">แผนภูมิแท่ง</a></li>
+                <li>
+                  <a
+                    class="nav-link"
+                    style="margin-left: 4rem"
+                    [routerLink]="'/hour-heat'"
+                    >แผนภูมิความร้อน</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="nav-link"
+                    style="margin-left: 4rem"
+                    [routerLink]="'/hour-bar'"
+                    >แผนภูมิแท่ง</a
+                  >
+                </li>
               </ul>
             </div>
           </li>
@@ -73,31 +143,92 @@
               รายชั่วโมง
             </a>
           </li> -->
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/day')}">
-            <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/day'">
+          <li
+            class="nav-item"
+            [ngClass]="{ 'bar-title': href.includes('/day') }"
+          >
+            <a
+              class="nav-link"
+              [routerLinkActive]="['is-active']"
+              [routerLink]="'/day'"
+            >
               <mat-icon svgIcon="month"></mat-icon>
               รายวัน
             </a>
           </li>
 
-          <li class="nav-item" [ngClass]="{'bar-title': href.includes('/month-heat') ||href.includes('/month-bar') }">
-            <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#month-collapse"
-              aria-expanded="true" [routerLinkActive]="['is-active']">
+          <li
+            class="nav-item"
+            [ngClass]="{
+              'bar-title':
+                href.includes('/month-heat') || href.includes('/month-bar')
+            }"
+          >
+            <a
+              class="nav-link toggle collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#month-collapse"
+              aria-expanded="true"
+              [routerLinkActive]="['is-active']"
+            >
               <mat-icon svgIcon="month"></mat-icon>
               รายเดือน
             </a>
             <div class="collapse" id="month-collapse">
               <ul class="toggle-nav list-unstyled">
-                <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/month-pie'">แผนภูมิวงกลม</a></li>
-                <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/month-heat'">แผนภูมิความร้อน</a></li>
-                <li><a class="nav-link" style="margin-left: 4rem;" [routerLink]="'/month-bar'">แผนภูมิแท่ง</a></li>
+                <li>
+                  <a
+                    class="nav-link"
+                    style="margin-left: 4rem"
+                    [routerLink]="'/month-pie'"
+                    >แผนภูมิวงกลม</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="nav-link"
+                    style="margin-left: 4rem"
+                    [routerLink]="'/month-heat'"
+                    >แผนภูมิความร้อน</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="nav-link"
+                    style="margin-left: 4rem"
+                    [routerLink]="'/month-bar'"
+                    >แผนภูมิแท่ง</a
+                  >
+                </li>
               </ul>
             </div>
           </li>
+          <div class="sidebar-divider-space">ข้อมูลจำนวนเข้าออก</div>
+
+          <li
+            class="nav-item"
+            [ngClass]="{ 'bar-title': href.includes('/people') }"
+          >
+            <a
+              class="nav-link"
+              [routerLinkActive]="['is-active']"
+              [routerLink]="'/people'"
+            >
+              <mat-icon svgIcon="hour"></mat-icon>
+              รายชั่วโมง
+            </a>
+          </li>
           <div *ngIf="isAdmin">
             <div class="sidebar-divider-space">ตั้งค่า</div>
-            <li class="nav-item" [ngClass]="{'bar-title': href.includes('/users')}">
-              <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/users'">
+            <li
+              class="nav-item"
+              [ngClass]="{ 'bar-title': href.includes('/users') }"
+            >
+              <a
+                class="nav-link"
+                [routerLinkActive]="['is-active']"
+                [routerLink]="'/users'"
+              >
                 <mat-icon svgIcon="user"></mat-icon>
                 ผู้ใช้งาน
               </a>
@@ -106,7 +237,7 @@
           <div class="lic-spacer"></div>
         </ul>
         <ul class="list-unstyled ps-0">
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link logout" (click)="logout()">
               <mat-icon svgIcon="logout"></mat-icon>
               ออกจากระบบ
@@ -115,7 +246,7 @@
         </ul>
       </div>
     </nav>
-    <main class="main-component col-md-8 ms-sm-auto col-lg-9 col-xl-10 px-md-4 ">
+    <main class="main-component col-md-8 ms-sm-auto col-lg-9 col-xl-10 px-md-4">
       <router-outlet></router-outlet>
     </main>
   </div>
