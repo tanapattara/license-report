@@ -7,6 +7,10 @@ import { ApiService } from '../services/api.service';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { MatTableDataSource } from '@angular/material/table';
 import { BaseChartDirective } from 'ng2-charts';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 
 @Component({
   selector: 'app-chart-bar-people-hour',
@@ -107,7 +111,17 @@ export class ChartBarPeopleHourComponent implements OnInit {
     ],
   };
 
-  constructor(private api: ApiService) {}
+  constructor(
+    private api: ApiService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    public dialog: MatDialog
+  ) {
+    iconRegistry.addSvgIcon(
+      'map',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Mapcolor.svg')
+    );
+  }
 
   ngOnInit(): void {}
   search() {
@@ -356,5 +370,9 @@ export class ChartBarPeopleHourComponent implements OnInit {
     active?: {}[];
   }): void {
     // console.log(event, active);
+  }
+
+  showminimap(): void {
+    this.dialog.open(MapDialogComponent, {}).afterClosed().subscribe();
   }
 }
