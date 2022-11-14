@@ -26,8 +26,8 @@ export class ChartBarPeopleHourComponent implements OnInit {
   });
   incount = 0;
   outcount = 0;
-  defaultChannel = 1;
-  channel = [1, 2, 3, 4, 5, 6, 7, 8];
+  defaultChannel = 'All';
+  channel = ['All', '1', '2', '3', '4', '5', '6', '7', '8'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild('channelSelection') channelSelection!: MatSelect;
@@ -150,123 +150,267 @@ export class ChartBarPeopleHourComponent implements OnInit {
         this.outcount += row.exitcount;
         switch (d.getHours()) {
           case 0: {
-            this.chartDictionaryIn.set('00', row.entercount);
-            this.chartDictionaryOut.set('00', row.exitcount);
+            this.chartDictionaryIn.set(
+              '00',
+              this.chartDictionaryIn.get('00') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '00',
+              this.chartDictionaryOut.get('00') + row.exitcount
+            );
             break;
           }
           case 1: {
-            this.chartDictionaryIn.set('01', row.entercount);
-            this.chartDictionaryOut.set('01', row.exitcount);
+            this.chartDictionaryIn.set(
+              '01',
+              this.chartDictionaryIn.get('01') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '01',
+              this.chartDictionaryOut.get('01') + row.exitcount
+            );
             break;
           }
           case 2: {
-            this.chartDictionaryIn.set('02', row.entercount);
-            this.chartDictionaryOut.set('02', row.exitcount);
+            this.chartDictionaryIn.set(
+              '02',
+              this.chartDictionaryIn.get('02') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '02',
+              this.chartDictionaryOut.get('02') + row.exitcount
+            );
             break;
           }
           case 3: {
-            this.chartDictionaryIn.set('03', row.entercount);
-            this.chartDictionaryOut.set('03', row.exitcount);
+            this.chartDictionaryIn.set(
+              '03',
+              this.chartDictionaryIn.get('03') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '03',
+              this.chartDictionaryOut.get('03') + row.exitcount
+            );
             break;
           }
           case 4: {
-            this.chartDictionaryIn.set('04', row.entercount);
-            this.chartDictionaryOut.set('04', row.exitcount);
+            this.chartDictionaryIn.set(
+              '04',
+              this.chartDictionaryIn.get('04') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '04',
+              this.chartDictionaryOut.get('04') + row.exitcount
+            );
             break;
           }
           case 5: {
-            this.chartDictionaryIn.set('05', row.entercount);
-            this.chartDictionaryOut.set('05', row.exitcount);
+            this.chartDictionaryIn.set(
+              '05',
+              this.chartDictionaryIn.get('05') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '05',
+              this.chartDictionaryOut.get('05') + row.exitcount
+            );
             break;
           }
           case 6: {
-            this.chartDictionaryIn.set('06', row.entercount);
-            this.chartDictionaryOut.set('06', row.exitcount);
+            this.chartDictionaryIn.set(
+              '06',
+              this.chartDictionaryIn.get('06') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '06',
+              this.chartDictionaryOut.get('06') + row.exitcount
+            );
             break;
           }
           case 7: {
-            this.chartDictionaryIn.set('07', row.entercount);
-            this.chartDictionaryOut.set('07', row.exitcount);
+            this.chartDictionaryIn.set(
+              '07',
+              this.chartDictionaryIn.get('07') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '07',
+              this.chartDictionaryOut.get('07') + row.exitcount
+            );
             break;
           }
           case 8: {
-            this.chartDictionaryIn.set('08', row.entercount);
-            this.chartDictionaryOut.set('08', row.exitcount);
+            this.chartDictionaryIn.set(
+              '08',
+              this.chartDictionaryIn.get('08') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '08',
+              this.chartDictionaryOut.get('08') + row.exitcount
+            );
             break;
           }
           case 9: {
-            this.chartDictionaryIn.set('09', row.entercount);
-            this.chartDictionaryOut.set('09', row.exitcount);
+            this.chartDictionaryIn.set(
+              '09',
+              this.chartDictionaryIn.get('09') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '09',
+              this.chartDictionaryOut.get('09') + row.exitcount
+            );
             break;
           }
           case 10: {
-            this.chartDictionaryIn.set('10', row.entercount);
-            this.chartDictionaryOut.set('10', row.exitcount);
+            this.chartDictionaryIn.set(
+              '10',
+              this.chartDictionaryIn.get('10') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '10',
+              this.chartDictionaryOut.get('10') + row.exitcount
+            );
             break;
           }
           case 11: {
-            this.chartDictionaryIn.set('11', row.entercount);
-            this.chartDictionaryOut.set('11', row.exitcount);
+            this.chartDictionaryIn.set(
+              '11',
+              this.chartDictionaryIn.get('11') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '11',
+              this.chartDictionaryOut.get('11') + row.exitcount
+            );
             break;
           }
           case 12: {
-            this.chartDictionaryIn.set('12', row.entercount);
-            this.chartDictionaryOut.set('12', row.exitcount);
+            this.chartDictionaryIn.set(
+              '12',
+              this.chartDictionaryIn.get('12') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '12',
+              this.chartDictionaryOut.get('12') + row.exitcount
+            );
             break;
           }
           case 13: {
-            this.chartDictionaryIn.set('13', row.entercount);
-            this.chartDictionaryOut.set('13', row.exitcount);
+            this.chartDictionaryIn.set(
+              '13',
+              this.chartDictionaryIn.get('13') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '13',
+              this.chartDictionaryOut.get('13') + row.exitcount
+            );
             break;
           }
           case 14: {
-            this.chartDictionaryIn.set('14', row.entercount);
-            this.chartDictionaryOut.set('14', row.exitcount);
+            this.chartDictionaryIn.set(
+              '14',
+              this.chartDictionaryIn.get('14') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '14',
+              this.chartDictionaryOut.get('14') + row.exitcount
+            );
             break;
           }
           case 15: {
-            this.chartDictionaryIn.set('15', row.entercount);
-            this.chartDictionaryOut.set('15', row.exitcount);
+            this.chartDictionaryIn.set(
+              '15',
+              this.chartDictionaryIn.get('15') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '15',
+              this.chartDictionaryOut.get('15') + row.exitcount
+            );
             break;
           }
           case 16: {
-            this.chartDictionaryIn.set('16', row.entercount);
-            this.chartDictionaryOut.set('16', row.exitcount);
+            this.chartDictionaryIn.set(
+              '16',
+              this.chartDictionaryIn.get('16') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '16',
+              this.chartDictionaryOut.get('16') + row.exitcount
+            );
             break;
           }
           case 17: {
-            this.chartDictionaryIn.set('17', row.entercount);
-            this.chartDictionaryOut.set('17', row.exitcount);
+            this.chartDictionaryIn.set(
+              '17',
+              this.chartDictionaryIn.get('17') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '17',
+              this.chartDictionaryOut.get('17') + row.exitcount
+            );
             break;
           }
           case 18: {
-            this.chartDictionaryIn.set('18', row.entercount);
-            this.chartDictionaryOut.set('18', row.exitcount);
+            this.chartDictionaryIn.set(
+              '18',
+              this.chartDictionaryIn.get('18') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '18',
+              this.chartDictionaryOut.get('18') + row.exitcount
+            );
             break;
           }
           case 19: {
-            this.chartDictionaryIn.set('19', row.entercount);
-            this.chartDictionaryOut.set('19', row.exitcount);
+            this.chartDictionaryIn.set(
+              '19',
+              this.chartDictionaryIn.get('19') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '19',
+              this.chartDictionaryOut.get('19') + row.exitcount
+            );
             break;
           }
           case 20: {
-            this.chartDictionaryIn.set('20', row.entercount);
-            this.chartDictionaryOut.set('20', row.exitcount);
+            this.chartDictionaryIn.set(
+              '20',
+              this.chartDictionaryIn.get('20') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '20',
+              this.chartDictionaryOut.get('20') + row.exitcount
+            );
             break;
           }
           case 21: {
-            this.chartDictionaryIn.set('21', row.entercount);
-            this.chartDictionaryOut.set('21', row.exitcount);
+            this.chartDictionaryIn.set(
+              '21',
+              this.chartDictionaryIn.get('21') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '21',
+              this.chartDictionaryOut.get('21') + row.exitcount
+            );
             break;
           }
           case 22: {
-            this.chartDictionaryIn.set('22', row.entercount);
-            this.chartDictionaryOut.set('22', row.exitcount);
+            this.chartDictionaryIn.set(
+              '22',
+              this.chartDictionaryIn.get('22') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '22',
+              this.chartDictionaryOut.get('22') + row.exitcount
+            );
             break;
           }
           case 23: {
-            this.chartDictionaryIn.set('23', row.entercount);
-            this.chartDictionaryOut.set('23', row.exitcount);
+            this.chartDictionaryIn.set(
+              '23',
+              this.chartDictionaryIn.get('23') + row.entercount
+            );
+            this.chartDictionaryOut.set(
+              '23',
+              this.chartDictionaryOut.get('23') + row.exitcount
+            );
             break;
           }
         }

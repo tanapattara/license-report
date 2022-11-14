@@ -5,12 +5,14 @@ let dbConfig = require("../utilities/mysqlConfig");
 exports.getData = async (req, res) => {
   const q = req.query;
   try {
-    const [results, metadata] = await db.sequelize.query(`
-    SELECT * FROM peoplecount WHERE channel = ${
-      q.channel
-    } AND (starttime BETWEEN '${
+    let sqlcommand = `
+    SELECT * FROM peoplecount WHERE (starttime BETWEEN '${
       q.startdate == "All" ? "2000-01-01" : q.startdate
-    }' AND ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"})`);
+    }' AND ${q.enddate == "All" ? "NOW()" : "'" + q.enddate + "'"}) `;
+
+    if (q.channel != "All") sqlcommand += `AND channel = ${q.channel}`;
+
+    const [results, metadata] = await db.sequelize.query(sqlcommand);
 
     res.status(200).send(results);
   } catch (error) {
