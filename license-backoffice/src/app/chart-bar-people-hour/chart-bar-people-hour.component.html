@@ -3,7 +3,7 @@
     <div class="col-lg-8 d-flex flex-row">
       <div class="mr-auto p-2">
         <div class="component-title">
-          สถิติข้อมูลคน เข้า-ออก แยกตามรายชั่วโมง
+          สถิตินับจำนวนคน พื้นที่บึงสีฐาน1
         </div>
         <div class="component-subtitle">
           สถิติแยกรายชั่วโมง ของภาพรวมทั้งหมด
@@ -39,12 +39,7 @@
         <div class="row">
           <div class="col-3" style="margin-bottom: 8px">
             <div class="car-sum">
-              <span>เข้า {{ incount | number }} คน</span>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="car-sum">
-              <span>ออก {{ outcount | number }} คน</span>
+              <span>จำนวน {{ _count | number }} คน</span>
             </div>
           </div>
 
