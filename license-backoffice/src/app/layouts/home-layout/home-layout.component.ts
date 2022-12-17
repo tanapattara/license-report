@@ -83,6 +83,10 @@ export class HomeLayoutComponent implements OnInit {
       'cardCar',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/CardCar.svg')
     );
+    iconRegistry.addSvgIcon(
+      'setting',
+      sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Setting.svg')
+    );
   }
 
   ngOnInit(): void {
@@ -100,6 +104,6 @@ export class HomeLayoutComponent implements OnInit {
         console.log(err);
       },
     });
-    this.router.navigate(['/signin'])
+    this.router.navigate(['/signin']);
   }
 }

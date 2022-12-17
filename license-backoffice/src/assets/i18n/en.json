@@ -1,0 +1,11 @@
+{
+    "dashboard": {
+        "title": "Statistics"
+    },
+     "setting":{
+        "language":{
+            "th":"Thai",
+            "en":"English"
+        }
+    }
+}

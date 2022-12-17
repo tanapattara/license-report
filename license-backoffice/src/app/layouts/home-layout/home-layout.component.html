@@ -17,19 +17,19 @@
     <nav id="sidebarMenu" class="d-flek overflow-auto col-md-4 col-lg-3 col-xl-2 d-md-block sidebar collapse noprint">
       <div class="position-sticky pt-1">
         <ul class="list-unstyled ps-0 mb-auto">
-          <div class="sidebar-divider-space">ภาพรวม</div>
+          <div class="sidebar-divider-space">{{'menu.dashboard-hr'|translate}}</div>
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/dashboard') }">
             <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/dashboard'">
               <mat-icon svgIcon="dashboard"></mat-icon>
-              รายละเอียด
+              {{'menu.dashboard'|translate}}
             </a>
           </li>
-          <div class="sidebar-divider-space">จำแนกตามรายละเอียด</div>
+          <div class="sidebar-divider-space">{{'menu.detail-hr'|translate}}</div>
 
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/license') }">
             <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/license'">
               <mat-icon svgIcon="license"></mat-icon>
-              รายชื่อ
+              {{'menu.list'|translate}}
             </a>
           </li>
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/color') }">
@@ -41,15 +41,15 @@
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/type') }">
             <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/type'">
               <mat-icon svgIcon="type"></mat-icon>
-              ประเภทรถ
+              {{'menu.type'|translate}}
             </a>
           </li>
-          <div class="sidebar-divider-space">จำแนกตามสถิติ</div>
+          <div class="sidebar-divider-space">{{'menu.stat-hr'|translate}}</div>
 
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/speed') }">
             <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/speed'">
               <mat-icon svgIcon="speed"></mat-icon>
-              ความเร็วรถ
+              {{'menu.speed'|translate}}
             </a>
           </li>
 
@@ -60,15 +60,17 @@
             <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#hour-collapse"
               aria-expanded="true" [routerLinkActive]="['is-active']">
               <mat-icon svgIcon="hour"></mat-icon>
-              รายชั่วโมง
+              {{'menu.hour'|translate}}
             </a>
             <div class="collapse" id="hour-collapse">
               <ul class="toggle-nav list-unstyled">
                 <li>
-                  <a class="nav-link" style="margin-left: 4rem" [routerLink]="'/hour-heat'">แผนภูมิความร้อน</a>
+                  <a class="nav-link" style="margin-left: 4rem"
+                    [routerLink]="'/hour-heat'">{{'menu.heat-chart'|translate}}</a>
                 </li>
                 <li>
-                  <a class="nav-link" style="margin-left: 4rem" [routerLink]="'/hour-bar'">แผนภูมิแท่ง</a>
+                  <a class="nav-link" style="margin-left: 4rem"
+                    [routerLink]="'/hour-bar'">{{'menu.bar-chart'|translate}}</a>
                 </li>
               </ul>
             </div>
@@ -82,7 +84,7 @@
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/day') }">
             <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/day'">
               <mat-icon svgIcon="month"></mat-icon>
-              รายวัน
+              {{'menu.day'|translate}}
             </a>
           </li>
 
@@ -93,36 +95,46 @@
             <a class="nav-link toggle collapsed" data-bs-toggle="collapse" data-bs-target="#month-collapse"
               aria-expanded="true" [routerLinkActive]="['is-active']">
               <mat-icon svgIcon="month"></mat-icon>
-              รายเดือน
+              {{'menu.month'|translate}}
             </a>
             <div class="collapse" id="month-collapse">
               <ul class="toggle-nav list-unstyled">
                 <li>
-                  <a class="nav-link" style="margin-left: 4rem" [routerLink]="'/month-pie'">แผนภูมิวงกลม</a>
+                  <a class="nav-link" style="margin-left: 4rem"
+                    [routerLink]="'/month-pie'">{{'menu.pie-chart'|translate}}</a>
                 </li>
                 <li>
-                  <a class="nav-link" style="margin-left: 4rem" [routerLink]="'/month-heat'">แผนภูมิความร้อน</a>
+                  <a class="nav-link" style="margin-left: 4rem"
+                    [routerLink]="'/month-heat'">{{'menu.heat-chart'|translate}}</a>
                 </li>
                 <li>
-                  <a class="nav-link" style="margin-left: 4rem" [routerLink]="'/month-bar'">แผนภูมิแท่ง</a>
+                  <a class="nav-link" style="margin-left: 4rem"
+                    [routerLink]="'/month-bar'">{{'menu.bar-chart'|translate}}</a>
                 </li>
               </ul>
             </div>
           </li>
-          <div class="sidebar-divider-space">ข้อมูลนับจำนวนคน</div>
+          <div class="sidebar-divider-space">{{'menu.count-hr'|translate}}</div>
 
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/people') }">
             <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/people'">
               <mat-icon svgIcon="hour"></mat-icon>
-              รายชั่วโมง
+              {{'menu.hour'|translate}}
             </a>
           </li>
-          <div *ngIf="isAdmin">
+
+          <div>
             <div class="sidebar-divider-space">ตั้งค่า</div>
-            <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/users') }">
+            <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/setting') }">
+              <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/setting'">
+                <mat-icon svgIcon="setting"></mat-icon>
+                {{'menu.setting'|translate}}
+              </a>
+            </li>
+            <li *ngIf="isAdmin" class="nav-item" [ngClass]="{ 'bar-title': href.includes('/users') }">
               <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/users'">
                 <mat-icon svgIcon="user"></mat-icon>
-                ผู้ใช้งาน
+                {{'menu.users'|translate}}
               </a>
             </li>
           </div>
@@ -132,7 +144,7 @@
           <li class="nav-item">
             <a class="nav-link logout" (click)="logout()">
               <mat-icon svgIcon="logout"></mat-icon>
-              ออกจากระบบ
+              {{'menu.logout'|translate}}
             </a>
           </li>
         </ul>

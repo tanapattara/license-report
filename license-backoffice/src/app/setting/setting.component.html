@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="header-section row">
+        <div class="col-10">
+            <div class="component-title">{{'setting.title'|translate}}</div>
+            <div class="component-subtitle">
+                {{'setting.subtitle'|translate}}
+            </div>
+        </div>
+    </div>
+    <div class="user-container">
+        <div class="row">
+            <div class="col">{{'setting.display-language'|translate}}</div>
+            <div class="col"><mat-form-field appearance="outline">
+                    <mat-select #languageSelection [value]="lang">
+                        <mat-option value="th">{{'setting.language.th'|translate}}</mat-option>
+                        <mat-option value="en">{{'setting.language.en'|translate}}</mat-option>
+                    </mat-select>
+                </mat-form-field></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"><button mat-raised-button color="primary" style="
+                    width: 120px !important;
+                    margin-right: 5px;
+                    min-width: unset !important;
+                  " (click)="save()">{{'save'|translate}}
+                </button></div>
+        </div>
+    </div>
+</div>

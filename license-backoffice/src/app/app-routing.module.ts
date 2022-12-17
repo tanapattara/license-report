@@ -18,6 +18,7 @@ import { ChartHeatmapHourComponent } from './chart-heatmap-hour/chart-heatmap-ho
 import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pie-car-per-month.component';
 import { LicenseWarningLetterComponent } from './license-warning-letter/license-warning-letter.component';
 import { ChartBarPeopleHourComponent } from './chart-bar-people-hour/chart-bar-people-hour.component';
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   {
@@ -102,7 +103,12 @@ const routes: Routes = [
     component: LicenseWarningLetterComponent,
     canActivate: [AuthGuard],
   },
-
+  {
+    path: 'setting',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '', component: SettingComponent }],
+  },
   {
     path: 'users',
     component: HomeLayoutComponent,

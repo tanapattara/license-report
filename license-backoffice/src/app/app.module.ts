@@ -27,7 +27,7 @@ import { LoginLayoutComponent } from './layouts/login-layout/login-layout.compon
 import { ChartHeatmapMonthComponent } from './chart-heatmap-month/chart-heatmap-month.component';
 import { ChartHeatmapHourComponent } from './chart-heatmap-hour/chart-heatmap-hour.component';
 
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { ChartPieCarPerMonthComponent } from './chart-pie-car-per-month/chart-pie-car-per-month.component';
 import { LicenseEditDialogComponent } from './license-edit-dialog/license-edit-dialog.component';
@@ -40,6 +40,11 @@ import { UserDeleteDialogComponent } from './user-delete-dialog/user-delete-dial
 import { ChartBarPeopleHourComponent } from './chart-bar-people-hour/chart-bar-people-hour.component';
 import { MapDialogComponent } from './map-dialog/map-dialog.component';
 
+// import ngx-translate and the http loader
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { SettingComponent } from './setting/setting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +76,7 @@ import { MapDialogComponent } from './map-dialog/map-dialog.component';
     UserDeleteDialogComponent,
     ChartBarPeopleHourComponent,
     MapDialogComponent,
+    SettingComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,8 +86,21 @@ import { MapDialogComponent } from './map-dialog/map-dialog.component';
     HttpClientModule,
     NgChartsModule,
     NgApexchartsModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
