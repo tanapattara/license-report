@@ -3,10 +3,10 @@
     <div class="col-lg-8 d-flex flex-row">
       <div class="mr-auto p-2">
         <div class="component-title">
-          สถิตินับจำนวนคน พื้นที่บึงสีฐาน1
+          {{'count.title'|translate}}
         </div>
         <div class="component-subtitle">
-          สถิติแยกรายชั่วโมง ของภาพรวมทั้งหมด
+          {{'count.subtitle'|translate}}
         </div>
       </div>
       <div class="lic-spacer"></div>
@@ -15,19 +15,23 @@
 
   <div class="searchbox row">
     <mat-form-field class="col-md-3" appearance="outline">
-      <mat-label>ระหว่างวันที่</mat-label>
+      <mat-label>{{'filter.datelayer'|translate}}</mat-label>
       <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-        <input matStartDate [(ngModel)]="datepickerInput1" formControlName="start" placeholder="เริ่มต้น" />
-        <input [(ngModel)]="datepickerInput2" matEndDate formControlName="end" placeholder="สิ้นสุด" />
+        <input matStartDate [(ngModel)]="datepickerInput1" formControlName="start"
+          placeholder="{{'filter.date-start'|translate}}" />
+        <input [(ngModel)]="datepickerInput2" matEndDate formControlName="end"
+          placeholder="{{'filter.date-end'|translate}}" />
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
 
-      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">รูปแบบวันที่เริ่มต้นไม่ถูกต้อง</mat-error>
-      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">รูปแบบวันที่สุดท้ายไม่ถูกต้อง</mat-error>
+      <mat-error
+        *ngIf="range.controls.start.hasError('matStartDateInvalid')">{{'filter.date-start-wrong'|translate}}</mat-error>
+      <mat-error
+        *ngIf="range.controls.end.hasError('matEndDateInvalid')">{{'filter.date-end-wrong'|translate}}</mat-error>
     </mat-form-field>
     <mat-form-field class="col-md-2" appearance="outline">
-      <mat-label>ประตู</mat-label>
+      <mat-label>{{'filter.door'|translate}}</mat-label>
       <mat-select #channelSelection [value]="defaultChannel">
         <mat-option *ngFor="let item of channel" [value]="item">{{
           item
@@ -39,7 +43,8 @@
         <div class="row">
           <div class="col-3" style="margin-bottom: 8px">
             <div class="car-sum">
-              <span>จำนวน {{ _count | number }} คน</span>
+              <span>{{'filter.total'|translate}} {{ _count | number }}
+                {{'filter.people'|translate}}</span>
             </div>
           </div>
 
@@ -56,14 +61,14 @@
               width: 120px !important;
               min-width: unset !important;
             ">
-            ค้นหา
+            {{'filter.search'|translate}}
           </button>
           <button mat-flat-button color="accent" (click)="clearFilter()" style="
               margin-right: 5px;
               width: 120px !important;
               min-width: unset !important;
             ">
-            ล้างการค้นหา
+            {{'filter.clear-search'|translate}}
           </button>
           <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png" />
         </div>

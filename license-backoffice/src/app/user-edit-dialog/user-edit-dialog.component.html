@@ -1,31 +1,31 @@
 <div align="center">
-  <div class="component-title">แก้ไขผู้ใช้งาน</div>
-  <div class="component-subtitle">กรุณากรอกข้อมูลด้านล่าง</div>
+  <div class="component-title">{{'users.dialog.edit.title'|translate}}</div>
+  <div class="component-subtitle">{{'users.dialog.edit.subtitle'|translate}}</div>
 </div>
 <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content>
     <mat-form-field class="col-12" appearance="outline">
-      <mat-label>ชื่อ</mat-label>
+      <mat-label>{{'users.column.name'|translate}}</mat-label>
       <input matInput formControlName="firstname" type="text" />
     </mat-form-field>
     <mat-form-field class="col-12" appearance="outline">
-      <mat-label>นามสกุล</mat-label>
+      <mat-label>{{'users.column.lname'|translate}}</mat-label>
       <input matInput formControlName="lastname" type="text" />
     </mat-form-field>
     <mat-form-field class="col-12" appearance="outline">
-      <mat-label>เบอร์โทรศัพท์</mat-label>
+      <mat-label>{{'users.column.phone'|translate}}</mat-label>
       <input matInput formControlName="phone" type="text" />
     </mat-form-field>
     <mat-form-field class="col-12" appearance="outline">
-      <mat-label>อีเมล</mat-label>
+      <mat-label>{{'users.column.mail'|translate}}</mat-label>
       <input matInput formControlName="email" type="email" required />
     </mat-form-field>
     <mat-form-field class="col-12" appearance="outline">
-      <mat-label>ชื่อผู้ใช้งาน</mat-label>
+      <mat-label>{{'users.column.username'|translate}}</mat-label>
       <input matInput formControlName="username" type="text" required />
     </mat-form-field>
     <mat-form-field class="col-12" appearance="outline">
-      <mat-label>ประเภทผู้ใช้</mat-label>
+      <mat-label>{{'users.column.role'|translate}}</mat-label>
       <mat-select formControlName="role" [(value)]="roleselected">
         <mat-option *ngFor="let role of userRole" [value]="role.id">
           {{ role.name }}
@@ -34,10 +34,10 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions align="end">
-    <button mat-flat-button mat-dialog-close>ยกเลิก</button>
+    <button mat-flat-button mat-dialog-close>{{'users.dialog.edit.cancle'|translate}}</button>
     <div class="flex-spacer"></div>
     <button mat-flat-button cdkFocusInitial color="primary" type="submit">
-      <mat-icon>save</mat-icon> บันทึก
+      <mat-icon>save</mat-icon> {{'users.dialog.edit.save'|translate}}
     </button>
   </div>
 </form>

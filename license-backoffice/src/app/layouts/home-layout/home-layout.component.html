@@ -35,7 +35,7 @@
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/color') }">
             <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/color'">
               <mat-icon svgIcon="color"></mat-icon>
-              สีรถ
+              {{'menu.color'|translate}}
             </a>
           </li>
           <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/type') }">
@@ -124,7 +124,7 @@
           </li>
 
           <div>
-            <div class="sidebar-divider-space">ตั้งค่า</div>
+            <div class="sidebar-divider-space">{{'menu.setting-hr'|translate}}</div>
             <li class="nav-item" [ngClass]="{ 'bar-title': href.includes('/setting') }">
               <a class="nav-link" [routerLinkActive]="['is-active']" [routerLink]="'/setting'">
                 <mat-icon svgIcon="setting"></mat-icon>
