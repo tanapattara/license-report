@@ -20,6 +20,7 @@ import { LicenseEditDialogComponent } from '../license-edit-dialog/license-edit-
 import { FilterComponent } from '../filter/filter.component';
 import { ExcelService } from '../services/excel.service';
 import { LicenseWarningLetterDialogComponent } from '../license-warning-letter-dialog/license-warning-letter-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-license-table',
@@ -57,7 +58,8 @@ export class LicenseTableComponent implements OnInit {
     public dialog: MatDialog,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    private tran: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'car',
@@ -87,8 +89,8 @@ export class LicenseTableComponent implements OnInit {
   );
 
   isLoading: boolean = true;
-  ngOnInit(): void { }
-  ngDoCheck() { }
+  ngOnInit(): void {}
+  ngDoCheck() {}
   ngOnDestroy() {
     this.notifierSubscription.unsubscribe();
   }
@@ -102,13 +104,13 @@ export class LicenseTableComponent implements OnInit {
   printExcelDataEvent(event: any) {
     this.printExcel();
   }
-  printPDFDataEvent(event:any){
+  printPDFDataEvent(event: any) {
     this.printPDF();
   }
 
   getType(type: string) {
-    if (type == '7' || type == '8') return 'รถจักรยานยนต์';
-    else return 'รถยนต์';
+    if (type == '7' || type == '8') return this.tran.instant('bike');
+    else return this.tran.instant('car');
   }
   summarise() {
     this.bike = 0;
@@ -126,12 +128,12 @@ export class LicenseTableComponent implements OnInit {
         data: {
           license: element,
           color: this.filterService.getColorData(),
-          province: this.filterService.getProvinceData()
-        }
+          province: this.filterService.getProvinceData(),
+        },
       })
       .afterClosed()
       .subscribe(() => {
-        this.childComponent.search()
+        this.childComponent.search();
       });
   }
   exportWarning(element: License) {
@@ -143,7 +145,7 @@ export class LicenseTableComponent implements OnInit {
           data: element,
         })
         .afterClosed()
-        .subscribe(() => { });
+        .subscribe(() => {});
     }
   }
   openDialog(imgPath: string, type: number): void {
@@ -161,7 +163,7 @@ export class LicenseTableComponent implements OnInit {
         data: assetsPath,
       })
       .afterClosed()
-      .subscribe(() => { });
+      .subscribe(() => {});
   }
 
   printExcel() {
@@ -173,7 +175,10 @@ export class LicenseTableComponent implements OnInit {
     let row: any[][] = [];
 
     datas.forEach((value, index, array) => {
-      let type = value.Type == '7' || value == '8' ? 'มอเตอร์ไซด์' : 'รถยนต์';
+      let type =
+        value.Type == '7' || value == '8'
+          ? this.tran.instant('bike')
+          : this.tran.instant('car');
       let d = new Date(value.aDate);
       let temp = [
         index + 1,
@@ -195,7 +200,7 @@ export class LicenseTableComponent implements OnInit {
       'normal'
     );
     doc.setFont('BaiJamjuree-Medium', 'normal');
-    doc.text('รายชื่อผู้เข้าใช้บริการ', 15, 10);
+    doc.text(this.tran.instant('license.title'), 15, 10);
     autoTable(doc, {
       head: [
         [
@@ -219,5 +224,4 @@ export class LicenseTableComponent implements OnInit {
 
     doc.save('license report.pdf');
   }
-
 }
