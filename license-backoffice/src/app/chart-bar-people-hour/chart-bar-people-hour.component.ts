@@ -11,6 +11,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chart-bar-people-hour',
@@ -35,49 +36,8 @@ export class ChartBarPeopleHourComponent implements OnInit {
   chartDictionaryCount = new Map<string, number>();
   //chartDictionaryOut = new Map<string, number>();
 
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        stacked: true,
-        title: {
-          display: true,
-          text: 'ชั่วโมง',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-      y: {
-        stacked: true,
-        min: 0,
-        title: {
-          display: true,
-          text: 'จำนวน',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-        align: 'start',
-      },
-      datalabels: {
-        anchor: 'center',
-        align: 'center',
-        display: (context) => {
-          return context.dataset.data[context.dataIndex] != 0;
-        },
-        color: (context) => {
-          var strColor = context.datasetIndex == 0 ? 'white' : 'black';
-          return strColor;
-        },
-        formatter: (value, ctx) => {
-          return value.toLocaleString();
-        },
-      },
-    },
-  };
+  public barChartOptions: ChartConfiguration['options'];
+
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [DataLabelsPlugin];
 
@@ -86,7 +46,7 @@ export class ChartBarPeopleHourComponent implements OnInit {
     datasets: [
       {
         data: [],
-        label: 'จำนวนคน',
+        label: this.translate.instant('chart.label'),
         borderColor: 'rgb(204, 61, 0)',
         backgroundColor: 'rgb(204, 61, 0)',
         borderRadius: Number.MAX_VALUE,
@@ -104,12 +64,57 @@ export class ChartBarPeopleHourComponent implements OnInit {
     private api: ApiService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private translate: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'map',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Mapcolor.svg')
     );
+
+    this.barChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          stacked: true,
+          title: {
+            display: true,
+            text: this.translate.instant('chart.hour'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+        y: {
+          stacked: true,
+          min: 0,
+          title: {
+            display: true,
+            text: this.translate.instant('chart.count'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          align: 'start',
+        },
+        datalabels: {
+          anchor: 'center',
+          align: 'center',
+          display: (context) => {
+            return context.dataset.data[context.dataIndex] != 0;
+          },
+          color: (context) => {
+            var strColor = context.datasetIndex == 0 ? 'white' : 'black';
+            return strColor;
+          },
+          formatter: (value, ctx) => {
+            return value.toLocaleString();
+          },
+        },
+      },
+    };
   }
 
   ngOnInit(): void {}

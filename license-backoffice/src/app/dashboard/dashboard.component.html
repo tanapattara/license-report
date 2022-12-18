@@ -1,12 +1,12 @@
 <div class="container">
 
   <div class="component-title">{{ 'dashboard.title' | translate}}</div>
-  <div class="component-subtitle">สถิติทั้งหมด ของรถแต่ละประเภท</div>
+  <div class="component-subtitle">{{ 'dashboard.subtitle' | translate}}</div>
   <div class="row">
     <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-red">
         <div>
-          <h4 class="h4-red-card">ทั้งหมด (คัน)</h4>
+          <h4 class="h4-red-card">{{ 'dashboard.card.all' | translate}}</h4>
           <h1 class="h1-red-card">{{ car + moto | number }}</h1>
         </div>
       </div>
@@ -14,7 +14,7 @@
     <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-white">
         <div>
-          <h4 class="h4-white-card">รถยนต์ (คัน)</h4>
+          <h4 class="h4-white-card">{{ 'dashboard.card.car' | translate}}</h4>
           <h1 class="h1-white-card">{{ car | number }}</h1>
         </div>
       </div>
@@ -23,7 +23,7 @@
     <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-white">
         <div>
-          <h4 class="h4-white-card">จักรยานยนต์ (คัน)</h4>
+          <h4 class="h4-white-card">{{ 'dashboard.card.bike' | translate}}</h4>
           <h1 class="h1-white-card">{{ moto | number }}</h1>
         </div>
 
@@ -32,7 +32,7 @@
     <div class="col-md-12 col-lg-6 col-xl-2">
       <div class="card-red">
         <div>
-          <h4 class="h4-red-card">ความเร็วเฉลี่ย</h4>
+          <h4 class="h4-red-card">{{ 'dashboard.card.speed' | translate}}</h4>
           <h1 class="h1-red-card">{{ speedavg | number : '1.0-2' }} <h4 style="font-size: 26px;">km/hr</h4>
           </h1>
         </div>
@@ -42,7 +42,7 @@
       <div class="card-white-speed">
         <div class="row">
           <div class="col-6">
-            <h6 class="h4-white-card">ความเร็วเกิน 50 km/hr</h6>
+            <h6 class="h4-white-card">{{ 'dashboard.card.over' | translate}}</h6>
             <h1 class="h1-white-card">{{ over50 | number}} <h4 style="font-size: 26px;">({{ over50percent |
                 number:'1.0-2'}}%)</h4>
             </h1>
@@ -50,14 +50,16 @@
           <div class="col-6" style="">
             <div class="card-white-speed-small">
               <div class="card-body">
-                <h6 class="card-title" style="color: #eb5a47 !important;">รถยนต์ (คัน)</h6>
+                <h6 class="card-title" style="color: #eb5a47 !important;">{{ 'dashboard.card.over-car' | translate}}
+                </h6>
                 <p class="card-text">{{ over50car | number: '1.0-0'}} ({{ over50percent_car |
                   number: '1.0-0'}}%)</p>
               </div>
             </div>
             <div class="card-white-speed-small">
               <div class="card-body">
-                <h6 class="card-title" style="color: #eb5a47 !important;">จักรยานยนต์ (คัน)</h6>
+                <h6 class="card-title" style="color: #eb5a47 !important;">{{ 'dashboard.card.over-bike' | translate}}
+                </h6>
                 <p class="card-text">{{ over50bike | number: '1.0-0'}} ({{ over50percent_bike |
                   number: '1.0-0'}}%)</p>
               </div>
@@ -70,9 +72,9 @@
     <div class="col-lg-12">
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="card-title">สถิติในแต่ละชั่วโมง</h5>
+          <h5 class="card-title">{{ 'dashboard.card.hour-title' | translate}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            สถิติยานพาหนะ ของภาพรวมทั้งหมด
+            {{ 'dashboard.card.hour-subtitle' | translate}}
           </h6>
           <div style="display: block; height:424px">
             <canvas baseChart [data]="barChartHourData" [options]="barChartHourOptions" [type]="barChartType">
@@ -85,9 +87,9 @@
     <div class="col-lg-8">
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="card-title">สถิติในแต่ละเดือน</h5>
+          <h5 class="card-title">{{ 'dashboard.card.month-title' | translate}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            สถิติยานพาหนะ ของรายเดือน
+            {{ 'dashboard.card.month-subtitle' | translate}}
           </h6>
           <div style="display: block; height:250px">
             <canvas #chartMonth baseChart [data]="barChartMonthData" [options]="barChartMonthOptions"
@@ -100,9 +102,9 @@
     <div class="col-lg-4">
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="card-title">สถิติในแต่ละวัน</h5>
+          <h5 class="card-title">{{ 'dashboard.card.day-title' | translate}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">
-            สถิติยานพาหนะ ของรายวัน
+            {{ 'dashboard.card.day-subtitle' | translate}}
           </h6>
           <div style="display: block; height:250px">
             <canvas #chartDay baseChart [data]="barChartDayData" [options]="barChartDayOptions" [type]="barChartType">

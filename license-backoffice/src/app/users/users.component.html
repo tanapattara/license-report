@@ -58,7 +58,7 @@
 
         <!-- email Column -->
         <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'users.column.type'|translate}}</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'users.column.role'|translate}}</th>
           <td mat-cell *matCellDef="let element">
             {{ element.role == 3 ? ('users.column.admin'|translate) : ('users.column.user'|translate) }}
           </td>

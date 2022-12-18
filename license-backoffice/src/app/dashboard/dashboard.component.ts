@@ -11,6 +11,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DashboardService } from '../services/dashboard.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -161,41 +162,7 @@ export class DashboardComponent implements OnInit {
       },
     },
   };
-  public barChartMonthData: ChartData<'bar'> = {
-    labels: [
-      'ม.ค.',
-      'ก.พ.',
-      'มี.ค.',
-      'เม.ย.',
-      'พ.ค.',
-      'มิ.ย.',
-      'ก.ค.',
-      'ส.ค.',
-      'ก.ย.',
-      'ต.ค.',
-      'พ.ย.',
-      'ธ.ค.',
-    ],
-    datasets: [
-      {
-        label: 'รถยนต์',
-        data: [],
-        borderColor: 'rgb(204, 61, 0)',
-        backgroundColor: 'rgb(204, 61, 0)',
-        borderRadius: Number.MAX_VALUE,
-        hoverBackgroundColor: 'rgb(233, 237, 247)',
-        borderSkipped: 'middle',
-      },
-      {
-        label: 'รถจักรยานยนต์',
-        data: [],
-        borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)',
-        borderRadius: Number.MAX_VALUE,
-        hoverBackgroundColor: 'rgb(233, 237, 247)',
-      },
-    ],
-  };
+  public barChartMonthData: ChartData<'bar'>;
   // Day
   public barChartDayOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -223,33 +190,81 @@ export class DashboardComponent implements OnInit {
       },
     },
   };
-  public barChartDayData: ChartData<'bar'> = {
-    labels: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'],
-    datasets: [
-      {
-        label: 'รถยนต์',
-        data: [],
-        borderColor: 'rgb(204, 61, 0)',
-        backgroundColor: 'rgb(204, 61, 0)',
-        borderRadius: Number.MAX_VALUE,
-        hoverBackgroundColor: 'rgb(233, 237, 247)',
-        borderSkipped: 'middle',
-      },
-      {
-        label: 'รถจักรยานยนต์',
-        data: [],
-        borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)',
-        borderRadius: Number.MAX_VALUE,
-        hoverBackgroundColor: 'rgb(233, 237, 247)',
-      },
-    ],
-  };
+  public barChartDayData: ChartData<'bar'>;
 
   public doughnutChartType: ChartType = 'doughnut';
   public barChartType: ChartType = 'bar';
 
-  constructor(private apiService: DashboardService) {}
+  constructor(
+    private apiService: DashboardService,
+    private translate: TranslateService
+  ) {
+    this.barChartMonthData = {
+      labels: [
+        this.translate.instant('jan'),
+        this.translate.instant('feb'),
+        this.translate.instant('mar'),
+        this.translate.instant('apr'),
+        this.translate.instant('may'),
+        this.translate.instant('jun'),
+        this.translate.instant('jul'),
+        this.translate.instant('aug'),
+        this.translate.instant('sep'),
+        this.translate.instant('oct'),
+        this.translate.instant('nov'),
+        this.translate.instant('dec'),
+      ],
+      datasets: [
+        {
+          label: this.translate.instant('car'),
+          data: [],
+          borderColor: 'rgb(204, 61, 0)',
+          backgroundColor: 'rgb(204, 61, 0)',
+          borderRadius: Number.MAX_VALUE,
+          hoverBackgroundColor: 'rgb(233, 237, 247)',
+          borderSkipped: 'middle',
+        },
+        {
+          label: this.translate.instant('bike'),
+          data: [],
+          borderColor: 'rgb(255, 172, 131)',
+          backgroundColor: 'rgb(255, 172, 131)',
+          borderRadius: Number.MAX_VALUE,
+          hoverBackgroundColor: 'rgb(233, 237, 247)',
+        },
+      ],
+    };
+    this.barChartDayData = {
+      labels: [
+        this.translate.instant('sun'),
+        this.translate.instant('mon'),
+        this.translate.instant('tue'),
+        this.translate.instant('wed'),
+        this.translate.instant('thu'),
+        this.translate.instant('fri'),
+        this.translate.instant('sat'),
+      ],
+      datasets: [
+        {
+          label: 'รถยนต์',
+          data: [],
+          borderColor: 'rgb(204, 61, 0)',
+          backgroundColor: 'rgb(204, 61, 0)',
+          borderRadius: Number.MAX_VALUE,
+          hoverBackgroundColor: 'rgb(233, 237, 247)',
+          borderSkipped: 'middle',
+        },
+        {
+          label: 'รถจักรยานยนต์',
+          data: [],
+          borderColor: 'rgb(255, 172, 131)',
+          backgroundColor: 'rgb(255, 172, 131)',
+          borderRadius: Number.MAX_VALUE,
+          hoverBackgroundColor: 'rgb(233, 237, 247)',
+        },
+      ],
+    };
+  }
 
   ngOnInit(): void {}
   ngAfterViewInit(): void {
