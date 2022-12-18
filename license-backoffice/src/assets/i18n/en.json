@@ -1,11 +1,221 @@
 {
-    "dashboard": {
-        "title": "Statistics"
+    "save":"save",
+    "no-data":"No data matching the filter",
+    "sun":"Sun",
+    "mon":"Mon",
+    "tue":"Tue",
+    "wed":"Wed",
+    "thu":"Thu",
+    "fri":"Fri",
+    "sat":"Sat",
+
+    "jan":"Jan",
+    "feb":"Feb",
+    "mar":"Mar",
+    "apr":"Apr",
+    "may":"May",
+    "jun":"Jun",
+    "jul":"Jul",
+    "aug":"Aug",
+    "sep":"Sep",
+    "oct":"Oct",
+    "nov":"Nov",
+    "dec":"Dec",
+
+    "january":"January",
+    "february":"February",
+    "march":"March",
+    "april":"April",
+    "mayy":"May",
+    "june":"June",
+    "july":"July",
+    "august":"August",
+    "september":"September",
+    "october":"October",
+    "november":"November",
+    "december":"December",
+
+    "car":"Car",
+    "bike":"Bike",
+    "car-unit":"",
+    "total":"Total",
+    "filter":{
+        "datelayer":"Date range",
+        "date-start-wrong":"Wrong start-date formate",
+        "date-end-wrong":"Wrong end-date formate",
+        "date-start":"Start date",
+        "date-end":"End date",
+        "door":"Gate",
+        "total":"Total",
+        "sum":"Total",
+        "people":"people",
+        "search":"Search",
+        "clear-search":"Clear",
+        "license":"License no.",
+        "place":"Gate",
+        "speed-start":"Minimum speed",
+        "speed-end":"Maximum speed",
+        "province":"Province",
+        "color":"Color",
+        "over":"Speed over 50 km/hr ",
+        "time-start":"Start time",
+        "time-end":"End time",
+        "month":"Month"
     },
-     "setting":{
+    "chart":{
+        "label":"Total",
+        "count":"Total",
+        "hour":"Hour",
+        "speed":"Speed km/hr",
+        "day":"Day",
+        "month":"Month"
+    },
+    "menu":{
+        "dashboard":"Dashboard",
+        "list":"All data",
+        "color":"Color",
+        "type":"Type",
+        "speed":"Speed",
+        "hour":"Hourly",
+        "day":"Daily",
+        "month":"Monthly",
+        "setting":"Setting",
+        "users":"Users",
+        "logout":"Logout",
+        "dashboard-hr":"Overview",
+        "detail-hr":"Details",
+        "stat-hr":"Statistics",
+        "count-hr":"Counter",
+        "setting-hr":"Settings",
+        "pie-chart":"Pie chart",
+        "bar-chart":"Bar chart",
+        "heat-chart":"Heatmap chart"
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "subtitle":"Overview of all vehicle.",
+     
+        "card":{
+            "all":"All vehicle",
+            "car":"Car",
+            "bike":"Motorcycle",
+            "speed":"Speed average",
+            "over":"Speed over 50 km/hr",
+            "over-car":"Car",
+            "over-bike":"Motorcycle",
+            "hour-title":"Hourly Statistics",
+            "hour-subtitle":"Overall of statistics of all vehicle.",
+            "month-title":"Monthly Statistics",
+            "month-subtitle":"Overall of statistics per month.",
+            "day-title":"Daily Statistics",
+            "day-subtitle":"Overall of statistics per day"
+        }
+       
+    },
+    "license":{
+        "title":"Data of license plate",
+        "subtitle":"All records of all vehicle's license plate.",
+        "column":{
+            "no":"No.",
+            "license":"License no.",
+            "province":"Province",
+            "color":"Color",
+            "brand":"Brand",
+            "type":"Type",
+            "speed":"Speed",
+            "place":"Place",
+            "aday":"Create date",
+            "bday":"Update date",
+            "action":"Action"
+        }
+    },
+     "color":{
+        "title":"Color of vehicle",
+        "subtitle":"Chart of vehicle's color data"
+    },
+    "cartype":{
+        "title":"Type of vehicle",
+        "subtitle":"Chart of vehicle's type data."
+    },
+    "speed":{
+        "title":"Statistics of vehicle's speed",
+        "subtitle":"Chart of vehicle's speed data."
+    },
+    "hour":{
+        "title":"Hourly statistics",
+        "subtitle":"Chart of vehicle data per hour."
+    },
+    "day":{
+        "title":"Daily statistics",
+        "subtitle":"Chart of vehicle data per day."
+    },
+    "month":{
+        "title":"Monthly statistics",
+        "subtitle":"Chart of vehicle data per month."
+    },
+    "count":{
+        "title":"Statistics of people in area",
+        "subtitle":"Chart of people in area per hour.",
+        "close":"Close"
+    },
+    "setting":{
+        "title":"Settings",
+        "subtitle":"Web settings and configuration.",
+        "display-language":"Display language",
         "language":{
             "th":"Thai",
             "en":"English"
         }
+    },
+    "users":{
+        "title":"List of users",
+        "subtitle":"users in system.",
+        "new":"Create",
+        "column":{
+            "no":"No.",
+            "username":"Username",
+            "name":"First mame",
+            "lname":"Last name",
+            "phone":"Phone",
+            "mail":"Email",
+            "role":"Role",
+            "action":"Manage",
+            "edit":"Edit",
+            "delete":"Delete",
+            "admin":"Admin",
+            "user":"User",
+            "password":"Password"
+        },
+        "dialog":{
+            "new":{
+                "title":"Create new user",
+                "subtitle":"Please add new user data.",  
+                "cancle":"Cancle",
+                "save":"Save"
+            },
+            "edit":{
+                "title":"Edit user",
+                "subtitle":"Please update user data.",
+                "cancle":"Cancle",
+                "save":"Save"
+            },
+            "delete":{
+                "title":"Delete user data",
+                "subtitle":"Do you want to delete user ",
+                "question":" ?",
+                "cancle":"Cancle",
+                "confirm":"Delete"
+            }
+        }
+
+    },
+    "login":{
+        "title":"Login",
+        "welcome":"WELCOME",
+        "appname1":"Vehicle Records System",
+        "appname2":"Khon Kaen University",
+        "username":"Username",
+        "password":"Password",
+        "login":"Login"
     }
 }
