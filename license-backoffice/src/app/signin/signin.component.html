@@ -2,31 +2,30 @@
   <div class="row" style="height: 100%">
     <div class="col login-logo">
       <img src="../../assets/img/LogoKKU.png" class="img-fluid rounded-start" alt="..." style="margin-top: 46px" />
-      <div class="login-title">WELCOME</div>
-
+      <div class="login-title">{{'login.welcome'|translate}}</div>
       <div class="login-subtitle">
-        ระบบจัดการรถเข้าออก<br />ภายในมหาวิทยาลัยขอนแก่น
+        {{'login.appname1'|translate}}<br>{{'login.appname2'|translate}}
       </div>
     </div>
     <div class="col login-form">
       <div class="card-body">
-        <h5 class="card-title">ลงชื่อเข้าสู่ระบบ</h5>
+        <h5 class="card-title">{{'login.title'|translate}}</h5>
         <div>
           <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Username</mat-label>
+                <mat-label>{{'login.username'|translate}}</mat-label>
                 <input matInput type="text" required formControlName="username" />
               </mat-form-field>
             </p>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
+                <mat-label>{{'login.password'|translate}}</mat-label>
                 <input matInput type="password" required formControlName="password" />
               </mat-form-field>
             </p>
             <button type="submit" mat-flat-button color="primary">
-              เข้าสู่ระบบ
+              {{'login.login'|translate}}
             </button>
           </form>
         </div>

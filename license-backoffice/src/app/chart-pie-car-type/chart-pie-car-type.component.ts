@@ -9,6 +9,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chart-pie-car-type',
@@ -52,15 +53,7 @@ export class ChartPieCarTypeComponent implements OnInit {
     },
     maintainAspectRatio: false,
   };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: ['รถยนต์', 'รถจักรยานยนต์'],
-    datasets: [
-      {
-        data: [],
-        backgroundColor: ['rgb(204, 61, 0)', 'rgb(255, 172, 131)'],
-      },
-    ],
-  };
+  public pieChartData: ChartData<'pie', number[], string | string[]>;
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [DatalabelsPlugin];
 
@@ -77,12 +70,22 @@ export class ChartPieCarTypeComponent implements OnInit {
     private api: ApiService,
     private filterService: FilterlicenseService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    private tran: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'printer',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg')
     );
+    this.pieChartData = {
+      labels: [this.tran.instant('car'), this.tran.instant('bike')],
+      datasets: [
+        {
+          data: [],
+          backgroundColor: ['rgb(204, 61, 0)', 'rgb(255, 172, 131)'],
+        },
+      ],
+    };
   }
 
   chartDictionary = new Map<string, number>();

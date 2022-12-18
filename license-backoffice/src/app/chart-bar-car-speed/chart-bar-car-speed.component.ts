@@ -10,6 +10,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Filter } from '../model/Filter';
 import { MatSelect } from '@angular/material/select';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chart-bar-car-speed',
@@ -124,110 +125,113 @@ export class ChartBarCarSpeedComponent implements OnInit {
       },
     },
   };
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    scales: {
-      x: {
-        stacked: true,
-        title: {
-          display: true,
-          text: 'ความเร็ว km/hr',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-      y: {
-        stacked: true,
-        min: 0,
-        title: {
-          display: true,
-          text: 'จำนวน',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-        align: 'start',
-      },
-      datalabels: {
-        display: (context) => {
-          var datai = context.dataIndex;
-          return context.dataset.data[datai] != 0;
-        },
-        anchor: 'center',
-        align: 'center',
-        color: (context) => {
-          var strColor = context.datasetIndex == 0 ? 'white' : 'black';
-          return strColor;
-        },
-        formatter: (value, ctx) => {
-          return value.toLocaleString();
-        },
-      },
-    },
-  };
+  public barChartOptions: ChartConfiguration['options'];
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [DataLabelsPlugin];
 
-  public barChartData: ChartData<'bar'> = {
-    labels: [
-      '0',
-      '10',
-      '20',
-      '30',
-      '40',
-      '50',
-      '60',
-      '70',
-      '80',
-      '90',
-      '100',
-      '110',
-      '120',
-      '130+',
-    ],
-    datasets: [
-      {
-        data: [],
-        label: 'รถยนต์',
-        borderColor: 'rgb(204, 61, 0)',
-        backgroundColor: 'rgb(204, 61, 0)',
-        borderRadius: Number.MAX_VALUE,
-        borderSkipped: 'middle',
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-      },
-      {
-        data: [],
-        label: 'รถจักรยานยนต์',
-        borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)',
-        borderRadius: Number.MAX_VALUE,
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-      },
-    ],
-  };
+  public barChartData: ChartData<'bar'>;
 
   filter: string = '';
 
   constructor(
     private api: ApiService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    private tran: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'printer',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg')
     );
+    this.barChartOptions = {
+      responsive: true,
+      scales: {
+        x: {
+          stacked: true,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.speed'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+        y: {
+          stacked: true,
+          min: 0,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.count'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          align: 'start',
+        },
+        datalabels: {
+          display: (context) => {
+            var datai = context.dataIndex;
+            return context.dataset.data[datai] != 0;
+          },
+          anchor: 'center',
+          align: 'center',
+          color: (context) => {
+            var strColor = context.datasetIndex == 0 ? 'white' : 'black';
+            return strColor;
+          },
+          formatter: (value, ctx) => {
+            return value.toLocaleString();
+          },
+        },
+      },
+    };
+    this.barChartData = {
+      labels: [
+        '0',
+        '10',
+        '20',
+        '30',
+        '40',
+        '50',
+        '60',
+        '70',
+        '80',
+        '90',
+        '100',
+        '110',
+        '120',
+        '130+',
+      ],
+      datasets: [
+        {
+          data: [],
+          label: this.tran.instant('car'),
+          borderColor: 'rgb(204, 61, 0)',
+          backgroundColor: 'rgb(204, 61, 0)',
+          borderRadius: Number.MAX_VALUE,
+          borderSkipped: 'middle',
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+        },
+        {
+          data: [],
+          label: this.tran.instant('bike'),
+          borderColor: 'rgb(255, 172, 131)',
+          backgroundColor: 'rgb(255, 172, 131)',
+          borderRadius: Number.MAX_VALUE,
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+        },
+      ],
+    };
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   clearDic() {
     this.bike = 0;
     this.car = 0;
@@ -352,19 +356,17 @@ export class ChartBarCarSpeedComponent implements OnInit {
       if (isBike) {
         this.chartDictionaryBike.set(k, value);
         this.bike++;
-        if (speed > 50)
-          this.o50bike++;
+        if (speed > 50) this.o50bike++;
       } else {
         this.chartDictionaryCar.set(k, value);
         this.car++;
-        if (speed > 50)
-          this.o50car++;
+        if (speed > 50) this.o50car++;
       }
     }
 
     this.o50 = this.o50bike + this.o50car;
-    this.o50bike_per = this.o50bike / this.o50 * 100;
-    this.o50car_per = this.o50car / this.o50 * 100;
+    this.o50bike_per = (this.o50bike / this.o50) * 100;
+    this.o50car_per = (this.o50car / this.o50) * 100;
     for (let [key, value] of this.chartDictionaryCar) {
       let ktext = key.toString();
       if (key == 130) ktext = '130+';
