@@ -2,37 +2,18 @@
   <div class="row">
     <div class="col-lg-8 d-flex flex-row">
       <div class="mr-auto p-2">
-        <div class="component-title">สถิติแยกตามรายวัน</div>
-        <div class="component-subtitle">สถิติแยกรายวัน ของภาพรวมทั้งหมด</div>
+        <div class="component-title">{{'day.title'|translate}}</div>
+        <div class="component-subtitle">{{'day.subtitle'|translate}}</div>
       </div>
       <div class="lic-spacer"></div>
-      <!-- <div class="p-2 align-self-center">
-        <button mat-mini-fab class="print-icon-button noprint" aria-label="print to pdf" (click)="print()">
-          <mat-icon svgIcon="printer"></mat-icon>
-        </button>
-      </div> -->
+
     </div>
-    <!-- <div class="col-sm-6 col-lg-2">
-      <div class="card card-summation-red">
-        <div class="card-body">
-          <p class="card-text card-summation-red-text">รถยนต์</p>
-          <h4 class="card-title card-summation-red-text">{{ car | number }}</h4>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-2">
-      <div class="card card-summation-white">
-        <div class="card-body">
-          <p class="card-text card-summation-white-text">จักรยานยนต์</p>
-          <h4 class="card-title card-summation-white-text">{{ bike | number }}</h4>
-        </div>
-      </div>
-    </div> -->
+
   </div>
 
   <div class="searchbox row">
     <mat-form-field class="col-2" appearance="outline">
-      <mat-label>เดือน</mat-label>
+      <mat-label>{{'filter.month'| translate}}</mat-label>
       <mat-select #monthSelection [value]="defaultValue" (selectionChange)="applyFilter($event)">
         <mat-option *ngFor="let item of month" [value]="item">{{
           item
@@ -40,7 +21,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-md-2" appearance="outline">
-      <mat-label>เวลาเริ่มต้น</mat-label>
+      <mat-label>{{'filter.time-start'| translate}}</mat-label>
       <mat-select #startTimeSelection [value]="defaultValue">
         <mat-option *ngFor="let item of time" [value]="item">{{
           item
@@ -48,7 +29,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-md-2" appearance="outline">
-      <mat-label>เวลาสิ้นสุด</mat-label>
+      <mat-label>{{'filter.time-end'| translate}}</mat-label>
       <mat-select #endTimeSelection [value]="defaultValue">
         <mat-option *ngFor="let item of time" [value]="item">{{
           item
@@ -56,40 +37,38 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-md-2" appearance="outline">
-      <mat-label>ความเร็วเริ่มต้น</mat-label>
+      <mat-label>{{'filter.speed-start'| translate}}</mat-label>
       <input matInput [(ngModel)]="speedInputA" type="number" min="0" placeholder="0" />
     </mat-form-field>
     <mat-form-field class="col-md-2" appearance="outline">
-      <mat-label>ความเร็วสูงสุด</mat-label>
+      <mat-label>{{'filter.speed-start'| translate}}</mat-label>
       <input matInput [(ngModel)]="speedInputB" type="number" min="0" placeholder="120" />
     </mat-form-field>
-    <!-- <div class="col-md-2 d-flex justify-content-end align-items-center hidden-print">
-
-      <button mat-flat-button color="primary" (click)="search()" style="width: 120px!important;min-width: unset!important;">
-        ค้นหา
-      </button>
-    </div> -->
   </div>
   <div class="row" style=" margin-bottom: 1rem;">
     <div class="col-lg-8 col-md-12" style="margin-bottom: 8px;">
       <div class="row">
         <div class="col-3" style="margin-bottom: 8px;">
-          <div class=" car-sum"> <span>รถยนต์ {{ car | number }} คัน</span></div>
+          <div class=" car-sum"> <span>{{'car'| translate}} {{ car | number }} {{'car-unit'| translate}}</span></div>
         </div>
         <div class="col-3">
-          <div class=" car-sum"> <span>จักรยานยนต์ {{ bike | number }} คัน</span></div>
+          <div class=" car-sum"> <span>{{'bile'| translate}} {{ bike | number }} {{'car-unit'| translate}}</span></div>
         </div>
         <div class="col-3">
-          <div class=" car-sum"> <span>รวม {{ car + bike | number }} คัน</span></div>
+          <div class=" car-sum"> <span>{{'filter.sum'| translate}} {{ car + bike | number }} {{'car-unit'|
+              translate}}</span></div>
         </div>
         <div class="col-6">
-          <div class=" car-sum"> <span>ขับความเร็วเกิน 50 km/hr ทั้งหมด {{ o50 | number }} คัน</span></div>
+          <div class=" car-sum"> <span>{{'filter.over'| translate}} {{ o50 | number }} {{'car-unit'| translate}}</span>
+          </div>
         </div>
         <div class="col-3">
-          <div class=" car-sum"> <span>รถยนต์ {{ o50car | number }} ({{ o50car_per | number:'1.0-0' }}%)</span></div>
+          <div class=" car-sum"> <span>{{'car'| translate}} {{ o50car | number }} ({{ o50car_per | number:'1.0-0'
+              }}%)</span></div>
         </div>
         <div class="col-3">
-          <div class=" car-sum"> <span>จักรยานยนต์ {{ o50bike | number }} ({{ o50bike_per | number:'1.0-0' }}%)</span>
+          <div class=" car-sum"> <span>{{'bike'| translate}} {{ o50bike | number }} ({{ o50bike_per | number:'1.0-0'
+              }}%)</span>
           </div>
         </div>
       </div>
@@ -98,11 +77,11 @@
       <div class="hidden-print d-flex align-items-center justify-content-end" style="padding-bottom: 22px;">
         <button mat-flat-button color="primary" (click)="search()"
           style="margin-right: 5px; width: 120px!important;min-width: unset!important;">
-          ค้นหา
+          {{'filter.search'| translate}}
         </button>
         <button mat-flat-button color="accent" (click)="clearFilter()"
           style="margin-right: 5px;width: 120px!important;min-width: unset!important;">
-          ล้างการค้นหา
+          {{'filter.clear-search'| translate}}
         </button>
         <img (click)="print()" style="cursor: pointer" src="/assets/img/print_bt.png">
       </div>

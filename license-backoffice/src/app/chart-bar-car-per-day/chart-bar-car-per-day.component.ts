@@ -11,6 +11,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Filter } from '../model/Filter';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chart-bar-car-per-day',
@@ -18,8 +19,6 @@ import { Filter } from '../model/Filter';
   styleUrls: ['./chart-bar-car-per-day.component.css'],
 })
 export class ChartBarCarPerDayComponent implements OnInit {
-  title = 'แผนภูมิจำนวนรถตลอดเดือน';
-
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   @ViewChild('monthSelection') monthSelection!: MatSelect;
 
@@ -108,126 +107,131 @@ export class ChartBarCarPerDayComponent implements OnInit {
   o50 = 0;
   o50bike_per = 0;
   o50car_per = 0;
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        stacked: true,
-        display: true,
-        title: {
-          display: true,
-          text: 'วันที่',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-      y: {
-        stacked: true,
-        min: 0,
-        display: true,
-        title: {
-          display: true,
-          text: 'จำนวน',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-        align: 'start',
-      },
-      datalabels: {
-        display: (context) => {
-          return context.dataset.data[context.dataIndex] != 0;
-        },
-        color: (context) => {
-          var strColor = context.datasetIndex == 0 ? 'white' : 'black';
-          return strColor;
-        },
-        formatter: (value, ctx) => {
-          return value.toLocaleString();
-        },
-      },
-    },
-  };
+  public barChartOptions: ChartConfiguration['options'];
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [DataLabelsPlugin];
 
-  public barChartData: ChartData<'bar'> = {
-    labels: [
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      '10',
-      '11',
-      '12',
-      '13',
-      '14',
-      '15',
-      '16',
-      '17',
-      '18',
-      '19',
-      '20',
-      '21',
-      '22',
-      '23',
-      '24',
-      '25',
-      '26',
-      '27',
-      '28',
-      '29',
-      '30',
-      '31',
-    ],
-    datasets: [
-      {
-        data: [],
-        label: 'รถยนต์',
-        borderColor: 'rgb(204, 61, 0)',
-        backgroundColor: 'rgb(204, 61, 0)',
-        borderRadius: Number.MAX_VALUE,
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-        borderSkipped: 'middle',
-      },
-      {
-        data: [],
-        label: 'รถจักรยานยนต์',
-        borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)',
-        borderRadius: Number.MAX_VALUE,
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-      },
-    ],
-  };
+  public barChartData: ChartData<'bar'>;
   speedInputA = '';
   speedInputB = '';
   constructor(
     private api: ApiService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    private tran: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'printer',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg')
     );
+
+    this.barChartData = {
+      labels: [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21',
+        '22',
+        '23',
+        '24',
+        '25',
+        '26',
+        '27',
+        '28',
+        '29',
+        '30',
+        '31',
+      ],
+      datasets: [
+        {
+          data: [],
+          label: this.tran.instant('car'),
+          borderColor: 'rgb(204, 61, 0)',
+          backgroundColor: 'rgb(204, 61, 0)',
+          borderRadius: Number.MAX_VALUE,
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+          borderSkipped: 'middle',
+        },
+        {
+          data: [],
+          label: this.tran.instant('bike'),
+          borderColor: 'rgb(255, 172, 131)',
+          backgroundColor: 'rgb(255, 172, 131)',
+          borderRadius: Number.MAX_VALUE,
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+        },
+      ],
+    };
+
+    this.barChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          stacked: true,
+          display: true,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.day'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+        y: {
+          stacked: true,
+          min: 0,
+          display: true,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.count'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          align: 'start',
+        },
+        datalabels: {
+          display: (context) => {
+            return context.dataset.data[context.dataIndex] != 0;
+          },
+          color: (context) => {
+            var strColor = context.datasetIndex == 0 ? 'white' : 'black';
+            return strColor;
+          },
+          formatter: (value, ctx) => {
+            return value.toLocaleString();
+          },
+        },
+      },
+    };
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   displayData() {
     this.clearDic();
@@ -248,19 +252,17 @@ export class ChartBarCarPerDayComponent implements OnInit {
         if (isBike) {
           this.chartDictionaryBike.set(date, value);
           this.bike++;
-          if (row.Speed > 50)
-            this.o50bike++;
+          if (row.Speed > 50) this.o50bike++;
         } else {
           this.chartDictionaryCar.set(date, value);
           this.car++;
-          if (row.Speed > 50)
-            this.o50car++;
+          if (row.Speed > 50) this.o50car++;
         }
       }
     }
     this.o50 = this.o50bike + this.o50car;
-    this.o50bike_per = this.o50bike / this.o50 * 100;
-    this.o50car_per = this.o50car / this.o50 * 100;
+    this.o50bike_per = (this.o50bike / this.o50) * 100;
+    this.o50car_per = (this.o50car / this.o50) * 100;
     for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);
@@ -345,7 +347,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
     this.chartDictionaryBike.set(30, 0);
     this.chartDictionaryBike.set(31, 0);
   }
-  applyFilter(ob: MatSelectChange) { }
+  applyFilter(ob: MatSelectChange) {}
   clearFilter() {
     this.monthSelection.options.first.select();
     this.startTimeSelection.options.first.select();
@@ -494,7 +496,7 @@ export class ChartBarCarPerDayComponent implements OnInit {
     }
     return new Date(strDate);
   }
-  onChangeEvent(event: any, filtername: string) { }
+  onChangeEvent(event: any, filtername: string) {}
   public chartClicked({
     event,
     active,

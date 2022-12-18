@@ -14,6 +14,7 @@ import { License } from '../model/license';
 import { Subscription } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -56,7 +57,8 @@ export class ChartHeatmapMonthComponent implements OnInit {
     private api: ApiService,
     private filterService: FilterlicenseService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    private tran: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'printer',
@@ -66,84 +68,84 @@ export class ChartHeatmapMonthComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: 'มกราคม',
+          name: this.tran.instant('january'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'กุมภาพันธ์',
+          name: this.tran.instant('february'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'มีนาคม',
+          name: this.tran.instant('march'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'เมษายน',
+          name: this.tran.instant('april'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'พฤษภาคม',
+          name: this.tran.instant('mayy'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'มิถุนายน',
+          name: this.tran.instant('june'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'กรกฎาคม',
+          name: this.tran.instant('july'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'สิงหาคม',
+          name: this.tran.instant('august'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'กันยายน',
+          name: this.tran.instant('september'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'ตุลาคม',
+          name: this.tran.instant('october'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'พฤศจิกายน',
+          name: this.tran.instant('november'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
           ],
         },
         {
-          name: 'ธันวาคม',
+          name: this.tran.instant('december'),
           data: [
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
@@ -163,7 +165,7 @@ export class ChartHeatmapMonthComponent implements OnInit {
       colors: ['#CC3D00'],
       yaxis: {
         title: {
-          text: 'วันที่',
+          text: this.tran.instant('day'),
         },
       },
     };
@@ -180,73 +182,71 @@ export class ChartHeatmapMonthComponent implements OnInit {
         let isBike: boolean = row.Type == '7' || row.Type == '8';
         if (isBike) {
           this.bike++;
-          if (row.Speed > 50)
-            this.o50bike++;
+          if (row.Speed > 50) this.o50bike++;
         } else {
           this.car++;
-          if (row.Speed > 50)
-            this.o50car++;
+          if (row.Speed > 50) this.o50car++;
         }
         let month = '';
         let value = 0;
         switch (d.getMonth()) {
           case 0: {
-            month = 'มกราคม';
+            month = 'january';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 1: {
-            month = 'กุมภาพันธ์';
+            month = 'february';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 2: {
-            month = 'มีนาคม';
+            month = 'march';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 3: {
-            month = 'เมษายน';
+            month = 'april';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 4: {
-            month = 'พฤษภาคม';
+            month = 'mayy';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 5: {
-            month = 'มิถุนายน';
+            month = 'june';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 6: {
-            month = 'กรกฎาคม';
+            month = 'july';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 7: {
-            month = 'สิงหาคม';
+            month = 'august';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 8: {
-            month = 'กันยายน';
+            month = 'september';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 9: {
-            month = 'ตุลาคม';
+            month = 'october';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 10: {
-            month = 'พฤศจิกายน';
+            month = 'november';
             this.setDateinMonth(month, d.getDate());
             break;
           }
           case 11: {
-            month = 'ธันวาคม';
+            month = 'december';
             this.setDateinMonth(month, d.getDate());
             break;
           }
@@ -254,21 +254,39 @@ export class ChartHeatmapMonthComponent implements OnInit {
       }
     }
     this.o50 = this.o50bike + this.o50car;
-    this.o50bike_per = this.o50bike / this.o50 * 100;
-    this.o50car_per = this.o50car / this.o50 * 100;
+    this.o50bike_per = (this.o50bike / this.o50) * 100;
+    this.o50car_per = (this.o50car / this.o50) * 100;
     this.chartOptions.series = [
-      { name: 'มกราคม', data: this.generateData('มกราคม') },
-      { name: 'กุมภาพันธ์', data: this.generateData('กุมภาพันธ์') },
-      { name: 'มีนาคม', data: this.generateData('มีนาคม') },
-      { name: 'เมษายน', data: this.generateData('เมษายน') },
-      { name: 'พฤษภาคม', data: this.generateData('พฤษภาคม') },
-      { name: 'มิถุนายน', data: this.generateData('มิถุนายน') },
-      { name: 'กรกฎาคม', data: this.generateData('กรกฎาคม') },
-      { name: 'สิงหาคม', data: this.generateData('สิงหาคม') },
-      { name: 'กันยายน', data: this.generateData('กันยายน') },
-      { name: 'ตุลาคม', data: this.generateData('ตุลาคม') },
-      { name: 'พฤศจิกายน', data: this.generateData('พฤศจิกายน') },
-      { name: 'ธันวาคม', data: this.generateData('ธันวาคม') },
+      {
+        name: this.tran.instant('january'),
+        data: this.generateData('january'),
+      },
+      {
+        name: this.tran.instant('february'),
+        data: this.generateData('february'),
+      },
+      { name: this.tran.instant('march'), data: this.generateData('march') },
+      { name: this.tran.instant('april'), data: this.generateData('april') },
+      { name: this.tran.instant('mayy'), data: this.generateData('mayy') },
+      { name: this.tran.instant('june'), data: this.generateData('june') },
+      { name: this.tran.instant('july'), data: this.generateData('july') },
+      { name: this.tran.instant('august'), data: this.generateData('august') },
+      {
+        name: this.tran.instant('september'),
+        data: this.generateData('september'),
+      },
+      {
+        name: this.tran.instant('october'),
+        data: this.generateData('october'),
+      },
+      {
+        name: this.tran.instant('november'),
+        data: this.generateData('november'),
+      },
+      {
+        name: this.tran.instant('december'),
+        data: this.generateData('december'),
+      },
     ];
   }
   setDateinMonth(strMonth: string, day: number) {
@@ -280,91 +298,91 @@ export class ChartHeatmapMonthComponent implements OnInit {
   clearDic() {
     this.car = 0;
     this.bike = 0;
-    
+
     this.o50bike = 0;
     this.o50car = 0;
     this.o50 = 0;
     this.o50bike_per = 0;
     this.o50car_per = 0;
     this.chartDictionary.set(
-      'มกราคม',
+      'january',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'กุมภาพันธ์',
+      'february',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'มีนาคม',
+      'march',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'เมษายน',
+      'april',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'พฤษภาคม',
+      'mayy',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'มิถุนายน',
+      'june',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'กรกฎาคม',
+      'july',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'สิงหาคม',
+      'august',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'กันยายน',
+      'september',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'ตุลาคม',
+      'october',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'พฤศจิกายน',
+      'november',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,
       ]
     );
     this.chartDictionary.set(
-      'ธันวาคม',
+      'december',
       [
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0,

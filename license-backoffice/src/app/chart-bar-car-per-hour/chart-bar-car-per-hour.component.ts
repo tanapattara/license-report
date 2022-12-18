@@ -28,6 +28,7 @@ import * as ApexCharts from 'apexcharts';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Filter } from '../model/Filter';
+import { TranslateService } from '@ngx-translate/core';
 
 export type HeatMapChartOptions = {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -127,80 +128,11 @@ export class ChartBarCarPerHourComponent implements OnInit {
   o50 = 0;
   o50bike_per = 0;
   o50car_per = 0;
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        stacked: true,
-        title: {
-          display: true,
-          text: 'ชั่วโมง',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-      y: {
-        stacked: true,
-        min: 0,
-        title: {
-          display: true,
-          text: 'จำนวน',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-        align: 'start',
-      },
-      datalabels: {
-        anchor: 'center',
-        align: 'center',
-        display: (context) => {
-          return context.dataset.data[context.dataIndex] != 0;
-        },
-        color: (context) => {
-          var strColor = context.datasetIndex == 0 ? 'white' : 'black';
-          return strColor;
-        },
-        formatter: (value, ctx) => {
-          return value.toLocaleString();
-        },
-      },
-    },
-  };
+  public barChartOptions: ChartConfiguration['options'];
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [DataLabelsPlugin];
 
-  public barChartData: ChartData<'bar'> = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        label: 'รถยนต์',
-        borderColor: 'rgb(204, 61, 0)',
-        backgroundColor: 'rgb(204, 61, 0)',
-        borderRadius: Number.MAX_VALUE,
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-        borderSkipped: 'middle',
-      },
-      {
-        data: [],
-        label: 'รถจักรยานยนต์',
-        borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)',
-        borderRadius: Number.MAX_VALUE,
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-      },
-    ],
-  };
+  public barChartData: ChartData<'bar'>;
 
   // heatmap
   public chartOptions!: Partial<HeatMapChartOptions>;
@@ -219,13 +151,84 @@ export class ChartBarCarPerHourComponent implements OnInit {
     private api: ApiService,
     private filterService: FilterlicenseService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    private tran: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'printer',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg')
     );
-
+    this.barChartData = {
+      labels: [],
+      datasets: [
+        {
+          data: [],
+          label: this.tran.instant('car'),
+          borderColor: 'rgb(204, 61, 0)',
+          backgroundColor: 'rgb(204, 61, 0)',
+          borderRadius: Number.MAX_VALUE,
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+          borderSkipped: 'middle',
+        },
+        {
+          data: [],
+          label: this.tran.instant('bike'),
+          borderColor: 'rgb(255, 172, 131)',
+          backgroundColor: 'rgb(255, 172, 131)',
+          borderRadius: Number.MAX_VALUE,
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+        },
+      ],
+    };
+    this.barChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          stacked: true,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.hour'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+        y: {
+          stacked: true,
+          min: 0,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.count'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          align: 'start',
+        },
+        datalabels: {
+          anchor: 'center',
+          align: 'center',
+          display: (context) => {
+            return context.dataset.data[context.dataIndex] != 0;
+          },
+          color: (context) => {
+            var strColor = context.datasetIndex == 0 ? 'white' : 'black';
+            return strColor;
+          },
+          formatter: (value, ctx) => {
+            return value.toLocaleString();
+          },
+        },
+      },
+    };
     this.clearDic();
     this.chartOptions = {
       series: [
@@ -469,7 +472,7 @@ export class ChartBarCarPerHourComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   displayData() {
     this.clearDic();
     this.barChartData.datasets[0].data = [];
@@ -661,13 +664,11 @@ export class ChartBarCarPerHourComponent implements OnInit {
         if (isBike) {
           this.chartDictionaryBike.set(hour, value);
           this.bike++;
-          if (row.Speed > 50)
-            this.o50bike++;
+          if (row.Speed > 50) this.o50bike++;
         } else {
           this.chartDictionaryCar.set(hour, value);
           this.car++;
-          if (row.Speed > 50)
-            this.o50car++;
+          if (row.Speed > 50) this.o50car++;
         }
 
         this.chartOptions.series = [
@@ -709,8 +710,8 @@ export class ChartBarCarPerHourComponent implements OnInit {
       }
     }
     this.o50 = this.o50bike + this.o50car;
-    this.o50bike_per = this.o50bike / this.o50 * 100;
-    this.o50car_per = this.o50car / this.o50 * 100;
+    this.o50bike_per = (this.o50bike / this.o50) * 100;
+    this.o50car_per = (this.o50car / this.o50) * 100;
     for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
       this.barChartData.datasets[0].data.push(value);

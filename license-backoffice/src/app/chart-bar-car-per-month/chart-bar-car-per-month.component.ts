@@ -9,6 +9,7 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { FilterlicenseService } from '../services/filterlicense.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chart-bar-car-per-month',
@@ -38,93 +39,11 @@ export class ChartBarCarPerMonthComponent implements OnInit {
   o50 = 0;
   o50bike_per = 0;
   o50car_per = 0;
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        stacked: true,
-        title: {
-          display: true,
-          text: 'เดือน',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-      y: {
-        stacked: true,
-        min: 0,
-        title: {
-          display: true,
-          text: 'จำนวน',
-          color: 'rgb(204, 61, 0)',
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-        align: 'start',
-      },
-      datalabels: {
-        anchor: 'center',
-        align: 'center',
-        display: (context) => {
-          return context.dataset.data[context.dataIndex] != 0;
-        },
-        color: (context) => {
-          var strColor = context.datasetIndex == 0 ? 'white' : 'black';
-          return strColor;
-        },
-        formatter: (value, ctx) => {
-          return value.toLocaleString();
-        },
-      },
-    },
-  };
+  public barChartOptions: ChartConfiguration['options'];
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [DataLabelsPlugin];
 
-  public barChartData: ChartData<'bar'> = {
-    labels: [
-      'มกราคม',
-      'กุมภาพันธ์',
-      'มีนาคม',
-      'เมษายน',
-      'พฤษภาคม',
-      'มิถุนายน',
-      'กรกฎาคม',
-      'สิงหาคม',
-      'กันยายน',
-      'ตุลาคม',
-      'พฤศจิกายน',
-      'ธันวาคม',
-    ],
-    datasets: [
-      {
-        data: [],
-        label: 'รถยนต์',
-        borderColor: 'rgb(204, 61, 0)',
-        backgroundColor: 'rgb(204, 61, 0)',
-        borderRadius: Number.MAX_VALUE,
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-        borderSkipped: 'middle',
-      },
-      {
-        data: [],
-        label: 'รถจักรยานยนต์',
-        borderColor: 'rgb(255, 172, 131)',
-        backgroundColor: 'rgb(255, 172, 131)',
-        borderRadius: Number.MAX_VALUE,
-        datalabels: {
-          align: 'center',
-          anchor: 'center',
-        },
-      },
-    ],
-  };
+  public barChartData: ChartData<'bar'>;
 
   filter: string = '';
   notifierSubscription: Subscription = this.filterService.event.subscribe(
@@ -139,12 +58,97 @@ export class ChartBarCarPerMonthComponent implements OnInit {
     private api: ApiService,
     private filterService: FilterlicenseService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    private tran: TranslateService
   ) {
     iconRegistry.addSvgIcon(
       'printer',
       sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/Printer.svg')
     );
+    this.barChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          stacked: true,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.month'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+        y: {
+          stacked: true,
+          min: 0,
+          title: {
+            display: true,
+            text: this.tran.instant('chart.count'),
+            color: 'rgb(204, 61, 0)',
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          align: 'start',
+        },
+        datalabels: {
+          anchor: 'center',
+          align: 'center',
+          display: (context) => {
+            return context.dataset.data[context.dataIndex] != 0;
+          },
+          color: (context) => {
+            var strColor = context.datasetIndex == 0 ? 'white' : 'black';
+            return strColor;
+          },
+          formatter: (value, ctx) => {
+            return value.toLocaleString();
+          },
+        },
+      },
+    };
+    this.barChartData = {
+      labels: [
+        this.tran.instant('january'),
+        this.tran.instant('february'),
+        this.tran.instant('march'),
+        this.tran.instant('april'),
+        this.tran.instant('mayy'),
+        this.tran.instant('june'),
+        this.tran.instant('july'),
+        this.tran.instant('august'),
+        this.tran.instant('september'),
+        this.tran.instant('october'),
+        this.tran.instant('november'),
+        this.tran.instant('december'),
+      ],
+      datasets: [
+        {
+          data: [],
+          label: this.tran.instant('car'),
+          borderColor: 'rgb(204, 61, 0)',
+          backgroundColor: 'rgb(204, 61, 0)',
+          borderRadius: Number.MAX_VALUE,
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+          borderSkipped: 'middle',
+        },
+        {
+          data: [],
+          label: this.tran.instant('bike'),
+          borderColor: 'rgb(255, 172, 131)',
+          backgroundColor: 'rgb(255, 172, 131)',
+          borderRadius: Number.MAX_VALUE,
+          datalabels: {
+            align: 'center',
+            anchor: 'center',
+          },
+        },
+      ],
+    };
   }
 
   ngOnInit(): void {}
@@ -159,11 +163,9 @@ export class ChartBarCarPerMonthComponent implements OnInit {
         let d: Date = new Date(row.aDate);
         let isBike: boolean = row.Type == '7' || row.Type == '8';
         if (isBike) {
-          if (row.Speed > 50)
-            this.o50bike++;
+          if (row.Speed > 50) this.o50bike++;
         } else {
-          if (row.Speed > 50)
-            this.o50car++;
+          if (row.Speed > 50) this.o50car++;
         }
 
         let month = '';
@@ -268,8 +270,8 @@ export class ChartBarCarPerMonthComponent implements OnInit {
     }
 
     this.o50 = this.o50bike + this.o50car;
-    this.o50bike_per = this.o50bike / this.o50 * 100;
-    this.o50car_per = this.o50car / this.o50 * 100;
+    this.o50bike_per = (this.o50bike / this.o50) * 100;
+    this.o50car_per = (this.o50car / this.o50) * 100;
 
     for (let [key, value] of this.chartDictionaryCar) {
       this.barChartData.labels!.push(key);
